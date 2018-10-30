@@ -59,7 +59,7 @@ public class App {
         
         /* MENU */
         JPanel menuSection = new JPanel();
-        menuSection.setBackground(Color.green);
+        menuSection.setBackground(Color.gray);
         
         /* BILL */
         JPanel billSection = new JPanel();
@@ -68,7 +68,7 @@ public class App {
         
         /* FOOTER */
         JPanel footer = new JPanel();
-        footer.setBackground(Color.cyan);
+        createFooter(footer);
         
         mainFrame.getContentPane().add(header, BorderLayout.PAGE_START);
         mainFrame.getContentPane().add(menuSection, BorderLayout.CENTER);
@@ -351,5 +351,41 @@ public class App {
         header.add(brandSection);
         header.add(controlSection);
         
+    }
+    
+    private void createFooter(JPanel footer) {
+        footer.setBackground(new Color(228,249,245));
+        
+        JLabel copyright = new JLabel("© 2018 Copyright:");
+        copyright.setForeground(new Color(41,55,72));
+        JLabel author = new JLabel("ndc07");
+        author.setForeground(new Color(0,107,68));
+        author.addMouseListener(new MouseAdapter()  
+        {  
+            @Override
+            public void mouseClicked(MouseEvent e)  
+            {  
+                try {
+                    Desktop.getDesktop().browse(new URL("https://github.com/ndc07").toURI());
+                } catch (IOException ex) {} catch (URISyntaxException ex) {
+                    Logger.getLogger(App.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+            
+            @Override
+            public void mouseEntered(MouseEvent e) {
+                super.mouseEntered(e);
+                author.setCursor(new Cursor(Cursor.HAND_CURSOR));
+            }
+
+            @Override
+            public void mouseExited(MouseEvent e) {
+                super.mouseExited(e); 
+                author.setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
+            }
+        }); 
+        
+        footer.add(copyright);
+        footer.add(author);
     }
 }
