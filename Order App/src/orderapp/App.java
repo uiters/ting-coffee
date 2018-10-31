@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package orderapp;
 
 import java.awt.BorderLayout;
@@ -14,31 +9,23 @@ import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.Image;
-import java.awt.Rectangle;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.awt.image.BufferedImage;
-import java.io.File;
 import java.io.IOException;
-import java.net.MalformedURLException;
 import java.net.URISyntaxException;
 import java.net.URL;
-import static java.util.Collections.list;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.imageio.ImageIO;
 import javax.swing.Box;
 import javax.swing.BoxLayout;
-import javax.swing.Icon;
 import javax.swing.ImageIcon;
-import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JSeparator;
+
+
 
 /**
  *
@@ -59,7 +46,7 @@ public class App {
     private void initComponents() {
         
         mainFrame = new JFrame("Cafe Management || Order App");
-        mainFrame.setSize(1000, 700);
+        mainFrame.setSize(1070, 700);
         
         /* HEADER */
         JPanel header = new JPanel();
@@ -79,8 +66,10 @@ public class App {
         
         /* JScrollPane */
         JScrollPane scrollPane = new JScrollPane(menuSection);
+        scrollPane.getVerticalScrollBar().setUnitIncrement(12);
         scrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
-        scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
+        scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);   
+        
         
         mainFrame.getContentPane().add(header, BorderLayout.PAGE_START);
         mainFrame.getContentPane().add(scrollPane, BorderLayout.CENTER);
@@ -500,13 +489,14 @@ public class App {
     
     private void createMenu(JPanel menu) {
         menu.setBackground(Color.gray);
-        menu.setLayout(new FlowLayout(FlowLayout.RIGHT));
+        menu.setLayout(new WrapLayout(WrapLayout.LEFT));
         
         for (int i = 0; i < 20; i++) {
             menu.add(createFoodItem());
         }
         
     }
+    
     
     private void createBill(JPanel bill) {
         URL imgURL = getClass().getResource("../images/csharp.jpg");
@@ -520,8 +510,10 @@ public class App {
         footer.setBackground(new Color(228,249,245));
         
         JLabel copyright = new JLabel("© 2018 Copyright:");
+        copyright.setFont(new Font("SansSerif", Font.PLAIN, 12));
         copyright.setForeground(new Color(41,55,72));
         JLabel author = new JLabel("ndc07");
+        author.setFont(new Font("SansSerif", Font.PLAIN, 12));
         author.setForeground(new Color(0,107,68));
         author.addMouseListener(new MouseAdapter()  
         {  
