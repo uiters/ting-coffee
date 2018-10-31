@@ -6,9 +6,9 @@ import java.awt.Component;
 import java.awt.Cursor;
 import java.awt.Desktop;
 import java.awt.Dimension;
-import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.Image;
+import java.awt.TextField;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.io.IOException;
@@ -19,6 +19,8 @@ import java.util.logging.Logger;
 import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
+import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -62,17 +64,11 @@ public class App {
         
         /* FOOTER */
         JPanel footer = new JPanel();
-        createFooter(footer);
-        
-        /* JScrollPane */
-        JScrollPane scrollPane = new JScrollPane(menuSection);
-        scrollPane.getVerticalScrollBar().setUnitIncrement(12);
-        scrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
-        scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);   
+        createFooter(footer);  
         
         
         mainFrame.getContentPane().add(header, BorderLayout.PAGE_START);
-        mainFrame.getContentPane().add(scrollPane, BorderLayout.CENTER);
+        mainFrame.getContentPane().add(menuSection, BorderLayout.CENTER);
         mainFrame.getContentPane().add(billSection, BorderLayout.LINE_END);
         mainFrame.getContentPane().add(footer, BorderLayout.PAGE_END);
         
@@ -389,7 +385,7 @@ public class App {
         center.setLayout(new BoxLayout(center, BoxLayout.X_AXIS));
         
         /* IMAGE */
-        URL imgURL = getClass().getResource("../images/menu1.png");
+        URL imgURL = getClass().getResource("../images/menu10.png");
         JLabel img = new JLabel(new ImageIcon(new ImageIcon(imgURL).getImage().getScaledInstance(150, 150, Image.SCALE_DEFAULT)));        
         /* END IMAGE */
         
@@ -488,12 +484,62 @@ public class App {
     }
     
     private void createMenu(JPanel menu) {
-        menu.setBackground(Color.gray);
-        menu.setLayout(new WrapLayout(WrapLayout.LEFT));
         
+        menu.setBackground(new Color(112,99,129));
+        menu.setLayout(new BoxLayout(menu, BoxLayout.Y_AXIS));
+        
+        /* CONTROLS */
+        JPanel controls = new JPanel();
+        controls.setLayout(new BoxLayout(controls, BoxLayout.X_AXIS));
+        controls.setBackground(new Color(112,99,129));
+        
+        /* Search Control */
+        JPanel searchControl = new JPanel();
+        searchControl.setLayout(new BoxLayout(searchControl, BoxLayout.X_AXIS));
+        
+        TextField txbSearch = new TextField();
+        txbSearch.setFont(new Font("SansSerif", Font.PLAIN, 12));
+        JButton btnSearch = new JButton("Search");
+        btnSearch.setFont(new Font("SansSerif", Font.PLAIN, 12));
+        
+        searchControl.add(txbSearch);
+        searchControl.add(btnSearch);
+        /* Filter Control */
+        JPanel filterControl = new JPanel();
+        filterControl.setLayout(new BoxLayout(filterControl, BoxLayout.X_AXIS));
+        
+        String cate[] = {"All", "Cate 1", "Cate 2", "Cate 3"};
+        JComboBox cbCategories = new JComboBox(cate);
+        cbCategories.setFont(new Font("SansSerif", Font.PLAIN, 12));
+        
+        filterControl.add(cbCategories);
+        /* Add controls */
+        controls.add(Box.createRigidArea(new Dimension(5, 0)));
+        controls.add(searchControl);
+        controls.add(Box.createRigidArea(new Dimension(30, 0)));
+        controls.add(filterControl);
+        /* END CONTROLS */
+        
+        /* LIST FOODS */
+        JPanel listFoods = new JPanel();
+        listFoods.setBackground(new Color(112,99,129));
+        listFoods.setLayout(new WrapLayout(WrapLayout.LEFT));
         for (int i = 0; i < 20; i++) {
-            menu.add(createFoodItem());
+            listFoods.add(createFoodItem());
         }
+        /* END LIST FOODS */
+        
+        /* JScrollPane */
+        JScrollPane scrollPane = new JScrollPane(listFoods);
+        scrollPane.getVerticalScrollBar().setUnitIncrement(12);
+        scrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
+        scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED); 
+        scrollPane.setBorder(null);
+        
+        menu.add(Box.createRigidArea(new Dimension(0, 10)));
+        menu.add(controls);
+        menu.add(Box.createRigidArea(new Dimension(0, 5)));
+        menu.add(scrollPane);
         
     }
     
