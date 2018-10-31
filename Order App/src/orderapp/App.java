@@ -11,12 +11,16 @@ import java.awt.Component;
 import java.awt.Cursor;
 import java.awt.Desktop;
 import java.awt.Dimension;
+import java.awt.FlowLayout;
 import java.awt.Font;
+import java.awt.Image;
 import java.awt.Rectangle;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.image.BufferedImage;
+import java.io.File;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URISyntaxException;
@@ -24,12 +28,16 @@ import java.net.URL;
 import static java.util.Collections.list;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.imageio.ImageIO;
 import javax.swing.Box;
 import javax.swing.BoxLayout;
+import javax.swing.Icon;
 import javax.swing.ImageIcon;
+import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.JSeparator;
 
 /**
@@ -59,19 +67,23 @@ public class App {
         
         /* MENU */
         JPanel menuSection = new JPanel();
-        menuSection.setBackground(Color.green);
+        createMenu(menuSection);
         
         /* BILL */
         JPanel billSection = new JPanel();
-        billSection.setBackground(Color.yellow);
-        
+        createBill(billSection);
         
         /* FOOTER */
         JPanel footer = new JPanel();
-        footer.setBackground(Color.cyan);
+        createFooter(footer);
+        
+        /* JScrollPane */
+        JScrollPane scrollPane = new JScrollPane(menuSection);
+        scrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
+        scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
         
         mainFrame.getContentPane().add(header, BorderLayout.PAGE_START);
-        mainFrame.getContentPane().add(menuSection, BorderLayout.CENTER);
+        mainFrame.getContentPane().add(scrollPane, BorderLayout.CENTER);
         mainFrame.getContentPane().add(billSection, BorderLayout.LINE_END);
         mainFrame.getContentPane().add(footer, BorderLayout.PAGE_END);
         
@@ -199,6 +211,7 @@ public class App {
         
         JLabel homeTitle = new JLabel("Home");
         homeTitle.setForeground(new Color(41,55,72));
+        homeTitle.setFont(new Font("SansSerif", Font.BOLD, 13));
         homeTitle.setAlignmentX(Component.CENTER_ALIGNMENT);
         
         URL homeURL = getClass().getResource("../images/home.png");
@@ -240,6 +253,7 @@ public class App {
         }); 
         
         JLabel historyTitle = new JLabel("History");
+        historyTitle.setFont(new Font("SansSerif", Font.BOLD, 13));
         historyTitle.setForeground(new Color(41,55,72));
         historyTitle.setAlignmentX(Component.CENTER_ALIGNMENT);
         
@@ -282,6 +296,7 @@ public class App {
         }); 
         
         JLabel helpTitle = new JLabel("Help");
+        helpTitle.setFont(new Font("SansSerif", Font.BOLD, 13));
         helpTitle.setForeground(new Color(41,55,72));
         helpTitle.setAlignmentX(Component.CENTER_ALIGNMENT);
         
@@ -324,6 +339,7 @@ public class App {
         }); 
         
         JLabel aboutTitle = new JLabel("About");
+        aboutTitle.setFont(new Font("SansSerif", Font.BOLD, 13));
         aboutTitle.setForeground(new Color(41,55,72));
         aboutTitle.setAlignmentX(Component.CENTER_ALIGNMENT);
         
@@ -351,5 +367,188 @@ public class App {
         header.add(brandSection);
         header.add(controlSection);
         
+    }
+    
+    private JPanel createFoodItem() {
+        /* FOOD */
+        //////////////////////////////////////////////////////
+        //////////////////////////////////////////////////////
+        JPanel food = new JPanel();
+        food.setLayout(new BoxLayout(food, BoxLayout.Y_AXIS));
+        
+        /* NAME */
+        //////////////////////////////////////////////////////
+        JLabel name = new JLabel("Food 1");
+        name.setAlignmentX(Component.CENTER_ALIGNMENT);
+        name.setFont(new Font("SansSerif", Font.BOLD, 16));
+        name.setForeground(new Color(0,107,68));
+        //////////////////////////////////////////////////////
+        /* END NAME */
+        
+        /* PRICE */
+        //////////////////////////////////////////////////////
+        JLabel price = new JLabel("$100");
+        price.setAlignmentX(Component.CENTER_ALIGNMENT);
+        price.setFont(new Font("SansSerif", Font.PLAIN, 12));
+        price.setForeground(new Color(0,107,68));
+        //////////////////////////////////////////////////////
+        /* END PRICE */
+        
+        /* CENTER */
+        //////////////////////////////////////////////////////
+        JPanel center = new JPanel();
+        center.setLayout(new BoxLayout(center, BoxLayout.X_AXIS));
+        
+        /* IMAGE */
+        URL imgURL = getClass().getResource("../images/menu1.png");
+        JLabel img = new JLabel(new ImageIcon(new ImageIcon(imgURL).getImage().getScaledInstance(150, 150, Image.SCALE_DEFAULT)));        
+        /* END IMAGE */
+        
+        /* CONTROLS */
+        JPanel controls = new JPanel();
+        controls.setLayout(new BoxLayout(controls, BoxLayout.Y_AXIS));
+        
+        
+        URL upURL = getClass().getResource("../images/up.png");
+        JLabel btnUp = new JLabel(new ImageIcon(upURL));
+        btnUp.setAlignmentX(Component.CENTER_ALIGNMENT);
+        btnUp.addMouseListener(new MouseAdapter()  
+        {  
+            @Override
+            public void mouseClicked(MouseEvent e)  
+            {  
+                try {
+                    Desktop.getDesktop().browse(new URL("https://github.com/ndc07/cafe-management").toURI());
+                } catch (IOException ex) {} catch (URISyntaxException ex) {
+                    Logger.getLogger(App.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+            
+            @Override
+            public void mouseEntered(MouseEvent e) {
+                super.mouseEntered(e);
+                btnUp.setCursor(new Cursor(Cursor.HAND_CURSOR));
+            }
+
+            @Override
+            public void mouseExited(MouseEvent e) {
+                super.mouseExited(e); 
+                btnUp.setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
+            }
+        }); 
+        
+        URL downURL = getClass().getResource("../images/down.png");
+        JLabel btnDown = new JLabel(new ImageIcon(downURL));
+        btnDown.setAlignmentX(Component.CENTER_ALIGNMENT);
+        btnDown.addMouseListener(new MouseAdapter()  
+        {  
+            @Override
+            public void mouseClicked(MouseEvent e)  
+            {  
+                try {
+                    Desktop.getDesktop().browse(new URL("https://github.com/ndc07/cafe-management").toURI());
+                } catch (IOException ex) {} catch (URISyntaxException ex) {
+                    Logger.getLogger(App.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+            
+            @Override
+            public void mouseEntered(MouseEvent e) {
+                super.mouseEntered(e);
+                btnDown.setCursor(new Cursor(Cursor.HAND_CURSOR));
+            }
+
+            @Override
+            public void mouseExited(MouseEvent e) {
+                super.mouseExited(e); 
+                btnDown.setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
+            }
+        }); 
+        
+        JLabel quantity = new JLabel("2");
+        quantity.setFont(new Font("SansSerif", Font.PLAIN, 12));
+        quantity.setAlignmentX(Component.CENTER_ALIGNMENT);
+        quantity.setForeground(new Color(0,107,68));
+        
+        controls.add(btnUp);
+        controls.add(quantity);
+        controls.add(btnDown);
+        /* END CONTROLS */
+        
+        center.add(Box.createRigidArea(new Dimension(10, 0)));
+        center.add(img);
+        center.add(Box.createRigidArea(new Dimension(12, 0)));
+        center.add(controls);
+        center.add(Box.createRigidArea(new Dimension(10, 0)));
+        //////////////////////////////////////////////////////
+        /* END CENTER */
+        
+        
+        food.add(Box.createRigidArea(new Dimension(0, 10)));        
+        food.add(price);
+        food.add(Box.createRigidArea(new Dimension(0, 10)));        
+        food.add(center);
+        food.add(Box.createRigidArea(new Dimension(0, 10)));        
+        food.add(name);
+        food.add(Box.createRigidArea(new Dimension(0, 10)));        
+        //////////////////////////////////////////////////////
+        //////////////////////////////////////////////////////
+        /* END FOOD */
+        
+        return food;
+    }
+    
+    private void createMenu(JPanel menu) {
+        menu.setBackground(Color.gray);
+        menu.setLayout(new FlowLayout(FlowLayout.RIGHT));
+        
+        for (int i = 0; i < 20; i++) {
+            menu.add(createFoodItem());
+        }
+        
+    }
+    
+    private void createBill(JPanel bill) {
+        URL imgURL = getClass().getResource("../images/csharp.jpg");
+        JLabel img = new JLabel(new ImageIcon(imgURL));
+        
+        bill.setBackground(Color.gray);
+        bill.add(img);
+    }
+    
+    private void createFooter(JPanel footer) {
+        footer.setBackground(new Color(228,249,245));
+        
+        JLabel copyright = new JLabel("© 2018 Copyright:");
+        copyright.setForeground(new Color(41,55,72));
+        JLabel author = new JLabel("ndc07");
+        author.setForeground(new Color(0,107,68));
+        author.addMouseListener(new MouseAdapter()  
+        {  
+            @Override
+            public void mouseClicked(MouseEvent e)  
+            {  
+                try {
+                    Desktop.getDesktop().browse(new URL("https://github.com/ndc07").toURI());
+                } catch (IOException ex) {} catch (URISyntaxException ex) {
+                    Logger.getLogger(App.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+            
+            @Override
+            public void mouseEntered(MouseEvent e) {
+                super.mouseEntered(e);
+                author.setCursor(new Cursor(Cursor.HAND_CURSOR));
+            }
+
+            @Override
+            public void mouseExited(MouseEvent e) {
+                super.mouseExited(e); 
+                author.setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
+            }
+        }); 
+        
+        footer.add(copyright);
+        footer.add(author);
     }
 }
