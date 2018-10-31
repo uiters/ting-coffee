@@ -26,6 +26,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JSeparator;
+import javax.swing.JTextField;
 
 
 
@@ -499,8 +500,10 @@ public class App {
         
         TextField txbSearch = new TextField();
         txbSearch.setFont(new Font("SansSerif", Font.PLAIN, 12));
+        txbSearch.setForeground(new Color(41,55,72));
         JButton btnSearch = new JButton("Search");
-        btnSearch.setFont(new Font("SansSerif", Font.PLAIN, 12));
+        btnSearch.setFont(new Font("SansSerif", Font.BOLD, 12));
+        btnSearch.setForeground(new Color(41,55,72));
         
         searchControl.add(txbSearch);
         searchControl.add(btnSearch);
@@ -511,6 +514,7 @@ public class App {
         String cate[] = {"All", "Cate 1", "Cate 2", "Cate 3"};
         JComboBox cbCategories = new JComboBox(cate);
         cbCategories.setFont(new Font("SansSerif", Font.PLAIN, 12));
+        cbCategories.setForeground(new Color(41,55,72));
         
         filterControl.add(cbCategories);
         /* Add controls */
@@ -542,14 +546,112 @@ public class App {
         menu.add(scrollPane);
         
     }
-    
-    
+        
     private void createBill(JPanel bill) {
-        URL imgURL = getClass().getResource("../images/csharp.jpg");
+        
+        bill.setBackground(new Color(112,99,129));
+        bill.setLayout(new BoxLayout(bill, BoxLayout.Y_AXIS));
+        
+        /* Show Bill */
+        JPanel showBill = new JPanel();
+        
+        
+        URL imgURL = getClass().getResource("../images/bill.png");
         JLabel img = new JLabel(new ImageIcon(imgURL));
         
-        bill.setBackground(Color.gray);
-        bill.add(img);
+        showBill.add(img);
+        /* End Bill */
+        
+        /* Controls */
+        JPanel controls = new JPanel();
+        controls.setLayout(new BoxLayout(controls, BoxLayout.X_AXIS));
+        
+            /* Info */
+        JPanel info = new JPanel();
+        info.setLayout(new BoxLayout(info, BoxLayout.Y_AXIS));
+        
+        JPanel subTotal = new JPanel();
+        subTotal.setLayout(new BoxLayout(subTotal, BoxLayout.X_AXIS));
+        JLabel lblSub = new JLabel("Sub Total:");
+        lblSub.setPreferredSize(new Dimension(80, lblSub.getMinimumSize().height));
+        lblSub.setFont(new Font("SansSerif", Font.BOLD, 12));
+        lblSub.setForeground(new Color(41,55,72));
+        JTextField txbSub = new JTextField();
+        txbSub.setFont(new Font("SansSerif", Font.PLAIN, 12));
+        txbSub.setForeground(new Color(41,55,72));
+        txbSub.setMaximumSize(new Dimension(Integer.MAX_VALUE, (new JButton("xx")).getMinimumSize().height));
+        subTotal.add(lblSub);
+        subTotal.add(txbSub);
+        
+        JPanel total = new JPanel();
+        total.setLayout(new BoxLayout(total, BoxLayout.X_AXIS));
+        JLabel lblTotal = new JLabel("Total:");
+        lblTotal.setPreferredSize(new Dimension(80, txbSub.getMinimumSize().height));
+        lblTotal.setFont(new Font("SansSerif", Font.BOLD, 12));
+        lblTotal.setForeground(new Color(41,55,72));
+        JTextField txbTotal = new JTextField();
+        txbTotal.setFont(new Font("SansSerif", Font.PLAIN, 12));
+        txbTotal.setForeground(new Color(41,55,72));
+        txbTotal.setMaximumSize(new Dimension(Integer.MAX_VALUE, (new JButton("xx")).getMinimumSize().height));
+        total.add(lblTotal);
+        total.add(txbTotal);
+        
+        JPanel discount = new JPanel();
+        discount.setLayout(new BoxLayout(discount, BoxLayout.X_AXIS));
+        JLabel lblDiscount =new JLabel("Discount:");
+        lblDiscount.setPreferredSize(new Dimension(80, lblSub.getMinimumSize().height));
+        lblDiscount.setFont(new Font("SansSerif", Font.BOLD, 12));
+        lblDiscount.setForeground(new Color(41,55,72));
+        JTextField txbDiscount = new JTextField();
+        txbDiscount.setFont(new Font("SansSerif", Font.PLAIN, 12));
+        txbDiscount.setForeground(new Color(41,55,72));
+        txbDiscount.setMaximumSize(new Dimension(Integer.MAX_VALUE, (new JButton("xx")).getMinimumSize().height));
+        discount.add(lblDiscount);
+        discount.add(txbDiscount);
+        
+        info.add(subTotal);
+        info.add(Box.createRigidArea(new Dimension(0, 10)));
+        info.add(discount);
+        info.add(Box.createRigidArea(new Dimension(0, 10)));
+        info.add(total);
+            /* End Info */
+        
+            /* Group Button */
+        JPanel groupButton = new JPanel();
+        groupButton.setLayout(new BoxLayout(groupButton, BoxLayout.Y_AXIS));
+        
+        JButton btnPay = new JButton("Pay");
+        btnPay.setFont(new Font("SansSerif", Font.BOLD, 12));
+        btnPay.setForeground(new Color(41,55,72));
+        btnPay.setMaximumSize(new Dimension(Integer.MAX_VALUE, btnPay.getMinimumSize().height));
+        
+        JButton btnReset = new JButton("Reset");
+        btnReset.setFont(new Font("SansSerif", Font.BOLD, 12));
+        btnReset.setForeground(new Color(41,55,72));
+        btnReset.setMaximumSize(new Dimension(Integer.MAX_VALUE, btnPay.getMinimumSize().height));
+        
+        JButton btnExit = new JButton("Exit");
+        btnExit.setFont(new Font("SansSerif", Font.BOLD, 12));
+        btnExit.setForeground(new Color(41,55,72));
+        btnExit.setMaximumSize(new Dimension(Integer.MAX_VALUE, btnPay.getMinimumSize().height));
+        
+        groupButton.add(btnPay);
+        groupButton.add(Box.createRigidArea(new Dimension(0, 10)));
+        groupButton.add(btnReset);
+        groupButton.add(Box.createRigidArea(new Dimension(0, 10)));
+        groupButton.add(btnExit);
+            /* End Group Button */
+        
+        controls.add(Box.createRigidArea(new Dimension(10, 0)));
+        controls.add(info);
+        controls.add(Box.createRigidArea(new Dimension(20, 0)));
+        controls.add(groupButton);
+        controls.add(Box.createRigidArea(new Dimension(10, 0)));
+        /* End Controls */
+        
+        bill.add(showBill);
+        bill.add(controls);
+        
     }
     
     private void createFooter(JPanel footer) {
