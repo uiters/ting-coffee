@@ -1,6 +1,6 @@
 # Cafe Management
 
-☕ Cafe Mangement with Java, PHP, MySQL.
+🍧🍵🍦🍶 Cafe Mangement with Java, PHP, MySQL.
 
 ## Contents
 
