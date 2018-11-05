@@ -16,12 +16,19 @@ import java.awt.Label;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.net.URL;
 import java.util.Objects;
+import javax.swing.Box;
+import javax.swing.BoxLayout;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTabbedPane;
@@ -38,74 +45,159 @@ public class Adminapp extends JFrame{
 
     JTabbedPane tabbedPane;
     JFrame jf;
+    JPanel header;
+    JPanel main;
+    JPanel info;
+    JPanel footer;
+    String []list={"All","An vat","Mon chinh","Mon trang mieng"} ; //danh sách trong category
     public Adminapp()
     {
         jf=new JFrame("Cafe Management || Admin App");
-        jf.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);  // đóng toàn bộ frame liên quan
-        jf.setSize(1280, 800);
         
-        
-        
-        
-        //Design tab Dashboard
-        tabbedPane=new JTabbedPane(); // mặc định tabbedPane sẽ luôn ở top
-        JPanel panel1=new JPanel(null);
-        tabbedPane.addTab("Dashboard", null, panel1, "Dashboard");
-        tabbedPane.setMnemonicAt(0, KeyEvent.VK_1);
-        
-        
+       jf.setSize(1000, 700);
+       jf.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);  // đóng toàn bộ frame liên quan
+       jf.setVisible(true);
+       jf.setLocationRelativeTo(null);
        
-        tabbedPane.addTab("Food",  CreatePanelFood());
-        tabbedPane.setMnemonicAt(1, KeyEvent.VK_2);
+        /* HEADER */
+        header = new JPanel();
         
+        
+        /* MAIN TABLE */
+        main = new JPanel();
+        main.setBackground(Color.green);
        
         
-        JPanel panel3=new JPanel(null);
-        panel3.add(new Label("test"));
-        tabbedPane.addTab("FoodCagetory", null, panel3, "FoodCagetory");
-        tabbedPane.setMnemonicAt(2, KeyEvent.VK_3);
+        /* INFO */
+        info = new JPanel();
+        info.setBackground(Color.yellow);
         
+        /* FOOTER */
+        footer = new JPanel();
+        footer.setBackground(Color.cyan);
         
-        
-        jf.getContentPane().add(tabbedPane);
-        jf.setResizable(false);
-        jf.setLocationRelativeTo(null); // set mặc định mở form ở giữa màn hình
-        jf.setVisible(true);
+        createHeader(header);
+        jf.add(header, BorderLayout.PAGE_START);
+        jf.add(main, BorderLayout.CENTER);
+        jf.add(info, BorderLayout.LINE_END);
+        jf.add(footer, BorderLayout.PAGE_END);
     }
     
-    
-    //Food
-    public JPanel CreatePanelFood()
+    private void createHeader(JPanel header)
     {
-         JPanel panel2=new JPanel(null);
-        
-        //text search
-        JTextField text=new JTextField();
-        text.setSize(240, 30);
-        text.setLocation(120, 20);
-        text.setFont(new java.awt.Font(text.getFont().toString(), Font.PLAIN, 18));
-        
-        //button Search
-        JButton btn=new JButton("Search");
-        btn.setSize(100,30);
-        btn.setLocation(380, 20);
-        btn.setFont(new java.awt.Font(btn.getFont().toString(), Font.PLAIN, 18));
-        
-        //Label
-        JLabel label=new JLabel("Select Cagetory");
-        label.setSize(150,30);
-        label.setLocation(800,20);
-        label.setFont(new java.awt.Font(label.getFont().toString(), Font.PLAIN, 18));
+         header.setLayout(new BoxLayout(header, BoxLayout.X_AXIS));
+         header.setBackground(new Color(228,249,245));
          
-        // List Cagetory
-        String []list={"All","A","B","C"};
-        JComboBox cb=new JComboBox(list);
-        cb.setMaximumRowCount(5); // số hàng tối đa được hiển thị
-        cb.setSize(150,30);
-        cb.setLocation(960,20);
-        cb.setFont(new java.awt.Font(cb.getFont().toString(), Font.PLAIN, 18));
+          /* BRAND */
+        JPanel brandSection = new JPanel();
+        brandSection.setBackground(new Color(228,249,245));
         
-        //Table
+        JLabel brandImage = new JLabel();
+        URL imgURL = getClass().getResource("../image/logo.png");
+        brandImage.setIcon(new ImageIcon(imgURL));
+        
+        JLabel brandText = new JLabel("Starbucks – The Best Coffee and Espresso Drinks");
+        brandText.setForeground(new Color(0,107,68));
+        brandText.setBackground(new Color(228,249,245));
+        brandText.setFont(new Font("SansSerif", Font.PLAIN, 20));
+        
+        brandSection.add(Box.createRigidArea(new Dimension(5, 0)));
+        brandSection.add(brandImage);
+        brandSection.add(Box.createRigidArea(new Dimension(15, 0)));
+        brandSection.add(brandText);
+        brandSection.add(Box.createRigidArea(new Dimension(10, 0)));
+        /* END BRAND*/
+        
+        /*OPTIONS*/
+        JPanel options = new JPanel();
+        options.setBackground(new Color(228,249,245));
+        options.setLayout(new BoxLayout(options, BoxLayout.X_AXIS));
+        
+        /*DASHBOARD*/
+        JPanel dashboard = new JPanel();
+        dashboard.setLayout(new BoxLayout(dashboard, BoxLayout.Y_AXIS));
+        dashboard.setBackground(new Color(228,249,245));
+        
+        JLabel dashboardTitle = new JLabel("Dashboard");
+        dashboardTitle.setForeground(new Color(41,55,72));
+        dashboardTitle.setAlignmentX(Component.CENTER_ALIGNMENT);
+        
+        URL dashboardURL = getClass().getResource("../image/dashboard.png");
+        JLabel dashboardIcon = new JLabel(new ImageIcon(dashboardURL));
+        dashboardIcon.setAlignmentX(Component.CENTER_ALIGNMENT);
+        
+        dashboard.add(dashboardTitle);
+        dashboard.add(Box.createRigidArea(new Dimension(0, 6)));
+        dashboard.add(dashboardIcon);
+        /*END DASHBOARD OPTIONS*/
+        
+        /*FOOD*/
+        JPanel food = new JPanel();
+        food.setLayout(new BoxLayout(food, BoxLayout.Y_AXIS));
+        food.setBackground(new Color(228,249,245));
+        
+        JLabel foodTitle = new JLabel("Food");
+        foodTitle.setForeground(new Color(41,55,72));
+        foodTitle.setAlignmentX(Component.CENTER_ALIGNMENT);
+        
+        URL foodURL = getClass().getResource("../image/food.png");
+        JLabel foodIcon = new JLabel(new ImageIcon(foodURL));
+        foodIcon.setAlignmentX(Component.CENTER_ALIGNMENT);
+        
+        food.add(foodTitle);
+        food.add(Box.createRigidArea(new Dimension(0, 6)));
+        food.add(foodIcon);
+        
+        food.addMouseListener(new MouseAdapter() {
+             @Override
+             public void mouseClicked(MouseEvent e) {
+                 super.mouseClicked(e); //To change body of generated methods, choose Tools | Templates.
+                 JOptionPane.showMessageDialog(null,"Xử lý sự kiện Load Database");
+                 LoadFood(main);
+                 LoadInfoFood(info);
+                 LoadFooter(footer);
+             }
+            
+});
+        /*END FOOD OPTIONS*/
+        
+         /*FOODCATEGORY*/
+        JPanel foodcategory = new JPanel();
+        foodcategory.setLayout(new BoxLayout(foodcategory, BoxLayout.Y_AXIS));
+        foodcategory.setBackground(new Color(228,249,245));
+        
+        JLabel categoryTitle = new JLabel("Food Category");
+        categoryTitle.setForeground(new Color(41,55,72));
+        categoryTitle.setAlignmentX(Component.CENTER_ALIGNMENT);
+        
+        URL categoryURL = getClass().getResource("../image/category.png");
+        JLabel categoryIcon = new JLabel(new ImageIcon(categoryURL));
+        categoryIcon.setAlignmentX(Component.CENTER_ALIGNMENT);
+        
+        foodcategory.add(categoryTitle);
+        foodcategory.add(Box.createRigidArea(new Dimension(0, 6)));
+        foodcategory.add(categoryIcon);
+        /*END FOOD OPTIONS*/
+        
+        options.add(Box.createRigidArea(new Dimension(30, 0)));
+        options.add(dashboard);
+        options.add(Box.createRigidArea(new Dimension(30, 0)));
+        options.add(food);
+        options.add(Box.createRigidArea(new Dimension(30, 0)));
+        options.add(foodcategory);
+        /*END OPTIONS*/
+        header.add(brandSection);
+        header.add(options);
+    }
+    /**
+     * @param args the command line arguments
+     */
+    void LoadFood(JPanel main)
+    {
+        main.removeAll();
+        main.setLayout(new BoxLayout(main, BoxLayout.X_AXIS));
+        /*LOAD TABLE*/
+         //Table
         String []title=new String[]{"ID","Name","Cagetory","Image","Price"};
         Object [][]object=new Object[][]{
             {1,"Banh trang tron","An vat","",10000},
@@ -118,64 +210,140 @@ public class Adminapp extends JFrame{
         };
         DefaultTableModel model= new DefaultTableModel(object,title);
         JTable table=new JTable();
-        table.setModel(model);
+        table.getTableHeader().setFont(new java.awt.Font(table.getFont().toString(), Font.BOLD, 22));
         table.setFont(new java.awt.Font(table.getFont().toString(), Font.PLAIN, 18));
-        table.setRowHeight(60); // chỉnh độ cao của hàng
+        table.setModel(model);
+        table.setRowHeight(80); // chỉnh độ cao của hàng
         
         JScrollPane jsp=new JScrollPane(table);
-        jsp.setSize(1200,350);
-        jsp.setLocation(40, 70);
+        /*END*/
+        main.add(Box.createRigidArea(new Dimension(5,0)));
+        main.add(jsp);
+        main.add(Box.createRigidArea(new Dimension(5,0)));
+        main.revalidate();
+    }
+
+    
+    void LoadInfoFood(JPanel info)
+    {
+        info.removeAll(); // remove all components
+        info.setLayout(new BoxLayout(info,BoxLayout.Y_AXIS));
+        info.setPreferredSize(new Dimension(300,info.getHeight()));
         
-        //Label id
-        JLabel id=new JLabel("ID");
-        id.setSize(150,30);
-        id.setLocation(50, 430);
-        id.setFont(new java.awt.Font(id.getFont().toString(), Font.PLAIN, 18));
+        /*search field*/
+        JPanel search=new JPanel();
+        search.setLayout(new BoxLayout(search,BoxLayout.X_AXIS));
+        search.setBackground(Color.yellow);
+        //search.setPreferredSize(new Dimension(info.getWidth(),20));
+        search.setMaximumSize(new Dimension(300, 30));
+        //search.setMaximumSize(new Dimension(info.getWidth(),20));
         
-        //Text ID
-         JTextField textID=new JTextField();
-        textID.setSize(240, 30);
-        textID.setLocation(50, 470);
-        textID.setEditable(false);
-        textID.setBackground(Color.lightGray);
-        textID.setFont(new java.awt.Font(textID.getFont().toString(), Font.PLAIN, 18));
         
-        //Label name
-        JLabel name=new JLabel("Name");
-        name.setSize(150,30);
-        name.setLocation(50, 510);
-        name.setFont(new java.awt.Font(name.getFont().toString(), Font.PLAIN, 18));
+        JTextField searchText=new JTextField();
+        searchText.setAlignmentX(Component.CENTER_ALIGNMENT);
+        JButton btnSearch=new JButton("Search");
+        btnSearch.setAlignmentX(Component.CENTER_ALIGNMENT);
         
-        //Text Name
-         JTextField textName=new JTextField();
-        textName.setSize(240, 30);
-        textName.setLocation(50, 550);
-        textName.setFont(new java.awt.Font(textName.getFont().toString(), Font.PLAIN, 18));
+        search.add(Box.createRigidArea(new Dimension(5,0)));
+        search.add(btnSearch);
+        search.add(Box.createRigidArea(new Dimension(5,0)));
+        search.add(searchText);
+        search.add(Box.createRigidArea(new Dimension(5,0)));
         
-         //Label cagetory
-        JLabel cagetory=new JLabel("Category");
-        cagetory.setSize(150,30);
-        cagetory.setLocation(50, 590);
-        cagetory.setFont(new java.awt.Font(name.getFont().toString(), Font.PLAIN, 18));
+        /*end search field*/
         
-       // List Cagetory
+        /*category*/
+        JPanel category=new JPanel();
+        category.setLayout(new BoxLayout(category,BoxLayout.X_AXIS));
+        category.setBackground(Color.yellow);
+        category.setMaximumSize(new Dimension(300, 30));
+        
+        JLabel categoryLabel=new JLabel("Select Category : ");
+        categoryLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
+        
+        JComboBox cb=new JComboBox(list);
+        cb.setAlignmentX(Component.CENTER_ALIGNMENT);
+        cb.setMaximumRowCount(5);
+        
+        category.add(Box.createRigidArea(new Dimension(5,0)));
+        category.add(categoryLabel);
+        category.add(Box.createRigidArea(new Dimension(5,0)));
+        category.add(cb);
+        category.add(Box.createRigidArea(new Dimension(5,0)));
+        /*end category*/
+        
+        /*info detail*/
+        JPanel detail=new JPanel();
+        detail.setLayout(new BoxLayout(detail,BoxLayout.Y_AXIS));
+        detail.setBackground(Color.yellow);
+        
+        /*ID*/
+        JPanel IDgroup=new JPanel();
+        IDgroup.setLayout(new BoxLayout(IDgroup,BoxLayout.X_AXIS));
+        IDgroup.setBackground(Color.yellow);
+        IDgroup.setMaximumSize(new Dimension(300, 30));
+        
+         JTextField idText=new JTextField();
+         idText.setEditable(false);
+         idText.setBackground(Color.lightGray);
+         idText.setAlignmentX(Component.CENTER_ALIGNMENT);
+         JLabel idLabel=new JLabel("ID : ");
+         idLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
+        IDgroup.add(Box.createRigidArea(new Dimension(5,0)));
+        IDgroup.add(idLabel);
+        IDgroup.add(Box.createRigidArea(new Dimension(70,0)));
+        IDgroup.add(idText);
+        IDgroup.add(Box.createRigidArea(new Dimension(5,0)));         
+        /*end ID*/
+        
+        /*Name*/
+        JPanel Namegroup=new JPanel();
+        Namegroup.setLayout(new BoxLayout(Namegroup,BoxLayout.X_AXIS));
+        Namegroup.setBackground(Color.yellow);
+        Namegroup.setMaximumSize(new Dimension(300, 30));
+        
+         JTextField nameText=new JTextField();
+         nameText.setAlignmentX(Component.CENTER_ALIGNMENT);
+         JLabel nameLabel=new JLabel("Name : ");
+         nameLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
+        Namegroup.add(Box.createRigidArea(new Dimension(5,0)));
+        Namegroup.add(nameLabel);
+        Namegroup.add(Box.createRigidArea(new Dimension(48,0)));
+        Namegroup.add(nameText);
+        Namegroup.add(Box.createRigidArea(new Dimension(5,0))); 
+        /*end Name*/
+        
+        /*Category*/
+        JPanel Categorygroup=new JPanel();
+        Categorygroup.setLayout(new BoxLayout(Categorygroup,BoxLayout.X_AXIS));
+        Categorygroup.setBackground(Color.yellow);
+        Categorygroup.setMaximumSize(new Dimension(300, 30));
+        
+        
         JComboBox cb2=new JComboBox(list);
-        cb2.setMaximumRowCount(5); // số hàng tối đa được hiển thị
-        cb2.setSize(150,30);
-        cb2.setLocation(50,640);
-        cb2.setFont(new java.awt.Font(cb2.getFont().toString(), Font.PLAIN, 18));
+        cb2.setAlignmentX(Component.CENTER_ALIGNMENT);
+        JLabel LabelCategory=new JLabel("Category : ");
+        LabelCategory.setAlignmentX(Component.CENTER_ALIGNMENT);
         
-        //Label image
-        JLabel image=new JLabel("Image");
-        image.setSize(150,30);
-        image.setLocation(400, 430);
-        image.setFont(new java.awt.Font(image.getFont().toString(), Font.PLAIN, 18));
+        Categorygroup.add(Box.createRigidArea(new Dimension(5,0)));
+        Categorygroup.add(LabelCategory);
+        Categorygroup.add(Box.createRigidArea(new Dimension(30,0)));
+        Categorygroup.add(cb2);
+        Categorygroup.add(Box.createRigidArea(new Dimension(5,0)));
+        /*End Category*/
         
-        //Choose Button
+        /*Choose image*/
+        JPanel Choosegroup=new JPanel();
+        Choosegroup.setLayout(new BoxLayout(Choosegroup,BoxLayout.X_AXIS));
+        Choosegroup.setBackground(Color.yellow);
+        Choosegroup.setMaximumSize(new Dimension(300, 30));
+        
+         JLabel imgLabel=new JLabel("Image : ");
+         imgLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
+         
+        //Button choose image
         JButton btnChoose=new JButton("Choose File");
-        btnChoose.setSize(150,30);
-        btnChoose.setLocation(400, 470);
-        btnChoose.setFont(new java.awt.Font(btn.getFont().toString(), Font.PLAIN, 18));
+        btnChoose.setAlignmentX(Component.CENTER_ALIGNMENT);
         JFileChooser choose=new JFileChooser();
         btnChoose.addActionListener(new ActionListener() {
             @Override
@@ -188,67 +356,85 @@ public class Adminapp extends JFrame{
             }
         });
         
+        Choosegroup.add(Box.createRigidArea(new Dimension(5,0)));
+        Choosegroup.add(imgLabel);
+        Choosegroup.add(Box.createRigidArea(new Dimension(45,0)));
+        Choosegroup.add(btnChoose);
+        Choosegroup.add(Box.createRigidArea(new Dimension(5,0)));
         
-          //Label price
-        JLabel price=new JLabel("Price");
-        price.setSize(150,30);
-        price.setLocation(400, 510);
-        price.setFont(new java.awt.Font(price.getFont().toString(), Font.PLAIN, 18));
+        /*End Choose image*/
         
-        //Text Name
-        JTextField textPrice=new JTextField();
-        textPrice.setSize(240, 30);
-        textPrice.setLocation(400, 550);
-        textPrice.setFont(new java.awt.Font(textPrice.getFont().toString(), Font.PLAIN, 18));
+        /*Price*/
+        JPanel Pricegroup=new JPanel();
+        Pricegroup.setLayout(new BoxLayout(Pricegroup,BoxLayout.X_AXIS));
+        Pricegroup.setBackground(Color.yellow);
+        Pricegroup.setMaximumSize(new Dimension(300, 30));
         
+         JTextField priceText=new JTextField();
+         priceText.setAlignmentX(Component.CENTER_ALIGNMENT);
+         JLabel priceLabel=new JLabel("Price : ");
+         priceLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
+        Pricegroup.add(Box.createRigidArea(new Dimension(5,0)));
+        Pricegroup.add(priceLabel);
+        Pricegroup.add(Box.createRigidArea(new Dimension(50,0)));
+        Pricegroup.add(priceText);
+        Pricegroup.add(Box.createRigidArea(new Dimension(5,0)));
+        /*End Price*/
         
-        JButton btnAdd=new JButton("Add");
-        btnAdd.setSize(150,30);
-        btnAdd.setLocation(800, 470);
-        btnAdd.setFont(new java.awt.Font(btnAdd.getFont().toString(), Font.PLAIN, 18));
+        detail.add(IDgroup);
+        detail.add(Box.createRigidArea(new Dimension(0,20)));
+        detail.add(Namegroup);
+        detail.add(Box.createRigidArea(new Dimension(0,20)));
+        detail.add(Categorygroup);
+        detail.add(Box.createRigidArea(new Dimension(0,20)));
+        detail.add(Pricegroup);
+        detail.add(Box.createRigidArea(new Dimension(0,20)));
+        detail.add(Choosegroup);
         
-        JButton btnUpdate=new JButton("Update");
-        btnUpdate.setSize(150,30);
-        btnUpdate.setLocation(800, 550);
-        btnUpdate.setFont(new java.awt.Font(btnUpdate.getFont().toString(), Font.PLAIN, 18));
+        /*end info detail*/
+        info.add(Box.createRigidArea(new Dimension(0,20)));
+        info.add(search);
+        info.add(Box.createRigidArea(new Dimension(0,20)));
+        info.add(category);
+        info.add(Box.createRigidArea(new Dimension(0,20)));
+        info.add(detail);
+        info.revalidate();
         
-        JButton btnDelete=new JButton("Delete");
-        btnDelete.setSize(150,30);
-        btnDelete.setLocation(1000, 470);
-        btnDelete.setFont(new java.awt.Font(btnDelete.getFont().toString(), Font.PLAIN, 18));
-        
-        JButton btnCancel=new JButton("Cancel");
-        btnCancel.setSize(150,30);
-        btnCancel.setLocation(1000, 550);
-        btnCancel.setFont(new java.awt.Font(btnCancel.getFont().toString(), Font.PLAIN, 18));
-        
-        
-        panel2.add(text);
-        panel2.add(btn);
-        panel2.add(label);
-        panel2.add(cb);
-        panel2.add(jsp);
-        panel2.add(id);
-        panel2.add(textID);
-        panel2.add(name);
-        panel2.add(textName);
-        panel2.add(cagetory);
-        panel2.add(cb2);
-        panel2.add(image);
-        panel2.add(btnChoose); 
-        panel2.add(price);
-        panel2.add(textPrice);
-        panel2.add(btnAdd);
-        panel2.add(btnUpdate);
-        panel2.add(btnDelete);
-        panel2.add(btnCancel);
-        return panel2;
     }
-    /**
-     * @param args the command line arguments
-     */
     
-
+    void LoadFooter(JPanel footer)
+    {
+        footer.removeAll(); // remove all components
+        footer.setLayout(new BoxLayout(footer,BoxLayout.X_AXIS));
+        footer.setPreferredSize(new Dimension(footer.getWidth(),50));
+        JPanel btn=new JPanel();
+        btn.setLayout(new BoxLayout(btn,BoxLayout.X_AXIS));
+        btn.setBackground(Color.cyan);
+        
+         JButton btnAdd=new JButton("Add");
+         JButton btnUpdate=new JButton("Update");
+         JButton btnDelete=new JButton("Delete");
+         JButton btnCancel=new JButton("Cancel");
+         
+         
+         btn.add(Box.createRigidArea(new Dimension(5,0)));
+         btn.add(btnAdd);
+         btn.add(Box.createRigidArea(new Dimension(50,0)));
+         btn.add(btnUpdate);
+         btn.add(Box.createRigidArea(new Dimension(50,0)));
+         btn.add(btnDelete);
+         btn.add(Box.createRigidArea(new Dimension(50,0)));
+         btn.add(btnCancel);
+         btn.add(Box.createRigidArea(new Dimension(50,0)));
+         
+         footer.add(btn);
+         footer.revalidate();
+         
+    }
+    void Clear(JPanel a)
+    {
+        a.removeAll();
+    }
     
     public static void main(String[] args) {
         // TODO code application logic here
