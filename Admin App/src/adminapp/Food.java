@@ -15,6 +15,7 @@ import java.awt.Label;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.net.URL;
@@ -42,15 +43,20 @@ import javax.swing.table.JTableHeader;
  */
 public class Food {
     private String []list={"All","An vat","Mon chinh","Mon trang mieng"} ; //danh sách trong category
+    private JTextField idText; //ID text
+    private JTextField nameText; //Nametext
+    private JTextField priceText;
+    private JTable table; //table FOOD
     Food()
     {
         
     }
     
-    public void Load(JPanel main,JPanel info)
+    public void Load(JPanel main,JPanel info,JPanel footer)
     {
         LoadFood(main);
         LoadInfoFood(info);
+        LoadFooter(footer);
     }
     public void LoadFood(JPanel main)
     {
@@ -69,13 +75,28 @@ public class Food {
                 
         };
         DefaultTableModel model= new DefaultTableModel(object,title);
-        JTable table=new JTable();
+        table=new JTable();
         table.getTableHeader().setFont(new java.awt.Font(table.getFont().toString(), Font.BOLD, 22));
         table.setFont(new java.awt.Font(table.getFont().toString(), Font.PLAIN, 18));
         table.setModel(model);
+        table.setSelectionMode(0);
         table.setRowHeight(80); // chỉnh độ cao của hàng
         
         JScrollPane jsp=new JScrollPane(table);
+        
+        /*Sự kiện click ở table*/
+        table.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent arg0)
+            {
+                    int row=table.getSelectedRow();
+                    setInfo( row);
+                    
+            }    
+});
+         /*End click table event*/
+         
+         
         /*END*/
         main.add(Box.createRigidArea(new Dimension(5,0)));
         main.add(jsp);
@@ -105,7 +126,7 @@ public class Food {
         
         search.add(Box.createRigidArea(new Dimension(5,0)));
         search.add(btnSearch);
-        search.add(Box.createRigidArea(new Dimension(5,0)));
+        search.add(Box.createRigidArea(new Dimension(15,0)));
         search.add(searchText);
         search.add(Box.createRigidArea(new Dimension(5,0)));
         
@@ -142,7 +163,7 @@ public class Food {
         IDgroup.setBackground(Color.yellow);
         IDgroup.setMaximumSize(new Dimension(300, 30));
         
-         JTextField idText=new JTextField();
+         idText=new JTextField();
          idText.setEditable(false);
          idText.setBackground(Color.lightGray);
          idText.setAlignmentX(Component.CENTER_ALIGNMENT);
@@ -161,7 +182,7 @@ public class Food {
         Namegroup.setBackground(Color.yellow);
         Namegroup.setMaximumSize(new Dimension(300, 30));
         
-         JTextField nameText=new JTextField();
+         nameText=new JTextField();
          nameText.setAlignmentX(Component.CENTER_ALIGNMENT);
          JLabel nameLabel=new JLabel("Name : ");
          nameLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
@@ -229,7 +250,7 @@ public class Food {
         Pricegroup.setBackground(Color.yellow);
         Pricegroup.setMaximumSize(new Dimension(300, 30));
         
-         JTextField priceText=new JTextField();
+         priceText=new JTextField();
          priceText.setAlignmentX(Component.CENTER_ALIGNMENT);
          JLabel priceLabel=new JLabel("Price : ");
          priceLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
@@ -260,4 +281,83 @@ public class Food {
         info.revalidate();
         
     }
+    
+    void LoadFooter(JPanel footer)
+    {
+        footer.removeAll(); // remove all components
+        footer.setLayout(new BoxLayout(footer,BoxLayout.X_AXIS));
+        footer.setPreferredSize(new Dimension(footer.getWidth(),50));
+        JPanel btn=new JPanel();
+        btn.setLayout(new BoxLayout(btn,BoxLayout.X_AXIS));
+        btn.setBackground(Color.cyan);
+        
+         JButton btnAdd=new JButton("Add");
+         JButton btnUpdate=new JButton("Update");
+         JButton btnDelete=new JButton("Delete");
+         JButton btnCancel=new JButton("Cancel");
+         
+         
+         btn.add(Box.createRigidArea(new Dimension(5,0)));
+         btn.add(btnAdd);
+         btn.add(Box.createRigidArea(new Dimension(50,0)));
+         btn.add(btnUpdate);
+         btn.add(Box.createRigidArea(new Dimension(50,0)));
+         btn.add(btnDelete);
+         btn.add(Box.createRigidArea(new Dimension(50,0)));
+         btn.add(btnCancel);
+         btn.add(Box.createRigidArea(new Dimension(50,0)));
+         
+         footer.add(btn);
+         footer.revalidate();
+         
+         /*Sự kiện các btn Add,Update,Delete,Cancel*/
+         btnAdd.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                JFrame jf=new JFrame("ADD");
+                 jf.setSize(400, 600);
+                 jf.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);  // đóng frame hiện hành
+                 jf.setResizable(false);
+                 jf.setVisible(true);
+                 jf.setLocationRelativeTo(null);
+            }
+        });
+         btnUpdate.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                int row=table.getSelectedRow();
+                setTable(row);
+                JOptionPane.showMessageDialog(null, "Đã update thành công!");
+            }
+        });
+         
+         btnDelete.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                int row=table.getSelectedRow();
+                ((DefaultTableModel)table.getModel()).removeRow(row);
+                JOptionPane.showMessageDialog(null, "Đã xóa thành công!");
+            }
+        });
+         /*END sự kiện btn Add,....*/
+         
+    }
+    
+    private void setInfo(int row)
+    {
+            String ID=table.getModel().getValueAt(row, 0).toString();
+            String Name=table.getModel().getValueAt(row, 1).toString();
+            String Price=table.getModel().getValueAt(row, 4).toString();
+            idText.setText(ID);
+            nameText.setText(Name);
+            priceText.setText(Price);
+    }
+    
+    private void setTable(int row)
+    {
+        table.setValueAt(idText.getText().toString(), row, 0);
+        table.setValueAt(nameText.getText().toString(), row, 1);
+        table.setValueAt(priceText.getText().toString(), row, 4);
+    }
+    
 }
