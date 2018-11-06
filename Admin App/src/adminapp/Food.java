@@ -18,6 +18,7 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.io.File;
 import java.net.URL;
 import java.util.Objects;
 import javax.swing.Box;
@@ -34,6 +35,7 @@ import javax.swing.JScrollPane;
 import javax.swing.JTabbedPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
+import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.JTableHeader;
 
@@ -42,14 +44,17 @@ import javax.swing.table.JTableHeader;
  * @author Thang Le
  */
 public class Food {
-    private String []list={"All","An vat","Mon chinh","Mon trang mieng"} ; //danh sách trong category
+    private String []list={"An vat","Mon chinh","Mon trang mieng"} ; //danh sách trong category
     private JTextField idText; //ID text
     private JTextField nameText; //Nametext
     private JTextField priceText;
     private JTable table; //table FOOD
+    private JComboBox cb2;
+    private JComboBox cb;
+    private AddFrame addFrame;
     Food()
     {
-        
+        addFrame=new AddFrame("Add Food");
     }
     
     public void Load(JPanel main,JPanel info,JPanel footer)
@@ -141,7 +146,12 @@ public class Food {
         JLabel categoryLabel=new JLabel("Select Category : ");
         categoryLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
         
-        JComboBox cb=new JComboBox(list);
+        cb=new JComboBox();
+        cb.addItem("All");
+        for(String obj : list)
+        {
+            cb.addItem(obj);
+        }
         cb.setAlignmentX(Component.CENTER_ALIGNMENT);
         cb.setMaximumRowCount(5);
         
@@ -200,8 +210,9 @@ public class Food {
         Categorygroup.setMaximumSize(new Dimension(300, 30));
         
         
-        JComboBox cb2=new JComboBox(list);
+        cb2=new JComboBox(list);
         cb2.setAlignmentX(Component.CENTER_ALIGNMENT);
+        cb2.setSelectedItem(null);
         JLabel LabelCategory=new JLabel("Category : ");
         LabelCategory.setAlignmentX(Component.CENTER_ALIGNMENT);
         
@@ -228,10 +239,14 @@ public class Food {
         btnChoose.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                int returnVal=choose.showOpenDialog(info);
+                choose.setCurrentDirectory(null);
+                FileNameExtensionFilter filter=new FileNameExtensionFilter("*.Images","jpg","gif","png");
+                choose.setFileFilter(filter);
+                int returnVal=choose.showOpenDialog(null);
                 if(returnVal==JFileChooser.APPROVE_OPTION)
                 {
-                    // xu ly
+                    // xu ly chon anh
+                    
                 }
             }
         });
@@ -314,20 +329,20 @@ public class Food {
          btnAdd.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                JFrame jf=new JFrame("ADD");
-                 jf.setSize(400, 600);
-                 jf.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);  // đóng frame hiện hành
-                 jf.setResizable(false);
-                 jf.setVisible(true);
-                 jf.setLocationRelativeTo(null);
+                addFrame.FoodAdd();
             }
         });
          btnUpdate.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                //Xu ly update
                 int row=table.getSelectedRow();
-                setTable(row);
-                JOptionPane.showMessageDialog(null, "Đã update thành công!");
+                if(row>0)
+                {
+                    setTable(row);
+                    JOptionPane.showMessageDialog(null, "Đã update thành công!");
+                }
+                
             }
         });
          
@@ -335,29 +350,63 @@ public class Food {
             @Override
             public void actionPerformed(ActionEvent e) {
                 int row=table.getSelectedRow();
-                ((DefaultTableModel)table.getModel()).removeRow(row);
-                JOptionPane.showMessageDialog(null, "Đã xóa thành công!");
+                if(row>0)
+                {
+                    ((DefaultTableModel)table.getModel()).removeRow(row);
+                    JOptionPane.showMessageDialog(null, "Đã xóa thành công!");
+                }
+                
+            }
+        });
+         
+         btnCancel.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                //Xu ly
             }
         });
          /*END sự kiện btn Add,....*/
          
     }
     
+    /*get value from table and set to textfield*/
     private void setInfo(int row)
     {
             String ID=table.getModel().getValueAt(row, 0).toString();
             String Name=table.getModel().getValueAt(row, 1).toString();
+            String Category=table.getModel().getValueAt(row, 2).toString();
             String Price=table.getModel().getValueAt(row, 4).toString();
+            
             idText.setText(ID);
             nameText.setText(Name);
             priceText.setText(Price);
+            for(int i=0;i<cb2.getItemCount();i++)
+            {
+                if(cb2.getItemAt(i).toString()==Category)
+                {
+                    cb2.setSelectedIndex(i);
+                }
+            }
     }
     
+    /*set value to table*/
     private void setTable(int row)
     {
         table.setValueAt(idText.getText().toString(), row, 0);
         table.setValueAt(nameText.getText().toString(), row, 1);
+        table.setValueAt(cb2.getSelectedItem().toString(), row, 2);
         table.setValueAt(priceText.getText().toString(), row, 4);
+    }
+    
+    /*get Image and Resize*/
+    private ImageIcon ResizeImage(String Imagepath)
+    {
+        ImageIcon myimage=new ImageIcon(Imagepath);
+        Image img=myimage.getImage();
+        //resize
+        Image newImg=img.getScaledInstance(30, 30, Image.SCALE_SMOOTH);
+        ImageIcon image=new ImageIcon(newImg);
+        return image;      
     }
     
 }
