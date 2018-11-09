@@ -50,6 +50,10 @@ public class Adminapp extends JFrame{
     JPanel info;
     JPanel footer;
     Food foodMain;
+<<<<<<< HEAD
+=======
+    FoodCategory categoryMain;
+>>>>>>> origin/admin_app
     
     public Adminapp()
     {
@@ -80,6 +84,10 @@ public class Adminapp extends JFrame{
         footer.setBackground(Color.cyan);
         
         foodMain=new Food();
+<<<<<<< HEAD
+=======
+        categoryMain=new FoodCategory();
+>>>>>>> origin/admin_app
         
         createHeader(header);
         jf.add(header, BorderLayout.PAGE_START);
@@ -180,7 +188,20 @@ public class Adminapp extends JFrame{
         foodcategory.add(categoryTitle);
         foodcategory.add(Box.createRigidArea(new Dimension(0, 6)));
         foodcategory.add(categoryIcon);
+<<<<<<< HEAD
         /*END FOOD OPTIONS*/
+=======
+        
+        foodcategory.addMouseListener(new MouseAdapter() {
+            @Override
+             public void mouseClicked(MouseEvent e) {
+                 super.mouseClicked(e); //To change body of generated methods, choose Tools | Templates.
+                 JOptionPane.showMessageDialog(null,"Xử lý sự kiện Load Database");
+                 categoryMain.Load(main,info,footer);
+             }
+});
+        /*END FOODCATEGORY OPTIONS*/
+>>>>>>> origin/admin_app
         
         options.add(Box.createRigidArea(new Dimension(30, 0)));
         options.add(dashboard);

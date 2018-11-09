@@ -43,66 +43,40 @@ import javax.swing.table.JTableHeader;
  *
  * @author Thang Le
  */
-public class Food {
-    private String []list={"An vat","Mon chinh","Mon trang mieng"} ; //danh sách trong category
+public class FoodCategory {
     private JTextField idText; //ID text
     private JTextField nameText; //Nametext
-    private JTextField priceText;
     private JTable table; //table FOOD
-    private JComboBox cb2;
-    private JComboBox cb;
     private AddFrame addFrame;
-    Food()
+    
+    public FoodCategory()
     {
-        addFrame=new AddFrame("Add Food");
+        addFrame=new AddFrame("Add Cagetory");
     }
     
     public void Load(JPanel main,JPanel info,JPanel footer)
     {
-        LoadFood(main);
-        LoadInfoFood(info);
+        LoadCategory(main);
+        LoadInfoCategory(info);
         LoadFooter(footer);
     }
-    public void LoadFood(JPanel main)
+    
+    //Load table FoodCategory
+    public void LoadCategory(JPanel main)
     {
         main.removeAll();
         main.setLayout(new BoxLayout(main, BoxLayout.X_AXIS));
         /*LOAD TABLE*/
          //Table
-        String []title=new String[]{"ID","Name","Cagetory","Image","Price"};
+        String []title=new String[]{"ID","Name"};
         Object [][]object=new Object[][]{
-            {1,"Banh trang tron","An vat","",10000},
-             {2,"Banh trang tron","An vat","",10000},
-                {3,"Banh trang tron","An vat","",10000},
-                {4,"Banh trang tron","An vat","",10000},
-                {5,"Banh trang tron","An vat","",10000},
-                {6,"Banh trang tron","An vat","",10000},
+            {1,"An vat"},
+             {2,"Mon an"},
+                {3,"Trang mieng"},
                 
         };
         DefaultTableModel model= new DefaultTableModel(object,title);
-<<<<<<< HEAD
         table=new JTable();
-=======
-        table=new JTable() {
-             @Override
-               public Class getColumnClass(int column) {
-                switch (column) {
-                    case 0:
-                        return String.class;
-                    case 1:
-                        return String.class;
-                    case 2:
-                        return Integer.class;
-                    case 3:
-                        return ImageIcon.class;
-                    case 4:
-                        return Double.class;
-                    default:
-                        return String.class;
-                }
-               }
-        };
->>>>>>> origin/admin_app
         table.getTableHeader().setFont(new java.awt.Font(table.getFont().toString(), Font.BOLD, 22));
         table.setFont(new java.awt.Font(table.getFont().toString(), Font.PLAIN, 18));
         table.setModel(model);
@@ -131,9 +105,10 @@ public class Food {
         main.revalidate();
     }
     
-    public void LoadInfoFood(JPanel info)
+    //Load info FoodCategory
+    public void LoadInfoCategory(JPanel info)
     {
-        info.removeAll(); // remove all components
+         info.removeAll(); // remove all components
         info.setLayout(new BoxLayout(info,BoxLayout.Y_AXIS));
         info.setPreferredSize(new Dimension(300,info.getHeight()));
         
@@ -158,31 +133,6 @@ public class Food {
         search.add(Box.createRigidArea(new Dimension(5,0)));
         
         /*end search field*/
-        
-        /*category*/
-        JPanel category=new JPanel();
-        category.setLayout(new BoxLayout(category,BoxLayout.X_AXIS));
-        category.setBackground(Color.yellow);
-        category.setMaximumSize(new Dimension(300, 30));
-        
-        JLabel categoryLabel=new JLabel("Select Category : ");
-        categoryLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
-        
-        cb=new JComboBox();
-        cb.addItem("All");
-        for(String obj : list)
-        {
-            cb.addItem(obj);
-        }
-        cb.setAlignmentX(Component.CENTER_ALIGNMENT);
-        cb.setMaximumRowCount(5);
-        
-        category.add(Box.createRigidArea(new Dimension(5,0)));
-        category.add(categoryLabel);
-        category.add(Box.createRigidArea(new Dimension(5,0)));
-        category.add(cb);
-        category.add(Box.createRigidArea(new Dimension(5,0)));
-        /*end category*/
         
         /*info detail*/
         JPanel detail=new JPanel();
@@ -225,118 +175,21 @@ public class Food {
         Namegroup.add(Box.createRigidArea(new Dimension(5,0))); 
         /*end Name*/
         
-        /*Category*/
-        JPanel Categorygroup=new JPanel();
-        Categorygroup.setLayout(new BoxLayout(Categorygroup,BoxLayout.X_AXIS));
-        Categorygroup.setBackground(Color.yellow);
-        Categorygroup.setMaximumSize(new Dimension(300, 30));
-        
-        
-        cb2=new JComboBox(list);
-        cb2.setAlignmentX(Component.CENTER_ALIGNMENT);
-        cb2.setSelectedItem(null);
-        JLabel LabelCategory=new JLabel("Category : ");
-        LabelCategory.setAlignmentX(Component.CENTER_ALIGNMENT);
-        
-        Categorygroup.add(Box.createRigidArea(new Dimension(5,0)));
-        Categorygroup.add(LabelCategory);
-        Categorygroup.add(Box.createRigidArea(new Dimension(30,0)));
-        Categorygroup.add(cb2);
-        Categorygroup.add(Box.createRigidArea(new Dimension(5,0)));
-        /*End Category*/
-        
-        /*Choose image*/
-        JPanel Choosegroup=new JPanel();
-        Choosegroup.setLayout(new BoxLayout(Choosegroup,BoxLayout.X_AXIS));
-        Choosegroup.setBackground(Color.yellow);
-        Choosegroup.setMaximumSize(new Dimension(300, 30));
-        
-         JLabel imgLabel=new JLabel("Image : ");
-         imgLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
-         
-        //Button choose image
-        JButton btnChoose=new JButton("Choose File");
-        btnChoose.setAlignmentX(Component.CENTER_ALIGNMENT);
-        JFileChooser choose=new JFileChooser();
-        btnChoose.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-<<<<<<< HEAD
-                choose.setCurrentDirectory(null);
-                FileNameExtensionFilter filter=new FileNameExtensionFilter("*.Images","jpg","gif","png");
-                choose.setFileFilter(filter);
-                int returnVal=choose.showOpenDialog(null);
-                if(returnVal==JFileChooser.APPROVE_OPTION)
-                {
-                    // xu ly chon anh
-                    
-=======
-                int row=table.getSelectedRow();
-                if(row>0)
-                {
-                     choose.setCurrentDirectory(new File(System.getProperty("user.home")));
-                    FileNameExtensionFilter filter=new FileNameExtensionFilter("*.Images","jpg","gif","png");
-                    choose.setFileFilter(filter);
-                    int returnVal=choose.showOpenDialog(null);
-                    if(returnVal==JFileChooser.APPROVE_OPTION)
-                    {
-                        // xu ly chon anh
-                        File selectedFile=choose.getSelectedFile();
-                        String path= selectedFile.getAbsolutePath();
-                    
-                        table.setValueAt(ResizeImage(path),row , 3);
-                     } 
->>>>>>> origin/admin_app
-                }
-            }
-        });
-        
-        Choosegroup.add(Box.createRigidArea(new Dimension(5,0)));
-        Choosegroup.add(imgLabel);
-        Choosegroup.add(Box.createRigidArea(new Dimension(45,0)));
-        Choosegroup.add(btnChoose);
-        Choosegroup.add(Box.createRigidArea(new Dimension(5,0)));
-        
-        /*End Choose image*/
-        
-        /*Price*/
-        JPanel Pricegroup=new JPanel();
-        Pricegroup.setLayout(new BoxLayout(Pricegroup,BoxLayout.X_AXIS));
-        Pricegroup.setBackground(Color.yellow);
-        Pricegroup.setMaximumSize(new Dimension(300, 30));
-        
-         priceText=new JTextField();
-         priceText.setAlignmentX(Component.CENTER_ALIGNMENT);
-         JLabel priceLabel=new JLabel("Price : ");
-         priceLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
-        Pricegroup.add(Box.createRigidArea(new Dimension(5,0)));
-        Pricegroup.add(priceLabel);
-        Pricegroup.add(Box.createRigidArea(new Dimension(50,0)));
-        Pricegroup.add(priceText);
-        Pricegroup.add(Box.createRigidArea(new Dimension(5,0)));
-        /*End Price*/
         
         detail.add(IDgroup);
         detail.add(Box.createRigidArea(new Dimension(0,20)));
         detail.add(Namegroup);
         detail.add(Box.createRigidArea(new Dimension(0,20)));
-        detail.add(Categorygroup);
-        detail.add(Box.createRigidArea(new Dimension(0,20)));
-        detail.add(Pricegroup);
-        detail.add(Box.createRigidArea(new Dimension(0,20)));
-        detail.add(Choosegroup);
         
-        /*end info detail*/
+         /*end info detail*/
         info.add(Box.createRigidArea(new Dimension(0,20)));
         info.add(search);
         info.add(Box.createRigidArea(new Dimension(0,20)));
-        info.add(category);
-        info.add(Box.createRigidArea(new Dimension(0,20)));
         info.add(detail);
         info.revalidate();
-        
     }
     
+    //Load footer
     void LoadFooter(JPanel footer)
     {
         footer.removeAll(); // remove all components
@@ -369,7 +222,7 @@ public class Food {
          btnAdd.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                addFrame.FoodAdd();
+                addFrame.FoodCategoryAdd();
             }
         });
          btnUpdate.addActionListener(new ActionListener() {
@@ -409,24 +262,14 @@ public class Food {
          
     }
     
+    
     /*get value from table and set to textfield*/
     private void setInfo(int row)
     {
             String ID=table.getModel().getValueAt(row, 0).toString();
-            String Name=table.getModel().getValueAt(row, 1).toString();
-            String Category=table.getModel().getValueAt(row, 2).toString();
-            String Price=table.getModel().getValueAt(row, 4).toString();
-            
+            String Name=table.getModel().getValueAt(row, 1).toString();   
             idText.setText(ID);
             nameText.setText(Name);
-            priceText.setText(Price);
-            for(int i=0;i<cb2.getItemCount();i++)
-            {
-                if(cb2.getItemAt(i).toString()==Category)
-                {
-                    cb2.setSelectedIndex(i);
-                }
-            }
     }
     
     /*set value to table*/
@@ -434,28 +277,5 @@ public class Food {
     {
         table.setValueAt(idText.getText().toString(), row, 0);
         table.setValueAt(nameText.getText().toString(), row, 1);
-        table.setValueAt(cb2.getSelectedItem().toString(), row, 2);
-        table.setValueAt(priceText.getText().toString(), row, 4);
     }
-    
-    /*get Image and Resize*/
-    private ImageIcon ResizeImage(String Imagepath)
-    {
-        ImageIcon myimage=new ImageIcon(Imagepath);
-        Image img=myimage.getImage();
-        //resize
-<<<<<<< HEAD
-        Image newImg=img.getScaledInstance(30, 30, Image.SCALE_SMOOTH);
-=======
-        Image newImg=img.getScaledInstance(50, 50, Image.SCALE_SMOOTH);
->>>>>>> origin/admin_app
-        ImageIcon image=new ImageIcon(newImg);
-        return image;      
-    }
-    
-<<<<<<< HEAD
-=======
-  
-    
->>>>>>> origin/admin_app
 }
