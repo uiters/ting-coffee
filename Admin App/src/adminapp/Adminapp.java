@@ -50,6 +50,7 @@ public class Adminapp extends JFrame{
     JPanel info;
     JPanel footer;
     Food foodMain;
+    FoodCategory categoryMain;
     
     public Adminapp()
     {
@@ -80,6 +81,7 @@ public class Adminapp extends JFrame{
         footer.setBackground(Color.cyan);
         
         foodMain=new Food();
+        categoryMain=new FoodCategory();
         
         createHeader(header);
         jf.add(header, BorderLayout.PAGE_START);
@@ -158,8 +160,7 @@ public class Adminapp extends JFrame{
              public void mouseClicked(MouseEvent e) {
                  super.mouseClicked(e); //To change body of generated methods, choose Tools | Templates.
                  JOptionPane.showMessageDialog(null,"Xử lý sự kiện Load Database");
-                 foodMain.Load(main,info);
-                 LoadFooter(footer);
+                 foodMain.Load(main,info,footer);
              }
             
 });
@@ -181,7 +182,16 @@ public class Adminapp extends JFrame{
         foodcategory.add(categoryTitle);
         foodcategory.add(Box.createRigidArea(new Dimension(0, 6)));
         foodcategory.add(categoryIcon);
-        /*END FOOD OPTIONS*/
+        
+        foodcategory.addMouseListener(new MouseAdapter() {
+            @Override
+             public void mouseClicked(MouseEvent e) {
+                 super.mouseClicked(e); //To change body of generated methods, choose Tools | Templates.
+                 JOptionPane.showMessageDialog(null,"Xử lý sự kiện Load Database");
+                 categoryMain.Load(main,info,footer);
+             }
+});
+        /*END FOODCATEGORY OPTIONS*/
         
         options.add(Box.createRigidArea(new Dimension(30, 0)));
         options.add(dashboard);
@@ -198,35 +208,7 @@ public class Adminapp extends JFrame{
      */
 
     
-    void LoadFooter(JPanel footer)
-    {
-        footer.removeAll(); // remove all components
-        footer.setLayout(new BoxLayout(footer,BoxLayout.X_AXIS));
-        footer.setPreferredSize(new Dimension(footer.getWidth(),50));
-        JPanel btn=new JPanel();
-        btn.setLayout(new BoxLayout(btn,BoxLayout.X_AXIS));
-        btn.setBackground(Color.cyan);
-        
-         JButton btnAdd=new JButton("Add");
-         JButton btnUpdate=new JButton("Update");
-         JButton btnDelete=new JButton("Delete");
-         JButton btnCancel=new JButton("Cancel");
-         
-         
-         btn.add(Box.createRigidArea(new Dimension(5,0)));
-         btn.add(btnAdd);
-         btn.add(Box.createRigidArea(new Dimension(50,0)));
-         btn.add(btnUpdate);
-         btn.add(Box.createRigidArea(new Dimension(50,0)));
-         btn.add(btnDelete);
-         btn.add(Box.createRigidArea(new Dimension(50,0)));
-         btn.add(btnCancel);
-         btn.add(Box.createRigidArea(new Dimension(50,0)));
-         
-         footer.add(btn);
-         footer.revalidate();
-         
-    }
+    
 
     
     public static void main(String[] args) {
