@@ -52,6 +52,7 @@ public class Food {
     private JComboBox cb2;
     private JComboBox cb;
     private AddFrame addFrame;
+    String pathImg;
     Food()
     {
         addFrame=new AddFrame("Add Food");
@@ -87,12 +88,6 @@ public class Food {
              @Override
                public Class getColumnClass(int column) {
                 switch (column) {
-                    case 0:
-                        return String.class;
-                    case 1:
-                        return String.class;
-                    case 2:
-                        return Integer.class;
                     case 3:
                         return ImageIcon.class;
                     case 4:
@@ -283,8 +278,8 @@ public class Food {
                         // xu ly chon anh
                         File selectedFile=choose.getSelectedFile();
                         String path= selectedFile.getAbsolutePath();
-                    
-                        table.setValueAt(ResizeImage(path),row , 3);
+                        pathImg=path;
+                        
                      } 
 >>>>>>> origin/admin_app
                 }
@@ -377,10 +372,13 @@ public class Food {
             public void actionPerformed(ActionEvent e) {
                 //Xu ly update
                 int row=table.getSelectedRow();
-                if(row>0)
+                if(row>=0)
                 {
+                    //setTable(row);
+                    table.setValueAt(ResizeImage(pathImg),row , 3);
                     setTable(row);
-                    JOptionPane.showMessageDialog(null, "Đã update thành công!");
+                    
+                    JOptionPane.showMessageDialog(null, "Đã update thành công! o hang thu "+row);
                 }
                 
             }
@@ -390,7 +388,7 @@ public class Food {
             @Override
             public void actionPerformed(ActionEvent e) {
                 int row=table.getSelectedRow();
-                if(row>0)
+                if(row>=0)
                 {
                     ((DefaultTableModel)table.getModel()).removeRow(row);
                     JOptionPane.showMessageDialog(null, "Đã xóa thành công!");
@@ -432,10 +430,15 @@ public class Food {
     /*set value to table*/
     private void setTable(int row)
     {
-        table.setValueAt(idText.getText().toString(), row, 0);
-        table.setValueAt(nameText.getText().toString(), row, 1);
-        table.setValueAt(cb2.getSelectedItem().toString(), row, 2);
-        table.setValueAt(priceText.getText().toString(), row, 4);
+        if(idText.getText().toString()!=null&&nameText.getText().toString()!=null&&priceText.getText().toString()!=null)
+        {
+            table.setValueAt(idText.getText().toString(), row, 0);
+            table.setValueAt(nameText.getText().toString(), row, 1);
+            table.setValueAt(cb2.getSelectedItem().toString(), row, 2);
+            Double f=Double.parseDouble(priceText.getText().toString());
+            table.setValueAt(f, row, 4);
+        }
+        
     }
     
     /*get Image and Resize*/
@@ -445,17 +448,28 @@ public class Food {
         Image img=myimage.getImage();
         //resize
 <<<<<<< HEAD
+<<<<<<< HEAD
         Image newImg=img.getScaledInstance(30, 30, Image.SCALE_SMOOTH);
 =======
         Image newImg=img.getScaledInstance(50, 50, Image.SCALE_SMOOTH);
 >>>>>>> origin/admin_app
+=======
+        Image newImg=img.getScaledInstance(80, 80, Image.SCALE_SMOOTH);
+>>>>>>> c2bdb69348d1323b12d4da63540db7e97fad6970
         ImageIcon image=new ImageIcon(newImg);
         return image;      
     }
     
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
   
+=======
+  private ImageIcon getImage(byte[]data)
+  {
+      return new ImageIcon(new ImageIcon(data).getImage().getScaledInstance(80, 80, java.awt.Image.SCALE_SMOOTH));
+  }
+>>>>>>> c2bdb69348d1323b12d4da63540db7e97fad6970
     
 >>>>>>> origin/admin_app
 }
