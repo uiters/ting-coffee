@@ -51,6 +51,7 @@ public class Adminapp extends JFrame{
     JPanel footer;
     Food foodMain;
     FoodCategory categoryMain;
+    Dashboard dashboardMain;
     
     public Adminapp()
     {
@@ -82,6 +83,7 @@ public class Adminapp extends JFrame{
         
         foodMain=new Food();
         categoryMain=new FoodCategory();
+        dashboardMain=new Dashboard();
         
         createHeader(header);
         jf.add(header, BorderLayout.PAGE_START);
@@ -136,6 +138,16 @@ public class Adminapp extends JFrame{
         dashboard.add(dashboardTitle);
         dashboard.add(Box.createRigidArea(new Dimension(0, 6)));
         dashboard.add(dashboardIcon);
+        
+        dashboard.addMouseListener(new MouseAdapter() {
+             @Override
+             public void mouseClicked(MouseEvent e) {
+                 super.mouseClicked(e); //To change body of generated methods, choose Tools | Templates.
+                 JOptionPane.showMessageDialog(null,"Xử lý sự kiện Load Database");
+                 dashboardMain.Load(main,info);
+             }
+            
+});
         /*END DASHBOARD OPTIONS*/
         
         /*FOOD*/

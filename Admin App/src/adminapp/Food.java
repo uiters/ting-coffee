@@ -415,7 +415,16 @@ public class Food {
     /*set value to table*/
     private void setTable(int row)
     {
-        if(idText.getText().toString()!=null&&nameText.getText().toString()!=null&&priceText.getText().toString()!=null)
+        
+        Boolean flag=true;
+        try {
+            Double f=Double.parseDouble(priceText.getText().toString());
+            flag=true; // jtextfield chi chua 0-9
+        } catch (NumberFormatException e)
+        {
+            flag=false;
+        }
+        if(idText.getText().toString()!=null&&nameText.getText().toString()!=null&&flag==true)
         {
             table.setValueAt(idText.getText().toString(), row, 0);
             table.setValueAt(nameText.getText().toString(), row, 1);
