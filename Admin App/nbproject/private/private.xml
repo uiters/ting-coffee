@@ -3,8 +3,11 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/Asus/Desktop/cafe-management/Admin%20App/src/adminapp/Food.java</file>
-            <file>file:/C:/Users/Asus/Desktop/cafe-management/Admin%20App/src/adminapp/AddFrame.java</file>
+            <file>file:/home/thienlan/cafe-management/Admin%20App/src/Models/FoodModel.java</file>
+            <file>file:/home/thienlan/cafe-management/Admin%20App/src/Controllers/FoodController.java</file>
+            <file>file:/home/thienlan/cafe-management/Admin%20App/src/Views/FoodCategoryView.java</file>
+            <file>file:/home/thienlan/cafe-management/Admin%20App/src/Views/FoodView.java</file>
+            <file>file:/home/thienlan/cafe-management/Admin%20App/src/Views/AdminappView.java</file>
         </group>
     </open-files>
 </project-private>

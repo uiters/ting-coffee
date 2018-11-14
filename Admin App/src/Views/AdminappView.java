@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package adminapp;
+package Views;
 
 import java.awt.*;
 import java.awt.BorderLayout;
@@ -41,7 +41,7 @@ import javax.swing.table.JTableHeader;
  *
  * @author Thang Le
  */
-public class Adminapp extends JFrame{
+public class AdminappView extends JFrame{
 
     JTabbedPane tabbedPane;
     JFrame jf;
@@ -49,17 +49,16 @@ public class Adminapp extends JFrame{
     JPanel main;
     JPanel info;
     JPanel footer;
-    Food foodMain;
-    FoodCategory categoryMain;
-    Dashboard dashboardMain;
+    FoodView foodMain;
+    FoodCategoryView categoryMain;
+    DashboardView dashboardMain;
     
-    public Adminapp()
+    public AdminappView()
     {
         jf=new JFrame("Cafe Management || Admin App");
         
        jf.setSize(1000, 700);
        jf.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);  // đóng toàn bộ frame liên quan
-       jf.setVisible(true);
        jf.setLocationRelativeTo(null);
        
        
@@ -81,15 +80,17 @@ public class Adminapp extends JFrame{
         footer = new JPanel();
         footer.setBackground(Color.cyan);
         
-        foodMain=new Food();
-        categoryMain=new FoodCategory();
-        dashboardMain=new Dashboard();
+        foodMain=new FoodView();
+        categoryMain=new FoodCategoryView();
+        dashboardMain=new DashboardView();
         
         createHeader(header);
         jf.add(header, BorderLayout.PAGE_START);
         jf.add(main, BorderLayout.CENTER);
         jf.add(info, BorderLayout.LINE_END);
         jf.add(footer, BorderLayout.PAGE_END);
+        jf.setVisible(true);
+
     }
     
     private void createHeader(JPanel header)
@@ -225,7 +226,7 @@ public class Adminapp extends JFrame{
     
     public static void main(String[] args) {
         // TODO code application logic here
-        Adminapp app=new Adminapp();
+        AdminappView app=new AdminappView();
     }
     
 }

@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package adminapp;
+package Views;
 
 import java.awt.Dimension;
 import javax.swing.Box;
@@ -20,9 +20,9 @@ import org.jfree.data.category.DefaultCategoryDataset;
  *
  * @author Thang Le
  */
-public class Dashboard {
+public class DashboardView {
     
-    public Dashboard()
+    public DashboardView()
     {
         
     }

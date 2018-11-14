@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package adminapp;
+package Views;
 
 import java.awt.*;
 import java.awt.BorderLayout;
@@ -45,7 +45,7 @@ import javax.swing.table.JTableHeader;
  *
  * @author Thang Le
  */
-public class AddFrame {
+public class AddFrameView {
     private String title;
     private JFrame jf;
     private JPanel panel;
@@ -53,7 +53,7 @@ public class AddFrame {
     private JTextField priceText;
     private JComboBox cb;
     private String []list={"An vat","Mon chinh","Mon trang mieng"} ; //danh sách trong category
-    public AddFrame(String title)
+    public AddFrameView(String title)
     {
        this.title=title;
         
