@@ -52,7 +52,8 @@ public class AdminappView extends JFrame{
     FoodView foodMain;
     FoodCategoryView categoryMain;
     DashboardView dashboardMain;
-    
+    TableView tableMain;
+    BillView billMain;
     public AdminappView()
     {
         jf=new JFrame("Cafe Management || Admin App");
@@ -83,6 +84,8 @@ public class AdminappView extends JFrame{
         foodMain=new FoodView();
         categoryMain=new FoodCategoryView();
         dashboardMain=new DashboardView();
+        tableMain=new TableView();
+        billMain=new BillView();
         
         createHeader(header);
         jf.add(header, BorderLayout.PAGE_START);
@@ -206,12 +209,110 @@ public class AdminappView extends JFrame{
 });
         /*END FOODCATEGORY OPTIONS*/
         
+        
+        /*TABLE*/
+        JPanel table = new JPanel();
+        table.setLayout(new BoxLayout(table, BoxLayout.Y_AXIS));
+        table.setBackground(new Color(228,249,245));
+        
+        JLabel tableTitle = new JLabel("Table");
+        tableTitle.setForeground(new Color(41,55,72));
+        tableTitle.setAlignmentX(Component.CENTER_ALIGNMENT);
+        
+        URL tableURL = getClass().getResource("../image/table.png");
+        JLabel tableIcon = new JLabel(new ImageIcon(tableURL));
+        tableIcon.setAlignmentX(Component.CENTER_ALIGNMENT);
+        
+        
+         table.addMouseListener(new MouseAdapter() {
+            @Override
+             public void mouseClicked(MouseEvent e) {
+                 super.mouseClicked(e); //To change body of generated methods, choose Tools | Templates.
+                 JOptionPane.showMessageDialog(null,"Xử lý sự kiện Load Database");
+                 //load
+                 tableMain.Load(main, info, footer);
+             }
+         });
+        
+        table.add(tableTitle);
+        table.add(Box.createRigidArea(new Dimension(0, 6)));
+        table.add(tableIcon);
+                       
+        /*END TABLE OPTIONS*/
+        
+        /*STAFF*/
+        JPanel staff= new JPanel();
+        staff.setLayout(new BoxLayout(staff, BoxLayout.Y_AXIS));
+        staff.setBackground(new Color(228,249,245));
+        
+        JLabel staffTitle = new JLabel("Staff");
+        staffTitle.setForeground(new Color(41,55,72));
+        staffTitle.setAlignmentX(Component.CENTER_ALIGNMENT);
+        
+        URL staffURL = getClass().getResource("../image/staff.png");
+        JLabel staffIcon = new JLabel(new ImageIcon(staffURL));
+        staffIcon.setAlignmentX(Component.CENTER_ALIGNMENT);
+        
+        
+         staff.addMouseListener(new MouseAdapter() {
+            @Override
+             public void mouseClicked(MouseEvent e) {
+                 super.mouseClicked(e); //To change body of generated methods, choose Tools | Templates.
+                 JOptionPane.showMessageDialog(null,"Xử lý sự kiện Load Database");
+                 //load
+             }
+         });
+        
+        staff.add(staffTitle);
+        staff.add(Box.createRigidArea(new Dimension(0, 6)));
+        staff.add(staffIcon);
+        
+        /*END STAFF OPTIONS*/
+        
+        
+        /*BILL*/
+        JPanel bill= new JPanel();
+        bill.setLayout(new BoxLayout(bill, BoxLayout.Y_AXIS));
+        bill.setBackground(new Color(228,249,245));
+        
+        JLabel billTitle = new JLabel("Bill");
+        billTitle.setForeground(new Color(41,55,72));
+        billTitle.setAlignmentX(Component.CENTER_ALIGNMENT);
+        
+        URL billURL = getClass().getResource("../image/bill.png");
+        JLabel billIcon = new JLabel(new ImageIcon(billURL));
+        billIcon.setAlignmentX(Component.CENTER_ALIGNMENT);
+        
+        
+         bill.addMouseListener(new MouseAdapter() {
+            @Override
+             public void mouseClicked(MouseEvent e) {
+                 super.mouseClicked(e); //To change body of generated methods, choose Tools | Templates.
+                 JOptionPane.showMessageDialog(null,"Xử lý sự kiện Load Database");
+                 //load
+                 billMain.Load(main, info, footer);
+             }
+         });
+        
+        bill.add(billTitle);
+        bill.add(Box.createRigidArea(new Dimension(0, 6)));
+        bill.add(billIcon);
+        /*END BILL OPTIONS*/
+        
+        
+        options.add(Box.createRigidArea(new Dimension(30, 0)));
+        options.add(bill);
         options.add(Box.createRigidArea(new Dimension(30, 0)));
         options.add(dashboard);
         options.add(Box.createRigidArea(new Dimension(30, 0)));
         options.add(food);
         options.add(Box.createRigidArea(new Dimension(30, 0)));
         options.add(foodcategory);
+        options.add(Box.createRigidArea(new Dimension(30, 0)));
+        options.add(table);
+        options.add(Box.createRigidArea(new Dimension(30, 0)));
+        options.add(staff);
+        options.add(Box.createRigidArea(new Dimension(30, 0)));
         /*END OPTIONS*/
         header.add(brandSection);
         header.add(options);

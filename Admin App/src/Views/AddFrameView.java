@@ -310,4 +310,88 @@ public class AddFrameView {
         });
         
     }
+    
+    
+    public void TableAdd()
+    {
+        jf=new JFrame(title);
+        jf.setSize(300, 200);
+        jf.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);  // đóng frame hiện hành
+        jf.setResizable(false);
+
+        jf.setLocationRelativeTo(null);
+        panel=new JPanel();
+        panel.setBackground(Color.green);
+        jf.add(panel, BorderLayout.CENTER);
+        jf.setVisible(true);
+         /*info detail*/
+        JPanel detail=new JPanel();
+        detail.setLayout(new BoxLayout(detail,BoxLayout.Y_AXIS));
+        detail.setBackground(Color.yellow);
+        detail.setPreferredSize(new Dimension(panel.getWidth(),panel.getHeight()));
+        
+        
+        JPanel Namegroup=new JPanel();
+        Namegroup.setLayout(new BoxLayout(Namegroup,BoxLayout.X_AXIS));
+        Namegroup.setBackground(Color.yellow);
+        Namegroup.setMaximumSize(new Dimension(300, 30));
+        
+         nameText=new JTextField();
+         nameText.setAlignmentX(Component.CENTER_ALIGNMENT);
+         JLabel nameLabel=new JLabel("Name : ");
+         nameLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
+        Namegroup.add(Box.createRigidArea(new Dimension(5,0)));
+        Namegroup.add(nameLabel);
+        Namegroup.add(Box.createRigidArea(new Dimension(48,0)));
+        Namegroup.add(nameText);
+        Namegroup.add(Box.createRigidArea(new Dimension(5,0))); 
+        
+        /*end info detail*/
+         /*Button Add,Cancel*/
+        JPanel Btngroup=new JPanel();
+        Btngroup.setLayout(new BoxLayout(Btngroup,BoxLayout.X_AXIS));
+        Btngroup.setBackground(Color.yellow);
+        Btngroup.setMaximumSize(new Dimension(300, 30));
+        
+        JButton btnCancel=new JButton("Cancel");
+        btnCancel.setAlignmentX(Component.CENTER_ALIGNMENT);
+        
+        JButton btnAdd=new JButton("Add");
+        btnAdd.setAlignmentX(Component.CENTER_ALIGNMENT);
+        
+        Btngroup.add(Box.createRigidArea(new Dimension(25,0)));
+        Btngroup.add(btnCancel);
+        Btngroup.add(Box.createRigidArea(new Dimension(115,0)));
+        Btngroup.add(btnAdd);
+        /*end Button Add,Cancel*/
+        
+        detail.add(Box.createRigidArea(new Dimension(0,20)));
+        detail.add(Namegroup);
+        detail.add(Box.createRigidArea(new Dimension(0,20)));
+        detail.add(Btngroup);
+        
+        panel.add(detail);
+        
+        /*Event Btn Add,Cancel*/
+        btnAdd.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if(nameText.getText().toString().equals("")==false)
+                {
+                    //Xu ly btn add
+                    JOptionPane.showMessageDialog(null, "Đã thêm 1 table thành công!");
+                    jf.dispose();
+                }
+            }
+        });
+        
+        btnCancel.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                 //Xu ly btn cancel
+                 JOptionPane.showMessageDialog(null, "Close frame add food cagetory");
+                  jf.dispose();
+            }
+        });
+    }
 }

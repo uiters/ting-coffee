@@ -43,26 +43,27 @@ import javax.swing.table.JTableHeader;
  *
  * @author Thang Le
  */
-public class FoodCategoryView {
+public class TableView {
+    
     private JTextField idText; //ID text
     private JTextField nameText; //Nametext
-    private JTable table; //table FOOD
+    private JTable table; //table Table
     private AddFrameView addFrame;
     
-    public FoodCategoryView()
+    public TableView()
     {
-        addFrame=new AddFrameView("Add Cagetory");
+        addFrame=new AddFrameView("Add Table");
     }
     
     public void Load(JPanel main,JPanel info,JPanel footer)
     {
-        LoadCategory(main);
-        LoadInfoCategory(info);
+        LoadTable(main);
+        LoadInfoTable(info);
         LoadFooter(footer);
     }
     
-    //Load table FoodCategory
-    public void LoadCategory(JPanel main)
+    
+    public void LoadTable(JPanel main)
     {
         main.removeAll();
         main.setLayout(new BoxLayout(main, BoxLayout.X_AXIS));
@@ -70,9 +71,9 @@ public class FoodCategoryView {
          //Table
         String []title=new String[]{"ID","Name"};
         Object [][]object=new Object[][]{
-            {1,"An vat"},
-             {2,"Mon an"},
-                {3,"Trang mieng"},
+            {1,"Ban 1"},
+            {2,"Ban 2"},
+             {3,"Ban 3"},
                 
         };
         DefaultTableModel model= new DefaultTableModel(object,title);
@@ -105,8 +106,7 @@ public class FoodCategoryView {
         main.revalidate();
     }
     
-    //Load info FoodCategory
-    public void LoadInfoCategory(JPanel info)
+    public void LoadInfoTable(JPanel info)
     {
         info.removeAll(); // remove all components
         info.setLayout(new BoxLayout(info,BoxLayout.Y_AXIS));
@@ -191,8 +191,7 @@ public class FoodCategoryView {
         info.revalidate();
     }
     
-    //Load footer
-    void LoadFooter(JPanel footer)
+    public void LoadFooter(JPanel footer)
     {
         footer.removeAll(); // remove all components
         footer.setLayout(new BoxLayout(footer,BoxLayout.X_AXIS));
@@ -218,13 +217,14 @@ public class FoodCategoryView {
          btn.add(Box.createRigidArea(new Dimension(50,0)));
          
          footer.add(btn);
+         //repaint panel
          footer.revalidate();
          
          /*Sự kiện các btn Add,Update,Delete,Cancel*/
          btnAdd.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                addFrame.FoodCategoryAdd();
+                addFrame.TableAdd();
             }
         });
          btnUpdate.addActionListener(new ActionListener() {
@@ -261,9 +261,7 @@ public class FoodCategoryView {
             }
         });
          /*END sự kiện btn Add,....*/
-         
     }
-    
     
     /*get value from table and set to textfield*/
     private void setInfo(int row)
@@ -274,10 +272,13 @@ public class FoodCategoryView {
             nameText.setText(Name);
     }
     
+    
     /*set value to table*/
     private void setTable(int row)
     {
         table.setValueAt(idText.getText().toString(), row, 0);
         table.setValueAt(nameText.getText().toString(), row, 1);
     }
+    
+    
 }
