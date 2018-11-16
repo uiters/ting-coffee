@@ -102,7 +102,10 @@ public class FoodCategoryView {
         main.add(Box.createRigidArea(new Dimension(5,0)));
         main.add(jsp);
         main.add(Box.createRigidArea(new Dimension(5,0)));
+        
+        //repaint
         main.revalidate();
+        main.repaint();
     }
     
     //Load info FoodCategory
@@ -189,6 +192,7 @@ public class FoodCategoryView {
         
         //repaint panel
         info.revalidate();
+        info.repaint();
     }
     
     //Load footer
@@ -218,7 +222,10 @@ public class FoodCategoryView {
          btn.add(Box.createRigidArea(new Dimension(50,0)));
          
          footer.add(btn);
+         
+         //repaint
          footer.revalidate();
+         footer.repaint();
          
          /*Sự kiện các btn Add,Update,Delete,Cancel*/
          btnAdd.addActionListener(new ActionListener() {

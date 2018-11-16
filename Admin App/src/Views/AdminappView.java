@@ -54,11 +54,12 @@ public class AdminappView extends JFrame{
     DashboardView dashboardMain;
     TableView tableMain;
     BillView billMain;
+    StaffView staffMain;
     public AdminappView()
     {
         jf=new JFrame("Cafe Management || Admin App");
         
-       jf.setSize(1000, 700);
+       jf.setSize(1280, 720);
        jf.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);  // đóng toàn bộ frame liên quan
        jf.setLocationRelativeTo(null);
        
@@ -86,6 +87,7 @@ public class AdminappView extends JFrame{
         dashboardMain=new DashboardView();
         tableMain=new TableView();
         billMain=new BillView();
+        staffMain=new StaffView();
         
         createHeader(header);
         jf.add(header, BorderLayout.PAGE_START);
@@ -260,6 +262,8 @@ public class AdminappView extends JFrame{
                  super.mouseClicked(e); //To change body of generated methods, choose Tools | Templates.
                  JOptionPane.showMessageDialog(null,"Xử lý sự kiện Load Database");
                  //load
+
+                 staffMain.Load(main, info, footer);
              }
          });
         
@@ -325,9 +329,6 @@ public class AdminappView extends JFrame{
     
 
     
-    public static void main(String[] args) {
-        // TODO code application logic here
-        AdminappView app=new AdminappView();
-    }
+    
     
 }

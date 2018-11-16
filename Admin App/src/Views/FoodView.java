@@ -163,11 +163,13 @@ public class FoodView {
         categoryLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
         
         cb=new JComboBox();
+        //add combo item
         cb.addItem("All");
         for(String obj : list)
         {
             cb.addItem(obj);
         }
+        //end
         cb.setAlignmentX(Component.CENTER_ALIGNMENT);
         cb.setMaximumRowCount(5);
         

@@ -20,6 +20,7 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.io.File;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.Objects;
 import javax.swing.Box;
 import javax.swing.BoxLayout;
@@ -43,38 +44,40 @@ import javax.swing.table.JTableHeader;
  *
  * @author Thang Le
  */
-public class TableView {
+public class StaffView {
     
     private JTextField idText; //ID text
-    private JTextField nameText; //Nametext
-    private JTable table; //table Table
+    private JTextField nameText; //IDtable text
+    private JTextField birthText; //Birthday text
+    private JTextField addressText; //address text
+    private JTextField phoneText; //Phone text
+    private JComboBox cb;//Sex combobox
+    private JTable table; //table Staff
     private AddFrameView addFrame;
     
-    public TableView()
+    public StaffView()
     {
-        addFrame=new AddFrameView("Add Table");
+        addFrame=new AddFrameView("Add Staff");
     }
     
     public void Load(JPanel main,JPanel info,JPanel footer)
     {
-        
-        LoadTable(main);
-        LoadInfoTable(info);
+        LoadStaff(main);
+        LoadStaffInfo(info);
         LoadFooter(footer);
     }
     
-    
-    public void LoadTable(JPanel main)
+    public void LoadStaff(JPanel main)
     {
         main.removeAll();
         main.setLayout(new BoxLayout(main, BoxLayout.X_AXIS));
         /*LOAD TABLE*/
          //Table
-        String []title=new String[]{"ID","Name"};
+        String []title=new String[]{"ID","Name","Birthday","Sex","Address","Phone"};
         Object [][]object=new Object[][]{
-            {1,"Ban 1"},
-            {2,"Ban 2"},
-             {3,"Ban 3"},
+            {1,"Nguyen Van A","1990","Male","TPHCM","123456"},
+            {2,"Ha Thi C","1995","Female","Da Nang","123456789"},
+            {3,"Nguyen Hoang C","1988","Male","TPHCM","123456666"}
                 
         };
         DefaultTableModel model= new DefaultTableModel(object,title);
@@ -104,17 +107,16 @@ public class TableView {
         main.add(Box.createRigidArea(new Dimension(5,0)));
         main.add(jsp);
         main.add(Box.createRigidArea(new Dimension(5,0)));
-        
-        //repaint
         main.revalidate();
-        main.repaint();
     }
     
-    public void LoadInfoTable(JPanel info)
+    
+    public void LoadStaffInfo(JPanel info)
     {
-        info.removeAll(); // remove all components
+        info.removeAll();// remove all components
         info.setLayout(new BoxLayout(info,BoxLayout.Y_AXIS));
         info.setPreferredSize(new Dimension(300,info.getHeight()));
+        
         
         /*search field*/
         JPanel search=new JPanel();
@@ -142,7 +144,7 @@ public class TableView {
         JPanel detail=new JPanel();
         detail.setLayout(new BoxLayout(detail,BoxLayout.Y_AXIS));
         detail.setBackground(Color.yellow);
-        
+           
         /*ID*/
         JPanel IDgroup=new JPanel();
         IDgroup.setLayout(new BoxLayout(IDgroup,BoxLayout.X_AXIS));
@@ -162,6 +164,7 @@ public class TableView {
         IDgroup.add(Box.createRigidArea(new Dimension(5,0)));         
         /*end ID*/
         
+        
         /*Name*/
         JPanel Namegroup=new JPanel();
         Namegroup.setLayout(new BoxLayout(Namegroup,BoxLayout.X_AXIS));
@@ -179,21 +182,101 @@ public class TableView {
         Namegroup.add(Box.createRigidArea(new Dimension(5,0))); 
         /*end Name*/
         
+        /*Birthday*/
+        JPanel Birthgroup=new JPanel();
+        Birthgroup.setLayout(new BoxLayout(Birthgroup,BoxLayout.X_AXIS));
+        Birthgroup.setBackground(Color.yellow);
+        Birthgroup.setMaximumSize(new Dimension(300, 30));
         
+         birthText=new JTextField();
+         birthText.setAlignmentX(Component.CENTER_ALIGNMENT);
+         JLabel birthLabel=new JLabel("Birthday : ");
+         birthLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
+        Birthgroup.add(Box.createRigidArea(new Dimension(5,0)));
+        Birthgroup.add(birthLabel);
+        Birthgroup.add(Box.createRigidArea(new Dimension(33,0)));
+        Birthgroup.add(birthText);
+        Birthgroup.add(Box.createRigidArea(new Dimension(5,0))); 
+        /*end Birthday*/
+        
+        /*Sex*/
+        JPanel Sexgroup=new JPanel();
+        Sexgroup.setLayout(new BoxLayout(Sexgroup,BoxLayout.X_AXIS));
+        Sexgroup.setBackground(Color.yellow);
+        Sexgroup.setMaximumSize(new Dimension(300, 30));
+        
+        String []list={"Male","Female"};
+        cb=new JComboBox(list);
+        cb.setAlignmentX(Component.CENTER_ALIGNMENT);
+        cb.setSelectedItem(list[0]);
+        
+        JLabel sexLabel=new JLabel("Sex : ");
+        sexLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
+        
+        Sexgroup.add(Box.createRigidArea(new Dimension(5,0)));
+        Sexgroup.add(sexLabel);
+        Sexgroup.add(Box.createRigidArea(new Dimension(58,0)));
+        Sexgroup.add(cb);
+        Sexgroup.add(Box.createRigidArea(new Dimension(5,0)));
+        /*end Sex*/
+        
+        /*Address*/
+        JPanel Addressgroup=new JPanel();
+        Addressgroup.setLayout(new BoxLayout(Addressgroup,BoxLayout.X_AXIS));
+        Addressgroup.setBackground(Color.yellow);
+        Addressgroup.setMaximumSize(new Dimension(300, 30));
+        
+         addressText=new JTextField();
+         addressText.setAlignmentX(Component.CENTER_ALIGNMENT);
+         JLabel addressLabel=new JLabel("Address : ");
+         addressLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
+        Addressgroup.add(Box.createRigidArea(new Dimension(5,0)));
+        Addressgroup.add(addressLabel);
+        Addressgroup.add(Box.createRigidArea(new Dimension(32,0)));
+        Addressgroup.add(addressText);
+        Addressgroup.add(Box.createRigidArea(new Dimension(5,0))); 
+        /*end Address*/
+        
+        /*Phonenumber*/
+        JPanel Phonegroup=new JPanel();
+        Phonegroup.setLayout(new BoxLayout(Phonegroup,BoxLayout.X_AXIS));
+        Phonegroup.setBackground(Color.yellow);
+        Phonegroup.setMaximumSize(new Dimension(300, 30));
+        
+         phoneText=new JTextField();
+         phoneText.setAlignmentX(Component.CENTER_ALIGNMENT);
+         JLabel phoneLabel=new JLabel("Phone : ");
+         phoneLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
+        Phonegroup.add(Box.createRigidArea(new Dimension(5,0)));
+        Phonegroup.add(phoneLabel);
+        Phonegroup.add(Box.createRigidArea(new Dimension(43,0)));
+        Phonegroup.add(phoneText);
+        Phonegroup.add(Box.createRigidArea(new Dimension(5,0))); 
+        /*end Phonenumber*/
+        
+        detail.add(Box.createRigidArea(new Dimension(0,20)));
         detail.add(IDgroup);
         detail.add(Box.createRigidArea(new Dimension(0,20)));
         detail.add(Namegroup);
         detail.add(Box.createRigidArea(new Dimension(0,20)));
+        detail.add(Birthgroup);
+        detail.add(Box.createRigidArea(new Dimension(0,20)));
+        detail.add(Sexgroup);
+        detail.add(Box.createRigidArea(new Dimension(0,20)));
+        detail.add(Addressgroup);
+        detail.add(Box.createRigidArea(new Dimension(0,20)));
+        detail.add(Phonegroup);
         
-         /*end info detail*/
+        /*end Staff info detail*/
+        
         info.add(Box.createRigidArea(new Dimension(0,20)));
         info.add(search);
-        info.add(Box.createRigidArea(new Dimension(0,20)));
+        //info.add(Box.createRigidArea(new Dimension(0,20)));
         info.add(detail);
-        
-        //repaint panel
         info.revalidate();
         info.repaint();
+        
+        
     }
     
     public void LoadFooter(JPanel footer)
@@ -222,7 +305,6 @@ public class TableView {
          btn.add(Box.createRigidArea(new Dimension(50,0)));
          
          footer.add(btn);
-         //repaint panel
          footer.revalidate();
          footer.repaint();
          
@@ -230,7 +312,8 @@ public class TableView {
          btnAdd.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                addFrame.TableAdd();
+                addFrame.StaffAdd();
+              
             }
         });
          btnUpdate.addActionListener(new ActionListener() {
@@ -238,10 +321,12 @@ public class TableView {
             public void actionPerformed(ActionEvent e) {
                 //Xu ly update
                 int row=table.getSelectedRow();
-                if(row>0)
+                if(row>=0)
                 {
+                    //setTable(row)
                     setTable(row);
-                    JOptionPane.showMessageDialog(null, "Đã update thành công!");
+                    
+                    JOptionPane.showMessageDialog(null, "Đã update thành công! o hang thu "+row);
                 }
                 
             }
@@ -269,22 +354,53 @@ public class TableView {
          /*END sự kiện btn Add,....*/
     }
     
+    
     /*get value from table and set to textfield*/
     private void setInfo(int row)
     {
             String ID=table.getModel().getValueAt(row, 0).toString();
-            String Name=table.getModel().getValueAt(row, 1).toString();   
+            String Name=table.getModel().getValueAt(row, 1).toString();
+            String Birth=table.getModel().getValueAt(row, 2).toString();
+            String Sex=table.getModel().getValueAt(row, 3).toString();
+            String Address=table.getModel().getValueAt(row, 4).toString();
+            String Phone=table.getModel().getValueAt(row, 5).toString();
+            
             idText.setText(ID);
             nameText.setText(Name);
+            birthText.setText(Birth);
+            addressText.setText(Address);
+            phoneText.setText(Phone);
+            for(int i=0;i<cb.getItemCount();i++)
+            {
+                if(cb.getItemAt(i).toString()==Sex)
+                {
+                    cb.setSelectedIndex(i);
+                }
+            }
     }
-    
     
     /*set value to table*/
     private void setTable(int row)
     {
-        table.setValueAt(idText.getText().toString(), row, 0);
-        table.setValueAt(nameText.getText().toString(), row, 1);
+        
+        Boolean flag=true;
+        try {
+            Double f=Double.parseDouble(phoneText.getText().toString());
+            flag=true; // jtextfield chi chua 0-9
+        } catch (NumberFormatException e)
+        {
+            flag=false;
+        }
+        if(idText.getText().toString()!=null&&nameText.getText().toString()!=null&&flag==true
+                &&cb.getSelectedItem()!=null&&addressText.getText().toString()!=null&&birthText.getText().toString()!=null)
+        {
+            table.setValueAt(idText.getText().toString(), row, 0);
+            table.setValueAt(nameText.getText().toString(), row, 1);
+            table.setValueAt(birthText.getText().toString(), row, 2);
+            table.setValueAt(cb.getSelectedItem().toString(), row, 3);
+            table.setValueAt(addressText.getText().toString(), row, 4);
+            table.setValueAt(phoneText.getText().toString(), row, 5);
+        }
+        
     }
-    
-    
 }

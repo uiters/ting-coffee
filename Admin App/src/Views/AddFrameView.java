@@ -50,7 +50,11 @@ public class AddFrameView {
     private JFrame jf;
     private JPanel panel;
     private JTextField nameText;
+    private JTextField birthText;
+    private JTextField addressText;
+    private JTextField phoneText;
     private JTextField priceText;
+    
     private JComboBox cb;
     private String []list={"An vat","Mon chinh","Mon trang mieng"} ; //danh sách trong category
     public AddFrameView(String title)
@@ -390,6 +394,176 @@ public class AddFrameView {
             public void actionPerformed(ActionEvent e) {
                  //Xu ly btn cancel
                  JOptionPane.showMessageDialog(null, "Close frame add food cagetory");
+                  jf.dispose();
+            }
+        });
+    }
+    
+    public void StaffAdd()
+    {
+        jf=new JFrame(title);
+        jf.setSize(300, 400);
+        jf.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);  // đóng frame hiện hành
+        jf.setResizable(false);
+
+        jf.setLocationRelativeTo(null);
+        panel=new JPanel();
+        panel.setBackground(Color.green);
+        jf.add(panel, BorderLayout.CENTER);
+        jf.setVisible(true);
+        
+        /*info detail*/
+        JPanel detail=new JPanel();
+        detail.setLayout(new BoxLayout(detail,BoxLayout.Y_AXIS));
+        detail.setBackground(Color.yellow);
+        detail.setPreferredSize(new Dimension(panel.getWidth(),panel.getHeight()));
+        
+        
+        /*Name*/
+        JPanel Namegroup=new JPanel();
+        Namegroup.setLayout(new BoxLayout(Namegroup,BoxLayout.X_AXIS));
+        Namegroup.setBackground(Color.yellow);
+        Namegroup.setMaximumSize(new Dimension(300, 30));
+        
+         nameText=new JTextField();
+         nameText.setAlignmentX(Component.CENTER_ALIGNMENT);
+         JLabel nameLabel=new JLabel("Name : ");
+         nameLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
+        Namegroup.add(Box.createRigidArea(new Dimension(5,0)));
+        Namegroup.add(nameLabel);
+        Namegroup.add(Box.createRigidArea(new Dimension(48,0)));
+        Namegroup.add(nameText);
+        Namegroup.add(Box.createRigidArea(new Dimension(5,0))); 
+        /*end Name*/
+        
+        /*Birthday*/
+        JPanel Birthgroup=new JPanel();
+        Birthgroup.setLayout(new BoxLayout(Birthgroup,BoxLayout.X_AXIS));
+        Birthgroup.setBackground(Color.yellow);
+        Birthgroup.setMaximumSize(new Dimension(300, 30));
+        
+         birthText=new JTextField();
+         birthText.setAlignmentX(Component.CENTER_ALIGNMENT);
+         JLabel birthLabel=new JLabel("Birthday : ");
+         birthLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
+        Birthgroup.add(Box.createRigidArea(new Dimension(5,0)));
+        Birthgroup.add(birthLabel);
+        Birthgroup.add(Box.createRigidArea(new Dimension(33,0)));
+        Birthgroup.add(birthText);
+        Birthgroup.add(Box.createRigidArea(new Dimension(5,0))); 
+        /*end Birthday*/
+        
+        /*Sex*/
+        JPanel Sexgroup=new JPanel();
+        Sexgroup.setLayout(new BoxLayout(Sexgroup,BoxLayout.X_AXIS));
+        Sexgroup.setBackground(Color.yellow);
+        Sexgroup.setMaximumSize(new Dimension(300, 30));
+        
+        String []list={"Male","Female"};
+        cb=new JComboBox(list);
+        cb.setAlignmentX(Component.CENTER_ALIGNMENT);
+        cb.setSelectedItem(list[0]);
+        
+        JLabel sexLabel=new JLabel("Sex : ");
+        sexLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
+        
+        Sexgroup.add(Box.createRigidArea(new Dimension(5,0)));
+        Sexgroup.add(sexLabel);
+        Sexgroup.add(Box.createRigidArea(new Dimension(58,0)));
+        Sexgroup.add(cb);
+        Sexgroup.add(Box.createRigidArea(new Dimension(5,0)));
+        /*end Sex*/
+        
+        /*Address*/
+        JPanel Addressgroup=new JPanel();
+        Addressgroup.setLayout(new BoxLayout(Addressgroup,BoxLayout.X_AXIS));
+        Addressgroup.setBackground(Color.yellow);
+        Addressgroup.setMaximumSize(new Dimension(300, 30));
+        
+         addressText=new JTextField();
+         addressText.setAlignmentX(Component.CENTER_ALIGNMENT);
+         JLabel addressLabel=new JLabel("Address : ");
+         addressLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
+        Addressgroup.add(Box.createRigidArea(new Dimension(5,0)));
+        Addressgroup.add(addressLabel);
+        Addressgroup.add(Box.createRigidArea(new Dimension(32,0)));
+        Addressgroup.add(addressText);
+        Addressgroup.add(Box.createRigidArea(new Dimension(5,0))); 
+        /*end Address*/
+        
+        /*Phonenumber*/
+        JPanel Phonegroup=new JPanel();
+        Phonegroup.setLayout(new BoxLayout(Phonegroup,BoxLayout.X_AXIS));
+        Phonegroup.setBackground(Color.yellow);
+        Phonegroup.setMaximumSize(new Dimension(300, 30));
+        
+         phoneText=new JTextField();
+         phoneText.setAlignmentX(Component.CENTER_ALIGNMENT);
+         JLabel phoneLabel=new JLabel("Phone : ");
+         phoneLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
+        Phonegroup.add(Box.createRigidArea(new Dimension(5,0)));
+        Phonegroup.add(phoneLabel);
+        Phonegroup.add(Box.createRigidArea(new Dimension(43,0)));
+        Phonegroup.add(phoneText);
+        Phonegroup.add(Box.createRigidArea(new Dimension(5,0))); 
+        /*end Phonenumber*/
+        
+        /*Button Add,Cancel*/
+        JPanel Btngroup=new JPanel();
+        Btngroup.setLayout(new BoxLayout(Btngroup,BoxLayout.X_AXIS));
+        Btngroup.setBackground(Color.yellow);
+        Btngroup.setMaximumSize(new Dimension(300, 30));
+        
+        JButton btnCancel=new JButton("Cancel");
+        btnCancel.setAlignmentX(Component.CENTER_ALIGNMENT);
+        
+        JButton btnAdd=new JButton("Add");
+        btnAdd.setAlignmentX(Component.CENTER_ALIGNMENT);
+        
+        Btngroup.add(Box.createRigidArea(new Dimension(15,0)));
+        Btngroup.add(btnCancel);
+        Btngroup.add(Box.createRigidArea(new Dimension(135,0)));
+        Btngroup.add(btnAdd);
+        Btngroup.add(Box.createRigidArea(new Dimension(15,0)));
+        /*end Button Add,Cancel*/
+        
+        detail.add(Box.createRigidArea(new Dimension(0,20)));
+        detail.add(Namegroup);
+        detail.add(Box.createRigidArea(new Dimension(0,20)));
+        detail.add(Birthgroup);
+        detail.add(Box.createRigidArea(new Dimension(0,20)));
+        detail.add(Sexgroup);
+        detail.add(Box.createRigidArea(new Dimension(0,20)));
+        detail.add(Addressgroup);
+        detail.add(Box.createRigidArea(new Dimension(0,20)));
+        detail.add(Phonegroup);
+        detail.add(Box.createRigidArea(new Dimension(0,20)));
+        detail.add(Btngroup);
+        
+        /*end Staff info detail*/
+        panel.add(detail);
+        
+        
+        /*Event Btn Add,Cancel*/
+        btnAdd.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if(nameText.getText().toString().equals("")==false&birthText.getText().toString().equals("")==false
+                        &&addressText.getText().toString().equals("")==false&&phoneText.getText().toString().equals("")==false
+                        &&cb.getSelectedItem()!=null);
+                {
+                    //Xu ly btn add
+                    JOptionPane.showMessageDialog(null, "Đã thêm 1 staff thành công!");
+                    jf.dispose();
+                }
+            }
+        });
+        
+        btnCancel.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                 //Xu ly btn cancel
+                 JOptionPane.showMessageDialog(null, "Close frame add staff");
                   jf.dispose();
             }
         });

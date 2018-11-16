@@ -104,6 +104,7 @@ public class BillView {
         main.add(jsp);
         main.add(Box.createRigidArea(new Dimension(5,0)));
         main.revalidate();
+        main.repaint();
     }
     
     public void LoadBillInfo(JPanel info)
@@ -308,11 +309,14 @@ public class BillView {
         
         //repaint panel
         info.revalidate();
+        info.repaint();
     }
     
     public void LoadFooter(JPanel footer)
     {
-        
+        footer.removeAll();
+        footer.revalidate();
+        footer.repaint();
     }
     
     
