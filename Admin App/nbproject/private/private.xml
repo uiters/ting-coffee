@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <?xml version="1.0" encoding="UTF-8"?>
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
@@ -13,3 +14,21 @@
         </group>
     </open-files>
 </project-private>
+=======
+<?xml version="1.0" encoding="UTF-8"?>
+<project-private xmlns="http://www.netbeans.org/ns/project-private/1">
+    <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
+    <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
+        <group>
+            <file>file:/C:/Users/Asus/Desktop/Admin%20App/src/Views/FoodCategoryView.java</file>
+            <file>file:/C:/Users/Asus/Desktop/Admin%20App/src/Views/StaffView.java</file>
+            <file>file:/C:/Users/Asus/Desktop/Admin%20App/src/Views/AddFrameView.java</file>
+            <file>file:/C:/Users/Asus/Desktop/Admin%20App/src/Views/AdminappView.java</file>
+            <file>file:/C:/Users/Asus/Desktop/Admin%20App/src/Views/FoodView.java</file>
+            <file>file:/C:/Users/Asus/Desktop/Admin%20App/src/Views/BillView.java</file>
+            <file>file:/C:/Users/Asus/Desktop/Admin%20App/src/Views/main.java</file>
+            <file>file:/C:/Users/Asus/Desktop/Admin%20App/src/Views/TableView.java</file>
+        </group>
+    </open-files>
+</project-private>
+>>>>>>> 7af2ecfe617499f8d38cba408562433699ebdaba
