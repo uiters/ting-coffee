@@ -4,6 +4,7 @@
  * and open the template in the editor.
  */
 package Views;
+import com.toedter.calendar.JDateChooser;
 import java.awt.*;
 import java.awt.BorderLayout;
 import java.awt.FlowLayout;
@@ -20,8 +21,13 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.io.File;
 import java.net.URL;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.Objects;
+import java.util.logging.Level;
 import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
@@ -48,6 +54,7 @@ public class StaffView {
     
     private JTextField idText; //ID text
     private JTextField nameText; //IDtable text
+    private JDateChooser birthday;
     private JTextField birthText; //Birthday text
     private JTextField addressText; //address text
     private JTextField phoneText; //Phone text
@@ -75,9 +82,9 @@ public class StaffView {
          //Table
         String []title=new String[]{"ID","Name","Birthday","Sex","Address","Phone"};
         Object [][]object=new Object[][]{
-            {1,"Nguyen Van A","1990","Male","TPHCM","123456"},
-            {2,"Ha Thi C","1995","Female","Da Nang","123456789"},
-            {3,"Nguyen Hoang C","1988","Male","TPHCM","123456666"}
+            {1,"Nguyen Van A","10-08-1990","Male","TPHCM","123456"},
+            {2,"Ha Thi C","15-02-1995","Female","Da Nang","123456789"},
+            {3,"Nguyen Hoang C","05-03-1988","Male","TPHCM","123456666"}
                 
         };
         DefaultTableModel model= new DefaultTableModel(object,title);
@@ -188,6 +195,11 @@ public class StaffView {
         Birthgroup.setBackground(Color.yellow);
         Birthgroup.setMaximumSize(new Dimension(300, 30));
         
+        
+        birthday=new JDateChooser();
+        birthday.setAlignmentX(Component.CENTER_ALIGNMENT);
+        birthday.setDateFormatString("dd-MM-yyyy");
+        
          birthText=new JTextField();
          birthText.setAlignmentX(Component.CENTER_ALIGNMENT);
          JLabel birthLabel=new JLabel("Birthday : ");
@@ -195,7 +207,7 @@ public class StaffView {
         Birthgroup.add(Box.createRigidArea(new Dimension(5,0)));
         Birthgroup.add(birthLabel);
         Birthgroup.add(Box.createRigidArea(new Dimension(33,0)));
-        Birthgroup.add(birthText);
+        Birthgroup.add(birthday);
         Birthgroup.add(Box.createRigidArea(new Dimension(5,0))); 
         /*end Birthday*/
         
@@ -360,14 +372,13 @@ public class StaffView {
     {
             String ID=table.getModel().getValueAt(row, 0).toString();
             String Name=table.getModel().getValueAt(row, 1).toString();
-            String Birth=table.getModel().getValueAt(row, 2).toString();
+            
             String Sex=table.getModel().getValueAt(row, 3).toString();
             String Address=table.getModel().getValueAt(row, 4).toString();
             String Phone=table.getModel().getValueAt(row, 5).toString();
             
             idText.setText(ID);
             nameText.setText(Name);
-            birthText.setText(Birth);
             addressText.setText(Address);
             phoneText.setText(Phone);
             for(int i=0;i<cb.getItemCount();i++)
@@ -377,6 +388,17 @@ public class StaffView {
                     cb.setSelectedIndex(i);
                 }
             }
+            
+            //set date for jdatechooser from a value get from table
+            try {
+                String Birth=table.getModel().getValueAt(row, 2).toString();
+                Date date=new SimpleDateFormat("dd-MM-yy").parse(Birth);
+                birthday.setDate(date);
+            }catch (ParseException ex)
+            {
+                
+            }
+            
     }
     
     /*set value to table*/
@@ -391,12 +413,16 @@ public class StaffView {
         {
             flag=false;
         }
+        
+        SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
+        Date date=birthday.getDate();
+        String birth=sdf.format(date);
         if(idText.getText().toString()!=null&&nameText.getText().toString()!=null&&flag==true
-                &&cb.getSelectedItem()!=null&&addressText.getText().toString()!=null&&birthText.getText().toString()!=null)
+                &&cb.getSelectedItem()!=null&&addressText.getText().toString()!=null&&birth!=null)
         {
             table.setValueAt(idText.getText().toString(), row, 0);
             table.setValueAt(nameText.getText().toString(), row, 1);
-            table.setValueAt(birthText.getText().toString(), row, 2);
+            table.setValueAt(birth, row, 2);
             table.setValueAt(cb.getSelectedItem().toString(), row, 3);
             table.setValueAt(addressText.getText().toString(), row, 4);
             table.setValueAt(phoneText.getText().toString(), row, 5);
