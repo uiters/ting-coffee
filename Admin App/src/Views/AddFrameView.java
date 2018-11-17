@@ -27,6 +27,7 @@ import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
+import javax.swing.JDialog;
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -47,7 +48,7 @@ import javax.swing.table.JTableHeader;
  */
 public class AddFrameView {
     private String title;
-    private JFrame jf;
+    private JDialog jf; // xài dialog vì để hold main excution (sau khi click add,frame gọi tới sẽ tự reload database)
     private JPanel panel;
     private JTextField nameText;
     private JTextField birthText;
@@ -65,21 +66,22 @@ public class AddFrameView {
     
     public void FoodAdd()
     {
-        jf=new JFrame(title);
+        jf=new JDialog(jf, title);
+        jf.setModal(true); // hold main excution
         jf.setSize(300, 400);
         jf.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);  // đóng frame hiện hành
         jf.setResizable(false);
 
         jf.setLocationRelativeTo(null);
+        
         panel=new JPanel();
         panel.setBackground(Color.green);
-        jf.add(panel, BorderLayout.CENTER);
-        jf.setVisible(true);
+        
          /*info detail*/
         JPanel detail=new JPanel();
         detail.setLayout(new BoxLayout(detail,BoxLayout.Y_AXIS));
         detail.setBackground(Color.yellow);
-        detail.setPreferredSize(new Dimension(panel.getWidth(),panel.getHeight()));
+        detail.setPreferredSize(new Dimension(250,300));
         
         
         JPanel Namegroup=new JPanel();
@@ -228,12 +230,17 @@ public class AddFrameView {
                   jf.dispose();
             }
         });
+        
+        
+        jf.add(detail, BorderLayout.CENTER);
+        jf.setVisible(true);
     }
     
     
     public void FoodCategoryAdd()
     {
-        jf=new JFrame(title);
+        jf=new JDialog(jf, title);
+        jf.setModal(true);
         jf.setSize(300, 200);
         jf.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);  // đóng frame hiện hành
         jf.setResizable(false);
@@ -241,8 +248,8 @@ public class AddFrameView {
         jf.setLocationRelativeTo(null);
         panel=new JPanel();
         panel.setBackground(Color.green);
-        jf.add(panel, BorderLayout.CENTER);
-        jf.setVisible(true);
+        //jf.add(panel, BorderLayout.CENTER);
+        
          /*info detail*/
         JPanel detail=new JPanel();
         detail.setLayout(new BoxLayout(detail,BoxLayout.Y_AXIS));
@@ -313,12 +320,15 @@ public class AddFrameView {
             }
         });
         
+        jf.getContentPane().add(detail,BorderLayout.CENTER);
+        jf.setVisible(true);
+        
     }
     
     
     public void TableAdd()
     {
-        jf=new JFrame(title);
+        jf=new JDialog(jf,title);
         jf.setSize(300, 200);
         jf.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);  // đóng frame hiện hành
         jf.setResizable(false);
@@ -326,8 +336,8 @@ public class AddFrameView {
         jf.setLocationRelativeTo(null);
         panel=new JPanel();
         panel.setBackground(Color.green);
-        jf.add(panel, BorderLayout.CENTER);
-        jf.setVisible(true);
+        //jf.add(panel, BorderLayout.CENTER);
+        
          /*info detail*/
         JPanel detail=new JPanel();
         detail.setLayout(new BoxLayout(detail,BoxLayout.Y_AXIS));
@@ -397,11 +407,15 @@ public class AddFrameView {
                   jf.dispose();
             }
         });
+        
+        jf.getContentPane().add(detail,BorderLayout.CENTER);
+        jf.setVisible(true);
     }
     
     public void StaffAdd()
     {
-        jf=new JFrame(title);
+        jf=new JDialog(jf,title);
+        jf.setModal(true);
         jf.setSize(300, 400);
         jf.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);  // đóng frame hiện hành
         jf.setResizable(false);
@@ -409,8 +423,7 @@ public class AddFrameView {
         jf.setLocationRelativeTo(null);
         panel=new JPanel();
         panel.setBackground(Color.green);
-        jf.add(panel, BorderLayout.CENTER);
-        jf.setVisible(true);
+        
         
         /*info detail*/
         JPanel detail=new JPanel();
@@ -567,5 +580,8 @@ public class AddFrameView {
                   jf.dispose();
             }
         });
+        
+        jf.add(detail, BorderLayout.CENTER);
+        jf.setVisible(true);
     }
 }

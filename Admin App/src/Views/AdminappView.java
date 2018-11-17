@@ -54,7 +54,7 @@ public class AdminappView extends JFrame{
     DashboardView dashboardMain;
     TableView tableMain;
     BillView billMain;
-    StaffView staffMain;
+    AccountView staffMain;
     public AdminappView()
     {
         jf=new JFrame("Cafe Management || Admin App");
@@ -87,7 +87,7 @@ public class AdminappView extends JFrame{
         dashboardMain=new DashboardView();
         tableMain=new TableView();
         billMain=new BillView();
-        staffMain=new StaffView();
+        staffMain=new AccountView();
         
         createHeader(header);
         jf.add(header, BorderLayout.PAGE_START);
@@ -247,7 +247,7 @@ public class AdminappView extends JFrame{
         staff.setLayout(new BoxLayout(staff, BoxLayout.Y_AXIS));
         staff.setBackground(new Color(228,249,245));
         
-        JLabel staffTitle = new JLabel("Staff");
+        JLabel staffTitle = new JLabel("Account");
         staffTitle.setForeground(new Color(41,55,72));
         staffTitle.setAlignmentX(Component.CENTER_ALIGNMENT);
         

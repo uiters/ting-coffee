@@ -77,7 +77,12 @@ public class TableView {
              {3,"Ban 3"},
                 
         };
-        DefaultTableModel model= new DefaultTableModel(object,title);
+        DefaultTableModel model= new DefaultTableModel(object,title){
+            @Override
+            public boolean isCellEditable(int row, int column) {
+            return false;
+            }
+        };
         table=new JTable();
         table.getTableHeader().setFont(new java.awt.Font(table.getFont().toString(), Font.BOLD, 22));
         table.setFont(new java.awt.Font(table.getFont().toString(), Font.PLAIN, 18));
