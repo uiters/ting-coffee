@@ -13,7 +13,7 @@
 ## Installation
 
 ## Documents
-* [Flutter](https://flutter.io/docs)
+
 * [Java Swing Tutorial](https://www.javatpoint.com/java-swing)
 * [MySQL and Java JDBC - Tutorial](http://www.vogella.com/tutorials/MySQLJava/article.html)
 
@@ -31,4 +31,3 @@ Have a bug or an issue with this project? [Open a new issue](https://github.com/
 ## License
 
 [MIT](https://github.com/ndc07/cafe-management/blob/master/LICENSE)
-
