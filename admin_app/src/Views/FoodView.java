@@ -83,10 +83,19 @@ public class FoodView {
                 {6,"Banh trang tron","An vat","",10000},
                 
         };
+<<<<<<< HEAD
         DefaultTableModel model= new DefaultTableModel(object,title);
 <<<<<<< HEAD
         table=new JTable();
 =======
+=======
+        DefaultTableModel model= new DefaultTableModel(object,title){
+            @Override
+            public boolean isCellEditable(int row, int column) {
+            return false;
+            }
+        };
+>>>>>>> admin_app
         table=new JTable() {
              @Override
                public Class getColumnClass(int column) {
@@ -370,6 +379,7 @@ public class FoodView {
             @Override
             public void actionPerformed(ActionEvent e) {
                 addFrame.FoodAdd();
+                JOptionPane.showMessageDialog(null, "Reload database ");
             }
         });
          btnUpdate.addActionListener(new ActionListener() {

@@ -76,7 +76,12 @@ public class BillView {
              {1,3,"20-08-2018","20-08-2018",15,300000}
                 
         };
-        DefaultTableModel model= new DefaultTableModel(object,title);
+        DefaultTableModel model= new DefaultTableModel(object,title){
+            @Override
+            public boolean isCellEditable(int row, int column) {
+            return false;
+            }
+        };
         table=new JTable();
         table.getTableHeader().setFont(new java.awt.Font(table.getFont().toString(), Font.BOLD, 22));
         table.setFont(new java.awt.Font(table.getFont().toString(), Font.PLAIN, 18));

@@ -75,7 +75,12 @@ public class FoodCategoryView {
                 {3,"Trang mieng"},
                 
         };
-        DefaultTableModel model= new DefaultTableModel(object,title);
+        DefaultTableModel model= new DefaultTableModel(object,title){
+            @Override
+            public boolean isCellEditable(int row, int column) {
+            return false;
+            }
+        };
         table=new JTable();
         table.getTableHeader().setFont(new java.awt.Font(table.getFont().toString(), Font.BOLD, 22));
         table.setFont(new java.awt.Font(table.getFont().toString(), Font.PLAIN, 18));
@@ -232,6 +237,7 @@ public class FoodCategoryView {
             @Override
             public void actionPerformed(ActionEvent e) {
                 addFrame.FoodCategoryAdd();
+                JOptionPane.showMessageDialog(null, "Reload database ");
             }
         });
          btnUpdate.addActionListener(new ActionListener() {

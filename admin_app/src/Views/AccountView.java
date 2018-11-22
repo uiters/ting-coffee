@@ -50,7 +50,7 @@ import javax.swing.table.JTableHeader;
  *
  * @author Thang Le
  */
-public class StaffView {
+public class AccountView {
     
     private JTextField idText; //ID text
     private JTextField nameText; //IDtable text
@@ -62,7 +62,7 @@ public class StaffView {
     private JTable table; //table Staff
     private AddFrameView addFrame;
     
-    public StaffView()
+    public AccountView()
     {
         addFrame=new AddFrameView("Add Staff");
     }
@@ -82,12 +82,17 @@ public class StaffView {
          //Table
         String []title=new String[]{"ID","Name","Birthday","Sex","Address","Phone"};
         Object [][]object=new Object[][]{
-            {1,"Nguyen Van A","10-08-1990","Male","TPHCM","123456"},
-            {2,"Ha Thi C","15-02-1995","Female","Da Nang","123456789"},
-            {3,"Nguyen Hoang C","05-03-1988","Male","TPHCM","123456666"}
+            {"abc","Nguyen Van A","10-08-1990","Male","TPHCM","123456"},
+            {"xyz","Ha Thi C","15-02-1995","Female","Da Nang","123456789"},
+            {"def","Nguyen Hoang C","05-03-1988","Male","TPHCM","123456666"}
                 
         };
-        DefaultTableModel model= new DefaultTableModel(object,title);
+        DefaultTableModel model= new DefaultTableModel(object,title){
+            @Override
+            public boolean isCellEditable(int row, int column) {
+            return false;
+            }
+        };
         table=new JTable();
         table.getTableHeader().setFont(new java.awt.Font(table.getFont().toString(), Font.BOLD, 22));
         table.setFont(new java.awt.Font(table.getFont().toString(), Font.PLAIN, 18));
@@ -162,11 +167,11 @@ public class StaffView {
          idText.setEditable(false);
          idText.setBackground(Color.lightGray);
          idText.setAlignmentX(Component.CENTER_ALIGNMENT);
-         JLabel idLabel=new JLabel("ID : ");
+         JLabel idLabel=new JLabel("Username : ");
          idLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
         IDgroup.add(Box.createRigidArea(new Dimension(5,0)));
         IDgroup.add(idLabel);
-        IDgroup.add(Box.createRigidArea(new Dimension(70,0)));
+        IDgroup.add(Box.createRigidArea(new Dimension(22,0)));
         IDgroup.add(idText);
         IDgroup.add(Box.createRigidArea(new Dimension(5,0)));         
         /*end ID*/
@@ -325,7 +330,7 @@ public class StaffView {
             @Override
             public void actionPerformed(ActionEvent e) {
                 addFrame.StaffAdd();
-              
+                JOptionPane.showMessageDialog(null, "Reload database ");
             }
         });
          btnUpdate.addActionListener(new ActionListener() {
