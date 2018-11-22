@@ -1,17 +1,21 @@
 import 'package:flutter/material.dart';
+
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:intl/intl.dart';
 
 import './../Controllers/cart.controller.dart';
+import './../Controllers/history.controller.dart' as historyController;
 
+import './../Models/login.model.dart';
 import './../Models/home.model.dart' as home;
 import './../Models/menu.model.dart' as menu;
 
 import './../Constants/theme.dart' as theme;
 
 class CartScreen extends StatefulWidget {
-  CartScreen({key, this.table, this.menuContext}):super(key: key);
+  CartScreen({key, this.table, this.menuContext, this.account}):super(key: key);
 
+  final Account account;
   final home.Table table;
   final BuildContext menuContext;
 
@@ -25,17 +29,17 @@ class _CartScreenState extends State<CartScreen> {
   TextEditingController _textController = new TextEditingController();
 
   @override
-    void initState() {
-      _discount = 0.0;
+  void initState() {
+    _discount = 0.0;
 
-      super.initState();
+    super.initState();
 
-      flutterLocalNotificationsPlugin = new FlutterLocalNotificationsPlugin();
-      var android = new AndroidInitializationSettings('app_icon');
-      var ios = new IOSInitializationSettings();
-      var initSetting = new InitializationSettings(android, ios);
-      flutterLocalNotificationsPlugin.initialize(initSetting);
-    }
+    flutterLocalNotificationsPlugin = new FlutterLocalNotificationsPlugin();
+    var android = new AndroidInitializationSettings('app_icon');
+    var ios = new IOSInitializationSettings();
+    var initSetting = new InitializationSettings(android, ios);
+    flutterLocalNotificationsPlugin.initialize(initSetting);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -253,24 +257,23 @@ class _CartScreenState extends State<CartScreen> {
             ],
           ),
           new Divider(),
-          new GestureDetector(
-            onTap: () {
-              if (widget.table.foods.length > 0) _checkOut(context);
-              else _error(context);
-
-            },
-            child: new Container(
-              alignment: Alignment(0.0, 0.0),
-              color: Color.fromARGB(255, 243, 73, 73),
-              padding: const EdgeInsets.all(8.0),
-              margin: const EdgeInsets.only(bottom: 8.0),
+          Container(
+            margin: const EdgeInsets.only(top: 15.0),
+            child: SizedBox(
               width: double.infinity,
-              child: new Text(
-                'Checkout',
-                style: _itemStyle,
+              child: new RaisedButton(
+                color: Colors.redAccent,
+                child: new Text(
+                  'Checkout',
+                  style: _itemStyle,
+                ),
+                onPressed: () {
+                  if (widget.table.foods.length > 0) _checkOut(context);
+                  else _error(context); 
+                },
               ),
             ),
-          )
+          ),
         ],
       ),
     );
@@ -348,9 +351,21 @@ class _CartScreenState extends State<CartScreen> {
                   DateTime.parse(new DateFormat('yyyy-MM-dd HH:mm:ss.SSS').format(DateTime.now())), 
                   _discount, 
                   table.getTotalPrice(),
-                  1
+                  1,
+                  widget.account.username
                 );
+                
                 int idBill = await Controller.instance.getIdBillMax();
+
+                historyController.Controller.instance.addBill(
+                  idBill, 
+                  table, 
+                  DateTime.parse(new DateFormat('yyyy-MM-dd HH:mm:ss.SSS').format(DateTime.now())), 
+                  _discount, 
+                  table.getTotalPrice(), 
+                  widget.account
+                );
+
                 for (var food in table.foods) {
                   await Controller.instance.insertBillDetail(idBill, food.id, food.quantity);
                 }

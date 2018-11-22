@@ -17,24 +17,20 @@ class Model {
   }
 
   Future<Account> login(String username) async {
-
     Future<List> futureAccount = MySqlConnection.instance.executeQuery(
       queries.LOGIN,
       parameter: [username]
     );
     return parseAccount(futureAccount);
-
   }
 
   Future<Account> parseAccount(Future<List> accounts) async  {
-
     Account account;
     await accounts.then((values){
       if (values.length > 0)
       account = Account.fromJson(values[0]);
     });
     return account;
-
   }
   
 }
@@ -60,7 +56,7 @@ class Account {
     address = json['Address'];
     phone = json['PhoneNumber'];
     birthday = DateTime.parse(json['BirthDay']);
-    accountType = json['Name'];
-    image = base64.decode(json['Data']);
+    accountType = json['Name'] != null ? json['Name'] : '';
+    image = json['Data'] != null ? base64.decode(json['Data']) : null;
   }
 }

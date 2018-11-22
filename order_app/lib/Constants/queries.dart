@@ -22,11 +22,13 @@ const String GET_FOODS = 'CALL `USP_GetFoods`();';
 // Queries for Bill
 
 // Insert Bill
-const String INSERT_BILL = 'CALL `USP_InsertBill`( @_IDTable , @_DateCheckIn , @_DateCheckOut , @_Discount , @_thien4chan , @_Status );';
+const String INSERT_BILL = 'CALL `USP_InsertBill`( @_IDTable , @_DateCheckIn , @_DateCheckOut , @_Discount , @_TotalPrice , @_Status , @_Username );';
 
 const String GET_ID_MAX = 'CALL `USP_GetIdMax`();';
 
 const String GET_BILLS = 'CALL `USP_GetBills`( @currentDate );';
+
+const String DELETE_BILL = 'CALL `USP_DelBill`( @id );';
 ///////////////////////////////////////////////////////////////
 
 // Queries for BillDetail
@@ -42,4 +44,9 @@ const String GET_BILLDETAIL_BY_BILL = 'CALL `USP_GetBillDetailByBill`( @id );';
 // Check login
 const String LOGIN = 'CALL USP_Login( @username )';
 
+// Update info
+const String UPDATE_ACC_INFO = 'CALL USP_UpdateAccInfo ( @username , @displayName , @sex , @birthday , @idCard , @address , @phone );';
+
+// Update password
+const String UPDATE_ACC_PASS = 'CALL USP_UpdateAccPass ( @username , @newPass );';
 ///////////////////////////////////////////////////////////////
