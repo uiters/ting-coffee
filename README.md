@@ -25,23 +25,31 @@ Cloning of [Store Management](https://github.com/ndc07/store-management) by [ndc
 </td>
 </tr></table></div>
 
-## Contents
+## 🏷️ Contents
 
 * [Installation](#installation)
 * [Documents](#documents)
+* [Build with](#build-with)
 * [Some Screens](#some-screens)
 * [Bugs and Issues](#bugs-and-issues)
 * [Authors](#authors)
 * [License](#license)
 
-## Installation
+## 🏷️ Installation
 
-## Documents
+## 🏷️ Documents
 
 * [Java Swing Tutorial](https://www.javatpoint.com/java-swing)
 * [MySQL and Java JDBC - Tutorial](http://www.vogella.com/tutorials/MySQLJava/article.html)
 
-## Some Screens
+## 🏷️ Build with
+
+* [Flutter](https://flutter.io/)
+* [Dart](https://www.dartlang.org/)
+* [PHP 7](http://php.net/manual/en/migration70.new-features.php)
+* [MySQL](https://www.mysql.com/)
+
+## 🏷️ Some Screens
 
 ### `Order App`
 
@@ -89,17 +97,17 @@ Cloning of [Store Management](https://github.com/ndc07/store-management) by [ndc
 
 ### `Kitchen App`
 
-## Bugs and Issues
+## 🏷️ Bugs and Issues
 
 Have a bug or an issue with this project? [Open a new issue](https://github.com/ndc07/cafe-management/issues) here on GitHub.
 
-## Authors
+## 🏷️ Authors
 
 * **Nguyen Duy Cuong** - [ndc07](https://github.com/ndc07) 💎
 * **Vi Chi Thien** - [tvc12](https://github.com/tvc12) 🐱
 * **Le Huu Thang** - [lhthang1998](https://github.com/lhthang1998) 🐷
 * **Tran Minh Triet** - [triet1213](https://github.com/triet1213) 🐶
 
-## License
+## 🏷️ License
 
 [MIT](https://github.com/ndc07/cafe-management/blob/master/LICENSE)
