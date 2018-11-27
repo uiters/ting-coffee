@@ -4,6 +4,9 @@
  * and open the template in the editor.
  */
 package Views;
+import Models.TablesModel;
+import Models.TablesModel.Tables;
+import Controllers.TablesController;
 import java.awt.*;
 import java.awt.BorderLayout;
 import java.awt.FlowLayout;
@@ -21,6 +24,7 @@ import java.awt.event.MouseEvent;
 import java.io.File;
 import java.net.URL;
 import java.util.Objects;
+import java.util.concurrent.CompletableFuture;
 import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
@@ -38,6 +42,7 @@ import javax.swing.JTextField;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.JTableHeader;
+import java.util.List;
 
 /**
  *
@@ -49,15 +54,17 @@ public class TableView {
     private JTextField nameText; //Nametext
     private JTable table; //table Table
     private AddFrameView addFrame;
+    private final TablesController controller;
     
     public TableView()
     {
         addFrame=new AddFrameView("Add Table");
+        controller=TablesController.getInstance(this);
     }
     
     public void Load(JPanel main,JPanel info,JPanel footer)
     {
-        
+
         LoadTable(main);
         LoadInfoTable(info);
         LoadFooter(footer);
@@ -70,26 +77,28 @@ public class TableView {
         main.setLayout(new BoxLayout(main, BoxLayout.X_AXIS));
         /*LOAD TABLE*/
          //Table
-        String []title=new String[]{"ID","Name"};
-        Object [][]object=new Object[][]{
+        String []title=new String[]{"ID","Name","Status"};
+        /*Object [][]object=new Object[][]{
             {1,"Ban 1"},
             {2,"Ban 2"},
              {3,"Ban 3"},
                 
-        };
-        DefaultTableModel model= new DefaultTableModel(object,title){
+        };*/
+        DefaultTableModel model= new DefaultTableModel(null,title){
             @Override
             public boolean isCellEditable(int row, int column) {
             return false;
             }
         };
         table=new JTable();
+        
         table.getTableHeader().setFont(new java.awt.Font(table.getFont().toString(), Font.BOLD, 22));
         table.setFont(new java.awt.Font(table.getFont().toString(), Font.PLAIN, 18));
         table.setModel(model);
         table.setSelectionMode(0);
         table.setRowHeight(80); // chỉnh độ cao của hàng
         
+        controller.getTables();
         JScrollPane jsp=new JScrollPane(table);
         
         /*Sự kiện click ở table*/
@@ -113,6 +122,7 @@ public class TableView {
         //repaint
         main.revalidate();
         main.repaint();
+     
     }
     
     public void LoadInfoTable(JPanel info)
@@ -289,6 +299,18 @@ public class TableView {
     {
         table.setValueAt(idText.getText().toString(), row, 0);
         table.setValueAt(nameText.getText().toString(), row, 1);
+    }
+
+    public void setlistTables(List<Tables> list)
+    {
+        DefaultTableModel model = (DefaultTableModel)table.getModel();
+        model.setRowCount(0);
+        for(Tables obj : list)
+        {
+            model.addRow(new Object[] { obj.id,obj.name,obj.status});
+         
+        table.setModel(model);
+        }
     }
     
     

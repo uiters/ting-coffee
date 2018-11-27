@@ -5,6 +5,7 @@
  */
 package Views;
 
+import Controllers.AddFrameController;
 import java.awt.*;
 import java.awt.BorderLayout;
 import java.awt.FlowLayout;
@@ -55,13 +56,13 @@ public class AddFrameView {
     private JTextField addressText;
     private JTextField phoneText;
     private JTextField priceText;
-    
+    private final AddFrameController controller;
     private JComboBox cb;
     private String []list={"An vat","Mon chinh","Mon trang mieng"} ; //danh sách trong category
     public AddFrameView(String title)
     {
        this.title=title;
-        
+        controller=AddFrameController.getInstance(this);
     }
     
     public void FoodAdd()
@@ -393,6 +394,7 @@ public class AddFrameView {
                 if(nameText.getText().toString().equals("")==false)
                 {
                     //Xu ly btn add
+                    controller.AddTable(nameText.getText().toString());
                     JOptionPane.showMessageDialog(null, "Đã thêm 1 table thành công!");
                     jf.dispose();
                 }

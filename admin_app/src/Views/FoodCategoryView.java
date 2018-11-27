@@ -4,6 +4,10 @@
  * and open the template in the editor.
  */
 package Views;
+import Views.FoodView;
+import Models.FoodCategoryModel.FoodCategory;
+import Controllers.FoodCategoryController;
+import java.util.List;
 import java.awt.*;
 import java.awt.BorderLayout;
 import java.awt.FlowLayout;
@@ -48,10 +52,14 @@ public class FoodCategoryView {
     private JTextField nameText; //Nametext
     private JTable table; //table FOOD
     private AddFrameView addFrame;
-    
+    private String[] list; // dung de luu list gan qua foodview
+    private final FoodCategoryController controller;
     public FoodCategoryView()
     {
         addFrame=new AddFrameView("Add Cagetory");
+        controller=FoodCategoryController.getInstance(this);
+        controller.getList(); // gan vao list de luu qua food view
+ 
     }
     
     public void Load(JPanel main,JPanel info,JPanel footer)
@@ -65,17 +73,13 @@ public class FoodCategoryView {
     public void LoadCategory(JPanel main)
     {
         main.removeAll();
+        
         main.setLayout(new BoxLayout(main, BoxLayout.X_AXIS));
         /*LOAD TABLE*/
          //Table
         String []title=new String[]{"ID","Name"};
-        Object [][]object=new Object[][]{
-            {1,"An vat"},
-             {2,"Mon an"},
-                {3,"Trang mieng"},
-                
-        };
-        DefaultTableModel model= new DefaultTableModel(object,title){
+        
+        DefaultTableModel model= new DefaultTableModel(null,title){
             @Override
             public boolean isCellEditable(int row, int column) {
             return false;
@@ -83,12 +87,16 @@ public class FoodCategoryView {
         };
         table=new JTable();
         table.getTableHeader().setFont(new java.awt.Font(table.getFont().toString(), Font.BOLD, 22));
+        table.getTableHeader().setReorderingAllowed(false); // khong cho di chuyen thu tu cac column
         table.setFont(new java.awt.Font(table.getFont().toString(), Font.PLAIN, 18));
         table.setModel(model);
         table.setSelectionMode(0);
         table.setRowHeight(80); // chỉnh độ cao của hàng
         
         JScrollPane jsp=new JScrollPane(table);
+        
+        controller.getFoodCategory();
+        
         
         /*Sự kiện click ở table*/
         table.addMouseListener(new MouseAdapter() {
@@ -110,7 +118,7 @@ public class FoodCategoryView {
         
         //repaint
         main.revalidate();
-        main.repaint();
+        
     }
     
     //Load info FoodCategory
@@ -293,4 +301,39 @@ public class FoodCategoryView {
         table.setValueAt(idText.getText().toString(), row, 0);
         table.setValueAt(nameText.getText().toString(), row, 1);
     }
+    
+    /*set food category*/
+
+    public void SetFoodCategory ( List<FoodCategory>  categories)
+    {
+        DefaultTableModel model = (DefaultTableModel)table.getModel();
+        model.setRowCount(0);
+        for(FoodCategory foodcategory : categories)
+        {
+            model.addRow(new Object[] { foodcategory.id,  foodcategory.nameCategory});
+        }
+         
+        table.setModel(model);
+    }
+    
+    public void SetListCategory ( List<FoodCategory>  categories)
+    {
+        list=new String[categories.size()];
+        int i=0;
+        for(FoodCategory obj : categories)
+        {
+            list[i]=obj.nameCategory.toString();
+            i++;
+        }
+    }
+    public String[] getList()
+    {
+        return list;
+    }
+    
+    
+    /*end set food category*/
+    
+    
+
 }

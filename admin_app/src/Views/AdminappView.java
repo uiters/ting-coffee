@@ -150,7 +150,7 @@ public class AdminappView extends JFrame{
              public void mouseClicked(MouseEvent e) {
                  super.mouseClicked(e); //To change body of generated methods, choose Tools | Templates.
                  JOptionPane.showMessageDialog(null,"Xử lý sự kiện Load Database");
-                 dashboardMain.Load(main,info);
+                 dashboardMain.Load(main,info,footer);
              }
             
 });
@@ -178,6 +178,7 @@ public class AdminappView extends JFrame{
              public void mouseClicked(MouseEvent e) {
                  super.mouseClicked(e); //To change body of generated methods, choose Tools | Templates.
                  JOptionPane.showMessageDialog(null,"Xử lý sự kiện Load Database");
+                 foodMain.setList(categoryMain.getList());
                  foodMain.Load(main,info,footer);
              }
             

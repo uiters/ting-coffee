@@ -5,6 +5,7 @@
  */
 package Views;
 
+import Controllers.FoodCategoryController;
 import Controllers.FoodController;
 import Models.FoodModel.Food;
 import java.awt.Dimension;
@@ -38,7 +39,7 @@ import java.util.List;
  */
 public class FoodView {
 
-    private String[] list = {"An vat", "Mon chinh", "Mon trang mieng"}; //danh sách trong category
+    private String[] list = null; //danh sách trong category
     private JTextField idText; //ID text
     private JTextField nameText; //Nametext
     private JTextField priceText;
@@ -46,8 +47,8 @@ public class FoodView {
     private JComboBox cb2;
     private JComboBox cb;
     private AddFrameView addFrame;
-    
     private final FoodController controller;
+    
     String pathImg;
 
     FoodView() {
@@ -64,7 +65,7 @@ public class FoodView {
 
     public void LoadFood(JPanel main) {
         main.removeAll();
-        controller.getFoods();//call get foods
+        
         main.setLayout(new BoxLayout(main, BoxLayout.X_AXIS));
         /*LOAD TABLE*/
         //Table
@@ -97,6 +98,7 @@ public class FoodView {
             }
         };
         table.getTableHeader().setFont(new java.awt.Font(table.getFont().toString(), Font.BOLD, 22));
+        table.getTableHeader().setReorderingAllowed(false); // khong cho di chuyen thu tu cac column
         table.setFont(new java.awt.Font(table.getFont().toString(), Font.PLAIN, 18));
         table.setModel(model);
         table.setSelectionMode(0);
@@ -104,6 +106,8 @@ public class FoodView {
 
         JScrollPane jsp = new JScrollPane(table);
 
+        controller.getFoods();//call get foods
+        
         /*Sự kiện click ở table*/
         table.addMouseListener(new MouseAdapter() {
             @Override
@@ -389,12 +393,12 @@ public class FoodView {
         String Name = table.getModel().getValueAt(row, 1).toString();
         String Category = table.getModel().getValueAt(row, 2).toString();
         String Price = table.getModel().getValueAt(row, 4).toString();
-
+        JOptionPane.showMessageDialog(null, Category);
         idText.setText(ID);
         nameText.setText(Name);
         priceText.setText(Price);
         for (int i = 0; i < cb2.getItemCount(); i++) {
-            if (cb2.getItemAt(i).toString() == Category) {
+            if (cb2.getItemAt(i).toString().equals(Category)) {
                 cb2.setSelectedIndex(i);
             }
         }
@@ -442,4 +446,11 @@ public class FoodView {
           model.addRow(new Object[] { food.id,  food.name, food.nameCategory, this.getImage(food.getImage()), food.price});
         table.setModel(model);
     }
+    
+    public void setList(String a[])
+    {
+        list=a;
+    }
+    
+    
 }
