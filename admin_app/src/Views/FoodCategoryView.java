@@ -4,64 +4,76 @@
  * and open the template in the editor.
  */
 package Views;
-import Views.FoodView;
 import Models.FoodCategoryModel.FoodCategory;
 import Controllers.FoodCategoryController;
+import Models.FoodCategoryModel;
 import java.util.List;
 import java.awt.*;
-import java.awt.BorderLayout;
-import java.awt.FlowLayout;
 import java.awt.Font;
-import java.awt.GridBagConstraints;
-import java.awt.GridBagLayout;
-import java.awt.GridLayout;
-import java.awt.Label;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.io.File;
-import java.net.URL;
-import java.util.Objects;
 import javax.swing.Box;
 import javax.swing.BoxLayout;
-import javax.swing.ImageIcon;
 import javax.swing.JButton;
-import javax.swing.JComboBox;
-import javax.swing.JFileChooser;
-import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
-import javax.swing.JTabbedPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
-import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.table.DefaultTableModel;
-import javax.swing.table.JTableHeader;
 
 /**
  *
  * @author Thang Le
  */
-public class FoodCategoryView {
+public class FoodCategoryView extends View{
     private JTextField idText; //ID text
     private JTextField nameText; //Nametext
     private JTable table; //table FOOD
-    private AddFrameView addFrame;
+    private final AddFrameView addFrame;
     private String[] list; // dung de luu list gan qua foodview
     private final FoodCategoryController controller;
     public FoodCategoryView()
     {
-        addFrame=new AddFrameView("Add Cagetory");
-        controller=FoodCategoryController.getInstance(this);
-        controller.getList(); // gan vao list de luu qua food view
- 
+        
+        controller = FoodCategoryController.getInstance(this);
+        addFrame=new AddFrameView("Add Cagetory", controller);
+        controller.loadFull();
+     }
+    //---------------------------------------------------------------------------------------------------------
+    @Override
+    public void insert(Object objects){
+        FoodCategory category = (FoodCategory)objects;
+        ((DefaultTableModel)table.getModel()).addRow(new Object[]{category.id, category.nameCategory});
     }
     
+    @Override
+    public void delete(int row){
+        ((DefaultTableModel)table.getModel()).removeRow(row);
+    }
+    
+    @Override
+    public void update(int row, Object objects){
+        FoodCategory category = (FoodCategory)objects;
+        ((DefaultTableModel)table.getModel()).setValueAt(category.nameCategory, row, 1);
+    }
+    
+    @Override
+    public void loadView(Object objects){
+        List<FoodCategory> categories = (List<FoodCategory>)(Object)objects;
+        
+        DefaultTableModel model = (DefaultTableModel)table.getModel();
+        model.setRowCount(0);
+        categories.forEach((foodcategory) -> {
+            model.addRow(new Object[] { foodcategory.id,  foodcategory.nameCategory});
+        });
+        
+        table.setModel(model);
+    }
+    //----------------------------------------------------------------------------------------------------------
     public void Load(JPanel main,JPanel info,JPanel footer)
     {
         LoadCategory(main);
@@ -95,7 +107,7 @@ public class FoodCategoryView {
         
         JScrollPane jsp=new JScrollPane(table);
         
-        controller.getFoodCategory();
+        controller.loadFull();
         
         
         /*Sự kiện click ở table*/
@@ -253,9 +265,11 @@ public class FoodCategoryView {
             public void actionPerformed(ActionEvent e) {
                 //Xu ly update
                 int row=table.getSelectedRow();
-                if(row>0)
+                if(row > 0)
                 {
-                    setTable(row);
+                    FoodCategory category = FoodCategoryModel.getInstance().new FoodCategory(Integer.parseInt(idText.getText()), nameText.getText());
+                    update(row, category);
+                    controller.update(category);
                     JOptionPane.showMessageDialog(null, "Đã update thành công!");
                 }
                 
@@ -266,9 +280,10 @@ public class FoodCategoryView {
             @Override
             public void actionPerformed(ActionEvent e) {
                 int row=table.getSelectedRow();
-                if(row>=0)
+                if(row >= 0)
                 {
-                    ((DefaultTableModel)table.getModel()).removeRow(row);
+                    controller.delete(table.getValueAt(row, 0));
+                    delete(row);//delete in view
                     JOptionPane.showMessageDialog(null, "Đã xóa thành công!");
                 }
                 
@@ -298,34 +313,13 @@ public class FoodCategoryView {
     /*set value to table*/
     private void setTable(int row)
     {
-        table.setValueAt(idText.getText().toString(), row, 0);
-        table.setValueAt(nameText.getText().toString(), row, 1);
+        table.setValueAt(idText.getText(), row, 0);
+        table.setValueAt(nameText.getText(), row, 1);
     }
     
     /*set food category*/
 
-    public void SetFoodCategory ( List<FoodCategory>  categories)
-    {
-        DefaultTableModel model = (DefaultTableModel)table.getModel();
-        model.setRowCount(0);
-        for(FoodCategory foodcategory : categories)
-        {
-            model.addRow(new Object[] { foodcategory.id,  foodcategory.nameCategory});
-        }
-         
-        table.setModel(model);
-    }
     
-    public void SetListCategory ( List<FoodCategory>  categories)
-    {
-        list=new String[categories.size()];
-        int i=0;
-        for(FoodCategory obj : categories)
-        {
-            list[i]=obj.nameCategory.toString();
-            i++;
-        }
-    }
     public String[] getList()
     {
         return list;
@@ -333,7 +327,6 @@ public class FoodCategoryView {
     
     
     /*end set food category*/
-    
     
 
 }

@@ -5,7 +5,6 @@
  */
 package Views;
 
-import Controllers.FoodCategoryController;
 import Controllers.FoodController;
 import Models.FoodModel.Food;
 import java.awt.Dimension;
@@ -52,7 +51,7 @@ public class FoodView {
     String pathImg;
 
     FoodView() {
-        addFrame = new AddFrameView("Add Food");
+        addFrame = new AddFrameView("Add Food", null);
         controller = FoodController.getInstance(this);
         
     }

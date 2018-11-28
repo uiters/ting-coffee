@@ -5,27 +5,14 @@
  */
 package Views;
 
-import Controllers.AddFrameController;
+
+import Controllers.Controller;
 import java.awt.*;
 import java.awt.BorderLayout;
-import java.awt.FlowLayout;
-import java.awt.Font;
-import java.awt.GridBagConstraints;
-import java.awt.GridBagLayout;
-import java.awt.GridLayout;
-import java.awt.Label;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
-import java.io.File;
-import java.net.URL;
-import java.util.Objects;
 import javax.swing.Box;
 import javax.swing.BoxLayout;
-import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JDialog;
@@ -34,13 +21,8 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-import javax.swing.JScrollPane;
-import javax.swing.JTabbedPane;
-import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.filechooser.FileNameExtensionFilter;
-import javax.swing.table.DefaultTableModel;
-import javax.swing.table.JTableHeader;
 
 
 /**
@@ -48,7 +30,7 @@ import javax.swing.table.JTableHeader;
  * @author Thang Le
  */
 public class AddFrameView {
-    private String title;
+    private final String title;
     private JDialog jf; // xài dialog vì để hold main excution (sau khi click add,frame gọi tới sẽ tự reload database)
     private JPanel panel;
     private JTextField nameText;
@@ -56,13 +38,13 @@ public class AddFrameView {
     private JTextField addressText;
     private JTextField phoneText;
     private JTextField priceText;
-    private final AddFrameController controller;
+    private final Controller controller;
     private JComboBox cb;
-    private String []list={"An vat","Mon chinh","Mon trang mieng"} ; //danh sách trong category
-    public AddFrameView(String title)
+    private final String [] list = {"An vat","Mon chinh","Mon trang mieng"} ; //danh sách trong category
+    public AddFrameView(String title, Controller c)
     {
        this.title=title;
-        controller=AddFrameController.getInstance(this);
+       controller = c;
     }
     
     public void FoodAdd()
@@ -214,7 +196,7 @@ public class AddFrameView {
         btnAdd.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                if(nameText.getText().toString()!=null&&priceText.getText().toString()!=null&&cb.getSelectedItem()!=null)
+                if(nameText.getText()!=null && priceText.getText()!=null && cb.getSelectedItem()!=null)
                 {
                     //Xu ly btn add
                     JOptionPane.showMessageDialog(null, "Đã thêm 1 food thành công!");
@@ -243,6 +225,7 @@ public class AddFrameView {
         jf=new JDialog(jf, title);
         jf.setModal(true);
         jf.setSize(300, 200);
+    
         jf.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);  // đóng frame hiện hành
         jf.setResizable(false);
 
@@ -303,9 +286,10 @@ public class AddFrameView {
         btnAdd.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                if(nameText.getText().toString().equals("")==false)
+                if(nameText.getText().equals("")==false)
                 {
                     //Xu ly btn add
+                    controller.insert(nameText.getText());
                     JOptionPane.showMessageDialog(null, "Đã thêm 1 food category thành công!");
                     jf.dispose();
                 }
@@ -391,10 +375,10 @@ public class AddFrameView {
         btnAdd.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                if(nameText.getText().toString().equals("")==false)
+                if(nameText.getText().equals("")==false)
                 {
                     //Xu ly btn add
-                    controller.AddTable(nameText.getText().toString());
+                    controller.insert(nameText.getText());
                     JOptionPane.showMessageDialog(null, "Đã thêm 1 table thành công!");
                     jf.dispose();
                 }
@@ -563,8 +547,8 @@ public class AddFrameView {
         btnAdd.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                if(nameText.getText().toString().equals("")==false&birthText.getText().toString().equals("")==false
-                        &&addressText.getText().toString().equals("")==false&&phoneText.getText().toString().equals("")==false
+                if(nameText.getText().equals("")==false&birthText.getText().equals("")==false
+                        &&addressText.getText().equals("")==false&&phoneText.getText().equals("")==false
                         &&cb.getSelectedItem()!=null);
                 {
                     //Xu ly btn add

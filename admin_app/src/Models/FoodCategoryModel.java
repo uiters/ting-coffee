@@ -8,12 +8,10 @@ package Models;
 
 import Constants.Query;
 import com.google.gson.Gson;
-import com.google.gson.annotations.Expose;
-import com.google.gson.annotations.JsonAdapter;
 import com.google.gson.annotations.SerializedName;
 import java.io.IOException;
-import java.lang.reflect.Array;
 import java.util.Arrays;
+import java.util.LinkedList;
 import java.util.List;
 
 /**
@@ -42,7 +40,7 @@ public class FoodCategoryModel {
     /*get list FoodCategory*/
     /**
      *
-     * @return List<FoodCategory>
+     * @return List<>
      * @throws IOException
      */
     public List<FoodCategory> getFoodCategory() throws IOException
@@ -51,22 +49,34 @@ public class FoodCategoryModel {
         if(rawJson==null)
             return null;
         FoodCategory[] foodcategories=json.fromJson(rawJson, FoodCategory[].class); // convert json to foodcategory[]
-        List<FoodCategory> listFoodCategories=Arrays.asList(foodcategories);
+        List<FoodCategory> listFoodCategories = new LinkedList<>(Arrays.asList(foodcategories));
         return listFoodCategories;
         
     }
+    
+    public void addTable(String name) throws IOException
+    {
+        mySqlConnection.executeNoneQuery(Query.addTable, new Object[] { name });
+    }
+
+    public void delete(int id) {
+        //delete 
+    }
+    
     /*End*/
     //----------------------------------
     public class FoodCategory
     {
-        @SerializedName("ID") public int id;
-        @SerializedName("Name") public String nameCategory;
+        @SerializedName("ID") 
+        public int id;
+        @SerializedName("Name") 
+        public String nameCategory;
         
         
-        public FoodCategory(int id,String name)
+        public FoodCategory(int id, String name)
         {
-            this.id=id;
-            this.nameCategory=name;
+            this.id = id;
+            this.nameCategory = name;
         }
         
         public FoodCategory(){}

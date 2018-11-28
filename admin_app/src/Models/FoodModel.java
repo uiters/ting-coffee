@@ -8,12 +8,11 @@ package Models;
 import Constants.Query;
 import com.google.gson.Gson;
 import com.google.gson.annotations.Expose;
-import com.google.gson.annotations.JsonAdapter;
 import com.google.gson.annotations.SerializedName;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Base64;
+import java.util.LinkedList;
 import java.util.List;
 
 /**
@@ -49,7 +48,7 @@ public class FoodModel {
         if(rawJson == null)
             return null;
         Food[] foods = json.fromJson(rawJson, Food[].class);//convert json to foods[]
-        List<Food> listFoods = Arrays.asList(foods); //convert food[] to list<food>
+        List<Food> listFoods = new LinkedList<>(Arrays.asList(foods)); //convert food[] to list<food>
         return listFoods;
     }
     //-------------------------------------------------------------------------------------
