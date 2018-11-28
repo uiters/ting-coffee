@@ -7,7 +7,12 @@ package Controllers;
 
 import Models.FoodModel;
 import Models.FoodModel.Food;
-import java.util.ArrayList;
+import Views.FoodView;
+import java.io.IOException;
+import java.util.List;
+import java.util.concurrent.CompletableFuture;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -16,16 +21,36 @@ import java.util.ArrayList;
 public class FoodController {
     private static FoodController _instance = null;
     
-    public static FoodController getInstance() {
+    public static FoodController getInstance(FoodView view) {
         if(_instance == null)
-            _instance = new FoodController();
+            _instance = new FoodController(view);
         return _instance;
     }
     
-    private FoodController() {}
+    private final FoodView view;
+    private final FoodModel model;
+    private List<Food> foods = null;//save
     
-    public ArrayList<Food> getFoods() // get food from models
-    {
-        return FoodModel.getInstance().getFoods();
+    private FoodController(FoodView view) {
+        this.view = view;
+        this.model = FoodModel.getInstance();
     }
+    
+    public void getFoods() // get food from models
+    {
+        CompletableFuture<List<Food>>  future;                
+        future = CompletableFuture.supplyAsync(() -> {//open thread
+            try {
+                if(foods == null)
+                    foods = model.getFoods();
+                return foods;
+            } catch (IOException ex) {
+                Logger.getLogger(FoodController.class.getName()).log(Level.SEVERE, null, ex);
+                return null;
+            }
+        });
+        future.thenAccept(listFoods -> view.setFoods(listFoods));
+    }
+    
+    
 }

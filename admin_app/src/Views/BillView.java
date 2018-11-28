@@ -320,6 +320,7 @@ public class BillView {
     public void LoadFooter(JPanel footer)
     {
         footer.removeAll();
+        footer.setPreferredSize(null);
         footer.revalidate();
         footer.repaint();
     }

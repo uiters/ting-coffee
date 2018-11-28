@@ -49,15 +49,6 @@ public class AdminappView extends JFrame{
     JPanel main;
     JPanel info;
     JPanel footer;
-<<<<<<< HEAD:Admin App/src/adminapp/Adminapp.java
-    Food foodMain;
-<<<<<<< HEAD
-=======
-    FoodCategory categoryMain;
->>>>>>> origin/admin_app
-    
-    public Adminapp()
-=======
     FoodView foodMain;
     FoodCategoryView categoryMain;
     DashboardView dashboardMain;
@@ -65,7 +56,6 @@ public class AdminappView extends JFrame{
     BillView billMain;
     AccountView staffMain;
     public AdminappView()
->>>>>>> 7af2ecfe617499f8d38cba408562433699ebdaba:Admin App/src/Views/AdminappView.java
     {
         jf=new JFrame("Cafe Management || Admin App");
         
@@ -92,24 +82,12 @@ public class AdminappView extends JFrame{
         footer = new JPanel();
         footer.setBackground(Color.cyan);
         
-<<<<<<< HEAD:Admin App/src/adminapp/Adminapp.java
-        foodMain=new Food();
-<<<<<<< HEAD
-=======
-        categoryMain=new FoodCategory();
->>>>>>> origin/admin_app
-=======
         foodMain=new FoodView();
         categoryMain=new FoodCategoryView();
         dashboardMain=new DashboardView();
         tableMain=new TableView();
         billMain=new BillView();
-<<<<<<< HEAD
-        staffMain=new StaffView();
->>>>>>> 7af2ecfe617499f8d38cba408562433699ebdaba:Admin App/src/Views/AdminappView.java
-=======
         staffMain=new AccountView();
->>>>>>> admin_app
         
         createHeader(header);
         jf.add(header, BorderLayout.PAGE_START);
@@ -172,7 +150,7 @@ public class AdminappView extends JFrame{
              public void mouseClicked(MouseEvent e) {
                  super.mouseClicked(e); //To change body of generated methods, choose Tools | Templates.
                  JOptionPane.showMessageDialog(null,"Xử lý sự kiện Load Database");
-                 dashboardMain.Load(main,info);
+                 dashboardMain.Load(main,info,footer);
              }
             
 });
@@ -200,6 +178,7 @@ public class AdminappView extends JFrame{
              public void mouseClicked(MouseEvent e) {
                  super.mouseClicked(e); //To change body of generated methods, choose Tools | Templates.
                  JOptionPane.showMessageDialog(null,"Xử lý sự kiện Load Database");
+                 foodMain.setList(categoryMain.getList());
                  foodMain.Load(main,info,footer);
              }
             
@@ -222,9 +201,6 @@ public class AdminappView extends JFrame{
         foodcategory.add(categoryTitle);
         foodcategory.add(Box.createRigidArea(new Dimension(0, 6)));
         foodcategory.add(categoryIcon);
-<<<<<<< HEAD
-        /*END FOOD OPTIONS*/
-=======
         
         foodcategory.addMouseListener(new MouseAdapter() {
             @Override
@@ -235,7 +211,6 @@ public class AdminappView extends JFrame{
              }
 });
         /*END FOODCATEGORY OPTIONS*/
->>>>>>> origin/admin_app
         
         
         /*TABLE*/

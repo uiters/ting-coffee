@@ -27,10 +27,11 @@ public class DashboardView {
         
     }
     
-    public void Load(JPanel main,JPanel info)
+    public void Load(JPanel main,JPanel info,JPanel footer)
     {
         LoadMain(main);
         LoadInfo(info);
+        LoadFooter(footer);
     }
     
     public void LoadMain(JPanel main)
@@ -60,6 +61,14 @@ public class DashboardView {
         info.removeAll();
         info.setPreferredSize( new Dimension( 5,5) );
         info.revalidate();
+    }
+    
+    public void LoadFooter(JPanel footer)
+    {
+        footer.removeAll();
+        footer.setPreferredSize(null);
+        footer.revalidate();
+        footer.repaint();
     }
     
     DefaultCategoryDataset createDataset()
