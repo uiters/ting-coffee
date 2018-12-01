@@ -12,6 +12,7 @@ import com.google.gson.annotations.JsonAdapter;
 import com.google.gson.annotations.SerializedName;
 import java.io.IOException;
 import java.util.Arrays;
+import java.util.LinkedList;
 import java.util.List;
 import javax.swing.JOptionPane;
 
@@ -51,11 +52,30 @@ public class TablesModel {
         if(rawJson==null)
             return null;
         Tables[] tables=json.fromJson(rawJson, Tables[].class);
-        List<Tables> listTable=Arrays.asList(tables);
+        List<Tables> listTable=new LinkedList<>(Arrays.asList(tables));
         //JOptionPane.showMessageDialog(null, tables[0].name.toString());
         return listTable;
     }
     
+    
+    public int getIDLast()
+    {
+        return 0;
+    }
+    
+    public void addTable(String name) throws IOException
+    {
+        String raw=mySqlConnection.executeNoneQuery(Query.addTable, new Object[] { name });
+        if(raw==null) return;
+        String [] result=json.fromJson(raw, String[].class);
+        List<String> res=Arrays.asList(result);
+        JOptionPane.showMessageDialog(null, "Ket qua la "+res.get(0).toString());
+    }
+    
+    public void delete(int index) throws IOException
+    {
+        
+    }
    
     
     //-----------
@@ -72,6 +92,8 @@ public class TablesModel {
             this.name=name;
             this.status=status;
         }
+        
+
         
         public Tables(){}
     }

@@ -51,14 +51,22 @@ public class FoodCategoryController extends Controller {
         CompletableFuture<FoodCategory>  future;
         
         future = CompletableFuture.supplyAsync(() -> {
-            int id = 12;// id get from model;
-            FoodCategory category = model.new FoodCategory(id, name);
-            _addCategories(category);
-            return category;
+            try
+                { 
+                    model.addFoodCagetory(name); // insert to database
+                    int id = model.getIDLast();// id get from model;
+                    FoodCategory category = model.new FoodCategory(id, name);
+                    _addCategories(category); // insert to table in list local
+                    return category;
+                }catch (IOException ex) {
+                Logger.getLogger(FoodCategoryController.class.getName()).log(Level.SEVERE, null, ex);
+                return null;
+            }
+           
             // call get database o day
- 
+            
         });
-        future.thenAccept(category -> view.insert(category));
+        future.thenAccept(category -> view.insert(category)); // insert to view
     }
     @Override
     public void delete(Object object){
@@ -85,9 +93,8 @@ public class FoodCategoryController extends Controller {
         CompletableFuture<List<FoodCategory>>  future;                
         future = CompletableFuture.supplyAsync(() -> {//open thread
             try {
-                if(foodcategories == null){
-                    foodcategories = model.getFoodCategory();
-                }
+
+                foodcategories = model.getFoodCategory();
                 return foodcategories;
             } catch (IOException ex) {
                 Logger.getLogger(FoodCategoryController.class.getName()).log(Level.SEVERE, null, ex);

@@ -41,7 +41,7 @@ public class FoodCategoryView extends View{
         
         controller = FoodCategoryController.getInstance(this);
         addFrame=new AddFrameView("Add Cagetory", controller);
-        controller.loadFull();
+        
      }
     //---------------------------------------------------------------------------------------------------------
     @Override

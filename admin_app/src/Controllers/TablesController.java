@@ -19,7 +19,7 @@ import javax.swing.JOptionPane;
  *
  * @author Thang Le
  */
-public class TablesController {
+public class TablesController extends Controller {
     private static TablesController _instance=null;
     
     
@@ -42,12 +42,69 @@ public class TablesController {
         this.model=TablesModel.getInstance();
     }
     
-    public void getTables()
+    @Override
+    public void insert(Object object){
+        String name = (String) object;
+        
+        CompletableFuture<Tables>  future;
+        
+        future = CompletableFuture.supplyAsync(() -> {
+            try
+                {
+                    //int id = model.getIDLast();// id get from model;
+                    model.addTable(name); // insert to database
+                    int id=41;
+                    Tables item = model.new Tables(41, name,-1);
+                    _addTables(item); // insert to table in list local
+                    return item;
+                }catch (IOException ex) {
+                Logger.getLogger(TablesController.class.getName()).log(Level.SEVERE, null, ex);
+                return null;
+            }
+           
+            // call get database o day
+            
+        });
+        future.thenAccept(item -> view.insert(item)); // insert to view
+    }
+    
+    
+    @Override
+    public void delete(Object object){
+        int id = (int)object;
+        _deleteTables(id);
+        CompletableFuture.runAsync(() -> { //runAsync no return value
+            try
+            {
+                    model.delete(id);
+            }catch (IOException ex) {
+                Logger.getLogger(TablesController.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        });
+    }
+    @Override
+    public void update(Object object){
+        
+        Tables item = (Tables)object;
+        
+        _updateTables(item); 
+        CompletableFuture.runAsync(() -> { //runAsync no return value
+            try
+            {
+                   // update
+                model.delete(0);
+            }catch (IOException ex) {
+                Logger.getLogger(TablesController.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        });
+    }
+    
+    @Override
+    public void loadFull()
     {
         CompletableFuture<List<Tables>>  future;                
         future = CompletableFuture.supplyAsync(() -> {//open thread
             try {
-                if(tables == null)
                     tables = model.getTables();
                 return tables;
             } catch (IOException ex) {
@@ -55,8 +112,42 @@ public class TablesController {
                 return null;
             }
         });
-        future.thenAccept(list -> view.setlistTables(list));
+        future.thenAccept(listTables -> view.loadView(listTables));
     }
     
     
+    //add trong list local
+    private void _addTables(Tables item)
+    {
+        tables.add(item);
+    }
+    
+    //xoa trong list local
+    private void _deleteTables(int index)
+    {
+        for (Tables item : tables)
+        {
+            if (item.id==index)
+            {
+                tables.remove(item);
+                break;
+            }
+                
+        }
+    }
+    
+    
+    //cap nhat trong list local
+    private void _updateTables(Tables index)
+    {
+        for (Tables item : tables)
+        {
+            if (item.id==index.id)
+            {
+                item.name=index.name;
+                break;
+            }             
+        }
+    }
 }
+

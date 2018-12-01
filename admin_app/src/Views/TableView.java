@@ -29,7 +29,7 @@ import java.util.List;
  *
  * @author Thang Le
  */
-public class TableView {
+public class TableView extends View {
     
     private JTextField idText; //ID text
     private JTextField nameText; //Nametext
@@ -39,9 +39,42 @@ public class TableView {
     
     public TableView()
     {
-        addFrame=new AddFrameView("Add Table", null);
         controller=TablesController.getInstance(this);
+        addFrame=new AddFrameView("Add Table", controller);
+        
     }
+    
+    //---------------------------------------------------------------------------------------------------------
+    @Override
+    public void insert(Object objects){
+        Tables category = (Tables)objects;
+        ((DefaultTableModel)table.getModel()).addRow(new Object[]{category.id, category.name,-1});
+    }
+    
+    @Override
+    public void delete(int row){
+        ((DefaultTableModel)table.getModel()).removeRow(row);
+    }
+    
+    @Override
+    public void update(int row, Object objects){
+        Tables selectedtable = (Tables)objects;
+        ((DefaultTableModel)table.getModel()).setValueAt(selectedtable.name, row, 1);
+    }
+    
+    @Override
+    public void loadView(Object objects){
+        List<Tables> items = (List<Tables>)(Object)objects;
+        
+        DefaultTableModel model = (DefaultTableModel)table.getModel();
+        model.setRowCount(0);
+        items.forEach((item) -> {
+            model.addRow(new Object[] { item.id,  item.name,-1});
+        });
+        
+        table.setModel(model);
+    }
+    //----------------------------------------------------------------------------------------------------------
     
     public void Load(JPanel main,JPanel info,JPanel footer)
     {
@@ -79,7 +112,7 @@ public class TableView {
         table.setSelectionMode(0);
         table.setRowHeight(80); // chỉnh độ cao của hàng
         
-        controller.getTables();
+        controller.loadFull();
         JScrollPane jsp=new JScrollPane(table);
         
         /*Sự kiện click ở table*/
@@ -102,7 +135,6 @@ public class TableView {
         
         //repaint
         main.revalidate();
-        main.repaint();
      
     }
     
@@ -227,6 +259,7 @@ public class TableView {
             @Override
             public void actionPerformed(ActionEvent e) {
                 addFrame.TableAdd();
+                JOptionPane.showMessageDialog(null, "Reload Database");
             }
         });
          btnUpdate.addActionListener(new ActionListener() {
