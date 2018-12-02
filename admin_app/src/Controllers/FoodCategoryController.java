@@ -67,6 +67,7 @@ public class FoodCategoryController extends Controller {
             
         });
         future.thenAccept(category -> view.insert(category)); // insert to view
+        
     }
     @Override
     public void delete(Object object){
@@ -102,7 +103,9 @@ public class FoodCategoryController extends Controller {
             }
         });
         future.thenAccept(listFoodCategories -> view.loadView(listFoodCategories));
+        
     }
+    
     
     private void _updateCategories(FoodCategory foodCategory){
         for(FoodCategory category : foodcategories){

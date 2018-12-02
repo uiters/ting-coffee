@@ -288,7 +288,7 @@ public class AccountView {
          JButton btnAdd=new JButton("Add");
          JButton btnUpdate=new JButton("Update");
          JButton btnDelete=new JButton("Delete");
-         JButton btnCancel=new JButton("Cancel");
+         JButton btnCancel=new JButton("Reset Password");
          
          
          btn.add(Box.createRigidArea(new Dimension(5,0)));

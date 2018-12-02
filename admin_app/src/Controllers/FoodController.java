@@ -18,7 +18,7 @@ import java.util.logging.Logger;
  *
  * @author thienlan
  */
-public class FoodController {
+public class FoodController extends Controller{
     private static FoodController _instance = null;
     
     public static FoodController getInstance(FoodView view) {
@@ -51,6 +51,26 @@ public class FoodController {
         });
         future.thenAccept(listFoods -> view.setFoods(listFoods));
     }
+    @Override
+    public void insert(Object object){
+        
+    }
+    @Override
+    public void delete(Object object){
+      
+    }
+    @Override
+    public void update(Object object){
+        
+       
+    }
     
+    @Override
+    public void loadFull()
+    {
+        
+    }
+    
+   
     
 }

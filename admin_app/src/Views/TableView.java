@@ -6,6 +6,7 @@
 package Views;
 import Models.TablesModel.Tables;
 import Controllers.TablesController;
+import Models.TablesModel;
 import java.awt.*;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
@@ -104,7 +105,19 @@ public class TableView extends View {
             return false;
             }
         };
-        table=new JTable();
+        table = new JTable() {
+            @Override
+            public Class getColumnClass(int column) {
+                switch (column) {
+                    case 0:
+                        return int.class;
+                    case 2:
+                        return int.class;
+                    default:
+                        return String.class;
+                }
+            }
+        };
         
         table.getTableHeader().setFont(new java.awt.Font(table.getFont().toString(), Font.BOLD, 22));
         table.setFont(new java.awt.Font(table.getFont().toString(), Font.PLAIN, 18));
@@ -260,6 +273,7 @@ public class TableView extends View {
             public void actionPerformed(ActionEvent e) {
                 addFrame.TableAdd();
                 JOptionPane.showMessageDialog(null, "Reload Database");
+                //controller.loadFull();
             }
         });
          btnUpdate.addActionListener(new ActionListener() {
@@ -267,9 +281,11 @@ public class TableView extends View {
             public void actionPerformed(ActionEvent e) {
                 //Xu ly update
                 int row=table.getSelectedRow();
-                if(row>0)
+                if(row>=0)
                 {
-                    setTable(row);
+                    Tables item=TablesModel.getInstance().new Tables(Integer.parseInt(idText.getText()),nameText.getText(),-1);
+                    update(row, item);
+                    controller.update(item);
                     JOptionPane.showMessageDialog(null, "Đã update thành công!");
                 }
                 
@@ -282,7 +298,8 @@ public class TableView extends View {
                 int row=table.getSelectedRow();
                 if(row>=0)
                 {
-                    ((DefaultTableModel)table.getModel()).removeRow(row);
+                    controller.delete(table.getValueAt(row, 0));
+                    delete(row);
                     JOptionPane.showMessageDialog(null, "Đã xóa thành công!");
                 }
                 

@@ -36,9 +36,9 @@ import java.util.List;
  *
  * @author Thang Le
  */
-public class FoodView {
+public class FoodView extends View{
 
-    private String[] list = null; //danh sách trong category
+    private List<String> list = null; //danh sách trong category
     private JTextField idText; //ID text
     private JTextField nameText; //Nametext
     private JTextField priceText;
@@ -51,10 +51,32 @@ public class FoodView {
     String pathImg;
 
     FoodView() {
-        addFrame = new AddFrameView("Add Food", null);
         controller = FoodController.getInstance(this);
+        addFrame = new AddFrameView("Add Food",controller);
+        
         
     }
+    //---------------------------------------------------------------------------------------------------------
+    @Override
+    public void insert(Object objects){
+        
+    }
+    
+    @Override
+    public void delete(int row){
+        ((DefaultTableModel)table.getModel()).removeRow(row);
+    }
+    
+    @Override
+    public void update(int row, Object objects){
+        
+    }
+    
+    @Override
+    public void loadView(Object objects){
+     
+    }
+    //----------------------------------------------------------------------------------------------------------
 
     public void Load(JPanel main, JPanel info, JPanel footer) {
         LoadFood(main);
@@ -162,9 +184,7 @@ public class FoodView {
         cb = new JComboBox();
         //add combo item
         cb.addItem("All");
-        for (String obj : list) {
-            cb.addItem(obj);
-        }
+        
         //end
         cb.setAlignmentX(Component.CENTER_ALIGNMENT);
         cb.setMaximumRowCount(5);
@@ -222,8 +242,14 @@ public class FoodView {
         Categorygroup.setLayout(new BoxLayout(Categorygroup, BoxLayout.X_AXIS));
         Categorygroup.setBackground(Color.yellow);
         Categorygroup.setMaximumSize(new Dimension(300, 30));
-
-        cb2 = new JComboBox(list);
+        String []temp=new String[list.size()];
+        int i=0;
+        for(String obj:list)
+        {
+            temp[i]=obj;
+            i++;
+        }
+        cb2 = new JComboBox(temp);
         cb2.setAlignmentX(Component.CENTER_ALIGNMENT);
         cb2.setSelectedItem(null);
         JLabel LabelCategory = new JLabel("Category : ");
@@ -446,7 +472,7 @@ public class FoodView {
         table.setModel(model);
     }
     
-    public void setList(String a[])
+    public void setList(List a)
     {
         list=a;
     }

@@ -53,8 +53,8 @@ public class TablesController extends Controller {
                 {
                     //int id = model.getIDLast();// id get from model;
                     model.addTable(name); // insert to database
-                    int id=41;
-                    Tables item = model.new Tables(41, name,-1);
+                    int id=model.getIDLast();
+                    Tables item = model.new Tables(id, name,-1);
                     _addTables(item); // insert to table in list local
                     return item;
                 }catch (IOException ex) {
@@ -92,7 +92,7 @@ public class TablesController extends Controller {
             try
             {
                    // update
-                model.delete(0);
+                model.update(item.id,item.name);
             }catch (IOException ex) {
                 Logger.getLogger(TablesController.class.getName()).log(Level.SEVERE, null, ex);
             }

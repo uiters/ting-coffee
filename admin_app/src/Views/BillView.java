@@ -4,6 +4,9 @@
  * and open the template in the editor.
  */
 package Views;
+import Controllers.BillController;
+import Models.BillModel.Bill;
+import Models.FoodCategoryModel;
 import java.awt.*;
 import java.awt.BorderLayout;
 import java.awt.FlowLayout;
@@ -42,7 +45,7 @@ import javax.swing.table.JTableHeader;
  *
  * @author Thang Le
  */
-public class BillView {
+public class BillView extends View {
     private JTextField idText; //ID text
     private JTextField idtableText; //IDtable text
     private JTextField dateinText; //DateCheckIn text
@@ -50,10 +53,10 @@ public class BillView {
     private JTextField discountText; //Discount text
     private JTextField totalText; //Total text
     private JTable table; //table Bill
-    
+    private BillController controller;
     public BillView()
     {
-        
+        controller=BillController.getInstance(this);
     }
     
     public void Load(JPanel main,JPanel info,JPanel footer)
@@ -62,6 +65,34 @@ public class BillView {
         LoadBillInfo(info);
         LoadFooter(footer);
     }
+    //---------------------------------------------------------------------------------------------------------
+    @Override
+    public void insert(Object objects){
+    }
+    
+    @Override
+    public void delete(int row){
+        ((DefaultTableModel)table.getModel()).removeRow(row);
+    }
+    
+    @Override
+    public void update(int row, Object objects){
+        
+    }
+    
+    @Override
+    public void loadView(Object objects){
+        java.util.List<Bill> bills = (java.util.List<Bill>)(Object)objects;
+        
+        DefaultTableModel model = (DefaultTableModel)table.getModel();
+        model.setRowCount(0);
+        bills.forEach((item) -> {
+            model.addRow(new Object[] { item.id,  item.idtable,item.checkin,item.checkout,item.discount,item.price,item.username});
+        });
+        
+        table.setModel(model);
+    }
+    //----------------------------------------------------------------------------------------------------------
     
     public void LoadBill(JPanel main)
     {
@@ -69,14 +100,8 @@ public class BillView {
         main.setLayout(new BoxLayout(main, BoxLayout.X_AXIS));
         /*LOAD TABLE*/
          //Table
-        String []title=new String[]{"ID","IDTable","Date CheckIn","Date Checkout","Discount","Total Price"};
-        Object [][]object=new Object[][]{
-            {1,1,"18-08-2018","18-08-2018",5,500000},
-            {2,1,"19-08-2018","19-08-2018",0,1500000},
-             {1,3,"20-08-2018","20-08-2018",15,300000}
-                
-        };
-        DefaultTableModel model= new DefaultTableModel(object,title){
+        String []title=new String[]{"ID","IDTable","CheckIn","Checkout","Discount","Total Price","Username"};
+        DefaultTableModel model= new DefaultTableModel(null,title){
             @Override
             public boolean isCellEditable(int row, int column) {
             return false;
@@ -84,11 +109,13 @@ public class BillView {
         };
         table=new JTable();
         table.getTableHeader().setFont(new java.awt.Font(table.getFont().toString(), Font.BOLD, 22));
+        table.getTableHeader().setReorderingAllowed(false); // khong cho di chuyen thu tu cac column
         table.setFont(new java.awt.Font(table.getFont().toString(), Font.PLAIN, 18));
         table.setModel(model);
         table.setSelectionMode(0);
         table.setRowHeight(80); // chỉnh độ cao của hàng
         
+        controller.loadFull();
         JScrollPane jsp=new JScrollPane(table);
         
         /*Sự kiện click ở table*/
@@ -280,7 +307,8 @@ public class BillView {
                  int row=table.getSelectedRow();
                 if(row>=0)
                 {
-                    ((DefaultTableModel)table.getModel()).removeRow(row);
+                    controller.delete(table.getValueAt(row, 0));
+                    delete(row);
                     JOptionPane.showMessageDialog(null, "Đã xóa thành công!");
                 }
             }

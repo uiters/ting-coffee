@@ -58,23 +58,31 @@ public class TablesModel {
     }
     
     
-    public int getIDLast()
+    public int getIDLast() throws IOException
     {
-        return 0;
+        String rawJson=mySqlConnection.executeQuery(Query.getIDLastTable, null);
+         if(rawJson==null)
+            return 0;
+         Tables[] list=json.fromJson(rawJson, Tables[].class); // convert json to foodcategory[]
+            List<Tables> listTables= new LinkedList<>(Arrays.asList(list));
+         return listTables.get(0).id;
     }
     
     public void addTable(String name) throws IOException
     {
         String raw=mySqlConnection.executeNoneQuery(Query.addTable, new Object[] { name });
-        if(raw==null) return;
-        String [] result=json.fromJson(raw, String[].class);
-        List<String> res=Arrays.asList(result);
-        JOptionPane.showMessageDialog(null, "Ket qua la "+res.get(0).toString());
+        //if(raw=="1") JOptionPane.showMessageDialog(null, "OK");;
     }
     
     public void delete(int index) throws IOException
     {
-        
+        String raw=mySqlConnection.executeNoneQuery(Query.delTable, new Object[] { index });
+    }
+    
+    
+    public void update(int index,String name) throws IOException
+    {
+        String raw=mySqlConnection.executeNoneQuery(Query.updateTable, new Object[] { index , name});
     }
    
     
