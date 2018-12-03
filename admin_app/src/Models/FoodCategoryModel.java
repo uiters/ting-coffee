@@ -56,7 +56,12 @@ public class FoodCategoryModel {
     
     public void addFoodCagetory(String name) throws IOException
     {
-        mySqlConnection.executeNoneQuery(Query.addFoodCagetory, new Object[] { name });
+        String raw= mySqlConnection.executeNoneQuery(Query.addFoodCagetory, new Object[] { name });
+    }
+    
+    public void update(int index,String name) throws IOException
+    {
+        String raw= mySqlConnection.executeNoneQuery(Query.updateFoodCategory, new Object[] { index , name });
     }
 
     public void delete(int id) {

@@ -267,7 +267,7 @@ public class FoodCategoryView extends View{
             public void actionPerformed(ActionEvent e) {
                 //Xu ly update
                 int row=table.getSelectedRow();
-                if(row > 0)
+                if(row >= 0)
                 {
                     FoodCategory category = FoodCategoryModel.getInstance().new FoodCategory(Integer.parseInt(idText.getText()), nameText.getText());
                     update(row, category);

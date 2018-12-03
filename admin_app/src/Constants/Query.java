@@ -22,11 +22,12 @@ public class Query {
      public static String getFoods = "call USP_Admin_GetFoods()";
      
      
+     
     //food category
     public static String getFoodCategory= "call USP_GetFoodCategories()";
     public static String addFoodCagetory = "call USP_InsertFoodCatetory( @_Name )";
     public static String getIDLastFoodCategory="call USP_Admin_GetIDLastCategory()";
-    
+    public static String updateFoodCategory="call USP_Admin_UpdateFoodCategory( @ID , @Name )";
     
     //account
     

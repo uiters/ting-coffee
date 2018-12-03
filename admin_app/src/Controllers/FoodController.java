@@ -5,6 +5,8 @@
  */
 package Controllers;
 
+import Models.FoodCategoryModel;
+import Models.FoodCategoryModel.FoodCategory;
 import Models.FoodModel;
 import Models.FoodModel.Food;
 import Views.FoodView;
@@ -30,26 +32,33 @@ public class FoodController extends Controller{
     private final FoodView view;
     private final FoodModel model;
     private List<Food> foods = null;//save
+    private List<FoodCategory> foodcategorie=null;
     
     private FoodController(FoodView view) {
         this.view = view;
         this.model = FoodModel.getInstance();
     }
     
-    public void getFoods() // get food from models
+    
+    public void setList()
     {
-        CompletableFuture<List<Food>>  future;                
+         CompletableFuture<List<FoodCategoryModel.FoodCategory>>  future;                
         future = CompletableFuture.supplyAsync(() -> {//open thread
             try {
-                if(foods == null)
-                    foods = model.getFoods();
-                return foods;
+
+                foodcategorie = model.getFoodCategory();
+                return foodcategorie;
             } catch (IOException ex) {
                 Logger.getLogger(FoodController.class.getName()).log(Level.SEVERE, null, ex);
                 return null;
             }
         });
-        future.thenAccept(listFoods -> view.setFoods(listFoods));
+        future.thenAccept(listFoodCategories -> view.setList(listFoodCategories));
+    }
+    
+    public void getFoods() // get food from models
+    {
+        
     }
     @Override
     public void insert(Object object){
@@ -68,7 +77,18 @@ public class FoodController extends Controller{
     @Override
     public void loadFull()
     {
-        
+        CompletableFuture<List<Food>>  future;                
+        future = CompletableFuture.supplyAsync(() -> {//open thread
+            try {
+                if(foods == null)
+                    foods = model.getFoods();
+                return foods;
+            } catch (IOException ex) {
+                Logger.getLogger(FoodController.class.getName()).log(Level.SEVERE, null, ex);
+                return null;
+            }
+        });
+        future.thenAccept(listFoods -> view.loadView(listFoods));
     }
     
    

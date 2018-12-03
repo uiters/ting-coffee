@@ -81,10 +81,15 @@ public class FoodCategoryController extends Controller {
     public void update(Object object){
         
         FoodCategory foodCategory = (FoodCategory)object;
-        
-        _updateCategories(foodCategory); 
+        _updateCategories(foodCategory);
         CompletableFuture.runAsync(() -> { //runAsync no return value
-            model.delete(foodCategory.id);
+            try
+            {
+                   // update
+                model.update(foodCategory.id,foodCategory.nameCategory);
+            }catch (IOException ex) {
+                Logger.getLogger(FoodCategoryController.class.getName()).log(Level.SEVERE, null, ex);
+            }
         });
     }
     
