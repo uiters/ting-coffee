@@ -64,8 +64,10 @@ public class FoodCategoryModel {
         String raw= mySqlConnection.executeNoneQuery(Query.updateFoodCategory, new Object[] { index , name });
     }
 
-    public void delete(int id) {
+    public void delete(int id) throws IOException 
+    {
         //delete 
+        String raw=mySqlConnection.executeNoneQuery(Query.delFoodCategory, new Object[] { id });
     }
     
     //get last id from model to insert to table

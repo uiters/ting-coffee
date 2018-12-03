@@ -80,7 +80,6 @@ public class FoodController extends Controller{
         CompletableFuture<List<Food>>  future;                
         future = CompletableFuture.supplyAsync(() -> {//open thread
             try {
-                if(foods == null)
                     foods = model.getFoods();
                 return foods;
             } catch (IOException ex) {

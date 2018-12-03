@@ -28,7 +28,7 @@ public class Query {
     public static String addFoodCagetory = "call USP_InsertFoodCatetory( @_Name )";
     public static String getIDLastFoodCategory="call USP_Admin_GetIDLastCategory()";
     public static String updateFoodCategory="call USP_Admin_UpdateFoodCategory( @ID , @Name )";
-    
+    public static String delFoodCategory="call USP_Admin_DelFoodCategory( @ID )";
     //account
     
     //bill

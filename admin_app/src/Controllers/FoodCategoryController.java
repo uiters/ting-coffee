@@ -74,7 +74,13 @@ public class FoodCategoryController extends Controller {
         int id = (int)object;
         _deleteCategories(id);
         CompletableFuture.runAsync(() -> { //runAsync no return value
-            //model.delete(id);
+             try
+            {
+                 //delete
+                model.delete(id);
+            }catch (IOException ex) {
+                Logger.getLogger(FoodCategoryController.class.getName()).log(Level.SEVERE, null, ex);
+            }
         });
     }
     @Override
