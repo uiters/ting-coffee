@@ -60,7 +60,17 @@ public class AccountController extends Controller {
     }
     @Override
     public void update(Object object){
-        
+        Account acc = (Account)object;
+        _updateAccount(acc);
+        CompletableFuture.runAsync(() -> { //runAsync no return value
+            try
+            {
+                   // update
+                model.update(acc.username,acc.name,acc.sex,acc.idcard,acc.address,acc.number,acc.birth,acc.typename);
+            }catch (IOException ex) {
+                Logger.getLogger(AccountController.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        });
        
     }
     
@@ -102,6 +112,23 @@ public class AccountController extends Controller {
         for(Account category :accounts){
             if(category.username == index){
                 accounts.remove(category);
+                break;
+            }
+        }
+    }
+    
+    private void _updateAccount(Account object)
+    {
+        for(Account category : accounts){
+            if (category.username == object.username){
+                category.name = object.name;
+                category.sex = object.sex;
+                category.address= object.address;
+                category.birth = object.birth;
+                category.type = object.type;
+                category.typename = object.typename;
+                category.idcard = object.idcard;
+                category.number = object.number;
                 break;
             }
         }

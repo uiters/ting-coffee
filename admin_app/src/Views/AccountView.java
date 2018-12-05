@@ -475,12 +475,17 @@ public class AccountView extends View {
                     {
                         int index=cb.getSelectedIndex();
                         int type=cbType.getSelectedIndex();
+                        String typename=cbType.getSelectedItem().toString();
+                        JOptionPane.showMessageDialog(null, typename);
                         //convert date to string
                         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
                         String strDate =dateFormat.format(birthday.getDate());
                         Account acc = AccountModel.getInstance().new Account(idText.getText(),nameText.getText(),idCardText.getText(),strDate,
                             index,addressText.getText(),phoneText.getText(),type);
+                        Account acc2 = AccountModel.getInstance().new Account(idText.getText(),nameText.getText(),idCardText.getText(),strDate,
+                            index,addressText.getText(),phoneText.getText(),typename);
                         update(row, acc);
+                        controller.update(acc2);
                     }
                     
                 }
