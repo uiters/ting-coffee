@@ -12,6 +12,7 @@ import java.io.IOException;
 import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -48,6 +49,7 @@ public class BillModel {
      public void delete(int id) throws IOException
      {
          String raw=mySqlConnection.executeNoneQuery(Query.delBill, new Object[] { id });
+         if (raw=="1") JOptionPane.showMessageDialog(null, "Đã xóa thành công");
      }
     
     public class Bill

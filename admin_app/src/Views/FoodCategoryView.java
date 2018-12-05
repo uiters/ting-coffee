@@ -272,7 +272,6 @@ public class FoodCategoryView extends View{
                     FoodCategory category = FoodCategoryModel.getInstance().new FoodCategory(Integer.parseInt(idText.getText()), nameText.getText());
                     update(row, category);
                     controller.update(category);
-                    JOptionPane.showMessageDialog(null, "Đã update thành công!");
                 }
                 
             }
@@ -286,7 +285,6 @@ public class FoodCategoryView extends View{
                 {
                     controller.delete(table.getValueAt(row, 0));
                     delete(row);//delete in view
-                    JOptionPane.showMessageDialog(null, "Đã xóa thành công!");
                 }
                 
             }

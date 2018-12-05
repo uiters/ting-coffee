@@ -33,6 +33,8 @@ import javax.swing.table.DefaultTableModel;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Image;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
@@ -42,7 +44,7 @@ import java.util.List;
  */
 public class FoodView extends View{
 
-    private List<String> list = new ArrayList<String>(); //danh sách trong category
+    private List<String> list = null; //danh sách trong category
     private JTextField idText; //ID text
     private JTextField nameText; //Nametext
     private JTextField priceText;
@@ -63,6 +65,9 @@ public class FoodView extends View{
     
     public void setList(Object objects)
     {
+        list=new ArrayList<String>();
+        cb.removeAllItems();
+        cb2.removeAllItems();
         List<FoodCategory> categories = (List<FoodCategory>)(Object)objects;
         for(FoodCategory item :categories)
         {
@@ -70,7 +75,8 @@ public class FoodView extends View{
             list.add(temp);
         }
         
-        int count=list.size();     
+        int count=list.size();
+        //JOptionPane.showMessageDialog(null, count);
         String []obj=new String[count];
         cb.addItem("All");
         for(int i=0;i<obj.length;i++)
@@ -351,6 +357,18 @@ public class FoodView extends View{
         Pricegroup.add(Box.createRigidArea(new Dimension(50, 0)));
         Pricegroup.add(priceText);
         Pricegroup.add(Box.createRigidArea(new Dimension(5, 0)));
+        //numeric
+        priceText.addKeyListener(new KeyAdapter() {
+            public void keyTyped(KeyEvent e) {
+                    char c = e.getKeyChar();
+                    if (!((c >= '0') && (c <= '9') ||
+                    (c == KeyEvent.VK_BACK_SPACE) ||
+                    (c == KeyEvent.VK_DELETE))) 
+                    {
+                        e.consume();
+                    }
+            }
+});
         /*End Price*/
 
         detail.add(IDgroup);
@@ -371,6 +389,7 @@ public class FoodView extends View{
         info.add(Box.createRigidArea(new Dimension(0, 20)));
         info.add(detail);
         info.revalidate();
+        info.repaint();
 
     }
 

@@ -40,6 +40,7 @@ import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.JTableHeader;
 import Views.AdminappView;
+import java.awt.event.KeyAdapter;
 import javax.swing.JPasswordField;
 /**
  *
@@ -156,6 +157,31 @@ public class LoginView {
         panel.add(Box.createRigidArea(new Dimension(10,0)));
         panel.add(detail);
         
+        nameText.addKeyListener(new KeyAdapter() {
+            @Override
+            public void keyPressed(KeyEvent e) {
+                  if(nameText.getText().toString().equals("")==false && passText.getText().equals("")==false)
+                {
+                    if(e.getKeyCode()==KeyEvent.VK_ENTER)
+                    {
+                        LoadApp();
+                    }                  
+                }
+            }
+});
+        
+        passText.addKeyListener(new KeyAdapter() {
+            @Override
+            public void keyPressed(KeyEvent e) {
+                  if(nameText.getText().toString().equals("")==false && passText.getText().equals("")==false)
+                {
+                    if(e.getKeyCode()==KeyEvent.VK_ENTER)
+                    {
+                        LoadApp();
+                    }                  
+                }
+            }
+});
         /*Event Btn Add,Cancel*/
         btnAdd.addActionListener(new ActionListener() {
             @Override
@@ -164,9 +190,7 @@ public class LoginView {
                 if(nameText.getText().toString().equals("")==false)
                 {
                     //Xu ly btn add
-                    JOptionPane.showMessageDialog(null, "Đăng nhập  thành công!");
-                    app=new AdminappView();
-                    jf.dispose();
+                    LoadApp();
                 }
             }
         });
@@ -175,7 +199,6 @@ public class LoginView {
             @Override
             public void actionPerformed(ActionEvent e) {
                  //Xu ly btn cancel
-                 JOptionPane.showMessageDialog(null, "Exit");
                   jf.dispose();
             }
         });
@@ -183,5 +206,13 @@ public class LoginView {
         jf.getContentPane().add(brandSection,BorderLayout.PAGE_START);
         jf.getContentPane().add(detail,BorderLayout.CENTER);
         jf.setVisible(true);
+    }
+    
+    
+    private void LoadApp()
+    {
+        JOptionPane.showMessageDialog(null, "Đăng nhập  thành công!");
+        app=new AdminappView();
+        jf.dispose();
     }
 }
