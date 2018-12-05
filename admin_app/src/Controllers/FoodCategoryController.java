@@ -51,31 +51,51 @@ public class FoodCategoryController extends Controller {
         CompletableFuture<FoodCategory>  future;
         
         future = CompletableFuture.supplyAsync(() -> {
-            int id = 12;// id get from model;
-            FoodCategory category = model.new FoodCategory(id, name);
-            _addCategories(category);
-            return category;
+            try
+                { 
+                    model.addFoodCagetory(name); // insert to database
+                    int id = model.getIDLast();// id get from model;
+                    FoodCategory category = model.new FoodCategory(id, name);
+                    _addCategories(category); // insert to table in list local
+                    return category;
+                }catch (IOException ex) {
+                Logger.getLogger(FoodCategoryController.class.getName()).log(Level.SEVERE, null, ex);
+                return null;
+            }
+           
             // call get database o day
- 
+            
         });
-        future.thenAccept(category -> view.insert(category));
+        future.thenAccept(category -> view.insert(category)); // insert to view
+        
     }
     @Override
     public void delete(Object object){
         int id = (int)object;
         _deleteCategories(id);
         CompletableFuture.runAsync(() -> { //runAsync no return value
-            //model.delete(id);
+             try
+            {
+                 //delete
+                model.delete(id);
+            }catch (IOException ex) {
+                Logger.getLogger(FoodCategoryController.class.getName()).log(Level.SEVERE, null, ex);
+            }
         });
     }
     @Override
     public void update(Object object){
         
         FoodCategory foodCategory = (FoodCategory)object;
-        
-        _updateCategories(foodCategory); 
+        _updateCategories(foodCategory);
         CompletableFuture.runAsync(() -> { //runAsync no return value
-            model.delete(foodCategory.id);
+            try
+            {
+                   // update
+                model.update(foodCategory.id,foodCategory.nameCategory);
+            }catch (IOException ex) {
+                Logger.getLogger(FoodCategoryController.class.getName()).log(Level.SEVERE, null, ex);
+            }
         });
     }
     
@@ -85,9 +105,8 @@ public class FoodCategoryController extends Controller {
         CompletableFuture<List<FoodCategory>>  future;                
         future = CompletableFuture.supplyAsync(() -> {//open thread
             try {
-                if(foodcategories == null){
-                    foodcategories = model.getFoodCategory();
-                }
+
+                foodcategories = model.getFoodCategory();
                 return foodcategories;
             } catch (IOException ex) {
                 Logger.getLogger(FoodCategoryController.class.getName()).log(Level.SEVERE, null, ex);
@@ -95,7 +114,9 @@ public class FoodCategoryController extends Controller {
             }
         });
         future.thenAccept(listFoodCategories -> view.loadView(listFoodCategories));
+        
     }
+    
     
     private void _updateCategories(FoodCategory foodCategory){
         for(FoodCategory category : foodcategories){

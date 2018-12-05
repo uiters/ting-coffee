@@ -5,9 +5,18 @@
  */
 package Views;
 
+import com.toedter.calendar.JDateChooser;
+import com.toedter.calendar.JMonthChooser;
+import com.toedter.calendar.JYearChooser;
+import java.awt.Color;
+import java.awt.Component;
 import java.awt.Dimension;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import javax.swing.Box;
 import javax.swing.BoxLayout;
+import javax.swing.JButton;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import org.jfree.chart.ChartFactory;
@@ -21,7 +30,10 @@ import org.jfree.data.category.DefaultCategoryDataset;
  * @author Thang Le
  */
 public class DashboardView {
-    
+    private JMonthChooser date;
+    private JYearChooser year;
+    private JButton btn;
+    private JFreeChart lineChart;
     public DashboardView()
     {
         
@@ -39,7 +51,7 @@ public class DashboardView {
         main.removeAll();
         main.setLayout(new BoxLayout(main, BoxLayout.X_AXIS));
         
-        JFreeChart lineChart = ChartFactory.createLineChart(
+        lineChart = ChartFactory.createLineChart(
          "Dashboard",
          "Day","Total",
          createDataset(),
@@ -65,10 +77,47 @@ public class DashboardView {
     
     public void LoadFooter(JPanel footer)
     {
-        footer.removeAll();
-        footer.setPreferredSize(null);
+        footer.removeAll(); // remove all components
+        footer.setLayout(new BoxLayout(footer,BoxLayout.X_AXIS));
+        footer.setPreferredSize(new Dimension(footer.getWidth(),50));
+        
+        
+         /*Birthday*/
+        JPanel Monthgroup=new JPanel();
+        Monthgroup.setLayout(new BoxLayout(Monthgroup,BoxLayout.X_AXIS));
+        Monthgroup.setMaximumSize(new Dimension(400, 30));
+        Monthgroup.setBackground(Color.cyan);
+        
+        
+        date=new JMonthChooser();
+        date.setAlignmentX(Component.CENTER_ALIGNMENT);
+        year=new JYearChooser();
+        year.setAlignmentX(Component.CENTER_ALIGNMENT);
+        btn=new JButton("View");
+        btn.setAlignmentX(Component.CENTER_ALIGNMENT);
+         JLabel dateLabel=new JLabel("Month : ");
+         dateLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
+        Monthgroup.add(Box.createRigidArea(new Dimension(5,0)));
+        Monthgroup.add(dateLabel);
+        Monthgroup.add(Box.createRigidArea(new Dimension(33,0)));
+        Monthgroup.add(date);
+        Monthgroup.add(Box.createRigidArea(new Dimension(10,0))); 
+        Monthgroup.add(year);
+        Monthgroup.add(Box.createRigidArea(new Dimension(33,0))); 
+        Monthgroup.add(btn);
+        
+        footer.add(Monthgroup);
+        
+        /*end Birthday*/
         footer.revalidate();
         footer.repaint();
+        
+        btn.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                createDataset();
+            }
+        });
     }
     
     DefaultCategoryDataset createDataset()

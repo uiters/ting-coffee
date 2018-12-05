@@ -14,6 +14,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.util.ArrayList;
 import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
@@ -34,14 +35,15 @@ public class FoodCategoryView extends View{
     private JTextField nameText; //Nametext
     private JTable table; //table FOOD
     private final AddFrameView addFrame;
-    private String[] list; // dung de luu list gan qua foodview
+    private List<String> list=new ArrayList<String>(); // dung de luu list gan qua foodview
+    private List<String> listCate=new ArrayList<String>(); // dung de luu list gan qua foodview
     private final FoodCategoryController controller;
     public FoodCategoryView()
     {
         
         controller = FoodCategoryController.getInstance(this);
         addFrame=new AddFrameView("Add Cagetory", controller);
-        controller.loadFull();
+        
      }
     //---------------------------------------------------------------------------------------------------------
     @Override
@@ -79,6 +81,7 @@ public class FoodCategoryView extends View{
         LoadCategory(main);
         LoadInfoCategory(info);
         LoadFooter(footer);
+        
     }
     
     //Load table FoodCategory
@@ -108,7 +111,6 @@ public class FoodCategoryView extends View{
         JScrollPane jsp=new JScrollPane(table);
         
         controller.loadFull();
-        
         
         /*Sự kiện click ở table*/
         table.addMouseListener(new MouseAdapter() {
@@ -265,7 +267,7 @@ public class FoodCategoryView extends View{
             public void actionPerformed(ActionEvent e) {
                 //Xu ly update
                 int row=table.getSelectedRow();
-                if(row > 0)
+                if(row >= 0)
                 {
                     FoodCategory category = FoodCategoryModel.getInstance().new FoodCategory(Integer.parseInt(idText.getText()), nameText.getText());
                     update(row, category);
@@ -319,11 +321,6 @@ public class FoodCategoryView extends View{
     
     /*set food category*/
 
-    
-    public String[] getList()
-    {
-        return list;
-    }
     
     
     /*end set food category*/

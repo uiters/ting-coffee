@@ -6,6 +6,7 @@
 package Models;
 
 import Constants.Query;
+import Models.FoodCategoryModel.FoodCategory;
 import com.google.gson.Gson;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
@@ -51,6 +52,19 @@ public class FoodModel {
         List<Food> listFoods = new LinkedList<>(Arrays.asList(foods)); //convert food[] to list<food>
         return listFoods;
     }
+    
+    public List<FoodCategory> getFoodCategory() throws IOException
+    {
+        String rawJson=mySqlConnection.executeQuery(Query.getFoodCategory, null);
+        if(rawJson==null)
+            return null;
+        FoodCategory[] foodcategories=json.fromJson(rawJson, FoodCategory[].class); // convert json to foodcategory[]
+        List<FoodCategory> listFoodCategories = new LinkedList<>(Arrays.asList(foodcategories));
+        return listFoodCategories;
+    }
+    
+    
+    
     //-------------------------------------------------------------------------------------
     public class Food {
         @SerializedName("ID") public int id;

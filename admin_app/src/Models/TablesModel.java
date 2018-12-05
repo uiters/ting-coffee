@@ -12,6 +12,7 @@ import com.google.gson.annotations.JsonAdapter;
 import com.google.gson.annotations.SerializedName;
 import java.io.IOException;
 import java.util.Arrays;
+import java.util.LinkedList;
 import java.util.List;
 import javax.swing.JOptionPane;
 
@@ -51,11 +52,38 @@ public class TablesModel {
         if(rawJson==null)
             return null;
         Tables[] tables=json.fromJson(rawJson, Tables[].class);
-        List<Tables> listTable=Arrays.asList(tables);
+        List<Tables> listTable=new LinkedList<>(Arrays.asList(tables));
         //JOptionPane.showMessageDialog(null, tables[0].name.toString());
         return listTable;
     }
     
+    
+    public int getIDLast() throws IOException
+    {
+        String rawJson=mySqlConnection.executeQuery(Query.getIDLastTable, null);
+         if(rawJson==null)
+            return 0;
+         Tables[] list=json.fromJson(rawJson, Tables[].class); // convert json to foodcategory[]
+            List<Tables> listTables= new LinkedList<>(Arrays.asList(list));
+         return listTables.get(0).id;
+    }
+    
+    public void addTable(String name) throws IOException
+    {
+        String raw=mySqlConnection.executeNoneQuery(Query.addTable, new Object[] { name });
+        //if(raw=="1") JOptionPane.showMessageDialog(null, "OK");;
+    }
+    
+    public void delete(int index) throws IOException
+    {
+        String raw=mySqlConnection.executeNoneQuery(Query.delTable, new Object[] { index });
+    }
+    
+    
+    public void update(int index,String name) throws IOException
+    {
+        String raw=mySqlConnection.executeNoneQuery(Query.updateTable, new Object[] { index , name});
+    }
    
     
     //-----------
@@ -72,6 +100,8 @@ public class TablesModel {
             this.name=name;
             this.status=status;
         }
+        
+
         
         public Tables(){}
     }

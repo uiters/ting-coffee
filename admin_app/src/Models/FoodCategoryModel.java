@@ -54,13 +54,31 @@ public class FoodCategoryModel {
         
     }
     
-    public void addTable(String name) throws IOException
+    public void addFoodCagetory(String name) throws IOException
     {
-        mySqlConnection.executeNoneQuery(Query.addTable, new Object[] { name });
+        String raw= mySqlConnection.executeNoneQuery(Query.addFoodCagetory, new Object[] { name });
+    }
+    
+    public void update(int index,String name) throws IOException
+    {
+        String raw= mySqlConnection.executeNoneQuery(Query.updateFoodCategory, new Object[] { index , name });
     }
 
-    public void delete(int id) {
+    public void delete(int id) throws IOException 
+    {
         //delete 
+        String raw=mySqlConnection.executeNoneQuery(Query.delFoodCategory, new Object[] { id });
+    }
+    
+    //get last id from model to insert to table
+    public int getIDLast() throws IOException
+    {
+         String rawJson=mySqlConnection.executeQuery(Query.getIDLastFoodCategory, null);
+         if(rawJson==null)
+            return 0;
+         FoodCategory[] foodcategories=json.fromJson(rawJson, FoodCategory[].class); // convert json to foodcategory[]
+            List<FoodCategory> listFoodCategories = new LinkedList<>(Arrays.asList(foodcategories));
+         return listFoodCategories.get(0).id;
     }
     
     /*End*/

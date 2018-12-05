@@ -314,6 +314,7 @@ public class AddFrameView {
     public void TableAdd()
     {
         jf=new JDialog(jf,title);
+        jf.setModal(true);
         jf.setSize(300, 200);
         jf.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);  // đóng frame hiện hành
         jf.setResizable(false);

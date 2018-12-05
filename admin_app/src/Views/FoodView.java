@@ -6,6 +6,8 @@
 package Views;
 
 import Controllers.FoodController;
+import Models.FoodCategoryModel;
+import Models.FoodCategoryModel.FoodCategory;
 import Models.FoodModel.Food;
 import java.awt.Dimension;
 import java.awt.Font;
@@ -31,35 +33,96 @@ import javax.swing.table.DefaultTableModel;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Image;
+import java.lang.reflect.Array;
+import java.util.ArrayList;
 import java.util.List;
 /**
  *
  * @author Thang Le
  */
-public class FoodView {
+public class FoodView extends View{
 
-    private String[] list = null; //danh sách trong category
+    private List<String> list = new ArrayList<String>(); //danh sách trong category
     private JTextField idText; //ID text
     private JTextField nameText; //Nametext
     private JTextField priceText;
     private JTable table; //table FOOD
-    private JComboBox cb2;
-    private JComboBox cb;
+    private JComboBox cb2=new JComboBox();
+    private JComboBox cb=new JComboBox();
     private AddFrameView addFrame;
     private final FoodController controller;
     
     String pathImg;
 
     FoodView() {
-        addFrame = new AddFrameView("Add Food", null);
         controller = FoodController.getInstance(this);
+        addFrame = new AddFrameView("Add Food",controller);
+        
         
     }
+    
+    public void setList(Object objects)
+    {
+        List<FoodCategory> categories = (List<FoodCategory>)(Object)objects;
+        for(FoodCategory item :categories)
+        {
+            String temp=item.nameCategory;
+            list.add(temp);
+        }
+        
+        int count=list.size();     
+        String []obj=new String[count];
+        cb.addItem("All");
+        for(int i=0;i<obj.length;i++)
+        {
+            obj[i]=list.get(i);
+            //add combo item
+            cb.addItem(obj[i]);
+            //end
+            cb2.addItem(obj[i]);
+        }
+        cb.setSelectedItem(null);
+        cb2.setSelectedItem(null);
+        
+    }
+    
+    
+    //---------------------------------------------------------------------------------------------------------
+    @Override
+    public void insert(Object objects){
+        
+    }
+    
+    @Override
+    public void delete(int row){
+        ((DefaultTableModel)table.getModel()).removeRow(row);
+    }
+    
+    @Override
+    public void update(int row, Object objects){
+        
+    }
+    
+    @Override
+    public void loadView(Object objects){
+         List<Food> categories = (List<Food>)(Object)objects;
+        
+        DefaultTableModel model = (DefaultTableModel)table.getModel();
+        model.setRowCount(0);
+        categories.forEach((food) -> {
+            model.addRow(new Object[] { food.id,  food.name, food.nameCategory, this.getImage(food.getImage()), food.price});
+        });
+        
+        table.setModel(model);
+    }
+    //----------------------------------------------------------------------------------------------------------
 
     public void Load(JPanel main, JPanel info, JPanel footer) {
         LoadFood(main);
         LoadInfoFood(info);
         LoadFooter(footer);
+        
+        
     }
 
     public void LoadFood(JPanel main) {
@@ -105,7 +168,8 @@ public class FoodView {
 
         JScrollPane jsp = new JScrollPane(table);
 
-        controller.getFoods();//call get foods
+        controller.loadFull();//call get foods
+        
         
         /*Sự kiện click ở table*/
         table.addMouseListener(new MouseAdapter() {
@@ -129,7 +193,9 @@ public class FoodView {
         info.removeAll(); // remove all components
         info.setLayout(new BoxLayout(info, BoxLayout.Y_AXIS));
         info.setPreferredSize(new Dimension(300, info.getHeight()));
-
+        
+        controller.setList();
+        
         /*search field*/
         JPanel search = new JPanel();
         search.setLayout(new BoxLayout(search, BoxLayout.X_AXIS));
@@ -159,15 +225,10 @@ public class FoodView {
         JLabel categoryLabel = new JLabel("Select Category : ");
         categoryLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
 
-        cb = new JComboBox();
-        //add combo item
-        cb.addItem("All");
-        for (String obj : list) {
-            cb.addItem(obj);
-        }
-        //end
+        cb.setSelectedItem(null);
         cb.setAlignmentX(Component.CENTER_ALIGNMENT);
         cb.setMaximumRowCount(5);
+        
 
         category.add(Box.createRigidArea(new Dimension(5, 0)));
         category.add(categoryLabel);
@@ -222,10 +283,9 @@ public class FoodView {
         Categorygroup.setLayout(new BoxLayout(Categorygroup, BoxLayout.X_AXIS));
         Categorygroup.setBackground(Color.yellow);
         Categorygroup.setMaximumSize(new Dimension(300, 30));
-
-        cb2 = new JComboBox(list);
-        cb2.setAlignmentX(Component.CENTER_ALIGNMENT);
+        
         cb2.setSelectedItem(null);
+        cb2.setAlignmentX(Component.CENTER_ALIGNMENT);
         JLabel LabelCategory = new JLabel("Category : ");
         LabelCategory.setAlignmentX(Component.CENTER_ALIGNMENT);
 
@@ -392,7 +452,6 @@ public class FoodView {
         String Name = table.getModel().getValueAt(row, 1).toString();
         String Category = table.getModel().getValueAt(row, 2).toString();
         String Price = table.getModel().getValueAt(row, 4).toString();
-        JOptionPane.showMessageDialog(null, Category);
         idText.setText(ID);
         nameText.setText(Name);
         priceText.setText(Price);
@@ -446,10 +505,7 @@ public class FoodView {
         table.setModel(model);
     }
     
-    public void setList(String a[])
-    {
-        list=a;
-    }
+    
     
     
 }
