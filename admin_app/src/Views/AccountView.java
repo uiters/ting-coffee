@@ -4,13 +4,22 @@
  * and open the template in the editor.
  */
 package Views;
+import Controllers.AccountController;
+import Models.AccountModel;
+import Models.AccountModel.Account;
+import Models.AccountTypeModel.AccountType;
+import Models.FoodCategoryModel.FoodCategory;
+import Models.FoodModel.Food;
 import com.toedter.calendar.JDateChooser;
 import java.awt.*;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -25,12 +34,14 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
+import java.util.List;
+import java.util.ArrayList;
 
 /**
  *
  * @author Thang Le
  */
-public class AccountView {
+public class AccountView extends View {
     
     private JTextField idText; //ID text
     private JTextField nameText; //IDtable text
@@ -38,13 +49,91 @@ public class AccountView {
     private JTextField birthText; //Birthday text
     private JTextField addressText; //address text
     private JTextField phoneText; //Phone text
+    private JTextField idCardText; //IDCard text
     private JComboBox cb;//Sex combobox
+    private JComboBox cbType=new JComboBox(); //account type combobox
     private JTable table; //table Staff
     private AddFrameView addFrame;
+    private List<String> list=null; //list save account type
+    private AccountController controller;
     
-    public AccountView()
+    public AccountView ()
     {
         addFrame=new AddFrameView("Add Staff", null);
+        
+        controller=AccountController.getInstance(this);
+    }
+    
+    //overide
+    //---------------------------------------------------------------------------------------------------------
+    @Override
+    public void insert(Object objects){
+        
+    }
+    
+    @Override
+    public void delete(int row){
+        ((DefaultTableModel)table.getModel()).removeRow(row);
+    }
+    
+    @Override
+    public void update(int row, Object objects){
+        Account item = (Account)objects;
+            cb.setSelectedIndex(item.sex);
+            String temp=cb.getSelectedItem().toString();
+            cbType.setSelectedIndex(item.type);
+            String staff=cbType.getSelectedItem().toString();
+             ((DefaultTableModel)table.getModel()).setValueAt(item.name, row, 1);
+             ((DefaultTableModel)table.getModel()).setValueAt(item.idcard, row, 2);
+             ((DefaultTableModel)table.getModel()).setValueAt(item.birth, row, 3);
+             ((DefaultTableModel)table.getModel()).setValueAt(temp, row, 4);
+             ((DefaultTableModel)table.getModel()).setValueAt(item.address, row, 5);
+             ((DefaultTableModel)table.getModel()).setValueAt(item.number, row, 6);
+             ((DefaultTableModel)table.getModel()).setValueAt(staff, row, 7);
+
+    }
+    
+    @Override
+    public void loadView(Object objects){
+         List<Account> categories = (List<Account>)(Object)objects;
+        
+        DefaultTableModel model = (DefaultTableModel)table.getModel();
+        model.setRowCount(0);
+        categories.forEach((item) -> {
+            String temp=null;
+            if(item.sex==1) temp="Male";
+            else temp="Female";
+            model.addRow(new Object[] { item.username,  item.name, item.idcard, item.birth, temp,item.address,item.number,item.typename});
+        });
+        
+        table.setModel(model);
+    }
+    //----------------------------------------------------------------------------------------------------------
+    
+    //set combobox account type
+    public void setList(Object objects)
+    {
+        cbType.removeAllItems();
+        list=new ArrayList<String>();
+        List<AccountType> categories = (List<AccountType>)(Object)objects;
+        for(AccountType item :categories)
+        {
+            String temp=item.name;
+            
+            list.add(temp);
+        }
+        
+        int count=list.size();    
+        String []obj=new String[count];
+        
+        for(int i=0;i<obj.length;i++)
+        {
+            obj[i]=list.get(i);
+            //add combo item
+            //end
+            cbType.addItem(obj[i]);
+        }
+        cbType.setSelectedItem(null);
     }
     
     public void Load(JPanel main,JPanel info,JPanel footer)
@@ -60,26 +149,27 @@ public class AccountView {
         main.setLayout(new BoxLayout(main, BoxLayout.X_AXIS));
         /*LOAD TABLE*/
          //Table
-        String []title=new String[]{"ID","Name","Birthday","Sex","Address","Phone"};
-        Object [][]object=new Object[][]{
-            {"abc","Nguyen Van A","10-08-1990","Male","TPHCM","123456"},
-            {"xyz","Ha Thi C","15-02-1995","Female","Da Nang","123456789"},
-            {"def","Nguyen Hoang C","05-03-1988","Male","TPHCM","123456666"}
+        String []title=new String[]{"ID","Name","IDCard","Birthday","Sex","Address","Phone","Staff Type"};
+        /*Object [][]object=new Object[][]{
+            {"abc","Nguyen Van A","123","10-08-1990","Male","TPHCM","123456","Nhan vien"},
+            {"xyz","Ha Thi C","123","15-02-1995","Female","Da Nang","123456789","Nhan vien"},
+            {"def","Nguyen Hoang C","123","05-03-1988","Male","TPHCM","123456666","Quan ly"}
                 
-        };
-        DefaultTableModel model= new DefaultTableModel(object,title){
+        */
+        DefaultTableModel model= new DefaultTableModel(null,title){
             @Override
             public boolean isCellEditable(int row, int column) {
             return false;
             }
         };
-        table=new JTable();
+        table = new JTable();
         table.getTableHeader().setFont(new java.awt.Font(table.getFont().toString(), Font.BOLD, 22));
         table.setFont(new java.awt.Font(table.getFont().toString(), Font.PLAIN, 18));
         table.setModel(model);
         table.setSelectionMode(0);
         table.setRowHeight(80); // chỉnh độ cao của hàng
         
+        controller.loadFull();
         JScrollPane jsp=new JScrollPane(table);
         
         /*Sự kiện click ở table*/
@@ -109,6 +199,8 @@ public class AccountView {
         info.setLayout(new BoxLayout(info,BoxLayout.Y_AXIS));
         info.setPreferredSize(new Dimension(300,info.getHeight()));
         
+        //get account type and set combobox
+        controller.setListAccType();
         
         /*search field*/
         JPanel search=new JPanel();
@@ -174,6 +266,23 @@ public class AccountView {
         Namegroup.add(Box.createRigidArea(new Dimension(5,0))); 
         /*end Name*/
         
+        /*ID Card*/
+        JPanel IDCardgroup=new JPanel();
+        IDCardgroup.setLayout(new BoxLayout(IDCardgroup,BoxLayout.X_AXIS));
+        IDCardgroup.setBackground(Color.yellow);
+        IDCardgroup.setMaximumSize(new Dimension(300, 30));
+        
+         idCardText=new JTextField();
+         idCardText.setAlignmentX(Component.CENTER_ALIGNMENT);
+         JLabel idcardLabel=new JLabel("ID Card : ");
+         idcardLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
+        IDCardgroup.add(Box.createRigidArea(new Dimension(5,0)));
+        IDCardgroup.add(idcardLabel);
+        IDCardgroup.add(Box.createRigidArea(new Dimension(40,0)));
+        IDCardgroup.add(idCardText);
+        IDCardgroup.add(Box.createRigidArea(new Dimension(5,0))); 
+        /*end IDCard*/
+        
         /*Birthday*/
         JPanel Birthgroup=new JPanel();
         Birthgroup.setLayout(new BoxLayout(Birthgroup,BoxLayout.X_AXIS));
@@ -183,7 +292,7 @@ public class AccountView {
         
         birthday=new JDateChooser();
         birthday.setAlignmentX(Component.CENTER_ALIGNMENT);
-        birthday.setDateFormatString("dd-MM-yyyy");
+        birthday.setDateFormatString("yyyy--MM-dd");
         
          birthText=new JTextField();
          birthText.setAlignmentX(Component.CENTER_ALIGNMENT);
@@ -202,10 +311,12 @@ public class AccountView {
         Sexgroup.setBackground(Color.yellow);
         Sexgroup.setMaximumSize(new Dimension(300, 30));
         
-        String []list={"Male","Female"};
+        String []list=new String[2];
+        list[0]="Female";
+        list[1]="Male";
         cb=new JComboBox(list);
         cb.setAlignmentX(Component.CENTER_ALIGNMENT);
-        cb.setSelectedItem(list[0]);
+        cb.setSelectedItem(null);
         
         JLabel sexLabel=new JLabel("Sex : ");
         sexLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
@@ -249,12 +360,50 @@ public class AccountView {
         Phonegroup.add(Box.createRigidArea(new Dimension(43,0)));
         Phonegroup.add(phoneText);
         Phonegroup.add(Box.createRigidArea(new Dimension(5,0))); 
+        
+        //numeric 
+        phoneText.addKeyListener(new KeyAdapter() {
+            public void keyTyped(KeyEvent e) {
+                    char c = e.getKeyChar();
+                    if (!((c >= '0') && (c <= '9') ||
+                    (c == KeyEvent.VK_BACK_SPACE) ||
+                    (c == KeyEvent.VK_DELETE))) 
+                    {
+                        e.consume();
+                    }
+            }
+});
         /*end Phonenumber*/
+        
+        
+         /*Account Type*/
+        JPanel Typegroup=new JPanel();
+        Typegroup.setLayout(new BoxLayout(Typegroup,BoxLayout.X_AXIS));
+        Typegroup.setBackground(Color.yellow);
+        Typegroup.setMaximumSize(new Dimension(300, 30));
+        
+        
+        cbType.setAlignmentX(Component.CENTER_ALIGNMENT);
+        cbType.setSelectedItem(null);
+
+        
+        
+        JLabel typeLabel=new JLabel("Account Type : ");
+        typeLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
+        
+        Typegroup.add(Box.createRigidArea(new Dimension(5,0)));
+        Typegroup.add(typeLabel);
+        Typegroup.add(Box.createRigidArea(new Dimension(3,0)));
+        Typegroup.add(cbType);
+        Typegroup.add(Box.createRigidArea(new Dimension(5,0)));
+        /*end Type*/
         
         detail.add(Box.createRigidArea(new Dimension(0,20)));
         detail.add(IDgroup);
         detail.add(Box.createRigidArea(new Dimension(0,20)));
         detail.add(Namegroup);
+        detail.add(Box.createRigidArea(new Dimension(0,20)));
+        detail.add(IDCardgroup);
         detail.add(Box.createRigidArea(new Dimension(0,20)));
         detail.add(Birthgroup);
         detail.add(Box.createRigidArea(new Dimension(0,20)));
@@ -263,6 +412,8 @@ public class AccountView {
         detail.add(Addressgroup);
         detail.add(Box.createRigidArea(new Dimension(0,20)));
         detail.add(Phonegroup);
+        detail.add(Box.createRigidArea(new Dimension(0,20)));
+        detail.add(Typegroup);
         
         /*end Staff info detail*/
         
@@ -320,10 +471,18 @@ public class AccountView {
                 int row=table.getSelectedRow();
                 if(row>=0)
                 {
-                    //setTable(row)
-                    setTable(row);
+                    //if(idText.getText()!=null&&nameText.getText()!=null&&idCardText.getText()!=null&&addressText.getText()!=null)
+                    {
+                        int index=cb.getSelectedIndex();
+                        int type=cbType.getSelectedIndex();
+                        //convert date to string
+                        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+                        String strDate =dateFormat.format(birthday.getDate());
+                        Account acc = AccountModel.getInstance().new Account(idText.getText(),nameText.getText(),idCardText.getText(),strDate,
+                            index,addressText.getText(),phoneText.getText(),type);
+                        update(row, acc);
+                    }
                     
-                    JOptionPane.showMessageDialog(null, "Đã update thành công! o hang thu "+row);
                 }
                 
             }
@@ -335,8 +494,8 @@ public class AccountView {
                 int row=table.getSelectedRow();
                 if(row>=0)
                 {
-                    ((DefaultTableModel)table.getModel()).removeRow(row);
-                    JOptionPane.showMessageDialog(null, "Đã xóa thành công!");
+                    controller.delete(table.getValueAt(row, 0));
+                    delete(row);//delete in view
                 }
                 
             }
@@ -357,13 +516,14 @@ public class AccountView {
     {
             String ID=table.getModel().getValueAt(row, 0).toString();
             String Name=table.getModel().getValueAt(row, 1).toString();
-            
-            String Sex=table.getModel().getValueAt(row, 3).toString();
-            String Address=table.getModel().getValueAt(row, 4).toString();
-            String Phone=table.getModel().getValueAt(row, 5).toString();
-            
+            String IDCard=table.getModel().getValueAt(row, 2).toString();
+            String Sex=table.getModel().getValueAt(row, 4).toString();
+            String Address=table.getModel().getValueAt(row, 5).toString();
+            String Phone=table.getModel().getValueAt(row, 6).toString();
+            String Type=table.getModel().getValueAt(row, 7).toString();
             idText.setText(ID);
             nameText.setText(Name);
+            idCardText.setText(IDCard);
             addressText.setText(Address);
             phoneText.setText(Phone);
             for(int i=0;i<cb.getItemCount();i++)
@@ -374,10 +534,20 @@ public class AccountView {
                 }
             }
             
+            for(int i=0;i<cbType.getItemCount();i++)
+            {
+                if(cbType.getItemAt(i).toString().equals(Type)==true)
+                {
+                    cbType.setSelectedIndex(i);
+
+                }
+            }
+            
+            
             //set date for jdatechooser from a value get from table
             try {
-                String Birth=table.getModel().getValueAt(row, 2).toString();
-                Date date=new SimpleDateFormat("dd-MM-yy").parse(Birth);
+                String Birth=table.getModel().getValueAt(row, 3).toString();
+                Date date=new SimpleDateFormat("yy-MM-dd").parse(Birth);
                 birthday.setDate(date);
             }catch (ParseException ex)
             {

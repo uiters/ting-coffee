@@ -7,6 +7,7 @@ package Views;
 
 
 import Controllers.Controller;
+import com.toedter.calendar.JDateChooser;
 import java.awt.*;
 import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
@@ -403,7 +404,7 @@ public class AddFrameView {
     {
         jf=new JDialog(jf,title);
         jf.setModal(true);
-        jf.setSize(300, 400);
+        jf.setSize(300, 500);
         jf.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);  // đóng frame hiện hành
         jf.setResizable(false);
 
@@ -417,6 +418,23 @@ public class AddFrameView {
         detail.setLayout(new BoxLayout(detail,BoxLayout.Y_AXIS));
         detail.setBackground(Color.yellow);
         detail.setPreferredSize(new Dimension(panel.getWidth(),panel.getHeight()));
+        
+        /*ID*/
+        JPanel IDgroup=new JPanel();
+        IDgroup.setLayout(new BoxLayout(IDgroup,BoxLayout.X_AXIS));
+        IDgroup.setBackground(Color.yellow);
+        IDgroup.setMaximumSize(new Dimension(300, 30));
+        
+         JTextField idText=new JTextField();
+         idText.setAlignmentX(Component.CENTER_ALIGNMENT);
+         JLabel idLabel=new JLabel("Username : ");
+         idLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
+        IDgroup.add(Box.createRigidArea(new Dimension(5,0)));
+        IDgroup.add(idLabel);
+        IDgroup.add(Box.createRigidArea(new Dimension(22,0)));
+        IDgroup.add(idText);
+        IDgroup.add(Box.createRigidArea(new Dimension(5,0)));         
+        /*end ID*/
         
         
         /*Name*/
@@ -442,6 +460,10 @@ public class AddFrameView {
         Birthgroup.setBackground(Color.yellow);
         Birthgroup.setMaximumSize(new Dimension(300, 30));
         
+        JDateChooser birthday=new JDateChooser();
+        birthday.setAlignmentX(Component.CENTER_ALIGNMENT);
+        birthday.setDateFormatString("yyyy--MM-dd");
+        
          birthText=new JTextField();
          birthText.setAlignmentX(Component.CENTER_ALIGNMENT);
          JLabel birthLabel=new JLabel("Birthday : ");
@@ -449,7 +471,7 @@ public class AddFrameView {
         Birthgroup.add(Box.createRigidArea(new Dimension(5,0)));
         Birthgroup.add(birthLabel);
         Birthgroup.add(Box.createRigidArea(new Dimension(33,0)));
-        Birthgroup.add(birthText);
+        Birthgroup.add(birthday);
         Birthgroup.add(Box.createRigidArea(new Dimension(5,0))); 
         /*end Birthday*/
         
@@ -508,6 +530,29 @@ public class AddFrameView {
         Phonegroup.add(Box.createRigidArea(new Dimension(5,0))); 
         /*end Phonenumber*/
         
+        /*Account Type*/
+        JPanel Typegroup=new JPanel();
+        Typegroup.setLayout(new BoxLayout(Typegroup,BoxLayout.X_AXIS));
+        Typegroup.setBackground(Color.yellow);
+        Typegroup.setMaximumSize(new Dimension(300, 30));
+        
+        JComboBox cbType=new JComboBox();
+        cbType.addItem("Name");            
+        cbType.setAlignmentX(Component.CENTER_ALIGNMENT);
+        cbType.setSelectedItem(null);
+
+        
+        
+        JLabel typeLabel=new JLabel("Account Type : ");
+        typeLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
+        
+        Typegroup.add(Box.createRigidArea(new Dimension(5,0)));
+        Typegroup.add(typeLabel);
+        Typegroup.add(Box.createRigidArea(new Dimension(3,0)));
+        Typegroup.add(cbType);
+        Typegroup.add(Box.createRigidArea(new Dimension(5,0)));
+        /*end Type*/
+        
         /*Button Add,Cancel*/
         JPanel Btngroup=new JPanel();
         Btngroup.setLayout(new BoxLayout(Btngroup,BoxLayout.X_AXIS));
@@ -528,6 +573,8 @@ public class AddFrameView {
         /*end Button Add,Cancel*/
         
         detail.add(Box.createRigidArea(new Dimension(0,20)));
+        detail.add(IDgroup);
+        detail.add(Box.createRigidArea(new Dimension(0,20)));
         detail.add(Namegroup);
         detail.add(Box.createRigidArea(new Dimension(0,20)));
         detail.add(Birthgroup);
@@ -537,6 +584,8 @@ public class AddFrameView {
         detail.add(Addressgroup);
         detail.add(Box.createRigidArea(new Dimension(0,20)));
         detail.add(Phonegroup);
+        detail.add(Box.createRigidArea(new Dimension(0,20)));
+        detail.add(Typegroup);     
         detail.add(Box.createRigidArea(new Dimension(0,20)));
         detail.add(Btngroup);
         

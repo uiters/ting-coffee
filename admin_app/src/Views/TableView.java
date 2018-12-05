@@ -272,7 +272,6 @@ public class TableView extends View {
             @Override
             public void actionPerformed(ActionEvent e) {
                 addFrame.TableAdd();
-                JOptionPane.showMessageDialog(null, "Reload Database");
                 //controller.loadFull();
             }
         });
@@ -286,7 +285,6 @@ public class TableView extends View {
                     Tables item=TablesModel.getInstance().new Tables(Integer.parseInt(idText.getText()),nameText.getText(),-1);
                     update(row, item);
                     controller.update(item);
-                    JOptionPane.showMessageDialog(null, "Đã update thành công!");
                 }
                 
             }
@@ -300,7 +298,6 @@ public class TableView extends View {
                 {
                     controller.delete(table.getValueAt(row, 0));
                     delete(row);
-                    JOptionPane.showMessageDialog(null, "Đã xóa thành công!");
                 }
                 
             }

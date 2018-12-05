@@ -35,6 +35,11 @@ public class Query {
     public static String getBill="call USP_Admin_GetBills() ";
     public static String delBill="call USP_Admin_DelBill( @ID )";
     //dashboard
+    
+    //acount
+    public static String getAccount="call USP_Admin_GetAccount()";
+    public static String getAccountType="call USP_Admin_GetAccountType()";
+    public static String delAccount="call USp_Admin_DelAccount( @Username )";
    
     
     

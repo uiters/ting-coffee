@@ -72,17 +72,20 @@ public class TablesModel {
     {
         String raw=mySqlConnection.executeNoneQuery(Query.addTable, new Object[] { name });
         //if(raw=="1") JOptionPane.showMessageDialog(null, "OK");;
+        if (raw=="1") JOptionPane.showMessageDialog(null, "Đã thêm thành công");
     }
     
     public void delete(int index) throws IOException
     {
         String raw=mySqlConnection.executeNoneQuery(Query.delTable, new Object[] { index });
+        if (raw=="1") JOptionPane.showMessageDialog(null, "Đã xóa thành công");
     }
     
     
     public void update(int index,String name) throws IOException
     {
         String raw=mySqlConnection.executeNoneQuery(Query.updateTable, new Object[] { index , name});
+        if (raw=="1") JOptionPane.showMessageDialog(null, "Đã cập nhật thành công");
     }
    
     
