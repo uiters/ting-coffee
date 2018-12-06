@@ -66,6 +66,15 @@ public class AccountModel {
         String raw=mySqlConnection.executeNoneQuery(Query.delAccount, new Object[] { username });
         if (raw.equals("1")==true) JOptionPane.showMessageDialog(null, "Đã xóa thành công");
     }
+    
+    //update
+    public void update(String username,String name,int sex,String idcard,String address,String number,String birth,String type) throws IOException
+    {
+        String raw=mySqlConnection.executeNoneQuery(Query.updateAccount, new Object[] { username,name,sex,idcard,address,number,birth,type });
+        if (raw.equals("1")==true) JOptionPane.showMessageDialog(null, "Đã cập nhật thành công");
+    }
+    
+
     //-------------------
     
     
@@ -103,6 +112,18 @@ public class AccountModel {
             this.address=address;
             this.number=number;
             this.type=acctype;
+        }
+        
+        public Account(String user, String name,String id,String birth,int sex,String address,String number,String acctype)
+        {
+            this.username=user;
+            this.name=name;
+            this.idcard=id;
+            this.birth=birth;
+            this.sex=sex;
+            this.address=address;
+            this.number=number;
+            this.typename=acctype;
         }
         
         public Account(){}

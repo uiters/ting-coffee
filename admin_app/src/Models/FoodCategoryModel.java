@@ -63,14 +63,14 @@ public class FoodCategoryModel {
     public void update(int index,String name) throws IOException
     {
         String raw= mySqlConnection.executeNoneQuery(Query.updateFoodCategory, new Object[] { index , name });
-        if (raw=="1") JOptionPane.showMessageDialog(null, "Đã cập nhật thành công");
+        if (raw.equals("1")==true) JOptionPane.showMessageDialog(null, "Đã cập nhật thành công");
     }
 
     public void delete(int id) throws IOException 
     {
         //delete 
         String raw=mySqlConnection.executeNoneQuery(Query.delFoodCategory, new Object[] { id });
-        if (raw=="1") JOptionPane.showMessageDialog(null, "Đã xóa thành công");
+        if (raw.equals("1")==true) JOptionPane.showMessageDialog(null, "Đã xóa thành công");
     }
     
     //get last id from model to insert to table

@@ -24,7 +24,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.filechooser.FileNameExtensionFilter;
-
+import java.util.List;
 
 /**
  *
@@ -400,7 +400,7 @@ public class AddFrameView {
         jf.setVisible(true);
     }
     
-    public void StaffAdd()
+    public void StaffAdd(JComboBox a)
     {
         jf=new JDialog(jf,title);
         jf.setModal(true);
@@ -537,7 +537,11 @@ public class AddFrameView {
         Typegroup.setMaximumSize(new Dimension(300, 30));
         
         JComboBox cbType=new JComboBox();
-        cbType.addItem("Name");            
+        /*for(String obj : list)
+        {
+            cbType.addItem(obj);    
+        }*/
+        cbType=a; 
         cbType.setAlignmentX(Component.CENTER_ALIGNMENT);
         cbType.setSelectedItem(null);
 

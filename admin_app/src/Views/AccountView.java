@@ -81,15 +81,13 @@ public class AccountView extends View {
         Account item = (Account)objects;
             cb.setSelectedIndex(item.sex);
             String temp=cb.getSelectedItem().toString();
-            cbType.setSelectedIndex(item.type);
-            String staff=cbType.getSelectedItem().toString();
              ((DefaultTableModel)table.getModel()).setValueAt(item.name, row, 1);
              ((DefaultTableModel)table.getModel()).setValueAt(item.idcard, row, 2);
              ((DefaultTableModel)table.getModel()).setValueAt(item.birth, row, 3);
              ((DefaultTableModel)table.getModel()).setValueAt(temp, row, 4);
              ((DefaultTableModel)table.getModel()).setValueAt(item.address, row, 5);
              ((DefaultTableModel)table.getModel()).setValueAt(item.number, row, 6);
-             ((DefaultTableModel)table.getModel()).setValueAt(staff, row, 7);
+             ((DefaultTableModel)table.getModel()).setValueAt(item.typename, row, 7);
 
     }
     
@@ -311,10 +309,10 @@ public class AccountView extends View {
         Sexgroup.setBackground(Color.yellow);
         Sexgroup.setMaximumSize(new Dimension(300, 30));
         
-        String []list=new String[2];
-        list[0]="Female";
-        list[1]="Male";
-        cb=new JComboBox(list);
+        String []list2=new String[2];
+        list2[0]="Female";
+        list2[1]="Male";
+        cb=new JComboBox(list2);
         cb.setAlignmentX(Component.CENTER_ALIGNMENT);
         cb.setSelectedItem(null);
         
@@ -460,7 +458,7 @@ public class AccountView extends View {
          btnAdd.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                addFrame.StaffAdd();
+                addFrame.StaffAdd(cbType);
                 JOptionPane.showMessageDialog(null, "Reload database ");
             }
         });
@@ -475,12 +473,18 @@ public class AccountView extends View {
                     {
                         int index=cb.getSelectedIndex();
                         int type=cbType.getSelectedIndex();
+                        String typename=cbType.getSelectedItem().toString();
+                        JOptionPane.showMessageDialog(null, typename);
                         //convert date to string
                         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
                         String strDate =dateFormat.format(birthday.getDate());
-                        Account acc = AccountModel.getInstance().new Account(idText.getText(),nameText.getText(),idCardText.getText(),strDate,
-                            index,addressText.getText(),phoneText.getText(),type);
-                        update(row, acc);
+                        //Account acc = AccountModel.getInstance().new Account(idText.getText(),nameText.getText(),idCardText.getText(),strDate,
+                            //index,addressText.getText(),phoneText.getText(),type);
+                        //acc 2 dung constructor khac de update trong database
+                        Account acc2 = AccountModel.getInstance().new Account(idText.getText(),nameText.getText(),idCardText.getText(),strDate,
+                            index,addressText.getText(),phoneText.getText(),typename);
+                        update(row, acc2);
+                        controller.update(acc2);
                     }
                     
                 }
