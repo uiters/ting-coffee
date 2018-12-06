@@ -41,7 +41,8 @@ public class Query {
     public static String getAccountType="call USP_Admin_GetAccountType()";
     public static String delAccount="call USP_Admin_DelAccount( @Username )";
     public static String updateAccount="call USP_Admin_UpdateAccount( @username , @name , @sex , @idcard , @address , @number , @birth , @type )";
-   
+    public static String addAccount="call USP_Admin_AddAccount( @username , @name , @sex , @idcard , @address , @number , @birth , @type , @pass )";
+    public static String resetAccount="call USP_Admin_ResetPass( @username , @pass )";
     
     
             

@@ -6,12 +6,16 @@
 package Views;
 
 
+import Constants.Password;
 import Controllers.Controller;
+import Models.AccountModel;
+import Models.AccountModel.Account;
 import com.toedter.calendar.JDateChooser;
 import java.awt.*;
 import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.text.SimpleDateFormat;
 import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
@@ -41,6 +45,7 @@ public class AddFrameView {
     private JTextField priceText;
     private final Controller controller;
     private JComboBox cb;
+    private JComboBox cbType;
     private final String [] list = {"An vat","Mon chinh","Mon trang mieng"} ; //danh sách trong category
     public AddFrameView(String title, Controller c)
     {
@@ -453,6 +458,22 @@ public class AddFrameView {
         Namegroup.add(nameText);
         Namegroup.add(Box.createRigidArea(new Dimension(5,0))); 
         /*end Name*/
+        /*ID Card*/
+        JPanel IDCardgroup=new JPanel();
+        IDCardgroup.setLayout(new BoxLayout(IDCardgroup,BoxLayout.X_AXIS));
+        IDCardgroup.setBackground(Color.yellow);
+        IDCardgroup.setMaximumSize(new Dimension(300, 30));
+        
+         JTextField idCardText=new JTextField();
+         idCardText.setAlignmentX(Component.CENTER_ALIGNMENT);
+         JLabel idcardLabel=new JLabel("ID Card : ");
+         idcardLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
+        IDCardgroup.add(Box.createRigidArea(new Dimension(5,0)));
+        IDCardgroup.add(idcardLabel);
+        IDCardgroup.add(Box.createRigidArea(new Dimension(40,0)));
+        IDCardgroup.add(idCardText);
+        IDCardgroup.add(Box.createRigidArea(new Dimension(5,0))); 
+        /*end IDCard*/
         
         /*Birthday*/
         JPanel Birthgroup=new JPanel();
@@ -464,8 +485,7 @@ public class AddFrameView {
         birthday.setAlignmentX(Component.CENTER_ALIGNMENT);
         birthday.setDateFormatString("yyyy--MM-dd");
         
-         birthText=new JTextField();
-         birthText.setAlignmentX(Component.CENTER_ALIGNMENT);
+         
          JLabel birthLabel=new JLabel("Birthday : ");
          birthLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
         Birthgroup.add(Box.createRigidArea(new Dimension(5,0)));
@@ -481,7 +501,7 @@ public class AddFrameView {
         Sexgroup.setBackground(Color.yellow);
         Sexgroup.setMaximumSize(new Dimension(300, 30));
         
-        String []list={"Male","Female"};
+        String []list={"Female","Male"};
         cb=new JComboBox(list);
         cb.setAlignmentX(Component.CENTER_ALIGNMENT);
         cb.setSelectedItem(list[0]);
@@ -536,7 +556,7 @@ public class AddFrameView {
         Typegroup.setBackground(Color.yellow);
         Typegroup.setMaximumSize(new Dimension(300, 30));
         
-        JComboBox cbType=new JComboBox();
+        cbType=new JComboBox();
         /*for(String obj : list)
         {
             cbType.addItem(obj);    
@@ -581,6 +601,8 @@ public class AddFrameView {
         detail.add(Box.createRigidArea(new Dimension(0,20)));
         detail.add(Namegroup);
         detail.add(Box.createRigidArea(new Dimension(0,20)));
+        detail.add(IDCardgroup);
+        detail.add(Box.createRigidArea(new Dimension(0,20)));
         detail.add(Birthgroup);
         detail.add(Box.createRigidArea(new Dimension(0,20)));
         detail.add(Sexgroup);
@@ -601,12 +623,21 @@ public class AddFrameView {
         btnAdd.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                if(nameText.getText().equals("")==false&birthText.getText().equals("")==false
+                if(nameText.getText().equals("")==false&birthday.getDate()!=null
                         &&addressText.getText().equals("")==false&&phoneText.getText().equals("")==false
                         &&cb.getSelectedItem()!=null);
                 {
+                    int index=cb.getSelectedIndex();
+                    int type=cbType.getSelectedIndex();
+                    String typename=cbType.getSelectedItem().toString();
+                    SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+                    String strDate =dateFormat.format(birthday.getDate());
+                    String pass=Password.hashPassword(Constants.Constant.defaultpass);
                     //Xu ly btn add
-                    JOptionPane.showMessageDialog(null, "Đã thêm 1 staff thành công!");
+                    Account acc=AccountModel.getInstance().new Account(idText.getText(),nameText.getText(),idCardText.getText(),strDate,
+                            index,addressText.getText(),phoneText.getText(),typename,pass);
+                    JOptionPane.showMessageDialog(null, pass);
+                    controller.insert(acc);
                     jf.dispose();
                 }
             }
