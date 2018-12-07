@@ -54,9 +54,11 @@ public class BillView extends View {
     private JTextField totalText; //Total text
     private JTable table; //table Bill
     private BillController controller;
+    private BillInfoView infoview;
     public BillView()
     {
         controller=BillController.getInstance(this);
+        infoview=new BillInfoView();
     }
     
     public void Load(JPanel main,JPanel info,JPanel footer)
@@ -316,6 +318,30 @@ public class BillView extends View {
         /*End Event click button Del*/
         /*End Button Delete*/
         
+        /*Button Delete*/
+        JPanel BtnDetailgroup=new JPanel();
+        BtnDetailgroup.setLayout(new BoxLayout(BtnDetailgroup,BoxLayout.X_AXIS));
+        BtnDetailgroup.setBackground(Color.yellow);
+        BtnDetailgroup.setMaximumSize(new Dimension(300, 30));
+        
+        JButton btnDetail=new JButton("Detail");
+        btnDetail.setAlignmentX(Component.CENTER_ALIGNMENT);
+        
+        BtnDetailgroup.add(Box.createRigidArea(new Dimension(5,0)));
+        BtnDetailgroup.add(btnDetail);
+        
+        btnDetail.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                 int row=table.getSelectedRow();
+                if(row>=0)
+                {
+                    infoview.Load(Integer.parseInt(table.getModel().getValueAt(row, 0).toString()));
+                }
+            }
+        });
+        /*Btn Detail*/
+        
         
         detail.add(IDgroup);
         detail.add(Box.createRigidArea(new Dimension(0,20)));
@@ -330,6 +356,8 @@ public class BillView extends View {
         detail.add(Totalgroup);
         detail.add(Box.createRigidArea(new Dimension(0,20)));
         detail.add(Btngroup); 
+        detail.add(Box.createRigidArea(new Dimension(0,20)));
+        detail.add(BtnDetailgroup); 
          /*end info detail*/
          
          

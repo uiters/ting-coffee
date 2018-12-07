@@ -174,9 +174,10 @@ public class FoodCategoryView extends View{
                 String text=searchText.getText();
                 for(int i=0;i<table.getRowCount();i++)
                 {
-                    if(text.equalsIgnoreCase(table.getValueAt(i, 1).toString())==true)
+                    if(text.equalsIgnoreCase(table.getValueAt(i, 0).toString())==true)
                     {
                         table.setRowSelectionInterval(i, i);
+                        setInfo(i);
                         break;
                     }
                 }
