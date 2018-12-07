@@ -4,6 +4,7 @@
  * and open the template in the editor.
  */
 package Views;
+import Constants.Password;
 import Controllers.AccountController;
 import Models.AccountModel;
 import Models.AccountModel.Account;
@@ -59,9 +60,12 @@ public class AccountView extends View {
     
     public AccountView ()
     {
-        addFrame=new AddFrameView("Add Staff", null);
         
         controller=AccountController.getInstance(this);
+        addFrame=new AddFrameView("Add Staff", controller);
+
+        
+        
     }
     
     //overide
@@ -474,7 +478,6 @@ public class AccountView extends View {
                         int index=cb.getSelectedIndex();
                         int type=cbType.getSelectedIndex();
                         String typename=cbType.getSelectedItem().toString();
-                        JOptionPane.showMessageDialog(null, typename);
                         //convert date to string
                         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
                         String strDate =dateFormat.format(birthday.getDate());
@@ -508,7 +511,14 @@ public class AccountView extends View {
          btnCancel.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                //Xu ly
+                //Xu ly reset password
+                 int row=table.getSelectedRow();
+                if(row>=0)
+                {
+                    String user=table.getValueAt(row, 0).toString();
+                    String pass=Password.hashPassword(Constants.Constant.defaultpass);
+                    controller.ResetPass(user,pass);
+                }
             }
         });
          /*END sự kiện btn Add,....*/

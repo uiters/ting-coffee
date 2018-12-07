@@ -24,13 +24,16 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
+import javax.swing.RowFilter;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableRowSorter;
 
 /**
  *
  * @author Thang Le
  */
 public class FoodCategoryView extends View{
+    private DefaultTableModel tablemodel;
     private JTextField idText; //ID text
     private JTextField nameText; //Nametext
     private JTable table; //table FOOD
@@ -107,6 +110,8 @@ public class FoodCategoryView extends View{
         table.setModel(model);
         table.setSelectionMode(0);
         table.setRowHeight(80); // chỉnh độ cao của hàng
+          
+        
         
         JScrollPane jsp=new JScrollPane(table);
         
@@ -161,6 +166,25 @@ public class FoodCategoryView extends View{
         search.add(Box.createRigidArea(new Dimension(15,0)));
         search.add(searchText);
         search.add(Box.createRigidArea(new Dimension(5,0)));
+        
+        btnSearch.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                
+                String text=searchText.getText();
+                for(int i=0;i<table.getRowCount();i++)
+                {
+                    if(text.equalsIgnoreCase(table.getValueAt(i, 0).toString())==true)
+                    {
+                        table.setRowSelectionInterval(i, i);
+                        setInfo(i);
+                        break;
+                    }
+                }
+                 
+               
+            }
+        });
         
         /*end search field*/
         

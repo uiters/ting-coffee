@@ -74,6 +74,20 @@ public class AccountModel {
         if (raw.equals("1")==true) JOptionPane.showMessageDialog(null, "Đã cập nhật thành công");
     }
     
+    
+    public void addAccount(String username,String name,int sex,String idcard,String address,String number,String birth,String type,String pass) throws IOException
+    {
+        String raw=mySqlConnection.executeNoneQuery(Query.addAccount, new Object[] { username,name,sex,idcard,address,number,birth,type,pass });
+        if (raw.equals("1")==true) JOptionPane.showMessageDialog(null, "Đã thêm thành công! Mật khẩu mặc định là abc");
+        else JOptionPane.showMessageDialog(null, "Đã tồn tại tên tài khoản nhân viên này!");
+    }
+    
+    public void resetPassword(String username,String pass) throws IOException
+    {
+        String raw=mySqlConnection.executeNoneQuery(Query.resetAccount, new Object[] { username,pass});
+        if(raw.equals("1")==true) JOptionPane.showMessageDialog(null, "Đã reset password! Mật khẩu mặc định là abc");
+    }
+    
 
     //-------------------
     
@@ -99,6 +113,9 @@ public class AccountModel {
         public int type;
         @SerializedName("AccountType") 
         public String typename;
+        @SerializedName("Password") 
+        public String pass;
+        
         
         
         
@@ -124,6 +141,30 @@ public class AccountModel {
             this.address=address;
             this.number=number;
             this.typename=acctype;
+        }
+        
+        public Account(String user, String name,String id,String birth,int sex,String address,String number,String acctype,String pass)
+        {
+            this.username=user;
+            this.name=name;
+            this.idcard=id;
+            this.birth=birth;
+            this.sex=sex;
+            this.address=address;
+            this.number=number;
+            this.typename=acctype;
+            this.pass=pass;
+        }
+        
+        public Account(String username,String pass)
+        {
+            this.username=username;
+            this.pass=pass;
+        }
+        
+        public Account(String username)
+        {
+            this.username=username;
         }
         
         public Account(){}

@@ -15,6 +15,7 @@ import java.util.Arrays;
 import java.util.Base64;
 import java.util.LinkedList;
 import java.util.List;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -64,6 +65,31 @@ public class FoodModel {
     }
     
     
+    public void update() throws IOException
+    {
+        
+    }
+    
+    public int BeforeDelete(int id) throws IOException
+    {
+        String rawJson=mySqlConnection.executeQuery(Query.beforedelFood, new Object[] { id });
+        Result[] ress=json.fromJson(rawJson, Result[].class);
+        List<Result> list = new LinkedList<>(Arrays.asList(ress));
+        return list.get(0).result;
+    }
+    public void delete(int id) throws IOException
+    {
+        //delete 
+        int d=BeforeDelete(id);
+        if(d<=0)
+        {
+            String raw=mySqlConnection.executeNoneQuery(Query.delFood, new Object[] { id });
+            JOptionPane.showMessageDialog(null, "Đã xóa thành công!");
+        }
+        else JOptionPane.showMessageDialog(null, "Không thể xóa!");
+    }
+    
+    
     
     //-------------------------------------------------------------------------------------
     public class Food {
@@ -88,5 +114,11 @@ public class FoodModel {
             return image;
         }
         public Food(){}
+    }
+    
+    //class nay dung de luu ket qua select
+    public class Result
+    {
+        @SerializedName("count(*)") public int result;
     }
 }

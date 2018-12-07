@@ -42,8 +42,23 @@ public class AccountController extends Controller {
     
     @Override
     public void insert(Object object){
+        Account acc = (Account) object;
+        CompletableFuture<Account>  future;
         
-    }
+        future = CompletableFuture.supplyAsync(() -> {
+            try
+                { 
+                    model.addAccount(acc.username,acc.name,acc.sex,acc.idcard,acc.address,acc.number,acc.birth,acc.typename,acc.pass); // insert to database
+                    _addAccount(acc); // insert to table in list local
+                    return acc;
+                }catch (IOException ex) {
+                Logger.getLogger(AccountController.class.getName()).log(Level.SEVERE, null, ex);
+                return null;
+            }
+         
+    });
+        future.thenAccept(newacc -> view.insert(newacc)); // insert to view
+     }
     @Override
     public void delete(Object object){
       String id = (String)object;
@@ -106,6 +121,19 @@ public class AccountController extends Controller {
         future.thenAccept(listAccTypes -> view.setList(listAccTypes));
     }
     
+    
+    public void ResetPass(String username,String pass)
+    {
+        CompletableFuture.runAsync(() -> { //runAsync no return value
+            try
+            {
+                   // update
+                model.resetPassword(username,pass);
+            }catch (IOException ex) {
+                Logger.getLogger(AccountController.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        });
+    }
     private void _deleteAccount(String index)
     {
         //foodcategories.remove(foodCategory); //??
@@ -132,5 +160,10 @@ public class AccountController extends Controller {
                 break;
             }
         }
+    }
+    
+    private void _addAccount(Account object)
+    {
+        accounts.add(object);
     }
 }
