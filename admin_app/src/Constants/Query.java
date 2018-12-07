@@ -20,6 +20,8 @@ public class Query {
     
     //food
      public static String getFoods = "call USP_Admin_GetFoods()";
+     public static String delFood="call USP_Admin_DelFood( @ID )";
+     public static String beforedelFood="call USP_Admin_GetDelFood( @ID )";
      
      
      

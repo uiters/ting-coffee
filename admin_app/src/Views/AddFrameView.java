@@ -636,7 +636,6 @@ public class AddFrameView {
                     //Xu ly btn add
                     Account acc=AccountModel.getInstance().new Account(idText.getText(),nameText.getText(),idCardText.getText(),strDate,
                             index,addressText.getText(),phoneText.getText(),typename,pass);
-                    JOptionPane.showMessageDialog(null, pass);
                     controller.insert(acc);
                     jf.dispose();
                 }

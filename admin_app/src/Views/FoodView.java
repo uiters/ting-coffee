@@ -50,7 +50,6 @@ public class FoodView extends View{
     private JTextField priceText;
     private JTable table; //table FOOD
     private JComboBox cb2=new JComboBox();
-    private JComboBox cb=new JComboBox();
     private AddFrameView addFrame;
     private final FoodController controller;
     
@@ -66,7 +65,6 @@ public class FoodView extends View{
     public void setList(Object objects)
     {
         list=new ArrayList<String>();
-        cb.removeAllItems();
         cb2.removeAllItems();
         List<FoodCategory> categories = (List<FoodCategory>)(Object)objects;
         for(FoodCategory item :categories)
@@ -78,16 +76,13 @@ public class FoodView extends View{
         int count=list.size();
         //JOptionPane.showMessageDialog(null, count);
         String []obj=new String[count];
-        cb.addItem("All");
         for(int i=0;i<obj.length;i++)
         {
             obj[i]=list.get(i);
             //add combo item
-            cb.addItem(obj[i]);
             //end
             cb2.addItem(obj[i]);
         }
-        cb.setSelectedItem(null);
         cb2.setSelectedItem(null);
         
     }
@@ -222,26 +217,7 @@ public class FoodView extends View{
         search.add(Box.createRigidArea(new Dimension(5, 0)));
 
         /*end search field*/
- /*category*/
-        JPanel category = new JPanel();
-        category.setLayout(new BoxLayout(category, BoxLayout.X_AXIS));
-        category.setBackground(Color.yellow);
-        category.setMaximumSize(new Dimension(300, 30));
-
-        JLabel categoryLabel = new JLabel("Select Category : ");
-        categoryLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
-
-        cb.setSelectedItem(null);
-        cb.setAlignmentX(Component.CENTER_ALIGNMENT);
-        cb.setMaximumRowCount(5);
-        
-
-        category.add(Box.createRigidArea(new Dimension(5, 0)));
-        category.add(categoryLabel);
-        category.add(Box.createRigidArea(new Dimension(5, 0)));
-        category.add(cb);
-        category.add(Box.createRigidArea(new Dimension(5, 0)));
-        /*end category*/
+ 
 
  /*info detail*/
         JPanel detail = new JPanel();
@@ -385,8 +361,6 @@ public class FoodView extends View{
         info.add(Box.createRigidArea(new Dimension(0, 20)));
         info.add(search);
         info.add(Box.createRigidArea(new Dimension(0, 20)));
-        info.add(category);
-        info.add(Box.createRigidArea(new Dimension(0, 20)));
         info.add(detail);
         info.revalidate();
         info.repaint();
@@ -448,8 +422,8 @@ public class FoodView extends View{
             public void actionPerformed(ActionEvent e) {
                 int row = table.getSelectedRow();
                 if (row >= 0) {
-                    ((DefaultTableModel) table.getModel()).removeRow(row);
-                    JOptionPane.showMessageDialog(null, "Đã xóa thành công!");
+                    controller.delete(table.getValueAt(row, 0));
+                    delete(row);//delete in view
                 }
 
             }

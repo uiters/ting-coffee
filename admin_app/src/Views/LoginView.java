@@ -208,7 +208,7 @@ public class LoginView extends View {
                 {
                     //Xu ly btn login         
                     Account input=AccountModel.getInstance().new Account(nameText.getText(),passText.getText());
-                     controller.CheckLogin(input.username);
+                    controller.CheckLogin(input.username);
                     //LoadApp();
                 }
 

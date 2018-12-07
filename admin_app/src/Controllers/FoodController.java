@@ -15,6 +15,7 @@ import java.util.List;
 import java.util.concurrent.CompletableFuture;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -31,8 +32,8 @@ public class FoodController extends Controller{
     
     private final FoodView view;
     private final FoodModel model;
-    private List<Food> foods = null;//save
-    private List<FoodCategory> foodcategorie=null;
+    private List<Food> foods = null;//save food
+    private List<FoodCategory> foodcategorie=null; //save food category
     
     private FoodController(FoodView view) {
         this.view = view;
@@ -66,7 +67,19 @@ public class FoodController extends Controller{
     }
     @Override
     public void delete(Object object){
-      
+      int index=(int)object;
+      _deleteFoods(index);
+        CompletableFuture.runAsync(() -> { //runAsync no return value
+             try
+            {
+                 //delete
+                model.delete(index);
+                   
+            }catch (IOException ex) {
+                Logger.getLogger(FoodCategoryController.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        });
+        
     }
     @Override
     public void update(Object object){
@@ -90,6 +103,15 @@ public class FoodController extends Controller{
         future.thenAccept(listFoods -> view.loadView(listFoods));
     }
     
-   
+   private void _deleteFoods(int index)
+   {
+       //foodcategories.remove(foodCategory); //??
+        for(Food category : foods){
+            if(category.id == index){
+                foods.remove(category);
+                break;
+            }
+        }
+   }
     
 }
