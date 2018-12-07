@@ -478,7 +478,6 @@ public class AccountView extends View {
                         int index=cb.getSelectedIndex();
                         int type=cbType.getSelectedIndex();
                         String typename=cbType.getSelectedItem().toString();
-                        JOptionPane.showMessageDialog(null, typename);
                         //convert date to string
                         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
                         String strDate =dateFormat.format(birthday.getDate());

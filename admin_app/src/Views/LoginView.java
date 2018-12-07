@@ -4,6 +4,10 @@
  * and open the template in the editor.
  */
 package Views;
+import Constants.Password;
+import Controllers.LoginController;
+import Models.AccountModel;
+import Models.AccountModel.Account;
 import java.awt.*;
 import java.awt.BorderLayout;
 import java.awt.FlowLayout;
@@ -41,16 +45,19 @@ import javax.swing.table.DefaultTableModel;
 import javax.swing.table.JTableHeader;
 import Views.AdminappView;
 import java.awt.event.KeyAdapter;
+import java.util.List;
 import javax.swing.JPasswordField;
 /**
  *
  * @author Thang Le
  */
-public class LoginView {
+public class LoginView extends View {
     private AdminappView app;
     private JFrame jf;
     private JTextField nameText;
     private JPasswordField passText;
+    private boolean check=false;
+    private LoginController controller;
     
     LoginView()
     {
@@ -58,6 +65,8 @@ public class LoginView {
         jf.setSize(600, 300);
         jf.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);  // đóng frame 
         jf.setResizable(false);
+        
+        controller=LoginController.getInstance(this);
 
         jf.setLocationRelativeTo(null);
         JPanel panel=new JPanel();
@@ -157,6 +166,9 @@ public class LoginView {
         panel.add(Box.createRigidArea(new Dimension(10,0)));
         panel.add(detail);
         
+        
+        
+        
         nameText.addKeyListener(new KeyAdapter() {
             @Override
             public void keyPressed(KeyEvent e) {
@@ -164,7 +176,9 @@ public class LoginView {
                 {
                     if(e.getKeyCode()==KeyEvent.VK_ENTER)
                     {
-                        LoadApp();
+                         Account input=AccountModel.getInstance().new Account(nameText.getText(),passText.getText());
+                        //JOptionPane.showMessageDialog(null, "Info "+input.username+ " "+input.pass);
+                        controller.CheckLogin(input.username);
                     }                  
                 }
             }
@@ -173,13 +187,16 @@ public class LoginView {
         passText.addKeyListener(new KeyAdapter() {
             @Override
             public void keyPressed(KeyEvent e) {
-                  if(nameText.getText().toString().equals("")==false && passText.getText().equals("")==false)
+                  if(nameText.getText().equals("")==false && passText.getText().equals("")==false)
                 {
                     if(e.getKeyCode()==KeyEvent.VK_ENTER)
                     {
-                        LoadApp();
+                        Account input=AccountModel.getInstance().new Account(nameText.getText(),passText.getText());
+                        //JOptionPane.showMessageDialog(null, "Info "+input.username+ " "+input.pass);
+                        controller.CheckLogin(input.username);
                     }                  
                 }
+                   
             }
 });
         /*Event Btn Add,Cancel*/
@@ -187,11 +204,14 @@ public class LoginView {
             @Override
             public void actionPerformed(ActionEvent e) {
                 //xử lý sự kiện check login
-                if(nameText.getText().toString().equals("")==false)
+                if(nameText.getText().equals("")==false&&passText.getText().equals("")==false)
                 {
-                    //Xu ly btn add
-                    LoadApp();
+                    //Xu ly btn login         
+                    Account input=AccountModel.getInstance().new Account(nameText.getText(),passText.getText());
+                     controller.CheckLogin(input.username);
+                    //LoadApp();
                 }
+
             }
         });
         
@@ -215,4 +235,33 @@ public class LoginView {
         app=new AdminappView();
         jf.dispose();
     }
+    
+    
+    //---------------------------------------------------------------------------------------------------------
+    @Override
+    public void insert(Object objects){
+    }
+    
+    @Override
+    public void delete(int row){
+        
+    }
+    
+    @Override
+    public void update(int row, Object objects){
+        
+    }
+    
+    @Override
+    public void loadView(Object objects){
+        List<Account> result=(List<Account>)(Object)objects;
+        if(result.get(0).username.equals(nameText.getText())==true&&Password.checkPassword(passText.getText(), result.get(0).pass)==true)
+        {
+            if(result.get(0).type==1) //account type la admin
+                LoadApp();
+            else JOptionPane.showMessageDialog(null, "Bạn phải là quản trị viên mới có quyền đăng nhập!");
+        }        
+        else JOptionPane.showMessageDialog(null, "Sai tên tài khoản hoặc mật khẩu đăng nhập");
+    }
+   
 }

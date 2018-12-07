@@ -158,8 +158,13 @@ public class AccountModel {
         
         public Account(String username,String pass)
         {
-            this.typename=username;
+            this.username=username;
             this.pass=pass;
+        }
+        
+        public Account(String username)
+        {
+            this.username=username;
         }
         
         public Account(){}
