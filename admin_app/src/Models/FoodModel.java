@@ -68,8 +68,15 @@ public class FoodModel {
     public void update(int index,String name,String category,double price,String pathimg) throws IOException
     {
         String raw= mySqlConnection.executeNoneQuery(Query.updateFood, new Object[] { index , name ,category,price,pathimg });
+        if (raw.equals("1")==true) JOptionPane.showMessageDialog(null, "Đã cập nhật image thành công");
+    }
+    
+    public void update(int index,String name,String category,double price) throws IOException
+    {
+        String raw= mySqlConnection.executeNoneQuery(Query.updateInfoFood, new Object[] { index , name ,category,price });
         if (raw.equals("1")==true) JOptionPane.showMessageDialog(null, "Đã cập nhật thành công");
     }
+    
     
     private int BeforeDelete(int id) throws IOException
     {
@@ -116,6 +123,13 @@ public class FoodModel {
             this.name = name;
             this.price = price;
             this.stringImage = pathIamge;
+        }
+        
+        public Food(int id, String name, String category, double price){
+            this.id = id;
+            this.nameCategory = category;
+            this.name = name;
+            this.price = price;
         }
         
         public byte[] getImage(){

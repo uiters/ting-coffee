@@ -81,6 +81,7 @@ public class FoodController extends Controller{
         });
         
     }
+    //update image food
     @Override
     public void update(Object object){
         Food food = (Food)object;
@@ -90,6 +91,22 @@ public class FoodController extends Controller{
             {
                    // update
                 model.update(food.id,food.name,food.nameCategory,food.price,food.stringImage);
+            }catch (IOException ex) {
+                Logger.getLogger(FoodController.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        });
+       
+    }
+    
+    //update info food
+    public void updateInfo(Object object){
+        Food food = (Food)object;
+        _updateFood(food);
+        CompletableFuture.runAsync(() -> { //runAsync no return value
+            try
+            {
+                   // update
+                model.update(food.id,food.name,food.nameCategory,food.price);
             }catch (IOException ex) {
                 Logger.getLogger(FoodController.class.getName()).log(Level.SEVERE, null, ex);
             }

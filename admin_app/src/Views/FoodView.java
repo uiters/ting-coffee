@@ -98,6 +98,14 @@ public class FoodView extends View{
     
     
     //---------------------------------------------------------------------------------------------------------
+    private void updateInfo(int row,Object objects)
+    {
+        Food category = (Food)objects;
+        ((DefaultTableModel)table.getModel()).setValueAt(category.name, row, 1);
+        ((DefaultTableModel)table.getModel()).setValueAt(category.nameCategory, row, 2);
+        //((DefaultTableModel)table.getModel()).setValueAt(this.getImage(category.getImage()), row, 3);
+        ((DefaultTableModel)table.getModel()).setValueAt(category.price, row, 4);
+    }
     @Override
     public void insert(Object objects){
         
@@ -440,9 +448,14 @@ public class FoodView extends View{
                     //table.setValueAt(ResizeImage(pathImg), row, 3);
                     //setTable(row);
                     
-                        JOptionPane.showMessageDialog(null, "Test  "+Integer.parseInt(idText.getText())+"/"+name+"/"+namecategory+"/"+price+"/"+encoded.length());
                         update(row, food);
                         controller.update(food);
+                    }
+                    else
+                    {
+                        Food food=FoodModel.getInstance().new Food( Integer.parseInt(idText.getText()), name ,namecategory,price );
+                        updateInfo(row,food);
+                        controller.updateInfo(food);
                     }
                     
                 }
