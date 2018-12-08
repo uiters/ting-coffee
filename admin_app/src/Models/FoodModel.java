@@ -97,6 +97,21 @@ public class FoodModel {
         else JOptionPane.showMessageDialog(null, "Không thể xóa do đã tồn tại trong bill");
     }
     
+    public void addFood(String name,String category,double price) throws IOException
+    {
+        String raw= mySqlConnection.executeNoneQuery(Query.addFood, new Object[] { name , category , price });
+    }
+    
+    public int getIDLast() throws IOException
+    {
+        String rawJson=mySqlConnection.executeQuery(Query.getIDLastFood, null);
+         if(rawJson==null)
+            return 0;
+         Food[] foods=json.fromJson(rawJson, Food[].class); // convert json to foodcategory[]
+            List<Food> listFood = new LinkedList<>(Arrays.asList(foods));
+         return listFood.get(0).id;
+    }
+    
     
     
     //-------------------------------------------------------------------------------------
@@ -127,6 +142,12 @@ public class FoodModel {
         
         public Food(int id, String name, String category, double price){
             this.id = id;
+            this.nameCategory = category;
+            this.name = name;
+            this.price = price;
+        }
+        
+        public Food(String name, String category, double price){
             this.nameCategory = category;
             this.name = name;
             this.price = price;

@@ -24,6 +24,8 @@ public class Query {
      public static String beforedelFood="call USP_Admin_GetDelFood( @ID )";
      public static String updateFood="call USP_Admin_UpdateFood( @ID , @Name , @FoodCategory , @Price , @Img )";
      public static String updateInfoFood="call USP_Admin_UpdateInfoFood( @ID , @Name , @FoodCategory , @Price )";
+     public static String getIDLastFood="call USP_Admin_GetIDLastFood()";
+     public static String addFood="call USP_Admin_AddFood( @Name , @Category , @Price )";
      
      
      

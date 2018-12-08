@@ -72,7 +72,12 @@ public class AccountView extends View {
     //---------------------------------------------------------------------------------------------------------
     @Override
     public void insert(Object objects){
-        
+        Account category = (Account)objects;
+        String temp="";
+        if(category.sex==1) temp="Male";
+        else temp="Female";
+        ((DefaultTableModel)table.getModel()).addRow(new Object[]{category.username, category.name,category.idcard,
+                                                                                       category.birth,temp,category.address,category.number,category.typename});
     }
     
     @Override

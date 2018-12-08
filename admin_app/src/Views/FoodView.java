@@ -108,7 +108,9 @@ public class FoodView extends View{
     }
     @Override
     public void insert(Object objects){
-        
+        Food category = (Food)objects;
+        ((DefaultTableModel)table.getModel()).addRow(new Object[]{category.id, category.name,category.nameCategory,
+                                                                                       null,category.price });
     }
     
     @Override
@@ -424,8 +426,8 @@ public class FoodView extends View{
         btnAdd.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                addFrame.FoodAdd();
-                JOptionPane.showMessageDialog(null, "Reload database ");
+                addFrame.FoodAdd(cb2);
+                //JOptionPane.showMessageDialog(null, "Reload database ");
             }
         });
         btnUpdate.addActionListener(new ActionListener() {
@@ -445,8 +447,6 @@ public class FoodView extends View{
                         String encoded = Base64.encodeBase64String(data);
 
                         Food food=FoodModel.getInstance().new Food( Integer.parseInt(idText.getText()), name ,namecategory,price,encoded );
-                    //table.setValueAt(ResizeImage(pathImg), row, 3);
-                    //setTable(row);
                     
                         update(row, food);
                         controller.update(food);
