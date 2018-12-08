@@ -63,7 +63,25 @@ public class FoodController extends Controller{
     }
     @Override
     public void insert(Object object){
+        Food item = (Food) object;
         
+        CompletableFuture<Food>  future;
+        
+        future = CompletableFuture.supplyAsync(() -> {
+            try
+                { 
+                    model.addFood(item.name,item.nameCategory,item.price); // insert to database
+                    int id = model.getIDLast();// id get from model;
+                    Food category = model.new Food(id, item.name,item.nameCategory,item.price);
+                    _addFood(category); // insert to table in list local
+                    return category;
+                }catch (IOException ex) {
+                Logger.getLogger(FoodController.class.getName()).log(Level.SEVERE, null, ex);
+                return null;
+            } 
+            // call get database o day
+        });
+        future.thenAccept(food -> view.insert(food)); // insert to view
     }
     @Override
     public void delete(Object object){
@@ -76,14 +94,41 @@ public class FoodController extends Controller{
                 model.delete(index);
                    
             }catch (IOException ex) {
-                Logger.getLogger(FoodCategoryController.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(FoodController.class.getName()).log(Level.SEVERE, null, ex);
             }
         });
         
     }
+    //update image food
     @Override
     public void update(Object object){
-        
+        Food food = (Food)object;
+        _updateFood(food);
+        CompletableFuture.runAsync(() -> { //runAsync no return value
+            try
+            {
+                   // update
+                model.update(food.id,food.name,food.nameCategory,food.price,food.stringImage);
+            }catch (IOException ex) {
+                Logger.getLogger(FoodController.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        });
+       
+    }
+    
+    //update info food
+    public void updateInfo(Object object){
+        Food food = (Food)object;
+        _updateFood(food);
+        CompletableFuture.runAsync(() -> { //runAsync no return value
+            try
+            {
+                   // update
+                model.update(food.id,food.name,food.nameCategory,food.price);
+            }catch (IOException ex) {
+                Logger.getLogger(FoodController.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        });
        
     }
     
@@ -113,5 +158,27 @@ public class FoodController extends Controller{
             }
         }
    }
-    
+   
+   private void _updateFood(Food object)
+   {
+        for(Food category : foods){
+            if (category.id == object.id){
+                category.name = object.name;
+                category.idCategory= object.idCategory;
+                category.nameCategory = object.nameCategory;
+                category.price = object.price;
+                category.stringImage = object.stringImage;
+                category.idImage = object.idImage;
+                category.image = object.image;
+                break;
+            }
+        }
+       
+   }
+   
+   
+   private void _addFood(Food object)
+   {
+       foods.add(object);
+   }
 }

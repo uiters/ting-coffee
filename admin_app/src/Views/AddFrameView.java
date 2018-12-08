@@ -10,11 +10,14 @@ import Constants.Password;
 import Controllers.Controller;
 import Models.AccountModel;
 import Models.AccountModel.Account;
+import Models.FoodModel;
 import com.toedter.calendar.JDateChooser;
 import java.awt.*;
 import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 import java.text.SimpleDateFormat;
 import javax.swing.Box;
 import javax.swing.BoxLayout;
@@ -46,14 +49,15 @@ public class AddFrameView {
     private final Controller controller;
     private JComboBox cb;
     private JComboBox cbType;
-    private final String [] list = {"An vat","Mon chinh","Mon trang mieng"} ; //danh sách trong category
+    //private final String [] list = {"An vat","Mon chinh","Mon trang mieng"} ; //danh sách trong category
     public AddFrameView(String title, Controller c)
     {
        this.title=title;
        controller = c;
     }
     
-    public void FoodAdd()
+    /*FOOD*/
+    public void FoodAdd(JComboBox a)
     {
         jf=new JDialog(jf, title);
         jf.setModal(true); // hold main excution
@@ -96,7 +100,8 @@ public class AddFrameView {
         Categorygroup.setMaximumSize(new Dimension(300, 30));
         
         
-        cb=new JComboBox(list);
+        cb=new JComboBox();
+        cb=a;
         cb.setSelectedItem(null);
         cb.setAlignmentX(Component.CENTER_ALIGNMENT);
         JLabel LabelCategory=new JLabel("Category : ");
@@ -108,43 +113,7 @@ public class AddFrameView {
         Categorygroup.add(cb);
         Categorygroup.add(Box.createRigidArea(new Dimension(5,0)));
         /*End Category*/
-        
-        /*Choose image*/
-        JPanel Choosegroup=new JPanel();
-        Choosegroup.setLayout(new BoxLayout(Choosegroup,BoxLayout.X_AXIS));
-        Choosegroup.setBackground(Color.yellow);
-        Choosegroup.setMaximumSize(new Dimension(300, 30));
-        
-         JLabel imgLabel=new JLabel("Image : ");
-         imgLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
-         
-        //Button choose image
-        JButton btnChoose=new JButton("Choose File");
-        btnChoose.setAlignmentX(Component.CENTER_ALIGNMENT);
-        JFileChooser choose=new JFileChooser();
-        btnChoose.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                choose.setCurrentDirectory(null);
-                FileNameExtensionFilter filter=new FileNameExtensionFilter("*.Images","jpg","gif","png");
-                choose.setFileFilter(filter);
-                int returnVal=choose.showOpenDialog(null);
-                if(returnVal==JFileChooser.APPROVE_OPTION)
-                {
-                    // xu ly chon anh
-                    
-                }
-            }
-        });
-        
-        Choosegroup.add(Box.createRigidArea(new Dimension(5,0)));
-        Choosegroup.add(imgLabel);
-        Choosegroup.add(Box.createRigidArea(new Dimension(45,0)));
-        Choosegroup.add(btnChoose);
-        Choosegroup.add(Box.createRigidArea(new Dimension(5,0)));
-        
-        /*End Choose image*/
-        
+          
         /*Price*/
         JPanel Pricegroup=new JPanel();
         Pricegroup.setLayout(new BoxLayout(Pricegroup,BoxLayout.X_AXIS));
@@ -160,6 +129,17 @@ public class AddFrameView {
         Pricegroup.add(Box.createRigidArea(new Dimension(50,0)));
         Pricegroup.add(priceText);
         Pricegroup.add(Box.createRigidArea(new Dimension(5,0)));
+        priceText.addKeyListener(new KeyAdapter() {
+            public void keyTyped(KeyEvent e) {
+                    char c = e.getKeyChar();
+                    if (!((c >= '0') && (c <= '9') ||
+                    (c == KeyEvent.VK_BACK_SPACE) ||
+                    (c == KeyEvent.VK_DELETE))) 
+                    {
+                        e.consume();
+                    }
+            }
+});
         /*End Price*/
         
         
@@ -170,10 +150,10 @@ public class AddFrameView {
         Btngroup.setMaximumSize(new Dimension(300, 30));
         
         JButton btnCancel=new JButton("Cancel");
-        btnChoose.setAlignmentX(Component.CENTER_ALIGNMENT);
+        btnCancel.setAlignmentX(Component.CENTER_ALIGNMENT);
         
         JButton btnAdd=new JButton("Add");
-        btnChoose.setAlignmentX(Component.CENTER_ALIGNMENT);
+        btnAdd.setAlignmentX(Component.CENTER_ALIGNMENT);
         
         Btngroup.add(Box.createRigidArea(new Dimension(25,0)));
         Btngroup.add(btnCancel);
@@ -189,8 +169,6 @@ public class AddFrameView {
         detail.add(Box.createRigidArea(new Dimension(0,20)));
         detail.add(Pricegroup);
         detail.add(Box.createRigidArea(new Dimension(0,20)));
-        detail.add(Choosegroup);
-        detail.add(Box.createRigidArea(new Dimension(0,20)));
         detail.add(Btngroup);
         
         
@@ -205,9 +183,13 @@ public class AddFrameView {
                 if(nameText.getText()!=null && priceText.getText()!=null && cb.getSelectedItem()!=null)
                 {
                     //Xu ly btn add
-                    JOptionPane.showMessageDialog(null, "Đã thêm 1 food thành công!");
+                    String namecategory=cb.getSelectedItem().toString();
+                    
+                    FoodModel.Food food=FoodModel.getInstance().new Food( nameText.getText() ,namecategory,Double.parseDouble(priceText.getText()) );
+                    controller.insert(food);
                     jf.dispose();
                 }
+                else  JOptionPane.showMessageDialog(null, "Bạn chưa điền đủ thông tin!");
             }
         });
         
@@ -225,7 +207,7 @@ public class AddFrameView {
         jf.setVisible(true);
     }
     
-    
+    /*FOOD CATEGORY*/
     public void FoodCategoryAdd()
     {
         jf=new JDialog(jf, title);
@@ -299,6 +281,7 @@ public class AddFrameView {
                     JOptionPane.showMessageDialog(null, "Đã thêm 1 food category thành công!");
                     jf.dispose();
                 }
+                else  JOptionPane.showMessageDialog(null, "Bạn chưa điền đủ thông tin!");
             }
         });
         
@@ -316,7 +299,7 @@ public class AddFrameView {
         
     }
     
-    
+    /*TABLE*/
     public void TableAdd()
     {
         jf=new JDialog(jf,title);
@@ -389,6 +372,7 @@ public class AddFrameView {
                     JOptionPane.showMessageDialog(null, "Đã thêm 1 table thành công!");
                     jf.dispose();
                 }
+                else  JOptionPane.showMessageDialog(null, "Bạn chưa điền đủ thông tin!");
             }
         });
         
@@ -405,6 +389,7 @@ public class AddFrameView {
         jf.setVisible(true);
     }
     
+    /*ACCOUNT*/
     public void StaffAdd(JComboBox a)
     {
         jf=new JDialog(jf,title);
@@ -548,6 +533,17 @@ public class AddFrameView {
         Phonegroup.add(Box.createRigidArea(new Dimension(43,0)));
         Phonegroup.add(phoneText);
         Phonegroup.add(Box.createRigidArea(new Dimension(5,0))); 
+        phoneText.addKeyListener(new KeyAdapter() {
+            public void keyTyped(KeyEvent e) {
+                    char c = e.getKeyChar();
+                    if (!((c >= '0') && (c <= '9') ||
+                    (c == KeyEvent.VK_BACK_SPACE) ||
+                    (c == KeyEvent.VK_DELETE))) 
+                    {
+                        e.consume();
+                    }
+            }
+});
         /*end Phonenumber*/
         
         /*Account Type*/
@@ -625,7 +621,7 @@ public class AddFrameView {
             public void actionPerformed(ActionEvent e) {
                 if(nameText.getText().equals("")==false&birthday.getDate()!=null
                         &&addressText.getText().equals("")==false&&phoneText.getText().equals("")==false
-                        &&cb.getSelectedItem()!=null);
+                        &&cb.getSelectedItem()!=null)
                 {
                     int index=cb.getSelectedIndex();
                     int type=cbType.getSelectedIndex();
@@ -639,14 +635,16 @@ public class AddFrameView {
                     controller.insert(acc);
                     jf.dispose();
                 }
+               else  JOptionPane.showMessageDialog(null, "Bạn chưa điền đủ thông tin!");
             }
+             
         });
         
         btnCancel.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                  //Xu ly btn cancel
-                 JOptionPane.showMessageDialog(null, "Close frame add staff");
+                 //JOptionPane.showMessageDialog(null, "Close frame add staff");
                   jf.dispose();
             }
         });

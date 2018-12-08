@@ -22,6 +22,10 @@ public class Query {
      public static String getFoods = "call USP_Admin_GetFoods()";
      public static String delFood="call USP_Admin_DelFood( @ID )";
      public static String beforedelFood="call USP_Admin_GetDelFood( @ID )";
+     public static String updateFood="call USP_Admin_UpdateFood( @ID , @Name , @FoodCategory , @Price , @Img )";
+     public static String updateInfoFood="call USP_Admin_UpdateInfoFood( @ID , @Name , @FoodCategory , @Price )";
+     public static String getIDLastFood="call USP_Admin_GetIDLastFood()";
+     public static String addFood="call USP_Admin_AddFood( @Name , @Category , @Price )";
      
      
      
@@ -30,7 +34,8 @@ public class Query {
     public static String addFoodCagetory = "call USP_InsertFoodCatetory( @_Name )";
     public static String getIDLastFoodCategory="call USP_Admin_GetIDLastCategory()";
     public static String updateFoodCategory="call USP_Admin_UpdateFoodCategory( @ID , @Name )";
-    public static String delFoodCategory="call USP_Admin_DelFoodCategory( @ID , Result )";
+    public static String delFoodCategory="call USP_Admin_DelFoodCategory( @ID )";
+    public static String beforedelFoodCategory="call USP_Admin_GetDelCategory( @ID )";
     //account
     
     //bill
