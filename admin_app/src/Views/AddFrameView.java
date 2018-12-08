@@ -16,6 +16,8 @@ import java.awt.*;
 import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 import java.text.SimpleDateFormat;
 import javax.swing.Box;
 import javax.swing.BoxLayout;
@@ -54,6 +56,7 @@ public class AddFrameView {
        controller = c;
     }
     
+    /*FOOD*/
     public void FoodAdd(JComboBox a)
     {
         jf=new JDialog(jf, title);
@@ -126,6 +129,17 @@ public class AddFrameView {
         Pricegroup.add(Box.createRigidArea(new Dimension(50,0)));
         Pricegroup.add(priceText);
         Pricegroup.add(Box.createRigidArea(new Dimension(5,0)));
+        priceText.addKeyListener(new KeyAdapter() {
+            public void keyTyped(KeyEvent e) {
+                    char c = e.getKeyChar();
+                    if (!((c >= '0') && (c <= '9') ||
+                    (c == KeyEvent.VK_BACK_SPACE) ||
+                    (c == KeyEvent.VK_DELETE))) 
+                    {
+                        e.consume();
+                    }
+            }
+});
         /*End Price*/
         
         
@@ -175,6 +189,7 @@ public class AddFrameView {
                     controller.insert(food);
                     jf.dispose();
                 }
+                else  JOptionPane.showMessageDialog(null, "Bạn chưa điền đủ thông tin!");
             }
         });
         
@@ -192,7 +207,7 @@ public class AddFrameView {
         jf.setVisible(true);
     }
     
-    
+    /*FOOD CATEGORY*/
     public void FoodCategoryAdd()
     {
         jf=new JDialog(jf, title);
@@ -266,6 +281,7 @@ public class AddFrameView {
                     JOptionPane.showMessageDialog(null, "Đã thêm 1 food category thành công!");
                     jf.dispose();
                 }
+                else  JOptionPane.showMessageDialog(null, "Bạn chưa điền đủ thông tin!");
             }
         });
         
@@ -283,7 +299,7 @@ public class AddFrameView {
         
     }
     
-    
+    /*TABLE*/
     public void TableAdd()
     {
         jf=new JDialog(jf,title);
@@ -356,6 +372,7 @@ public class AddFrameView {
                     JOptionPane.showMessageDialog(null, "Đã thêm 1 table thành công!");
                     jf.dispose();
                 }
+                else  JOptionPane.showMessageDialog(null, "Bạn chưa điền đủ thông tin!");
             }
         });
         
@@ -372,6 +389,7 @@ public class AddFrameView {
         jf.setVisible(true);
     }
     
+    /*ACCOUNT*/
     public void StaffAdd(JComboBox a)
     {
         jf=new JDialog(jf,title);
@@ -515,6 +533,17 @@ public class AddFrameView {
         Phonegroup.add(Box.createRigidArea(new Dimension(43,0)));
         Phonegroup.add(phoneText);
         Phonegroup.add(Box.createRigidArea(new Dimension(5,0))); 
+        phoneText.addKeyListener(new KeyAdapter() {
+            public void keyTyped(KeyEvent e) {
+                    char c = e.getKeyChar();
+                    if (!((c >= '0') && (c <= '9') ||
+                    (c == KeyEvent.VK_BACK_SPACE) ||
+                    (c == KeyEvent.VK_DELETE))) 
+                    {
+                        e.consume();
+                    }
+            }
+});
         /*end Phonenumber*/
         
         /*Account Type*/
@@ -592,7 +621,7 @@ public class AddFrameView {
             public void actionPerformed(ActionEvent e) {
                 if(nameText.getText().equals("")==false&birthday.getDate()!=null
                         &&addressText.getText().equals("")==false&&phoneText.getText().equals("")==false
-                        &&cb.getSelectedItem()!=null);
+                        &&cb.getSelectedItem()!=null)
                 {
                     int index=cb.getSelectedIndex();
                     int type=cbType.getSelectedIndex();
@@ -606,7 +635,9 @@ public class AddFrameView {
                     controller.insert(acc);
                     jf.dispose();
                 }
+               else  JOptionPane.showMessageDialog(null, "Bạn chưa điền đủ thông tin!");
             }
+             
         });
         
         btnCancel.addActionListener(new ActionListener() {
