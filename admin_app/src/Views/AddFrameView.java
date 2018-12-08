@@ -646,7 +646,7 @@ public class AddFrameView {
             @Override
             public void actionPerformed(ActionEvent e) {
                  //Xu ly btn cancel
-                 JOptionPane.showMessageDialog(null, "Close frame add staff");
+                 //JOptionPane.showMessageDialog(null, "Close frame add staff");
                   jf.dispose();
             }
         });

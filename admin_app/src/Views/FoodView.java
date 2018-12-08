@@ -8,6 +8,7 @@ package Views;
 import Controllers.FoodController;
 import Models.FoodCategoryModel;
 import Models.FoodCategoryModel.FoodCategory;
+import Models.FoodModel;
 import Models.FoodModel.Food;
 import java.awt.Dimension;
 import java.awt.Font;
@@ -35,9 +36,16 @@ import java.awt.Component;
 import java.awt.Image;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.awt.image.BufferedImage;
+import java.awt.image.DataBufferByte;
+import java.awt.image.WritableRaster;
+import java.io.IOException;
 import java.lang.reflect.Array;
+import java.nio.file.Files;
 import java.util.ArrayList;
 import java.util.List;
+import javax.imageio.ImageIO;
+import org.apache.commons.codec.binary.Base64;
 /**
  *
  * @author Thang Le
@@ -53,7 +61,8 @@ public class FoodView extends View{
     private AddFrameView addFrame;
     private final FoodController controller;
     
-    String pathImg;
+    String pathImg="";
+    byte[] data=null;
 
     FoodView() {
         controller = FoodController.getInstance(this);
@@ -101,7 +110,11 @@ public class FoodView extends View{
     
     @Override
     public void update(int row, Object objects){
-        
+        Food category = (Food)objects;
+        ((DefaultTableModel)table.getModel()).setValueAt(category.name, row, 1);
+        ((DefaultTableModel)table.getModel()).setValueAt(category.nameCategory, row, 2);
+        ((DefaultTableModel)table.getModel()).setValueAt(this.getImage(category.getImage()), row, 3);
+        ((DefaultTableModel)table.getModel()).setValueAt(category.price, row, 4);
     }
     
     @Override
@@ -305,7 +318,13 @@ public class FoodView extends View{
                         File selectedFile = choose.getSelectedFile();
                         String path = selectedFile.getAbsolutePath();
                         pathImg = path;
-
+                        try
+                        {
+                            data=getByte(selectedFile);
+                        } catch (IOException  ex)
+                         {
+                                    
+                        }
                     }
                 }
             }
@@ -407,11 +426,25 @@ public class FoodView extends View{
                 //Xu ly update
                 int row = table.getSelectedRow();
                 if (row >= 0) {
+                    String name=nameText.getText();
+                    String namecategory=cb2.getSelectedItem().toString();
+                    double price=Double.parseDouble(priceText.getText());
                     //setTable(row);
-                    table.setValueAt(ResizeImage(pathImg), row, 3);
-                    setTable(row);
+                    if(pathImg.equals("")==false) // kiem tra co cap nhat avt hay 
+                    {
+                        
+                       // encode with padding
+                        String encoded = Base64.encodeBase64String(data);
 
-                    JOptionPane.showMessageDialog(null, "Đã update thành công! o hang thu " + row);
+                        Food food=FoodModel.getInstance().new Food( Integer.parseInt(idText.getText()), name ,namecategory,price,encoded );
+                    //table.setValueAt(ResizeImage(pathImg), row, 3);
+                    //setTable(row);
+                    
+                        JOptionPane.showMessageDialog(null, "Test  "+Integer.parseInt(idText.getText())+"/"+name+"/"+namecategory+"/"+price+"/"+encoded.length());
+                        update(row, food);
+                        controller.update(food);
+                    }
+                    
                 }
 
             }
@@ -481,6 +514,7 @@ public class FoodView extends View{
         Image img = myimage.getImage();
         //resize
         Image newImg = img.getScaledInstance(80, 80, Image.SCALE_SMOOTH);
+        
         ImageIcon image = new ImageIcon(newImg);
         return image;
     }
@@ -496,6 +530,25 @@ public class FoodView extends View{
         for(Food food : foods)
           model.addRow(new Object[] { food.id,  food.name, food.nameCategory, this.getImage(food.getImage()), food.price});
         table.setModel(model);
+    }
+    
+    public byte[] extractBytes (String ImageName) throws IOException 
+    {
+            // open image
+            File imgPath = new File(ImageName);
+            BufferedImage bufferedImage = ImageIO.read(imgPath);
+
+            // get DataBufferBytes from Raster
+            WritableRaster raster = bufferedImage .getRaster();
+            DataBufferByte data   = (DataBufferByte) raster.getDataBuffer();
+
+            return ( data.getData() );
+    }
+    
+    public byte[] getByte(File file) throws IOException
+    {
+        byte[] fileContent = Files.readAllBytes(file.toPath());
+        return fileContent;
     }
     
     

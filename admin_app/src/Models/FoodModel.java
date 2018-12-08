@@ -65,12 +65,13 @@ public class FoodModel {
     }
     
     
-    public void update() throws IOException
+    public void update(int index,String name,String category,double price,String pathimg) throws IOException
     {
-        
+        String raw= mySqlConnection.executeNoneQuery(Query.updateFood, new Object[] { index , name ,category,price,pathimg });
+        if (raw.equals("1")==true) JOptionPane.showMessageDialog(null, "Đã cập nhật thành công");
     }
     
-    public int BeforeDelete(int id) throws IOException
+    private int BeforeDelete(int id) throws IOException
     {
         String rawJson=mySqlConnection.executeQuery(Query.beforedelFood, new Object[] { id });
         Result[] ress=json.fromJson(rawJson, Result[].class);
@@ -86,7 +87,7 @@ public class FoodModel {
             String raw=mySqlConnection.executeNoneQuery(Query.delFood, new Object[] { id });
             JOptionPane.showMessageDialog(null, "Đã xóa thành công!");
         }
-        else JOptionPane.showMessageDialog(null, "Không thể xóa!");
+        else JOptionPane.showMessageDialog(null, "Không thể xóa do đã tồn tại trong bill");
     }
     
     
@@ -99,7 +100,7 @@ public class FoodModel {
         @SerializedName("Name") public String name;
         @SerializedName("Price") public double price;
         @SerializedName("IDImage") public int idImage;
-        @SerializedName("Image") @Expose private String stringImage;
+        @SerializedName("Image") @Expose public String stringImage;
         public byte[] image;
         public Food(int id, int idCategory, String name, double price, int idIamge){
             this.id = id;
@@ -108,6 +109,15 @@ public class FoodModel {
             this.price = price;
             this.idImage = idIamge;
         }
+        
+        public Food(int id, String name, String category, double price, String pathIamge){
+            this.id = id;
+            this.nameCategory = category;
+            this.name = name;
+            this.price = price;
+            this.stringImage = pathIamge;
+        }
+        
         public byte[] getImage(){
             if(image == null)
                 image = Base64.getDecoder().decode(stringImage);

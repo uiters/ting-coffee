@@ -65,12 +65,26 @@ public class FoodCategoryModel {
         String raw= mySqlConnection.executeNoneQuery(Query.updateFoodCategory, new Object[] { index , name });
         if (raw.equals("1")==true) JOptionPane.showMessageDialog(null, "Đã cập nhật thành công");
     }
+    
+    private int beforedelete(int index) throws IOException
+    {
+         String rawJson=mySqlConnection.executeQuery(Query.beforedelFoodCategory, new Object[] { index });
+        FoodModel.Result[] ress=json.fromJson(rawJson, FoodModel.Result[].class);
+        List<FoodModel.Result> list = new LinkedList<>(Arrays.asList(ress));
+        return list.get(0).result;
+    }
 
     public void delete(int id) throws IOException 
     {
         //delete 
-        String raw=mySqlConnection.executeNoneQuery(Query.delFoodCategory, new Object[] { id });
-        if (raw.equals("1")==true) JOptionPane.showMessageDialog(null, "Đã xóa thành công");
+        int d=beforedelete(id);
+        if(d<=0)
+        {
+            String raw=mySqlConnection.executeNoneQuery(Query.delFoodCategory, new Object[] { id });
+            JOptionPane.showMessageDialog(null, "Đã xóa thành công!");
+        }
+        else JOptionPane.showMessageDialog(null, "Không thể xóa do đã tồn tại trong bill");
+        
     }
     
     //get last id from model to insert to table
