@@ -7,6 +7,7 @@ package Views;
 import Controllers.BillController;
 import Models.BillModel.Bill;
 import Models.FoodCategoryModel;
+import com.placeholder.PlaceHolder;
 import java.awt.*;
 import java.awt.BorderLayout;
 import java.awt.FlowLayout;
@@ -157,6 +158,8 @@ public class BillView extends View {
         
         
         JTextField searchText=new JTextField();
+        PlaceHolder p1;
+        p1=new PlaceHolder (searchText,"Tìm với ID");
         searchText.setAlignmentX(Component.CENTER_ALIGNMENT);
         JButton btnSearch=new JButton("Search");
         btnSearch.setAlignmentX(Component.CENTER_ALIGNMENT);
@@ -167,6 +170,21 @@ public class BillView extends View {
         search.add(searchText);
         search.add(Box.createRigidArea(new Dimension(5,0)));
         
+        btnSearch.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+             String text=searchText.getText();
+                for(int i=0;i<table.getRowCount();i++)
+                {
+                    if(text.equalsIgnoreCase(table.getValueAt(i, 0).toString())==true)
+                    {
+                        table.setRowSelectionInterval(i, i);
+                        setInfo(i);
+                        break;
+                    }
+                }
+            }
+        });
         /*end search field*/
         
         /*info detail*/

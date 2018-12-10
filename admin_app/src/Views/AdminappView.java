@@ -149,7 +149,7 @@ public class AdminappView extends JFrame{
              @Override
              public void mouseClicked(MouseEvent e) {
                  super.mouseClicked(e); //To change body of generated methods, choose Tools | Templates.
-                 JOptionPane.showMessageDialog(null,"Xử lý sự kiện Load Database");
+                 /*JOptionPane.showMessageDialog(null,"Xử lý sự kiện Load Database");*/
                  dashboardMain.Load(main,info,footer);
              }
             
@@ -177,7 +177,7 @@ public class AdminappView extends JFrame{
              @Override
              public void mouseClicked(MouseEvent e) {
                  super.mouseClicked(e); //To change body of generated methods, choose Tools | Templates.
-                 JOptionPane.showMessageDialog(null,"Xử lý sự kiện Load Database");
+                /*JOptionPane.showMessageDialog(null,"Xử lý sự kiện Load Database");*/
                  //foodMain.setList(categoryMain.getList());
                  foodMain.Load(main,info,footer);
              }
@@ -206,7 +206,7 @@ public class AdminappView extends JFrame{
             @Override
              public void mouseClicked(MouseEvent e) {
                  super.mouseClicked(e); //To change body of generated methods, choose Tools | Templates.
-                 JOptionPane.showMessageDialog(null,"Xử lý sự kiện Load Database");
+               /*JOptionPane.showMessageDialog(null,"Xử lý sự kiện Load Database");*/
                  categoryMain.Load(main,info,footer);
                  //categoryMain.getList();
              }
@@ -232,7 +232,7 @@ public class AdminappView extends JFrame{
             @Override
              public void mouseClicked(MouseEvent e) {
                  super.mouseClicked(e); //To change body of generated methods, choose Tools | Templates.
-                 JOptionPane.showMessageDialog(null,"Xử lý sự kiện Load Database");
+                /*JOptionPane.showMessageDialog(null,"Xử lý sự kiện Load Database");*/
                  //load
                  tableMain.Load(main, info, footer);
              }
@@ -262,7 +262,7 @@ public class AdminappView extends JFrame{
             @Override
              public void mouseClicked(MouseEvent e) {
                  super.mouseClicked(e); //To change body of generated methods, choose Tools | Templates.
-                 JOptionPane.showMessageDialog(null,"Xử lý sự kiện Load Database");
+                /*JOptionPane.showMessageDialog(null,"Xử lý sự kiện Load Database");*/
                  //load
 
                  staffMain.Load(main, info, footer);
@@ -294,7 +294,7 @@ public class AdminappView extends JFrame{
             @Override
              public void mouseClicked(MouseEvent e) {
                  super.mouseClicked(e); //To change body of generated methods, choose Tools | Templates.
-                 JOptionPane.showMessageDialog(null,"Xử lý sự kiện Load Database");
+                /*JOptionPane.showMessageDialog(null,"Xử lý sự kiện Load Database");*/
                  //load
                  billMain.Load(main, info, footer);
              }

@@ -11,6 +11,7 @@ import Models.AccountModel.Account;
 import Models.AccountTypeModel.AccountType;
 import Models.FoodCategoryModel.FoodCategory;
 import Models.FoodModel.Food;
+import com.placeholder.PlaceHolder;
 import com.toedter.calendar.JDateChooser;
 import java.awt.*;
 import java.awt.Font;
@@ -219,6 +220,8 @@ public class AccountView extends View {
         
         
         JTextField searchText=new JTextField();
+        PlaceHolder p1;
+        p1=new PlaceHolder (searchText,"Tìm với ID,Name,Phone");
         searchText.setAlignmentX(Component.CENTER_ALIGNMENT);
         JButton btnSearch=new JButton("Search");
         btnSearch.setAlignmentX(Component.CENTER_ALIGNMENT);
@@ -229,6 +232,39 @@ public class AccountView extends View {
         search.add(searchText);
         search.add(Box.createRigidArea(new Dimension(5,0)));
         
+        btnSearch.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+             String text=searchText.getText();
+                if(!text.equals("")){
+                for(int i=0;i<table.getRowCount();i++)
+                    
+                {
+                    if(text.equalsIgnoreCase(table.getValueAt(i, 0).toString())==true)
+                    {
+                        table.setRowSelectionInterval(i, i);
+                         setInfo(i);
+                        break;
+                    }
+                   
+                    if(String.valueOf(table.getValueAt(i, 1)).toLowerCase().contains(text.toLowerCase()))
+                    {
+                            table.setRowSelectionInterval(i, i);
+                            setInfo(i);
+                            break;
+                    }
+                    if(String.valueOf(table.getValueAt(i, 6)).toLowerCase().contains(text.toLowerCase()))
+                    {
+                            table.setRowSelectionInterval(i, i);
+                            setInfo(i);
+                            break;
+                    }
+                    
+                }
+                }
+            }
+            
+        });
         /*end search field*/
         
         /*info detail*/

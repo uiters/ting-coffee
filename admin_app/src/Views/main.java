@@ -10,8 +10,9 @@ package Views;
  * @author Thang Le
  */
 public class main {
+        public static LoginView app;
         public static void main(String[] args) {
         // TODO code application logic here
-        LoginView app=new LoginView();
+         app = new LoginView();
     }
 }

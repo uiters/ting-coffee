@@ -7,6 +7,7 @@ package Views;
 import Models.FoodCategoryModel.FoodCategory;
 import Controllers.FoodCategoryController;
 import Models.FoodCategoryModel;
+import com.placeholder.PlaceHolder;
 import java.util.List;
 import java.awt.*;
 import java.awt.Font;
@@ -157,6 +158,8 @@ public class FoodCategoryView extends View{
         
         
         JTextField searchText=new JTextField();
+        PlaceHolder p1;
+        p1=new PlaceHolder (searchText,"Tìm với ID,Name");
         searchText.setAlignmentX(Component.CENTER_ALIGNMENT);
         JButton btnSearch=new JButton("Search");
         btnSearch.setAlignmentX(Component.CENTER_ALIGNMENT);
@@ -167,23 +170,33 @@ public class FoodCategoryView extends View{
         search.add(searchText);
         search.add(Box.createRigidArea(new Dimension(5,0)));
         
-        btnSearch.addActionListener(new ActionListener() {
+         btnSearch.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                
-                String text=searchText.getText();
+             String text=searchText.getText();
+                if(!text.equals("")){
                 for(int i=0;i<table.getRowCount();i++)
+                    
                 {
                     if(text.equalsIgnoreCase(table.getValueAt(i, 0).toString())==true)
                     {
                         table.setRowSelectionInterval(i, i);
-                        setInfo(i);
+                         setInfo(i);
                         break;
                     }
+                   
+                    if(String.valueOf(table.getValueAt(i, 1)).toLowerCase().contains(text.toLowerCase()))
+                    {
+                            table.setRowSelectionInterval(i, i);
+                            setInfo(i);
+                            break;
+                    }
+ 
+                    
                 }
-                 
-               
+                }
             }
+            
         });
         
         /*end search field*/
