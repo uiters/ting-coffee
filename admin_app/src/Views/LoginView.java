@@ -233,7 +233,7 @@ public class LoginView extends View {
     {
         JOptionPane.showMessageDialog(null, "Đăng nhập  thành công!");
         app=new AdminappView();
-        app.setLoginView(this);
+        //app.setLoginView(this);
         jf.dispose();
     }
     

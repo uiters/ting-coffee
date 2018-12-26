@@ -56,6 +56,13 @@ public class AdminappView extends JFrame{
     BillView billMain;
     AccountView staffMain;
     LoginView loginView;
+    JLabel dashboardTitle;
+    JLabel foodTitle;
+    JLabel categoryTitle;
+    JLabel tableTitle;
+    JLabel staffTitle;
+    JLabel billTitle;
+    JLabel logoutTitle;
     public AdminappView()
     {
         jf=new JFrame("Cafe Management || Admin App");
@@ -134,7 +141,7 @@ public class AdminappView extends JFrame{
         dashboard.setLayout(new BoxLayout(dashboard, BoxLayout.Y_AXIS));
         dashboard.setBackground(new Color(228,249,245));
         
-        JLabel dashboardTitle = new JLabel("Dashboard");
+        dashboardTitle = new JLabel("Dashboard");
         dashboardTitle.setForeground(new Color(41,55,72));
         dashboardTitle.setAlignmentX(Component.CENTER_ALIGNMENT);
         
@@ -151,6 +158,8 @@ public class AdminappView extends JFrame{
              public void mouseClicked(MouseEvent e) {
                  super.mouseClicked(e); //To change body of generated methods, choose Tools | Templates.
                  /*JOptionPane.showMessageDialog(null,"Xử lý sự kiện Load Database");*/
+                 setForeColor();
+                 dashboardTitle.setForeground(Color.red);
                  dashboardMain.Load(main,info,footer);
              }
             
@@ -162,7 +171,7 @@ public class AdminappView extends JFrame{
         food.setLayout(new BoxLayout(food, BoxLayout.Y_AXIS));
         food.setBackground(new Color(228,249,245));
         
-        JLabel foodTitle = new JLabel("Food");
+        foodTitle = new JLabel("Food");
         foodTitle.setForeground(new Color(41,55,72));
         foodTitle.setAlignmentX(Component.CENTER_ALIGNMENT);
         
@@ -180,6 +189,8 @@ public class AdminappView extends JFrame{
                  super.mouseClicked(e); //To change body of generated methods, choose Tools | Templates.
                 /*JOptionPane.showMessageDialog(null,"Xử lý sự kiện Load Database");*/
                  //foodMain.setList(categoryMain.getList());
+                 setForeColor();
+                 foodTitle.setForeground(Color.red);
                  foodMain.Load(main,info,footer);
              }
             
@@ -191,7 +202,7 @@ public class AdminappView extends JFrame{
         foodcategory.setLayout(new BoxLayout(foodcategory, BoxLayout.Y_AXIS));
         foodcategory.setBackground(new Color(228,249,245));
         
-        JLabel categoryTitle = new JLabel("Food Category");
+        categoryTitle = new JLabel("Food Category");
         categoryTitle.setForeground(new Color(41,55,72));
         categoryTitle.setAlignmentX(Component.CENTER_ALIGNMENT);
         
@@ -208,6 +219,8 @@ public class AdminappView extends JFrame{
              public void mouseClicked(MouseEvent e) {
                  super.mouseClicked(e); //To change body of generated methods, choose Tools | Templates.
                /*JOptionPane.showMessageDialog(null,"Xử lý sự kiện Load Database");*/
+                 setForeColor();
+                 categoryTitle.setForeground(Color.red);
                  categoryMain.Load(main,info,footer);
                  //categoryMain.getList();
              }
@@ -220,7 +233,7 @@ public class AdminappView extends JFrame{
         table.setLayout(new BoxLayout(table, BoxLayout.Y_AXIS));
         table.setBackground(new Color(228,249,245));
         
-        JLabel tableTitle = new JLabel("Table");
+        tableTitle = new JLabel("Table");
         tableTitle.setForeground(new Color(41,55,72));
         tableTitle.setAlignmentX(Component.CENTER_ALIGNMENT);
         
@@ -235,6 +248,8 @@ public class AdminappView extends JFrame{
                  super.mouseClicked(e); //To change body of generated methods, choose Tools | Templates.
                 /*JOptionPane.showMessageDialog(null,"Xử lý sự kiện Load Database");*/
                  //load
+                 setForeColor();
+                 tableTitle.setForeground(Color.red);
                  tableMain.Load(main, info, footer);
              }
          });
@@ -250,7 +265,7 @@ public class AdminappView extends JFrame{
         staff.setLayout(new BoxLayout(staff, BoxLayout.Y_AXIS));
         staff.setBackground(new Color(228,249,245));
         
-        JLabel staffTitle = new JLabel("Account");
+        staffTitle = new JLabel("Account");
         staffTitle.setForeground(new Color(41,55,72));
         staffTitle.setAlignmentX(Component.CENTER_ALIGNMENT);
         
@@ -265,7 +280,8 @@ public class AdminappView extends JFrame{
                  super.mouseClicked(e); //To change body of generated methods, choose Tools | Templates.
                 /*JOptionPane.showMessageDialog(null,"Xử lý sự kiện Load Database");*/
                  //load
-
+                 setForeColor();
+                 staffTitle.setForeground(Color.red);
                  staffMain.Load(main, info, footer);
              }
          });
@@ -282,7 +298,7 @@ public class AdminappView extends JFrame{
         bill.setLayout(new BoxLayout(bill, BoxLayout.Y_AXIS));
         bill.setBackground(new Color(228,249,245));
         
-        JLabel billTitle = new JLabel("Bill");
+        billTitle = new JLabel("Bill");
         billTitle.setForeground(new Color(41,55,72));
         billTitle.setAlignmentX(Component.CENTER_ALIGNMENT);
         
@@ -297,6 +313,8 @@ public class AdminappView extends JFrame{
                  super.mouseClicked(e); //To change body of generated methods, choose Tools | Templates.
                 /*JOptionPane.showMessageDialog(null,"Xử lý sự kiện Load Database");*/
                  //load
+                 setForeColor();
+                 billTitle.setForeground(Color.red);
                  billMain.Load(main, info, footer);
              }
          });
@@ -306,12 +324,12 @@ public class AdminappView extends JFrame{
         bill.add(billIcon);
         /*END BILL OPTIONS*/
         
-         /*DASHBOARD*/
+         /*LOG OUT*/
         JPanel logout = new JPanel();
         logout.setLayout(new BoxLayout(logout, BoxLayout.Y_AXIS));
         logout.setBackground(new Color(228,249,245));
         
-        JLabel logoutTitle = new JLabel("Log out");
+        logoutTitle = new JLabel("Log out");
         logoutTitle.setForeground(new Color(41,55,72));
         logoutTitle.setAlignmentX(Component.CENTER_ALIGNMENT);
         
@@ -327,10 +345,12 @@ public class AdminappView extends JFrame{
              @Override
              public void mouseClicked(MouseEvent e) {
                  super.mouseClicked(e); //To change body of generated methods, choose Tools | Templates.
+                 setForeColor();
+                 logoutTitle.setForeground(Color.red);
                  int reply = JOptionPane.showConfirmDialog(null, "Bạn có muốn đăng xuất?", "Thông báo", JOptionPane.YES_NO_OPTION);
                  if (reply == JOptionPane.YES_OPTION) {
-                    jf.dispose();
-                    loginView.Visible(true);
+                    //xu ly log out
+                    
                 }
                 else {
                 }
@@ -338,7 +358,7 @@ public class AdminappView extends JFrame{
              }
             
 });
-        /*END DASHBOARD OPTIONS*/
+        /*END LOG OUT OPTIONS*/
         
         options.add(Box.createRigidArea(new Dimension(30, 0)));
         options.add(bill);
@@ -366,5 +386,17 @@ public class AdminappView extends JFrame{
     public void setLoginView(LoginView a)
     {
         loginView=a;
+    }
+    
+    private void setForeColor()
+    {
+        Color defColor=new Color(41,55,72);
+        dashboardTitle.setForeground(defColor);
+        foodTitle.setForeground(defColor);
+        categoryTitle.setForeground(defColor);
+        tableTitle.setForeground(defColor);
+        staffTitle.setForeground(defColor);
+        billTitle.setForeground(defColor);
+        logoutTitle.setForeground(defColor);
     }
 }
