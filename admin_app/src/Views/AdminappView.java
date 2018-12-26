@@ -18,6 +18,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.event.WindowEvent;
 import java.net.URL;
 import java.util.Objects;
 import javax.swing.Box;
@@ -329,7 +330,7 @@ public class AdminappView extends JFrame{
         logout.setLayout(new BoxLayout(logout, BoxLayout.Y_AXIS));
         logout.setBackground(new Color(228,249,245));
         
-        logoutTitle = new JLabel("Log out");
+        logoutTitle = new JLabel("Exit");
         logoutTitle.setForeground(new Color(41,55,72));
         logoutTitle.setAlignmentX(Component.CENTER_ALIGNMENT);
         
@@ -347,10 +348,10 @@ public class AdminappView extends JFrame{
                  super.mouseClicked(e); //To change body of generated methods, choose Tools | Templates.
                  setForeColor();
                  logoutTitle.setForeground(Color.red);
-                 int reply = JOptionPane.showConfirmDialog(null, "Bạn có muốn đăng xuất?", "Thông báo", JOptionPane.YES_NO_OPTION);
+                 int reply = JOptionPane.showConfirmDialog(null, "Bạn có muốn thoát?", "Thông báo", JOptionPane.YES_NO_OPTION);
                  if (reply == JOptionPane.YES_OPTION) {
                     //xu ly log out
-                    
+                    System.exit(0);
                 }
                 else {
                 }
