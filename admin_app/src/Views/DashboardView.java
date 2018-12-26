@@ -5,6 +5,11 @@
  */
 package Views;
 
+import Controllers.DashboardController;
+import Models.BillModel;
+import Models.DashboardModel.Report;
+import com.orsoncharts.label.StandardCategoryItemLabelGenerator;
+import com.orsoncharts.util.TextAnchor;
 import com.toedter.calendar.JDateChooser;
 import com.toedter.calendar.JMonthChooser;
 import com.toedter.calendar.JYearChooser;
@@ -13,31 +18,76 @@ import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.List;
+import java.util.ArrayList;
+import java.util.Date;
 import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
+import javax.swing.table.DefaultTableModel;
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartPanel;
 import org.jfree.chart.JFreeChart;
+import org.jfree.chart.labels.ItemLabelAnchor;
+import org.jfree.chart.labels.ItemLabelPosition;
+import org.jfree.chart.plot.CategoryPlot;
 import org.jfree.chart.plot.PlotOrientation;
+import org.jfree.chart.renderer.category.CategoryItemRenderer;
 import org.jfree.data.category.DefaultCategoryDataset;
 
 /**
  *
  * @author Thang Le
  */
-public class DashboardView {
+public class DashboardView extends View {
     private JMonthChooser date;
     private JYearChooser year;
     private JButton btn;
     private JFreeChart lineChart;
+    private DashboardController controller;
+    private List<Report> list=new ArrayList<Report>();
     public DashboardView()
     {
+        controller=DashboardController.getInstance(this);
+    }
+    
+    //---------------------------------------------------------------------------------------------------------
+    @Override
+    public void insert(Object objects){
+    }
+    
+    @Override
+    public void delete(int row){
+    }
+    
+    @Override
+    public void update(int row, Object objects){
         
     }
+    
+    @Override
+    public void loadView(Object objects){
+
+    }
+    
+    public void setList(Object objects)
+    {
+        list.clear();
+        List<Report> categories = (List<Report>)(Object)objects;
+        for(Report item :categories)
+        {
+            list.add(item);
+        }
+        //update chart
+        CategoryPlot plot = (CategoryPlot) lineChart.getPlot();
+        plot.setDataset(createDataset());
+
+    }
+    //----------------------------------------------------------------------------------------------------------
     
     public void Load(JPanel main,JPanel info,JPanel footer)
     {
@@ -54,14 +104,21 @@ public class DashboardView {
         lineChart = ChartFactory.createLineChart(
          "Dashboard",
          "Day","Total",
-         createDataset(),
+         null,
          PlotOrientation.VERTICAL,
          true,true,false);
          
         ChartPanel chartPanel = new ChartPanel( lineChart );
         chartPanel.setPreferredSize( new Dimension( main.getWidth() , main.getHeight() ) );
         
-        
+        //show detail value on top chart
+        CategoryItemRenderer renderer = ((CategoryPlot)lineChart.getPlot()).getRenderer();
+        renderer.setBaseItemLabelGenerator(new org.jfree.chart.labels.StandardCategoryItemLabelGenerator());
+        renderer.setBaseItemLabelsVisible(true);
+        ItemLabelPosition position = new ItemLabelPosition(ItemLabelAnchor.OUTSIDE12, 
+                org.jfree.ui.TextAnchor.TOP_CENTER);
+        renderer.setBasePositiveItemLabelPosition(position);
+        //
         main.add(Box.createRigidArea(new Dimension(5,0)));
         main.add(chartPanel);
         
@@ -115,7 +172,26 @@ public class DashboardView {
         btn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                createDataset();
+                Date curday=new Date();
+                int curYear=curday.getYear()+1900;
+                int curMonth=curday.getMonth();
+                String day="";
+                if(year.getYear()<=curYear&&date.getMonth()<=curMonth)
+                {
+                    if(date.getMonth()+1<10)
+                    day=year.getYear()+"-0"+(date.getMonth()+1)+"-01";
+                else
+                    day=year.getYear()+"-"+(date.getMonth()+1)+"-01";
+                
+                controller.loadReport(day);
+                }
+                else
+                {
+                    JOptionPane.showMessageDialog(null, "Chưa có báo cáo vì ngày hiện tại nhỏ hơn ngày xem báo cáo");
+                }
+                
+                
+                
             }
         });
     }
@@ -123,12 +199,11 @@ public class DashboardView {
     DefaultCategoryDataset createDataset()
     {
         DefaultCategoryDataset dataset = new DefaultCategoryDataset( );
-        dataset.addValue( 15000 , "VND" , "2018-8" );
-        dataset.addValue( 300000 , "VND" , "2018-9" );
-        dataset.addValue( 600000 , "VND" ,  "2018-10" );
-        dataset.addValue( 1200000 , "VND" , "2018-11" );
-        dataset.addValue( 240000 , "VND" , "2018-12" );
-        dataset.addValue( 300000 , "VND", "2019-1" );
+        for(Report item : list)
+        {
+            dataset.addValue( item.price , "VND" , item._date );
+        }
         return dataset;
     }
+
 }

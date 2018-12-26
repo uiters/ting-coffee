@@ -55,6 +55,9 @@ public class Query {
     //login
     public static String checkLogin="call USP_Admin_CheckLogin( @username  )";
     
+    //report
+    public static String getReport="call USP_Admin_GetReport( @date  )";
+    
     
             
 }
