@@ -233,9 +233,14 @@ public class LoginView extends View {
     {
         JOptionPane.showMessageDialog(null, "Đăng nhập  thành công!");
         app=new AdminappView();
+        app.setLoginView(this);
         jf.dispose();
     }
     
+    public void Visible(boolean a)
+    {
+        jf.setVisible(a);
+    }
     
     //---------------------------------------------------------------------------------------------------------
     @Override

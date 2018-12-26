@@ -55,6 +55,7 @@ public class AdminappView extends JFrame{
     TableView tableMain;
     BillView billMain;
     AccountView staffMain;
+    LoginView loginView;
     public AdminappView()
     {
         jf=new JFrame("Cafe Management || Admin App");
@@ -305,6 +306,39 @@ public class AdminappView extends JFrame{
         bill.add(billIcon);
         /*END BILL OPTIONS*/
         
+         /*DASHBOARD*/
+        JPanel logout = new JPanel();
+        logout.setLayout(new BoxLayout(logout, BoxLayout.Y_AXIS));
+        logout.setBackground(new Color(228,249,245));
+        
+        JLabel logoutTitle = new JLabel("Log out");
+        logoutTitle.setForeground(new Color(41,55,72));
+        logoutTitle.setAlignmentX(Component.CENTER_ALIGNMENT);
+        
+        URL logoutURL = getClass().getResource("../image/logout.png");
+        JLabel logoutIcon = new JLabel(new ImageIcon(logoutURL));
+        logoutIcon.setAlignmentX(Component.CENTER_ALIGNMENT);
+        
+        logout.add(logoutTitle);
+        logout.add(Box.createRigidArea(new Dimension(0, 6)));
+        logout.add(logoutIcon);
+        
+        logout.addMouseListener(new MouseAdapter() {
+             @Override
+             public void mouseClicked(MouseEvent e) {
+                 super.mouseClicked(e); //To change body of generated methods, choose Tools | Templates.
+                 int reply = JOptionPane.showConfirmDialog(null, "Bạn có muốn đăng xuất?", "Thông báo", JOptionPane.YES_NO_OPTION);
+                 if (reply == JOptionPane.YES_OPTION) {
+                    jf.dispose();
+                    loginView.Visible(true);
+                }
+                else {
+                }
+                
+             }
+            
+});
+        /*END DASHBOARD OPTIONS*/
         
         options.add(Box.createRigidArea(new Dimension(30, 0)));
         options.add(bill);
@@ -319,6 +353,8 @@ public class AdminappView extends JFrame{
         options.add(Box.createRigidArea(new Dimension(30, 0)));
         options.add(staff);
         options.add(Box.createRigidArea(new Dimension(30, 0)));
+        options.add(logout);
+        options.add(Box.createRigidArea(new Dimension(30, 0)));
         /*END OPTIONS*/
         header.add(brandSection);
         header.add(options);
@@ -326,11 +362,9 @@ public class AdminappView extends JFrame{
     /**
      * @param args the command line arguments
      */
-
-    
-    
-
-    
-    
-    
+   
+    public void setLoginView(LoginView a)
+    {
+        loginView=a;
+    }
 }
