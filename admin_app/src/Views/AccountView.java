@@ -172,6 +172,7 @@ public class AccountView extends View {
         };
         table = new JTable();
         table.getTableHeader().setFont(new java.awt.Font(table.getFont().toString(), Font.BOLD, 22));
+        table.getTableHeader().setReorderingAllowed(false); // khong cho di chuyen thu tu cac column
         table.setFont(new java.awt.Font(table.getFont().toString(), Font.PLAIN, 18));
         table.setModel(model);
         table.setSelectionMode(0);

@@ -45,6 +45,7 @@ import javax.swing.table.DefaultTableModel;
 import javax.swing.table.JTableHeader;
 import Views.AdminappView;
 import java.awt.event.KeyAdapter;
+import java.awt.event.WindowEvent;
 import java.util.List;
 import javax.swing.JPasswordField;
 /**
@@ -64,6 +65,7 @@ public class LoginView extends View {
         jf=new JFrame("Login | Admin App");
         jf.setSize(600, 300);
         jf.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);  // đóng frame 
+        
         jf.setResizable(false);
         
         controller=LoginController.getInstance(this);
@@ -233,9 +235,17 @@ public class LoginView extends View {
     {
         JOptionPane.showMessageDialog(null, "Đăng nhập  thành công!");
         app=new AdminappView();
+        //app.setLoginView(this);
+        
+        //jf.setVisible(false);
         jf.dispose();
+        
     }
     
+    public void Visible(boolean a)
+    {
+        jf.setVisible(a);
+    }
     
     //---------------------------------------------------------------------------------------------------------
     @Override
