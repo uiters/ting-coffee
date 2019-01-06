@@ -70,68 +70,8 @@ Enjoy 👍
 
 <div style="text-align: center"><table><tr>
   <td style="text-align: center">
-  <a href="https://github.com/jade28/store-management/tree/master/order_app">
-    <img src="https://user-images.githubusercontent.com/34389409/50733860-ff3f1880-11c7-11e9-8e2e-5186c9d9d390.png" width="200"/></a>
-</td>
-<td style="text-align: center">
-  <a href="https://github.com/jade28/store-management/tree/master/order_app">
-<img src="https://user-images.githubusercontent.com/34389409/49172727-64efe780-f374-11e8-8a93-e4c603615d40.png" width="200"/>
-  </a>
-</td>
-<td style="text-align: center">
-  <a href="https://github.com/jade28/store-management/tree/master/order_app">
-<img src="https://user-images.githubusercontent.com/34389409/48913037-dd086a00-eea9-11e8-927a-1056286dabfa.png" width="200" />
-  </a>
-</td>
-<td style="text-align: center">
-  <a href="https://github.com/jade28/store-management/tree/master/order_app">
-<img src="https://user-images.githubusercontent.com/34389409/48913050-e691d200-eea9-11e8-89e7-bce901825865.png" width="200"/>
-  </a>
-</td>
-</tr></table></div>
-
-<div style="text-align: center"><table><tr>
-<td style="text-align: center">
-  <a href="https://github.com/jade28/store-management/tree/master/order_app">
-<img src="https://user-images.githubusercontent.com/34389409/48913060-ebef1c80-eea9-11e8-8754-cef221812efe.png" width="200"/>
-  </a>
-</td>
-<td style="text-align: center">
-<a href="https://github.com/jade28/store-management/tree/master/order_app">
-  <img src="https://user-images.githubusercontent.com/34389409/48913066-eeea0d00-eea9-11e8-8546-10091f647594.png" width="200"/></a>
-</td>
-<td style="text-align: center">
-  <a href="https://github.com/jade28/store-management/tree/master/order_app">
-<img src="https://user-images.githubusercontent.com/34389409/48913072-f1e4fd80-eea9-11e8-93e5-417afa3cc16a.png" width="200" />
-  </a>
-</td>
-<td style="text-align: center">
-  <a href="https://github.com/jade28/store-management/tree/master/order_app">
-<img src="https://user-images.githubusercontent.com/34389409/48913080-f7424800-eea9-11e8-955e-3df16d99ff33.png" width="200"/>
-  </a>
-</td>
-
-</tr></table></div>
-
-### `Admin App`
-
-### `Kitchen App`
-
-## Technologies
-
-* [Flutter](https://flutter.io/)
-* [Dart](https://www.dartlang.org/)
-* [PHP 7](http://php.net/manual/en/migration70.new-features.php)
-* [MySQL](https://www.mysql.com/)
-
-## Some Screens
-
-### `Order App`
-
-<div style="text-align: center"><table><tr>
-  <td style="text-align: center">
   <a href="https://github.com/jade28/starbucks-coffee/tree/master/order_app">
-    <img src="https://user-images.githubusercontent.com/34389409/48913030-d974e300-eea9-11e8-9a6e-042bb06ddecb.png" width="200"/></a>
+    <img src="https://user-images.githubusercontent.com/34389409/50733860-ff3f1880-11c7-11e9-8e2e-5186c9d9d390.png" width="200"/></a>
 </td>
 <td style="text-align: center">
   <a href="https://github.com/jade28/starbucks-coffee/tree/master/order_app">
@@ -174,6 +114,8 @@ Enjoy 👍
 </tr></table></div>
 
 ### `Admin App`
+
+### `Kitchen App`
 
 ## Bugs and Issues
 
