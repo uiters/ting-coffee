@@ -37,6 +37,21 @@
 
 ## Install
 
+Clone this project:
+```
+$ git clone https://github.com/jade28/starbucks-coffee.git
+```
+cd `starbucks-coffee`:
+```
+$ cd starbucks-coffee
+```
+Install packages for `flutter` apps:
+```
+$ flutter packages get
+```
+
+Enjoy 👍
+
 ## Documents
 
 * [Java Swing Tutorial](https://www.javatpoint.com/java-swing)
