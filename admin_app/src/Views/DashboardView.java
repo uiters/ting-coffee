@@ -174,18 +174,32 @@ public class DashboardView extends View {
             public void actionPerformed(ActionEvent e) {
                 Date curday=new Date();
                 int curYear=curday.getYear()+1900;
-                int curMonth=curday.getMonth();
+                int curMonth=curday.getMonth();                
                 String day="";
-                if(year.getYear()<=curYear&&date.getMonth()<=curMonth)
+                if(year.getYear()<curYear)
                 {
-                    if(date.getMonth()+1<10)
-                    day=year.getYear()+"-0"+(date.getMonth()+1)+"-01";
-                else
-                    day=year.getYear()+"-"+(date.getMonth()+1)+"-01";
-                
-                controller.loadReport(day);
+                    
+                        if(date.getMonth()+1<10)
+                            day=year.getYear()+"-0"+(date.getMonth()+1)+"-01";
+                        else
+                            day=year.getYear()+"-"+(date.getMonth()+1)+"-01";
+                        
+                        controller.loadReport(day);
                 }
-                else
+                if(year.getYear()==curYear)
+                {
+                    if(date.getMonth()<=curMonth)
+                    {
+                        if(date.getMonth()+1<10)
+                            day=year.getYear()+"-0"+(date.getMonth()+1)+"-01";
+                        else
+                            day=year.getYear()+"-"+(date.getMonth()+1)+"-01";
+                        controller.loadReport(day);
+                    }
+                    else
+                        JOptionPane.showMessageDialog(null, "Chưa có báo cáo vì ngày hiện tại nhỏ hơn ngày xem báo cáo");
+                }
+                if(year.getYear()>curYear)
                 {
                     JOptionPane.showMessageDialog(null, "Chưa có báo cáo vì ngày hiện tại nhỏ hơn ngày xem báo cáo");
                 }
