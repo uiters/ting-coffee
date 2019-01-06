@@ -35,6 +35,14 @@
 
 ## Features
 
+* Ordering drinks, foods by table.
+* Checkout, preview & print invoice.
+* Profile feature.
+* Manage drink, food & category.
+* Manage table.
+* Manage account.
+* Sales report.
+
 ## Install
 
 Clone this project:
@@ -60,9 +68,9 @@ Enjoy 👍
 ## Technologies
 
 * [Flutter](https://flutter.io/)
-* [Dart](https://www.dartlang.org/)
-* [PHP 7](http://php.net/manual/en/migration70.new-features.php)
+* [PHP](http://php.net/manual/en/migration70.new-features.php)
 * [MySQL](https://www.mysql.com/)
+* [Java](https://www.java.com/en/download/)
 
 ## Some Screens
 
