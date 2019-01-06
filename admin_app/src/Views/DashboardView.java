@@ -174,8 +174,7 @@ public class DashboardView extends View {
             public void actionPerformed(ActionEvent e) {
                 Date curday=new Date();
                 int curYear=curday.getYear()+1900;
-                int curMonth=curday.getMonth();       
-                JOptionPane.showMessageDialog(null,curYear+ "/////"+curMonth+"**"+year.getYear()+"---"+date.getMonth());
+                int curMonth=curday.getMonth();                
                 String day="";
                 if(year.getYear()<curYear)
                 {
