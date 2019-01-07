@@ -11,8 +11,8 @@
 </h4>
 
 <p align="center">
-  <a href="#">
-    <img src="https://img.shields.io/appveyor/ci/gruntjs/grunt.svg"/>
+  <a href="https://travis-ci.org/jade28/starbucks-coffee">
+    <img src="https://travis-ci.org/jade28/starbucks-coffee.svg?branch=master"/>
   </a>
   
   <a href="https://github.com/jade28/starbucks-coffee/blob/master/LICENSE">
