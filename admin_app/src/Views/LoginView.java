@@ -47,7 +47,9 @@ import Views.AdminappView;
 import java.awt.event.KeyAdapter;
 import java.awt.event.WindowEvent;
 import java.util.List;
+import javax.swing.BorderFactory;
 import javax.swing.JPasswordField;
+import javax.swing.border.EtchedBorder;
 /**
  *
  * @author Thang Le
@@ -63,7 +65,7 @@ public class LoginView extends View {
     LoginView()
     {
         jf=new JFrame("Login | Admin App");
-        jf.setSize(600, 300);
+        jf.setSize(500, 400);
         jf.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);  // đóng frame 
         
         jf.setResizable(false);
@@ -77,43 +79,51 @@ public class LoginView extends View {
         
         /*LOGO*/
         JPanel brandSection = new JPanel();
-        brandSection.setBackground(new Color(228,249,245));
+        brandSection.setBackground(new Color(209, 228, 252));
         
         JLabel brandImage = new JLabel();
         URL imgURL = getClass().getResource("../image/logo.png");
         brandImage.setIcon(new ImageIcon(imgURL));
         
-        JLabel brandText = new JLabel("Starbucks – The Best Coffee and Espresso Drinks");
-        brandText.setForeground(new Color(0,107,68));
+        JLabel brandText = new JLabel("Coffee Management");
+    
+        brandText.setForeground(new Color(100,40,251));
         brandText.setBackground(new Color(228,249,245));
+      
         brandText.setFont(new Font("SansSerif", Font.PLAIN, 20));
+  
         
         brandSection.add(Box.createRigidArea(new Dimension(5, 0)));
         brandSection.add(brandImage);
         brandSection.add(Box.createRigidArea(new Dimension(15, 0)));
         brandSection.add(brandText);
         brandSection.add(Box.createRigidArea(new Dimension(10, 0)));
+
         /*END LOGO */
         
         
          /*info detail*/
         JPanel detail=new JPanel();
         detail.setLayout(new BoxLayout(detail,BoxLayout.Y_AXIS));
-        detail.setBackground(new Color(228,249,245));
+        detail.setBackground(new Color(228,249,255));
         detail.setPreferredSize(new Dimension(panel.getWidth(),panel.getHeight()));
         
         /*USERNAME*/
         JPanel Namegroup=new JPanel();
+          Namegroup.setBorder(
+            BorderFactory.createEmptyBorder());
+        Namegroup.setLayout(new BorderLayout());
         Namegroup.setLayout(new BoxLayout(Namegroup,BoxLayout.X_AXIS));
         Namegroup.setBackground(new Color(228,249,245));
-        Namegroup.setMaximumSize(new Dimension(300, 30));
-        
+        Namegroup.setMaximumSize(new Dimension(340, 55));
          nameText=new JTextField();
+         nameText.setBackground(new Color(228,249,245));
          nameText.setAlignmentX(Component.CENTER_ALIGNMENT);
-         JLabel nameLabel=new JLabel("Username : ");
-         nameLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
-        Namegroup.add(Box.createRigidArea(new Dimension(5,0)));
-        Namegroup.add(nameLabel);
+         nameText.setBorder(
+            BorderFactory.createTitledBorder(
+            BorderFactory.createEtchedBorder(
+                    EtchedBorder.RAISED, (new Color(0,107,68))
+                    , (new Color(0,107,68))), "Username"));
         Namegroup.add(Box.createRigidArea(new Dimension(48,0)));
         Namegroup.add(nameText);
         Namegroup.add(Box.createRigidArea(new Dimension(5,0))); 
@@ -122,16 +132,23 @@ public class LoginView extends View {
         
         /*PASSWORD*/
          JPanel Passgroup=new JPanel();
+        Passgroup.setBorder(
+        BorderFactory.createEmptyBorder());
+        Passgroup.setLayout(new BorderLayout());
         Passgroup.setLayout(new BoxLayout(Passgroup,BoxLayout.X_AXIS));
         Passgroup.setBackground(new Color(228,249,245));
-        Passgroup.setMaximumSize(new Dimension(300, 30));
+        Passgroup.setMaximumSize(new Dimension(340, 55));
         
          passText=new JPasswordField();
+         passText.add(Box.createRigidArea(new Dimension(400, 20)));
+         passText.setBackground(new Color(228,249,245));
          passText.setAlignmentX(Component.CENTER_ALIGNMENT);
-         JLabel passLabel=new JLabel("Password : ");
-         passLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
-        Passgroup.add(Box.createRigidArea(new Dimension(5,0)));
-        Passgroup.add(passLabel);
+         passText.setBorder(
+            BorderFactory.createTitledBorder(
+            BorderFactory.createEtchedBorder(
+                    EtchedBorder.RAISED, (new Color(0,107,68))
+                    , (new Color(0,107,68))), "Password"));
+       
         Passgroup.add(Box.createRigidArea(new Dimension(48,0)));
         Passgroup.add(passText);
         Passgroup.add(Box.createRigidArea(new Dimension(5,0))); 
@@ -139,21 +156,32 @@ public class LoginView extends View {
         
         /*end info detail*/
          /*Button Add,Cancel*/
-        JPanel Btngroup=new JPanel();
-        Btngroup.setLayout(new BoxLayout(Btngroup,BoxLayout.X_AXIS));
-        Btngroup.setBackground(new Color(228,249,245));
-        Btngroup.setMaximumSize(new Dimension(300, 30));
-        
-        JButton btnCancel=new JButton("Cancel");
-        btnCancel.setAlignmentX(Component.CENTER_ALIGNMENT);
-        
+        JPanel Btngroup2=new JPanel();
+        Btngroup2.setLayout(new BoxLayout(Btngroup2,BoxLayout.X_AXIS));
+        Btngroup2.setBackground(new Color(228,249,245));
         JButton btnAdd=new JButton("Login");
+    
+        btnAdd.add(Box.createRigidArea(new Dimension(250, 20)));
+        btnAdd.setBackground(new Color(255,82,82));
         btnAdd.setAlignmentX(Component.CENTER_ALIGNMENT);
         
-        Btngroup.add(Box.createRigidArea(new Dimension(25,0)));
-        Btngroup.add(btnCancel);
-        Btngroup.add(Box.createRigidArea(new Dimension(115,0)));
-        Btngroup.add(btnAdd);
+        JPanel Btngroup1=new JPanel();
+        Btngroup1.setLayout(new BoxLayout(Btngroup1,BoxLayout.X_AXIS));
+        Btngroup1.setBackground(new Color(228,249,245));
+        
+        
+        JButton btnCancel=new JButton("Cancel");
+        btnCancel.add(Box.createRigidArea(new Dimension(250, 20)));
+        btnCancel.setBackground(new Color(255,82,82));
+     
+        btnCancel.setAlignmentX(Component.CENTER_ALIGNMENT);
+        
+        Btngroup2.add(Box.createRigidArea(new Dimension(30,10)));
+        Btngroup2.add(btnAdd);
+        
+        Btngroup1.add(Box.createRigidArea(new Dimension(30,20)));
+        Btngroup1.add(btnCancel);
+       
         /*end Button Add,Cancel*/
         
         detail.add(Box.createRigidArea(new Dimension(0,20)));
@@ -161,9 +189,10 @@ public class LoginView extends View {
         detail.add(Box.createRigidArea(new Dimension(0,20)));
         detail.add(Passgroup);
         detail.add(Box.createRigidArea(new Dimension(0,20)));
-        detail.add(Btngroup);
-        
-        
+        detail.add(Btngroup2);
+        detail.add(Box.createRigidArea(new Dimension(0,20)));
+        detail.add(Btngroup1);
+     
         panel.add(brandSection);
         panel.add(Box.createRigidArea(new Dimension(10,0)));
         panel.add(detail);

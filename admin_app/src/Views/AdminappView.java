@@ -80,12 +80,12 @@ public class AdminappView extends JFrame{
         
         /* MAIN TABLE */
         main = new JPanel();
-        main.setBackground(Color.green);
+        main.setBackground(new Color(0,107,68));
        
         
         /* INFO */
         info = new JPanel();
-        info.setBackground(Color.yellow);
+        info.setBackground(new Color(209, 228, 252));
         
         /* FOOTER */
         footer = new JPanel();
