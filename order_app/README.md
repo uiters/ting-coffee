@@ -11,8 +11,8 @@
 </h4>
 
 <p align="center">
-  <a href="https://travis-ci.org/jade28/starbucks-coffee">
-    <img src="https://travis-ci.org/jade28/starbucks-coffee.svg?branch=master"/>
+  <a href="#">
+    <img src="https://img.shields.io/appveyor/ci/gruntjs/grunt.svg"/>
   </a>
   
   <a href="https://github.com/jade28/starbucks-coffee/blob/master/LICENSE">
@@ -35,30 +35,7 @@
 
 ## Features
 
-* Ordering drinks, foods by table.
-* Checkout, preview & print invoice.
-* Profile feature.
-* Manage drink, food & category.
-* Manage table.
-* Manage account.
-* Sales report.
-
 ## Install
-
-Clone this project:
-```
-$ git clone https://github.com/jade28/starbucks-coffee.git
-```
-cd `starbucks-coffee`:
-```
-$ cd starbucks-coffee
-```
-Install packages for `flutter` apps:
-```
-$ flutter packages get
-```
-
-Enjoy 👍
 
 ## Documents
 
@@ -68,9 +45,9 @@ Enjoy 👍
 ## Technologies
 
 * [Flutter](https://flutter.io/)
-* [PHP](http://php.net/manual/en/migration70.new-features.php)
+* [Dart](https://www.dartlang.org/)
+* [PHP 7](http://php.net/manual/en/migration70.new-features.php)
 * [MySQL](https://www.mysql.com/)
-* [Java](https://www.java.com/en/download/)
 
 ## Some Screens
 
@@ -78,21 +55,21 @@ Enjoy 👍
 
 <div style="text-align: center"><table><tr>
   <td style="text-align: center">
-  <a href="https://github.com/jade28/starbucks-coffee/tree/master/order_app">
-    <img src="https://user-images.githubusercontent.com/34389409/50733860-ff3f1880-11c7-11e9-8e2e-5186c9d9d390.png" width="200"/></a>
+  <a href="https://github.com/jade28/store-management/tree/master/order_app">
+    <img src="https://user-images.githubusercontent.com/34389409/48913030-d974e300-eea9-11e8-9a6e-042bb06ddecb.png" width="200"/></a>
 </td>
 <td style="text-align: center">
-  <a href="https://github.com/jade28/starbucks-coffee/tree/master/order_app">
+  <a href="https://github.com/jade28/store-management/tree/master/order_app">
 <img src="https://user-images.githubusercontent.com/34389409/49172727-64efe780-f374-11e8-8a93-e4c603615d40.png" width="200"/>
   </a>
 </td>
 <td style="text-align: center">
-  <a href="https://github.com/jade28/starbucks-coffee/tree/master/order_app">
+  <a href="https://github.com/jade28/store-management/tree/master/order_app">
 <img src="https://user-images.githubusercontent.com/34389409/48913037-dd086a00-eea9-11e8-927a-1056286dabfa.png" width="200" />
   </a>
 </td>
 <td style="text-align: center">
-  <a href="https://github.com/jade28/starbucks-coffee/tree/master/order_app">
+  <a href="https://github.com/jade28/store-management/tree/master/order_app">
 <img src="https://user-images.githubusercontent.com/34389409/48913050-e691d200-eea9-11e8-89e7-bce901825865.png" width="200"/>
   </a>
 </td>
@@ -101,7 +78,7 @@ Enjoy 👍
 <div style="text-align: center"><table><tr>
 <td style="text-align: center">
   <a href="https://github.com/jade28/starbucks-coffee/tree/master/order_app">
-<img src="https://user-images.githubusercontent.com/34389409/48913060-ebef1c80-eea9-11e8-8754-cef221812efe.png" width="200"/>
+<img src="https://user-images.githubusercontent.com/34389409/50733742-f3eaed80-11c5-11e9-914f-a629c7957041.png" width="200"/>
   </a>
 </td>
 <td style="text-align: center">
