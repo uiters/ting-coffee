@@ -151,7 +151,7 @@ public class FoodCategoryView extends View{
         /*search field*/
         JPanel search=new JPanel();
         search.setLayout(new BoxLayout(search,BoxLayout.X_AXIS));
-        search.setBackground(Color.yellow);
+        search.setBackground(new Color(209, 228, 252));
         //search.setPreferredSize(new Dimension(info.getWidth(),20));
         search.setMaximumSize(new Dimension(300, 30));
         //search.setMaximumSize(new Dimension(info.getWidth(),20));
@@ -162,6 +162,8 @@ public class FoodCategoryView extends View{
         p1=new PlaceHolder (searchText,"Tìm với ID,Name");
         searchText.setAlignmentX(Component.CENTER_ALIGNMENT);
         JButton btnSearch=new JButton("Search");
+        btnSearch.setForeground(new Color(0,107,68));
+        btnSearch.add(Box.createRigidArea(new Dimension(43, 20)));
         btnSearch.setAlignmentX(Component.CENTER_ALIGNMENT);
         
         search.add(Box.createRigidArea(new Dimension(5,0)));
@@ -204,12 +206,12 @@ public class FoodCategoryView extends View{
         /*info detail*/
         JPanel detail=new JPanel();
         detail.setLayout(new BoxLayout(detail,BoxLayout.Y_AXIS));
-        detail.setBackground(Color.yellow);
+        detail.setBackground(new Color(209, 228, 252));
         
         /*ID*/
         JPanel IDgroup=new JPanel();
         IDgroup.setLayout(new BoxLayout(IDgroup,BoxLayout.X_AXIS));
-        IDgroup.setBackground(Color.yellow);
+        IDgroup.setBackground(new Color(209, 228, 252));
         IDgroup.setMaximumSize(new Dimension(300, 30));
         
          idText=new JTextField();
@@ -228,7 +230,7 @@ public class FoodCategoryView extends View{
         /*Name*/
         JPanel Namegroup=new JPanel();
         Namegroup.setLayout(new BoxLayout(Namegroup,BoxLayout.X_AXIS));
-        Namegroup.setBackground(Color.yellow);
+        Namegroup.setBackground(new Color(209, 228, 252));
         Namegroup.setMaximumSize(new Dimension(300, 30));
         
          nameText=new JTextField();
@@ -269,10 +271,18 @@ public class FoodCategoryView extends View{
         btn.setLayout(new BoxLayout(btn,BoxLayout.X_AXIS));
         btn.setBackground(Color.cyan);
         
-         JButton btnAdd=new JButton("Add");
-         JButton btnUpdate=new JButton("Update");
-         JButton btnDelete=new JButton("Delete");
-         JButton btnCancel=new JButton("Cancel");
+        JButton btnAdd=new JButton("Add");
+        btnAdd.setForeground(new Color(0,107,68));
+        btnAdd.add(Box.createRigidArea(new Dimension(50, 20)));
+        JButton btnUpdate=new JButton("Update");
+        btnUpdate.setForeground(new Color(0,107,68));
+        btnUpdate.add(Box.createRigidArea(new Dimension(50, 20)));
+        JButton btnDelete=new JButton("Delete");
+        btnDelete.setForeground(new Color(0,107,68));
+        btnDelete.add(Box.createRigidArea(new Dimension(50, 20)));
+        JButton btnCancel=new JButton("Cancel");
+        btnCancel.setForeground(new Color(0,107,68));
+        btnCancel.add(Box.createRigidArea(new Dimension(50, 20)));
          
          
          btn.add(Box.createRigidArea(new Dimension(5,0)));

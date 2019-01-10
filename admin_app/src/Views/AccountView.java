@@ -214,7 +214,7 @@ public class AccountView extends View {
         /*search field*/
         JPanel search=new JPanel();
         search.setLayout(new BoxLayout(search,BoxLayout.X_AXIS));
-        search.setBackground(Color.yellow);
+        search.setBackground(new Color(209, 228, 252));
         //search.setPreferredSize(new Dimension(info.getWidth(),20));
         search.setMaximumSize(new Dimension(300, 30));
         //search.setMaximumSize(new Dimension(info.getWidth(),20));
@@ -225,6 +225,8 @@ public class AccountView extends View {
         p1=new PlaceHolder (searchText,"Tìm với ID,Name,Phone");
         searchText.setAlignmentX(Component.CENTER_ALIGNMENT);
         JButton btnSearch=new JButton("Search");
+        btnSearch.setForeground(new Color(0,107,68));
+        btnSearch.add(Box.createRigidArea(new Dimension(43, 20)));
         btnSearch.setAlignmentX(Component.CENTER_ALIGNMENT);
         
         search.add(Box.createRigidArea(new Dimension(5,0)));
@@ -271,12 +273,12 @@ public class AccountView extends View {
         /*info detail*/
         JPanel detail=new JPanel();
         detail.setLayout(new BoxLayout(detail,BoxLayout.Y_AXIS));
-        detail.setBackground(Color.yellow);
+        detail.setBackground(new Color(209, 228, 252));
            
         /*ID*/
         JPanel IDgroup=new JPanel();
         IDgroup.setLayout(new BoxLayout(IDgroup,BoxLayout.X_AXIS));
-        IDgroup.setBackground(Color.yellow);
+        IDgroup.setBackground(new Color(209, 228, 252));
         IDgroup.setMaximumSize(new Dimension(300, 30));
         
          idText=new JTextField();
@@ -296,7 +298,7 @@ public class AccountView extends View {
         /*Name*/
         JPanel Namegroup=new JPanel();
         Namegroup.setLayout(new BoxLayout(Namegroup,BoxLayout.X_AXIS));
-        Namegroup.setBackground(Color.yellow);
+        Namegroup.setBackground(new Color(209, 228, 252));
         Namegroup.setMaximumSize(new Dimension(300, 30));
         
          nameText=new JTextField();
@@ -313,7 +315,7 @@ public class AccountView extends View {
         /*ID Card*/
         JPanel IDCardgroup=new JPanel();
         IDCardgroup.setLayout(new BoxLayout(IDCardgroup,BoxLayout.X_AXIS));
-        IDCardgroup.setBackground(Color.yellow);
+        IDCardgroup.setBackground(new Color(209, 228, 252));
         IDCardgroup.setMaximumSize(new Dimension(300, 30));
         
          idCardText=new JTextField();
@@ -330,7 +332,7 @@ public class AccountView extends View {
         /*Birthday*/
         JPanel Birthgroup=new JPanel();
         Birthgroup.setLayout(new BoxLayout(Birthgroup,BoxLayout.X_AXIS));
-        Birthgroup.setBackground(Color.yellow);
+        Birthgroup.setBackground(new Color(209, 228, 252));
         Birthgroup.setMaximumSize(new Dimension(300, 30));
         
         
@@ -352,7 +354,7 @@ public class AccountView extends View {
         /*Sex*/
         JPanel Sexgroup=new JPanel();
         Sexgroup.setLayout(new BoxLayout(Sexgroup,BoxLayout.X_AXIS));
-        Sexgroup.setBackground(Color.yellow);
+        Sexgroup.setBackground(new Color(209, 228, 252));
         Sexgroup.setMaximumSize(new Dimension(300, 30));
         
         String []list2=new String[2];
@@ -375,7 +377,7 @@ public class AccountView extends View {
         /*Address*/
         JPanel Addressgroup=new JPanel();
         Addressgroup.setLayout(new BoxLayout(Addressgroup,BoxLayout.X_AXIS));
-        Addressgroup.setBackground(Color.yellow);
+        Addressgroup.setBackground(new Color(209, 228, 252));
         Addressgroup.setMaximumSize(new Dimension(300, 30));
         
          addressText=new JTextField();
@@ -392,7 +394,7 @@ public class AccountView extends View {
         /*Phonenumber*/
         JPanel Phonegroup=new JPanel();
         Phonegroup.setLayout(new BoxLayout(Phonegroup,BoxLayout.X_AXIS));
-        Phonegroup.setBackground(Color.yellow);
+        Phonegroup.setBackground(new Color(209, 228, 252));
         Phonegroup.setMaximumSize(new Dimension(300, 30));
         
          phoneText=new JTextField();
@@ -423,7 +425,7 @@ public class AccountView extends View {
          /*Account Type*/
         JPanel Typegroup=new JPanel();
         Typegroup.setLayout(new BoxLayout(Typegroup,BoxLayout.X_AXIS));
-        Typegroup.setBackground(Color.yellow);
+        Typegroup.setBackground(new Color(209, 228, 252));
         Typegroup.setMaximumSize(new Dimension(300, 30));
         
         
@@ -481,9 +483,17 @@ public class AccountView extends View {
         btn.setBackground(Color.cyan);
         
          JButton btnAdd=new JButton("Add");
+        btnAdd.setForeground(new Color(0,107,68));
+        btnAdd.add(Box.createRigidArea(new Dimension(50, 20)));
          JButton btnUpdate=new JButton("Update");
+        btnUpdate.setForeground(new Color(0,107,68));
+        btnUpdate.add(Box.createRigidArea(new Dimension(50, 20)));
          JButton btnDelete=new JButton("Delete");
+        btnDelete.setForeground(new Color(0,107,68));
+        btnDelete.add(Box.createRigidArea(new Dimension(50, 20)));
          JButton btnCancel=new JButton("Reset Password");
+        btnCancel.setForeground(new Color(0,107,68));
+        btnCancel.add(Box.createRigidArea(new Dimension(100, 20)));
          
          
          btn.add(Box.createRigidArea(new Dimension(5,0)));
@@ -505,7 +515,7 @@ public class AccountView extends View {
             @Override
             public void actionPerformed(ActionEvent e) {
                 addFrame.StaffAdd(cbType);
-                JOptionPane.showMessageDialog(null, "Reload database ");
+                //JOptionPane.showMessageDialog(null, "Reload database ");
             }
         });
          btnUpdate.addActionListener(new ActionListener() {

@@ -78,7 +78,7 @@ public class AccountModel {
     public void addAccount(String username,String name,int sex,String idcard,String address,String number,String birth,String type,String pass) throws IOException
     {
         String raw=mySqlConnection.executeNoneQuery(Query.addAccount, new Object[] { username,name,sex,idcard,address,number,birth,type,pass });
-        if (raw.equals("1")==true) JOptionPane.showMessageDialog(null, "Đã thêm thành công! Mật khẩu mặc định là abc");
+        if (raw.equals("1")==true) JOptionPane.showMessageDialog(null, "Đã thêm thành công! Mật khẩu mặc định là số điện thoại nhân viên!");
         else JOptionPane.showMessageDialog(null, "Đã tồn tại tên tài khoản nhân viên này!");
     }
     

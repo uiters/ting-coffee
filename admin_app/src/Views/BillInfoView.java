@@ -85,7 +85,7 @@ public class BillInfoView extends View {
         /*info detail*/
         JPanel detail=new JPanel();
         detail.setLayout(new BoxLayout(detail,BoxLayout.Y_AXIS));
-        detail.setBackground(Color.yellow);
+        detail.setBackground(new Color(209, 228, 252));
         detail.setPreferredSize(new Dimension(500,400));
          //Table
         String []title=new String[]{"Food","Quantity"};

@@ -97,9 +97,9 @@ public class FoodModel {
         else JOptionPane.showMessageDialog(null, "Không thể xóa do đã tồn tại trong bill");
     }
     
-    public void addFood(String name,String category,double price) throws IOException
+    public void addFood(String name,String category,double price,String path) throws IOException
     {
-        String raw= mySqlConnection.executeNoneQuery(Query.addFood, new Object[] { name , category , price });
+        String raw= mySqlConnection.executeNoneQuery(Query.addFood, new Object[] { name , category , price, path });
     }
     
     public int getIDLast() throws IOException
@@ -151,6 +151,13 @@ public class FoodModel {
             this.nameCategory = category;
             this.name = name;
             this.price = price;
+        }
+        
+        public Food(String name, String category, double price, String path){
+            this.nameCategory = category;
+            this.name = name;
+            this.price = price;
+            this.stringImage = path;
         }
         
         public byte[] getImage(){

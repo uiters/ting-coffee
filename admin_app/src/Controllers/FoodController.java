@@ -70,9 +70,9 @@ public class FoodController extends Controller{
         future = CompletableFuture.supplyAsync(() -> {
             try
                 { 
-                    model.addFood(item.name,item.nameCategory,item.price); // insert to database
+                    model.addFood(item.name,item.nameCategory,item.price,item.stringImage); // insert to database
                     int id = model.getIDLast();// id get from model;
-                    Food category = model.new Food(id, item.name,item.nameCategory,item.price);
+                    Food category = model.new Food(id, item.name,item.nameCategory,item.price,item.stringImage);
                     _addFood(category); // insert to table in list local
                     return category;
                 }catch (IOException ex) {

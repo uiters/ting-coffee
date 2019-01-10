@@ -151,6 +151,8 @@ public class DashboardView extends View {
         year=new JYearChooser();
         year.setAlignmentX(Component.CENTER_ALIGNMENT);
         btn=new JButton("View");
+        btn.setForeground(new Color(0,107,68));
+        btn.add(Box.createRigidArea(new Dimension(50, 20)));
         btn.setAlignmentX(Component.CENTER_ALIGNMENT);
          JLabel dateLabel=new JLabel("Month : ");
          dateLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
