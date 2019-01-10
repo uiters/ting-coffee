@@ -515,7 +515,7 @@ public class AccountView extends View {
             @Override
             public void actionPerformed(ActionEvent e) {
                 addFrame.StaffAdd(cbType);
-                JOptionPane.showMessageDialog(null, "Reload database ");
+                //JOptionPane.showMessageDialog(null, "Reload database ");
             }
         });
          btnUpdate.addActionListener(new ActionListener() {

@@ -111,7 +111,7 @@ public class FoodView extends View{
     public void insert(Object objects){
         Food category = (Food)objects;
         ((DefaultTableModel)table.getModel()).addRow(new Object[]{category.id, category.name,category.nameCategory,
-                                                                                       null,category.price });
+                                                                                       this.getImage(category.getImage()),category.price });
     }
     
     @Override

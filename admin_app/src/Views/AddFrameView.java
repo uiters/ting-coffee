@@ -18,6 +18,10 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.io.File;
+import java.io.IOException;
+import java.net.URL;
+import java.nio.file.Files;
 import java.text.SimpleDateFormat;
 import javax.swing.Box;
 import javax.swing.BoxLayout;
@@ -32,6 +36,7 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import java.util.List;
+import org.apache.commons.codec.binary.Base64;
 
 /**
  *
@@ -184,8 +189,18 @@ public class AddFrameView {
                 {
                     //Xu ly btn add
                     String namecategory=cb.getSelectedItem().toString();
-                    
-                    FoodModel.Food food=FoodModel.getInstance().new Food( nameText.getText() ,namecategory,Double.parseDouble(priceText.getText()) );
+                    URL default_url = getClass().getResource("../image/food_default.png");
+                    File file=new File(default_url.getPath());
+                    String encoded="";
+                    try
+                    {
+                        encoded = Base64.encodeBase64String(getByte(file));
+                    }
+                    catch (IOException ex)
+                    {
+                        
+                    }
+                    FoodModel.Food food=FoodModel.getInstance().new Food( nameText.getText() ,namecategory,Double.parseDouble(priceText.getText()),encoded );
                     controller.insert(food);
                     jf.dispose();
                 }
@@ -628,7 +643,7 @@ public class AddFrameView {
                     String typename=cbType.getSelectedItem().toString();
                     SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
                     String strDate =dateFormat.format(birthday.getDate());
-                    String pass=Password.hashPassword(Constants.Constant.defaultpass);
+                    String pass=Password.hashPassword(phoneText.getText());
                     //Xu ly btn add
                     Account acc=AccountModel.getInstance().new Account(idText.getText(),nameText.getText(),idCardText.getText(),strDate,
                             index,addressText.getText(),phoneText.getText(),typename,pass);
@@ -651,5 +666,12 @@ public class AddFrameView {
         
         jf.add(detail, BorderLayout.CENTER);
         jf.setVisible(true);
+    }
+    
+    
+    public byte[] getByte(File file) throws IOException
+    {
+        byte[] fileContent = Files.readAllBytes(file.toPath());
+        return fileContent;
     }
 }
