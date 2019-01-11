@@ -100,6 +100,7 @@ public class FoodModel {
     public void addFood(String name,String category,double price,String path) throws IOException
     {
         String raw= mySqlConnection.executeNoneQuery(Query.addFood, new Object[] { name , category , price, path });
+        if (raw.equals("1")==true) JOptionPane.showMessageDialog(null, "Đã thêm thành công");
     }
     
     public int getIDLast() throws IOException

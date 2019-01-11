@@ -212,7 +212,7 @@ public class AddFrameView {
             @Override
             public void actionPerformed(ActionEvent e) {
                  //Xu ly btn cancel
-                 JOptionPane.showMessageDialog(null, "Close frame add food");
+                 //JOptionPane.showMessageDialog(null, "Close frame add food");
                   jf.dispose();
             }
         });
@@ -293,7 +293,7 @@ public class AddFrameView {
                 {
                     //Xu ly btn add
                     controller.insert(nameText.getText());
-                    JOptionPane.showMessageDialog(null, "Đã thêm 1 food category thành công!");
+                    //JOptionPane.showMessageDialog(null, "Đã thêm 1 food category thành công!");
                     jf.dispose();
                 }
                 else  JOptionPane.showMessageDialog(null, "Bạn chưa điền đủ thông tin!");
@@ -304,7 +304,7 @@ public class AddFrameView {
             @Override
             public void actionPerformed(ActionEvent e) {
                  //Xu ly btn cancel
-                 JOptionPane.showMessageDialog(null, "Close frame add food cagetory");
+                 //JOptionPane.showMessageDialog(null, "Close frame add food cagetory");
                   jf.dispose();
             }
         });
@@ -384,7 +384,7 @@ public class AddFrameView {
                 {
                     //Xu ly btn add
                     controller.insert(nameText.getText());
-                    JOptionPane.showMessageDialog(null, "Đã thêm 1 table thành công!");
+                    //JOptionPane.showMessageDialog(null, "Đã thêm 1 table thành công!");
                     jf.dispose();
                 }
                 else  JOptionPane.showMessageDialog(null, "Bạn chưa điền đủ thông tin!");
@@ -395,7 +395,7 @@ public class AddFrameView {
             @Override
             public void actionPerformed(ActionEvent e) {
                  //Xu ly btn cancel
-                 JOptionPane.showMessageDialog(null, "Close frame add food cagetory");
+                 //JOptionPane.showMessageDialog(null, "Close frame add food cagetory");
                   jf.dispose();
             }
         });
