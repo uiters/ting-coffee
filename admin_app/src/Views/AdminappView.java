@@ -347,7 +347,7 @@ public class AdminappView extends JFrame{
                  super.mouseClicked(e); //To change body of generated methods, choose Tools | Templates.
                  setForeColor();
                  logoutTitle.setForeground(Color.red);
-                 int reply = JOptionPane.showConfirmDialog(null, "Bạn có muốn thoát?", "Thông báo", JOptionPane.YES_NO_OPTION);
+                 int reply = JOptionPane.showConfirmDialog(null, "Do you want to exit?", "Notification", JOptionPane.YES_NO_OPTION);
                  if (reply == JOptionPane.YES_OPTION) {
                     //xu ly log out
                     System.exit(0);
