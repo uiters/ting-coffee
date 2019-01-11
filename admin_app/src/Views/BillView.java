@@ -229,7 +229,7 @@ public class BillView extends View {
          idtableLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
         IDtablegroup.add(Box.createRigidArea(new Dimension(5,0)));
         IDtablegroup.add(idtableLabel);
-        IDtablegroup.add(Box.createRigidArea(new Dimension(48,0)));
+        IDtablegroup.add(Box.createRigidArea(new Dimension(62,0)));
         IDtablegroup.add(idtableText);
         IDtablegroup.add(Box.createRigidArea(new Dimension(5,0))); 
         /*end ID table*/
