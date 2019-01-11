@@ -262,7 +262,7 @@ public class LoginView extends View {
     
     private void LoadApp()
     {
-        JOptionPane.showMessageDialog(null, "Đăng nhập  thành công!");
+        JOptionPane.showMessageDialog(null, "Login successfully!");
         app=new AdminappView();
         //app.setLoginView(this);
         
@@ -298,9 +298,9 @@ public class LoginView extends View {
         {
             if(result.get(0).type==1) //account type la admin
                 LoadApp();
-            else JOptionPane.showMessageDialog(null, "Bạn phải là quản trị viên mới có quyền đăng nhập!");
+            else JOptionPane.showMessageDialog(null, "Your account must be admin to login this app!");
         }        
-        else JOptionPane.showMessageDialog(null, "Sai tên tài khoản hoặc mật khẩu đăng nhập");
+        else JOptionPane.showMessageDialog(null, "Username or password is not correct!");
     }
    
 }

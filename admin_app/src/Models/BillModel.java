@@ -49,7 +49,7 @@ public class BillModel {
      public void delete(int id) throws IOException
      {
          String raw=mySqlConnection.executeNoneQuery(Query.delBill, new Object[] { id });
-         if (raw=="1") JOptionPane.showMessageDialog(null, "Đã xóa thành công");
+         if (raw=="1") JOptionPane.showMessageDialog(null, "Deleted successfully!");
      }
     
     public class Bill
