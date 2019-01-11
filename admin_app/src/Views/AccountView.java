@@ -222,7 +222,7 @@ public class AccountView extends View {
         
         JTextField searchText=new JTextField();
         PlaceHolder p1;
-        p1=new PlaceHolder (searchText,"Tìm với ID,Name,Phone");
+        p1=new PlaceHolder (searchText,"ID,Name,Phone");
         searchText.setAlignmentX(Component.CENTER_ALIGNMENT);
         JButton btnSearch=new JButton("Search");
         btnSearch.setForeground(new Color(0,107,68));
@@ -480,7 +480,7 @@ public class AccountView extends View {
         footer.setPreferredSize(new Dimension(footer.getWidth(),50));
         JPanel btn=new JPanel();
         btn.setLayout(new BoxLayout(btn,BoxLayout.X_AXIS));
-        btn.setBackground(Color.cyan);
+        btn.setBackground(new Color(228,249,245));
         
          JButton btnAdd=new JButton("Add");
         btnAdd.setForeground(new Color(0,107,68));

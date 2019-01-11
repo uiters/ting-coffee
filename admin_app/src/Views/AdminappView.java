@@ -89,8 +89,7 @@ public class AdminappView extends JFrame{
         
         /* FOOTER */
         footer = new JPanel();
-        footer.setBackground(Color.cyan);
-        
+        footer.setBackground(new Color(228,249,245));
         foodMain=new FoodView();
         categoryMain=new FoodCategoryView();
         dashboardMain=new DashboardView();

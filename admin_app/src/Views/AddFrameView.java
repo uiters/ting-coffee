@@ -66,7 +66,7 @@ public class AddFrameView {
     {
         jf=new JDialog(jf, title);
         jf.setModal(true); // hold main excution
-        jf.setSize(300, 400);
+        jf.setSize(300, 250);
         jf.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);  // đóng frame hiện hành
         jf.setResizable(false);
 
@@ -156,14 +156,17 @@ public class AddFrameView {
         
         JButton btnCancel=new JButton("Cancel");
         btnCancel.setAlignmentX(Component.CENTER_ALIGNMENT);
+        btnCancel.setForeground(new Color(0,107,68));
         
         JButton btnAdd=new JButton("Add");
         btnAdd.setAlignmentX(Component.CENTER_ALIGNMENT);
+        btnAdd.setForeground(new Color(0,107,68));
         
-        Btngroup.add(Box.createRigidArea(new Dimension(25,0)));
-        Btngroup.add(btnCancel);
         Btngroup.add(Box.createRigidArea(new Dimension(115,0)));
         Btngroup.add(btnAdd);
+        Btngroup.add(Box.createRigidArea(new Dimension(25,0)));
+        Btngroup.add(btnCancel);
+        
         /*end Button Add,Cacnel*/
         
         
@@ -227,7 +230,7 @@ public class AddFrameView {
     {
         jf=new JDialog(jf, title);
         jf.setModal(true);
-        jf.setSize(300, 200);
+        jf.setSize(300, 150);
     
         jf.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);  // đóng frame hiện hành
         jf.setResizable(false);
@@ -268,14 +271,17 @@ public class AddFrameView {
         
         JButton btnCancel=new JButton("Cancel");
         btnCancel.setAlignmentX(Component.CENTER_ALIGNMENT);
+        btnCancel.setForeground(new Color(0,107,68));
         
         JButton btnAdd=new JButton("Add");
         btnAdd.setAlignmentX(Component.CENTER_ALIGNMENT);
+        btnAdd.setForeground(new Color(0,107,68));
         
-        Btngroup.add(Box.createRigidArea(new Dimension(25,0)));
-        Btngroup.add(btnCancel);
         Btngroup.add(Box.createRigidArea(new Dimension(115,0)));
         Btngroup.add(btnAdd);
+        Btngroup.add(Box.createRigidArea(new Dimension(25,0)));
+        Btngroup.add(btnCancel);
+       
         /*end Button Add,Cancel*/
         
         detail.add(Box.createRigidArea(new Dimension(0,20)));
@@ -319,7 +325,7 @@ public class AddFrameView {
     {
         jf=new JDialog(jf,title);
         jf.setModal(true);
-        jf.setSize(300, 200);
+        jf.setSize(300, 150);
         jf.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);  // đóng frame hiện hành
         jf.setResizable(false);
 
@@ -359,14 +365,17 @@ public class AddFrameView {
         
         JButton btnCancel=new JButton("Cancel");
         btnCancel.setAlignmentX(Component.CENTER_ALIGNMENT);
+        btnCancel.setForeground(new Color(0,107,68));
         
         JButton btnAdd=new JButton("Add");
         btnAdd.setAlignmentX(Component.CENTER_ALIGNMENT);
+        btnAdd.setForeground(new Color(0,107,68));
         
-        Btngroup.add(Box.createRigidArea(new Dimension(25,0)));
-        Btngroup.add(btnCancel);
         Btngroup.add(Box.createRigidArea(new Dimension(115,0)));
         Btngroup.add(btnAdd);
+        Btngroup.add(Box.createRigidArea(new Dimension(25,0)));
+        Btngroup.add(btnCancel);
+        
         /*end Button Add,Cancel*/
         
         detail.add(Box.createRigidArea(new Dimension(0,20)));
@@ -596,14 +605,16 @@ public class AddFrameView {
         
         JButton btnCancel=new JButton("Cancel");
         btnCancel.setAlignmentX(Component.CENTER_ALIGNMENT);
+        btnCancel.setForeground(new Color(0,107,68));
         
         JButton btnAdd=new JButton("Add");
         btnAdd.setAlignmentX(Component.CENTER_ALIGNMENT);
+        btnAdd.setForeground(new Color(0,107,68));
         
         Btngroup.add(Box.createRigidArea(new Dimension(15,0)));
-        Btngroup.add(btnCancel);
-        Btngroup.add(Box.createRigidArea(new Dimension(135,0)));
         Btngroup.add(btnAdd);
+        Btngroup.add(Box.createRigidArea(new Dimension(135,0)));
+        Btngroup.add(btnCancel);
         Btngroup.add(Box.createRigidArea(new Dimension(15,0)));
         /*end Button Add,Cancel*/
         

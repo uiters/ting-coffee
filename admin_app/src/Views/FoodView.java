@@ -231,7 +231,7 @@ public class FoodView extends View{
 
         JTextField searchText = new JTextField();
         PlaceHolder p1;
-        p1=new PlaceHolder (searchText,"Tìm với ID,Name");
+        p1=new PlaceHolder (searchText,"ID,Name");
         searchText.setAlignmentX(Component.CENTER_ALIGNMENT);
         JButton btnSearch = new JButton("Search");
         btnSearch.setForeground(new Color(0,107,68));
@@ -435,7 +435,7 @@ public class FoodView extends View{
         footer.setPreferredSize(new Dimension(footer.getWidth(), 50));
         JPanel btn = new JPanel();
         btn.setLayout(new BoxLayout(btn, BoxLayout.X_AXIS));
-        btn.setBackground(Color.cyan);
+        btn.setBackground(new Color(228,249,245));
 
         JButton btnAdd = new JButton("Add");
         btnAdd.setForeground(new Color(0,107,68));
@@ -446,9 +446,9 @@ public class FoodView extends View{
         JButton btnDelete = new JButton("Delete");
         btnDelete.setForeground(new Color(0,107,68));
         btnDelete.add(Box.createRigidArea(new Dimension(50, 20)));
-        JButton btnCancel = new JButton("Cancel");
-        btnCancel.setForeground(new Color(0,107,68));
-        btnCancel.add(Box.createRigidArea(new Dimension(50, 20)));
+        //JButton btnCancel = new JButton("Cancel");
+        //btnCancel.setForeground(new Color(0,107,68));
+        //btnCancel.add(Box.createRigidArea(new Dimension(50, 20)));
 
         btn.add(Box.createRigidArea(new Dimension(5, 0)));
         btn.add(btnAdd);
@@ -457,8 +457,8 @@ public class FoodView extends View{
         btn.add(Box.createRigidArea(new Dimension(50, 0)));
         btn.add(btnDelete);
         btn.add(Box.createRigidArea(new Dimension(50, 0)));
-        btn.add(btnCancel);
-        btn.add(Box.createRigidArea(new Dimension(50, 0)));
+        //btn.add(btnCancel);
+        //btn.add(Box.createRigidArea(new Dimension(50, 0)));
 
         footer.add(btn);
         footer.revalidate();
@@ -516,12 +516,12 @@ public class FoodView extends View{
             }
         });
 
-        btnCancel.addActionListener(new ActionListener() {
+        /*btnCancel.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 //Xu ly
             }
-        });
+        });*/
         /*END sự kiện btn Add,....*/
 
     }

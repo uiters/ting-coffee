@@ -143,7 +143,7 @@ public class DashboardView extends View {
         JPanel Monthgroup=new JPanel();
         Monthgroup.setLayout(new BoxLayout(Monthgroup,BoxLayout.X_AXIS));
         Monthgroup.setMaximumSize(new Dimension(400, 30));
-        Monthgroup.setBackground(Color.cyan);
+        Monthgroup.setBackground(new Color(228,249,245));
         
         
         date=new JMonthChooser();

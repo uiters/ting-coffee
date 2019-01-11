@@ -159,7 +159,7 @@ public class BillView extends View {
         
         JTextField searchText=new JTextField();
         PlaceHolder p1;
-        p1=new PlaceHolder (searchText,"Tìm với ID");
+        p1=new PlaceHolder (searchText,"ID");
         searchText.setAlignmentX(Component.CENTER_ALIGNMENT);
         JButton btnSearch=new JButton("Search");
         btnSearch.setForeground(new Color(0,107,68));
