@@ -68,7 +68,7 @@ public class AdminappView extends JFrame{
     {
         jf=new JFrame("Cafe Management || Admin App");
         
-       jf.setSize(1280, 720);
+       jf.setSize(1400, 800);
        jf.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);  // đóng toàn bộ frame liên quan
        jf.setLocationRelativeTo(null);
        

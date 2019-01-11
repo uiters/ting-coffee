@@ -90,7 +90,10 @@ public class BillView extends View {
         DefaultTableModel model = (DefaultTableModel)table.getModel();
         model.setRowCount(0);
         bills.forEach((item) -> {
-            model.addRow(new Object[] { item.id,  item.idtable,item.checkin,item.checkout,item.discount,item.price,item.username});
+            String status="";
+            if(item.status==1) status="Paid";
+            else status="Unpaid";
+            model.addRow(new Object[] { item.id,  item.table,item.checkin,item.checkout,item.discount,item.price,status,item.username});
         });
         
         table.setModel(model);
@@ -103,7 +106,7 @@ public class BillView extends View {
         main.setLayout(new BoxLayout(main, BoxLayout.X_AXIS));
         /*LOAD TABLE*/
          //Table
-        String []title=new String[]{"ID","IDTable","CheckIn","Checkout","Discount","Total Price","Username"};
+        String []title=new String[]{"ID","Table","CheckIn","Checkout","Discount","Total Price","Status","Username"};
         DefaultTableModel model= new DefaultTableModel(null,title){
             @Override
             public boolean isCellEditable(int row, int column) {
@@ -222,7 +225,7 @@ public class BillView extends View {
          idtableText=new JTextField();
          idtableText.setEditable(false);
          idtableText.setAlignmentX(Component.CENTER_ALIGNMENT);
-         JLabel idtableLabel=new JLabel("ID Table : ");
+         JLabel idtableLabel=new JLabel("Table : ");
          idtableLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
         IDtablegroup.add(Box.createRigidArea(new Dimension(5,0)));
         IDtablegroup.add(idtableLabel);
