@@ -68,13 +68,13 @@ public class FoodModel {
     public void update(int index,String name,String category,double price,String pathimg) throws IOException
     {
         String raw= mySqlConnection.executeNoneQuery(Query.updateFood, new Object[] { index , name ,category,price,pathimg });
-        if (raw.equals("1")==true) JOptionPane.showMessageDialog(null, "Đã cập nhật image thành công");
+        if (raw.equals("1")==true) JOptionPane.showMessageDialog(null, "Updated image successfully!");
     }
     
     public void update(int index,String name,String category,double price) throws IOException
     {
         String raw= mySqlConnection.executeNoneQuery(Query.updateInfoFood, new Object[] { index , name ,category,price });
-        if (raw.equals("1")==true) JOptionPane.showMessageDialog(null, "Đã cập nhật thành công");
+        if (raw.equals("1")==true) JOptionPane.showMessageDialog(null, "Updated successfully!");
     }
     
     
@@ -92,14 +92,15 @@ public class FoodModel {
         if(d<=0)
         {
             String raw=mySqlConnection.executeNoneQuery(Query.delFood, new Object[] { id });
-            JOptionPane.showMessageDialog(null, "Đã xóa thành công!");
+            JOptionPane.showMessageDialog(null, "Deleted successfully!");
         }
-        else JOptionPane.showMessageDialog(null, "Không thể xóa do đã tồn tại trong bill");
+        else JOptionPane.showMessageDialog(null, "Can't delete because it exists in bills!");
     }
     
     public void addFood(String name,String category,double price,String path) throws IOException
     {
         String raw= mySqlConnection.executeNoneQuery(Query.addFood, new Object[] { name , category , price, path });
+        if (raw.equals("1")==true) JOptionPane.showMessageDialog(null, "Added successfully!");
     }
     
     public int getIDLast() throws IOException

@@ -6,11 +6,7 @@
 package Views;
 
 import Controllers.DashboardController;
-import Models.BillModel;
 import Models.DashboardModel.Report;
-import com.orsoncharts.label.StandardCategoryItemLabelGenerator;
-import com.orsoncharts.util.TextAnchor;
-import com.toedter.calendar.JDateChooser;
 import com.toedter.calendar.JMonthChooser;
 import com.toedter.calendar.JYearChooser;
 import java.awt.Color;
@@ -24,11 +20,9 @@ import java.util.Date;
 import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
-import javax.swing.JLabel;
+import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-import javax.swing.JTextField;
-import javax.swing.table.DefaultTableModel;
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartPanel;
 import org.jfree.chart.JFreeChart;
@@ -49,7 +43,9 @@ public class DashboardView extends View {
     private JButton btn;
     private JFreeChart lineChart;
     private DashboardController controller;
-    private List<Report> list=new ArrayList<Report>();
+    private List<Report> list=new ArrayList<>();
+    String []items={"Last 7 day","Last month","Last year"};
+    JComboBox cb;
     public DashboardView()
     {
         controller=DashboardController.getInstance(this);
@@ -142,26 +138,32 @@ public class DashboardView extends View {
          /*Birthday*/
         JPanel Monthgroup=new JPanel();
         Monthgroup.setLayout(new BoxLayout(Monthgroup,BoxLayout.X_AXIS));
-        Monthgroup.setMaximumSize(new Dimension(400, 30));
-        Monthgroup.setBackground(Color.cyan);
+        //Monthgroup.setMaximumSize(new Dimension(400, 30));
+        Monthgroup.setMaximumSize(new Dimension(300, 30));
+        Monthgroup.setBackground(new Color(228,249,245));
         
-        
+        /*
         date=new JMonthChooser();
         date.setAlignmentX(Component.CENTER_ALIGNMENT);
         year=new JYearChooser();
         year.setAlignmentX(Component.CENTER_ALIGNMENT);
-        btn=new JButton("View");
+        
+         JLabel dateLabel=new JLabel("Month : ");
+         dateLabel.setAlignmentX(Component.CENTER_ALIGNMENT);*/
+        
+       cb=new JComboBox(items);
+       btn=new JButton("View");
         btn.setForeground(new Color(0,107,68));
         btn.add(Box.createRigidArea(new Dimension(50, 20)));
         btn.setAlignmentX(Component.CENTER_ALIGNMENT);
-         JLabel dateLabel=new JLabel("Month : ");
-         dateLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
+        
+        
         Monthgroup.add(Box.createRigidArea(new Dimension(5,0)));
-        Monthgroup.add(dateLabel);
-        Monthgroup.add(Box.createRigidArea(new Dimension(33,0)));
+        Monthgroup.add(cb);
+        /*Monthgroup.add(Box.createRigidArea(new Dimension(33,0)));
         Monthgroup.add(date);
         Monthgroup.add(Box.createRigidArea(new Dimension(10,0))); 
-        Monthgroup.add(year);
+        Monthgroup.add(year);*/
         Monthgroup.add(Box.createRigidArea(new Dimension(33,0))); 
         Monthgroup.add(btn);
         
@@ -174,7 +176,7 @@ public class DashboardView extends View {
         btn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                Date curday=new Date();
+                /*Date curday=new Date();
                 int curYear=curday.getYear()+1900;
                 int curMonth=curday.getMonth();                
                 String day="";
@@ -204,9 +206,17 @@ public class DashboardView extends View {
                 if(year.getYear()>curYear)
                 {
                     JOptionPane.showMessageDialog(null, "Chưa có báo cáo vì ngày hiện tại nhỏ hơn ngày xem báo cáo");
-                }
-                
-                
+                }*/
+                Date curday=new Date();
+                int day=curday.getDate();
+                int month=curday.getMonth()+1;
+                int year=curday.getYear();
+                if(cb.getSelectedIndex()==0) 
+                    JOptionPane.showMessageDialog(null, "Load ngay");
+                if(cb.getSelectedIndex()==1) 
+                    JOptionPane.showMessageDialog(null, "Load thang");
+                if(cb.getSelectedIndex()==2) 
+                    JOptionPane.showMessageDialog(null, "Load nam");
                 
             }
         });

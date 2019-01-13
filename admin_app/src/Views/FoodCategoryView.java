@@ -25,9 +25,7 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
-import javax.swing.RowFilter;
 import javax.swing.table.DefaultTableModel;
-import javax.swing.table.TableRowSorter;
 
 /**
  *
@@ -39,8 +37,8 @@ public class FoodCategoryView extends View{
     private JTextField nameText; //Nametext
     private JTable table; //table FOOD
     private final AddFrameView addFrame;
-    private List<String> list=new ArrayList<String>(); // dung de luu list gan qua foodview
-    private List<String> listCate=new ArrayList<String>(); // dung de luu list gan qua foodview
+    private List<String> list=new ArrayList<>(); // dung de luu list gan qua foodview
+    private List<String> listCate=new ArrayList<>(); // dung de luu list gan qua foodview
     private final FoodCategoryController controller;
     public FoodCategoryView()
     {
@@ -104,7 +102,7 @@ public class FoodCategoryView extends View{
             return false;
             }
         };
-        table=new JTable();
+        table=new JTable();      
         table.getTableHeader().setFont(new java.awt.Font(table.getFont().toString(), Font.BOLD, 22));
         table.getTableHeader().setReorderingAllowed(false); // khong cho di chuyen thu tu cac column
         table.setFont(new java.awt.Font(table.getFont().toString(), Font.PLAIN, 18));
@@ -159,7 +157,7 @@ public class FoodCategoryView extends View{
         
         JTextField searchText=new JTextField();
         PlaceHolder p1;
-        p1=new PlaceHolder (searchText,"Tìm với ID,Name");
+        p1=new PlaceHolder (searchText,"Name");
         searchText.setAlignmentX(Component.CENTER_ALIGNMENT);
         JButton btnSearch=new JButton("Search");
         btnSearch.setForeground(new Color(0,107,68));
@@ -175,28 +173,12 @@ public class FoodCategoryView extends View{
          btnSearch.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-             String text=searchText.getText();
-                if(!text.equals("")){
-                for(int i=0;i<table.getRowCount();i++)
-                    
-                {
-                    if(text.equalsIgnoreCase(table.getValueAt(i, 0).toString())==true)
-                    {
-                        table.setRowSelectionInterval(i, i);
-                         setInfo(i);
-                        break;
-                    }
-                   
-                    if(String.valueOf(table.getValueAt(i, 1)).toLowerCase().contains(text.toLowerCase()))
-                    {
-                            table.setRowSelectionInterval(i, i);
-                            setInfo(i);
-                            break;
-                    }
- 
-                    
-                }
-                }
+                String text = searchText.getText().toLowerCase();
+                if(text.equalsIgnoreCase("Name"))
+                    text = "";
+                Object data =  controller.Filter(text, null);
+                if(data != null)
+                    loadView(data);
             }
             
         });
@@ -269,7 +251,7 @@ public class FoodCategoryView extends View{
         footer.setPreferredSize(new Dimension(footer.getWidth(),50));
         JPanel btn=new JPanel();
         btn.setLayout(new BoxLayout(btn,BoxLayout.X_AXIS));
-        btn.setBackground(Color.cyan);
+        btn.setBackground(new Color(228,249,245));
         
         JButton btnAdd=new JButton("Add");
         btnAdd.setForeground(new Color(0,107,68));
@@ -280,9 +262,9 @@ public class FoodCategoryView extends View{
         JButton btnDelete=new JButton("Delete");
         btnDelete.setForeground(new Color(0,107,68));
         btnDelete.add(Box.createRigidArea(new Dimension(50, 20)));
-        JButton btnCancel=new JButton("Cancel");
-        btnCancel.setForeground(new Color(0,107,68));
-        btnCancel.add(Box.createRigidArea(new Dimension(50, 20)));
+        //JButton btnCancel=new JButton("Cancel");
+        //btnCancel.setForeground(new Color(0,107,68));
+        //btnCancel.add(Box.createRigidArea(new Dimension(50, 20)));
          
          
          btn.add(Box.createRigidArea(new Dimension(5,0)));
@@ -292,8 +274,8 @@ public class FoodCategoryView extends View{
          btn.add(Box.createRigidArea(new Dimension(50,0)));
          btn.add(btnDelete);
          btn.add(Box.createRigidArea(new Dimension(50,0)));
-         btn.add(btnCancel);
-         btn.add(Box.createRigidArea(new Dimension(50,0)));
+         //btn.add(btnCancel);
+         //btn.add(Box.createRigidArea(new Dimension(50,0)));
          
          footer.add(btn);
          
@@ -337,12 +319,12 @@ public class FoodCategoryView extends View{
             }
         });
          
-         btnCancel.addActionListener(new ActionListener() {
+        /* btnCancel.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 //Xu ly
             }
-        });
+        });*/
          /*END sự kiện btn Add,....*/
          
     }

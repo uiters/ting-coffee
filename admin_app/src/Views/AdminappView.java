@@ -7,36 +7,20 @@ package Views;
 
 import java.awt.*;
 import java.awt.BorderLayout;
-import java.awt.FlowLayout;
 import java.awt.Font;
-import java.awt.GridBagConstraints;
-import java.awt.GridBagLayout;
-import java.awt.GridLayout;
-import java.awt.Label;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.KeyEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.awt.event.WindowEvent;
 import java.net.URL;
-import java.util.Objects;
+import java.util.Timer;
+import java.util.TimerTask;
 import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
-import javax.swing.JButton;
-import javax.swing.JComboBox;
-import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-import javax.swing.JScrollPane;
 import javax.swing.JTabbedPane;
-import javax.swing.JTable;
-import javax.swing.JTextField;
-import javax.swing.table.DefaultTableModel;
-import javax.swing.table.JTableHeader;
 
 /**
  *
@@ -57,6 +41,7 @@ public class AdminappView extends JFrame{
     BillView billMain;
     AccountView staffMain;
     LoginView loginView;
+    ProfileView profileView;
     JLabel dashboardTitle;
     JLabel foodTitle;
     JLabel categoryTitle;
@@ -64,11 +49,14 @@ public class AdminappView extends JFrame{
     JLabel staffTitle;
     JLabel billTitle;
     JLabel logoutTitle;
-    public AdminappView()
+    JLabel profileTitle;
+    String username="";
+    public AdminappView(String a)
     {
+        username=a;
         jf=new JFrame("Cafe Management || Admin App");
         
-       jf.setSize(1280, 720);
+       jf.setSize(1400, 800);
        jf.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);  // đóng toàn bộ frame liên quan
        jf.setLocationRelativeTo(null);
        
@@ -89,14 +77,14 @@ public class AdminappView extends JFrame{
         
         /* FOOTER */
         footer = new JPanel();
-        footer.setBackground(Color.cyan);
-        
+        footer.setBackground(new Color(228,249,245));
         foodMain=new FoodView();
         categoryMain=new FoodCategoryView();
         dashboardMain=new DashboardView();
         tableMain=new TableView();
         billMain=new BillView();
         staffMain=new AccountView();
+        profileView=new ProfileView(username);
         
         createHeader(header);
         jf.add(header, BorderLayout.PAGE_START);
@@ -330,7 +318,7 @@ public class AdminappView extends JFrame{
         logout.setLayout(new BoxLayout(logout, BoxLayout.Y_AXIS));
         logout.setBackground(new Color(228,249,245));
         
-        logoutTitle = new JLabel("Exit");
+        logoutTitle = new JLabel("Logout");
         logoutTitle.setForeground(new Color(41,55,72));
         logoutTitle.setAlignmentX(Component.CENTER_ALIGNMENT);
         
@@ -348,10 +336,12 @@ public class AdminappView extends JFrame{
                  super.mouseClicked(e); //To change body of generated methods, choose Tools | Templates.
                  setForeColor();
                  logoutTitle.setForeground(Color.red);
-                 int reply = JOptionPane.showConfirmDialog(null, "Bạn có muốn thoát?", "Thông báo", JOptionPane.YES_NO_OPTION);
+                 int reply = JOptionPane.showConfirmDialog(null, "Do you want to logout?", "Notification", JOptionPane.YES_NO_OPTION);
                  if (reply == JOptionPane.YES_OPTION) {
                     //xu ly log out
-                    System.exit(0);
+                    //System.exit(0);
+                    jf.dispose();
+                    new LoginView();
                 }
                 else {
                 }
@@ -360,6 +350,37 @@ public class AdminappView extends JFrame{
             
 });
         /*END LOG OUT OPTIONS*/
+        
+        /*PROFILE*/
+        JPanel profile = new JPanel();
+        profile.setLayout(new BoxLayout(profile, BoxLayout.Y_AXIS));
+        profile.setBackground(new Color(228,249,245));
+        
+        profileTitle = new JLabel("Password");
+        profileTitle.setForeground(new Color(41,55,72));
+        profileTitle.setAlignmentX(Component.CENTER_ALIGNMENT);
+        
+        URL profileURL = getClass().getResource("../image/key.png");
+        JLabel profileIcon = new JLabel(new ImageIcon(profileURL));
+        profileIcon.setAlignmentX(Component.CENTER_ALIGNMENT);
+        
+        profile.add(profileTitle);
+        profile.add(Box.createRigidArea(new Dimension(0, 6)));
+        profile.add(profileIcon);
+        
+        profile.addMouseListener(new MouseAdapter() {
+             @Override
+             public void mouseClicked(MouseEvent e) {
+                 super.mouseClicked(e); //To change body of generated methods, choose Tools | Templates.
+                 setForeColor();
+                 profileTitle.setForeground(Color.red);
+                 profileView.Load();
+                 Wait(2);
+                
+             }
+            
+});
+        /*END PROFILE*/
         
         options.add(Box.createRigidArea(new Dimension(30, 0)));
         options.add(bill);
@@ -373,6 +394,8 @@ public class AdminappView extends JFrame{
         options.add(table);
         options.add(Box.createRigidArea(new Dimension(30, 0)));
         options.add(staff);
+        options.add(Box.createRigidArea(new Dimension(30, 0)));
+        options.add(profile);
         options.add(Box.createRigidArea(new Dimension(30, 0)));
         options.add(logout);
         options.add(Box.createRigidArea(new Dimension(30, 0)));
@@ -389,6 +412,30 @@ public class AdminappView extends JFrame{
         loginView=a;
     }
     
+    private void Wait(int x)
+    {
+            //long timewait=Long.parseLong(timeText.getText()); // convert string to long
+            Timer wait=new Timer();
+            //flag=true; //set flag to recognize timer is started
+            TimerTask task=new TimerTask() {
+                long second=0;
+                @Override
+                public void run() {               
+                    //JOptionPane.showMessageDialog(null, "Refresh!");
+                    second=second+1;
+                    System.out.println(second);
+                    if(second==x)
+                    {
+                        //controller.loadFull();
+                        second=0;
+                        setForeColor();
+                        wait.cancel();
+                        wait.purge();
+                    }
+                }      
+            };
+           wait.scheduleAtFixedRate(task, 1000, x*1000);
+    }
     private void setForeColor()
     {
         Color defColor=new Color(41,55,72);
@@ -399,5 +446,6 @@ public class AdminappView extends JFrame{
         staffTitle.setForeground(defColor);
         billTitle.setForeground(defColor);
         logoutTitle.setForeground(defColor);
+        profileTitle.setForeground(defColor);
     }
 }

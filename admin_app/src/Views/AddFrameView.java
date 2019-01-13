@@ -28,14 +28,11 @@ import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JDialog;
-import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
-import javax.swing.filechooser.FileNameExtensionFilter;
-import java.util.List;
 import org.apache.commons.codec.binary.Base64;
 
 /**
@@ -66,7 +63,7 @@ public class AddFrameView {
     {
         jf=new JDialog(jf, title);
         jf.setModal(true); // hold main excution
-        jf.setSize(300, 400);
+        jf.setSize(300, 250);
         jf.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);  // đóng frame hiện hành
         jf.setResizable(false);
 
@@ -156,14 +153,17 @@ public class AddFrameView {
         
         JButton btnCancel=new JButton("Cancel");
         btnCancel.setAlignmentX(Component.CENTER_ALIGNMENT);
+        btnCancel.setForeground(new Color(0,107,68));
         
         JButton btnAdd=new JButton("Add");
         btnAdd.setAlignmentX(Component.CENTER_ALIGNMENT);
+        btnAdd.setForeground(new Color(0,107,68));
         
-        Btngroup.add(Box.createRigidArea(new Dimension(25,0)));
-        Btngroup.add(btnCancel);
         Btngroup.add(Box.createRigidArea(new Dimension(115,0)));
         Btngroup.add(btnAdd);
+        Btngroup.add(Box.createRigidArea(new Dimension(25,0)));
+        Btngroup.add(btnCancel);
+        
         /*end Button Add,Cacnel*/
         
         
@@ -212,7 +212,7 @@ public class AddFrameView {
             @Override
             public void actionPerformed(ActionEvent e) {
                  //Xu ly btn cancel
-                 JOptionPane.showMessageDialog(null, "Close frame add food");
+                 //JOptionPane.showMessageDialog(null, "Close frame add food");
                   jf.dispose();
             }
         });
@@ -227,7 +227,7 @@ public class AddFrameView {
     {
         jf=new JDialog(jf, title);
         jf.setModal(true);
-        jf.setSize(300, 200);
+        jf.setSize(300, 150);
     
         jf.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);  // đóng frame hiện hành
         jf.setResizable(false);
@@ -268,14 +268,17 @@ public class AddFrameView {
         
         JButton btnCancel=new JButton("Cancel");
         btnCancel.setAlignmentX(Component.CENTER_ALIGNMENT);
+        btnCancel.setForeground(new Color(0,107,68));
         
         JButton btnAdd=new JButton("Add");
         btnAdd.setAlignmentX(Component.CENTER_ALIGNMENT);
+        btnAdd.setForeground(new Color(0,107,68));
         
-        Btngroup.add(Box.createRigidArea(new Dimension(25,0)));
-        Btngroup.add(btnCancel);
         Btngroup.add(Box.createRigidArea(new Dimension(115,0)));
         Btngroup.add(btnAdd);
+        Btngroup.add(Box.createRigidArea(new Dimension(25,0)));
+        Btngroup.add(btnCancel);
+       
         /*end Button Add,Cancel*/
         
         detail.add(Box.createRigidArea(new Dimension(0,20)));
@@ -293,7 +296,7 @@ public class AddFrameView {
                 {
                     //Xu ly btn add
                     controller.insert(nameText.getText());
-                    JOptionPane.showMessageDialog(null, "Đã thêm 1 food category thành công!");
+                    //JOptionPane.showMessageDialog(null, "Đã thêm 1 food category thành công!");
                     jf.dispose();
                 }
                 else  JOptionPane.showMessageDialog(null, "Bạn chưa điền đủ thông tin!");
@@ -304,7 +307,7 @@ public class AddFrameView {
             @Override
             public void actionPerformed(ActionEvent e) {
                  //Xu ly btn cancel
-                 JOptionPane.showMessageDialog(null, "Close frame add food cagetory");
+                 //JOptionPane.showMessageDialog(null, "Close frame add food cagetory");
                   jf.dispose();
             }
         });
@@ -319,7 +322,7 @@ public class AddFrameView {
     {
         jf=new JDialog(jf,title);
         jf.setModal(true);
-        jf.setSize(300, 200);
+        jf.setSize(300, 150);
         jf.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);  // đóng frame hiện hành
         jf.setResizable(false);
 
@@ -359,14 +362,17 @@ public class AddFrameView {
         
         JButton btnCancel=new JButton("Cancel");
         btnCancel.setAlignmentX(Component.CENTER_ALIGNMENT);
+        btnCancel.setForeground(new Color(0,107,68));
         
         JButton btnAdd=new JButton("Add");
         btnAdd.setAlignmentX(Component.CENTER_ALIGNMENT);
+        btnAdd.setForeground(new Color(0,107,68));
         
-        Btngroup.add(Box.createRigidArea(new Dimension(25,0)));
-        Btngroup.add(btnCancel);
         Btngroup.add(Box.createRigidArea(new Dimension(115,0)));
         Btngroup.add(btnAdd);
+        Btngroup.add(Box.createRigidArea(new Dimension(25,0)));
+        Btngroup.add(btnCancel);
+        
         /*end Button Add,Cancel*/
         
         detail.add(Box.createRigidArea(new Dimension(0,20)));
@@ -384,7 +390,7 @@ public class AddFrameView {
                 {
                     //Xu ly btn add
                     controller.insert(nameText.getText());
-                    JOptionPane.showMessageDialog(null, "Đã thêm 1 table thành công!");
+                    //JOptionPane.showMessageDialog(null, "Đã thêm 1 table thành công!");
                     jf.dispose();
                 }
                 else  JOptionPane.showMessageDialog(null, "Bạn chưa điền đủ thông tin!");
@@ -395,7 +401,7 @@ public class AddFrameView {
             @Override
             public void actionPerformed(ActionEvent e) {
                  //Xu ly btn cancel
-                 JOptionPane.showMessageDialog(null, "Close frame add food cagetory");
+                 //JOptionPane.showMessageDialog(null, "Close frame add food cagetory");
                   jf.dispose();
             }
         });
@@ -596,14 +602,16 @@ public class AddFrameView {
         
         JButton btnCancel=new JButton("Cancel");
         btnCancel.setAlignmentX(Component.CENTER_ALIGNMENT);
+        btnCancel.setForeground(new Color(0,107,68));
         
         JButton btnAdd=new JButton("Add");
         btnAdd.setAlignmentX(Component.CENTER_ALIGNMENT);
+        btnAdd.setForeground(new Color(0,107,68));
         
         Btngroup.add(Box.createRigidArea(new Dimension(15,0)));
-        Btngroup.add(btnCancel);
-        Btngroup.add(Box.createRigidArea(new Dimension(135,0)));
         Btngroup.add(btnAdd);
+        Btngroup.add(Box.createRigidArea(new Dimension(135,0)));
+        Btngroup.add(btnCancel);
         Btngroup.add(Box.createRigidArea(new Dimension(15,0)));
         /*end Button Add,Cancel*/
         

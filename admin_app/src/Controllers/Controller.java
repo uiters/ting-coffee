@@ -14,4 +14,5 @@ public abstract class Controller {
     public abstract void delete(Object object);
     public abstract void update(Object object);
     public abstract void loadFull();
+    public abstract Object Filter(String keyWord, Object opt);
 }

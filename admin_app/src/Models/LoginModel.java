@@ -42,7 +42,7 @@ public class LoginModel {
         String rawJson= mySqlConnection.executeQuery(Query.checkLogin, new Object[] { username });
         if(rawJson.equals("[]")==true)
         {
-            JOptionPane.showMessageDialog(null, "Thông tin tài khoản chưa chính xác!");
+            JOptionPane.showMessageDialog(null, "Account information is not correct!");
             return null;
         }
             

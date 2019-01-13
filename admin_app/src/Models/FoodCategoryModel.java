@@ -58,12 +58,13 @@ public class FoodCategoryModel {
     public void addFoodCagetory(String name) throws IOException
     {
         String raw= mySqlConnection.executeNoneQuery(Query.addFoodCagetory, new Object[] { name });
+        if (raw.equals("1")==true) JOptionPane.showMessageDialog(null, "Added successfully!");
     }
     
     public void update(int index,String name) throws IOException
     {
         String raw= mySqlConnection.executeNoneQuery(Query.updateFoodCategory, new Object[] { index , name });
-        if (raw.equals("1")==true) JOptionPane.showMessageDialog(null, "Đã cập nhật thành công");
+        if (raw.equals("1")==true) JOptionPane.showMessageDialog(null, "Updated successfully!");
     }
     
     private int beforedelete(int index) throws IOException
@@ -81,7 +82,7 @@ public class FoodCategoryModel {
         if(d<=0)
         {
             String raw=mySqlConnection.executeNoneQuery(Query.delFoodCategory, new Object[] { id });
-            JOptionPane.showMessageDialog(null, "Đã xóa thành công!");
+            if(raw.equals("1"))JOptionPane.showMessageDialog(null, "Đã xóa thành công!");
         }
         else JOptionPane.showMessageDialog(null, "Không thể xóa do đã tồn tại trong bill");
         

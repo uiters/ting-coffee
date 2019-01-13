@@ -13,7 +13,7 @@ import java.util.List;
 import java.util.concurrent.CompletableFuture;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.swing.JOptionPane;
+import java.util.stream.Collectors;
 
 /**
  *
@@ -115,6 +115,20 @@ public class TablesController extends Controller {
         future.thenAccept(listTables -> view.loadView(listTables));
     }
     
+    @Override
+    public Object Filter(String keyWord, Object opt)
+    {
+        if(tables == null) return null;
+        if(keyWord.isEmpty() || keyWord.trim().isEmpty())
+        {
+            return tables;
+        }
+        else
+        {
+            return tables.stream().filter(item -> 
+                    item.name.toLowerCase().contains(keyWord)).collect(Collectors.toList());
+        }
+    }
     
     //add trong list local
     private void _addTables(Tables item)

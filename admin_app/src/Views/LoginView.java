@@ -10,42 +10,22 @@ import Models.AccountModel;
 import Models.AccountModel.Account;
 import java.awt.*;
 import java.awt.BorderLayout;
-import java.awt.FlowLayout;
 import java.awt.Font;
-import java.awt.GridBagConstraints;
-import java.awt.GridBagLayout;
-import java.awt.GridLayout;
-import java.awt.Label;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
-import java.io.File;
 import java.net.URL;
-import java.util.Objects;
 import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
-import javax.swing.JComboBox;
-import javax.swing.JDialog;
-import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-import javax.swing.JScrollPane;
-import javax.swing.JTabbedPane;
-import javax.swing.JTable;
 import javax.swing.JTextField;
-import javax.swing.filechooser.FileNameExtensionFilter;
-import javax.swing.table.DefaultTableModel;
-import javax.swing.table.JTableHeader;
 import Views.AdminappView;
 import java.awt.event.KeyAdapter;
-import java.awt.event.WindowEvent;
 import java.util.List;
 import javax.swing.BorderFactory;
 import javax.swing.JPasswordField;
@@ -65,7 +45,7 @@ public class LoginView extends View {
     LoginView()
     {
         jf=new JFrame("Login | Admin App");
-        jf.setSize(500, 400);
+        jf.setSize(550, 450);
         jf.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);  // đóng frame 
         
         jf.setResizable(false);
@@ -79,13 +59,14 @@ public class LoginView extends View {
         
         /*LOGO*/
         JPanel brandSection = new JPanel();
-        brandSection.setBackground(new Color(209, 228, 252));
+        brandSection.setBackground(new Color(255,255,208));
         
         JLabel brandImage = new JLabel();
-        URL imgURL = getClass().getResource("../image/logo.png");
+        URL imgURL = getClass().getResource("../image/logo1.png");
         brandImage.setIcon(new ImageIcon(imgURL));
         
-        JLabel brandText = new JLabel("Coffee Management");
+        JLabel brandText = new JLabel("Starbucks – "
+                + "The Best Coffee and Espresso Drinks");
     
         brandText.setForeground(new Color(100,40,251));
         brandText.setBackground(new Color(228,249,245));
@@ -118,15 +99,15 @@ public class LoginView extends View {
         Namegroup.setMaximumSize(new Dimension(340, 55));
          nameText=new JTextField();
          nameText.setBackground(new Color(228,249,245));
-         nameText.setAlignmentX(Component.CENTER_ALIGNMENT);
          nameText.setBorder(
             BorderFactory.createTitledBorder(
             BorderFactory.createEtchedBorder(
                     EtchedBorder.RAISED, (new Color(0,107,68))
                     , (new Color(0,107,68))), "Username"));
-        Namegroup.add(Box.createRigidArea(new Dimension(48,0)));
+   
+        Namegroup.add(Box.createRigidArea(new Dimension(30,0)));
         Namegroup.add(nameText);
-        Namegroup.add(Box.createRigidArea(new Dimension(5,0))); 
+        Namegroup.add(Box.createRigidArea(new Dimension(0,0))); 
         /*END USERNAME*/
         
         
@@ -149,9 +130,9 @@ public class LoginView extends View {
                     EtchedBorder.RAISED, (new Color(0,107,68))
                     , (new Color(0,107,68))), "Password"));
        
-        Passgroup.add(Box.createRigidArea(new Dimension(48,0)));
+        Passgroup.add(Box.createRigidArea(new Dimension(30,0)));
         Passgroup.add(passText);
-        Passgroup.add(Box.createRigidArea(new Dimension(5,0))); 
+        Passgroup.add(Box.createRigidArea(new Dimension(0,0))); 
         /*END PASSWORD*/
         
         /*end info detail*/
@@ -160,6 +141,7 @@ public class LoginView extends View {
         Btngroup2.setLayout(new BoxLayout(Btngroup2,BoxLayout.X_AXIS));
         Btngroup2.setBackground(new Color(228,249,245));
         JButton btnAdd=new JButton("Login");
+        btnAdd.setForeground(new Color(255,255,255));
     
         btnAdd.add(Box.createRigidArea(new Dimension(250, 20)));
         btnAdd.setBackground(new Color(255,82,82));
@@ -171,6 +153,7 @@ public class LoginView extends View {
         
         
         JButton btnCancel=new JButton("Cancel");
+        btnCancel.setForeground(new Color(255,255,255));
         btnCancel.add(Box.createRigidArea(new Dimension(250, 20)));
         btnCancel.setBackground(new Color(255,82,82));
      
@@ -260,14 +243,17 @@ public class LoginView extends View {
     }
     
     
-    private void LoadApp()
+    private void LoadApp(String a)
     {
-        JOptionPane.showMessageDialog(null, "Đăng nhập  thành công!");
-        app=new AdminappView();
+        JOptionPane.showMessageDialog(null, "Login successfully!");
+        app=new AdminappView(a);
         //app.setLoginView(this);
-        
+        app = null;
+        nameText.setText("");
+        passText.setText("");
         //jf.setVisible(false);
         jf.dispose();
+        
         
     }
     
@@ -294,13 +280,13 @@ public class LoginView extends View {
     @Override
     public void loadView(Object objects){
         List<Account> result=(List<Account>)(Object)objects;
-        if(result.get(0).username.equals(nameText.getText())==true&&Password.checkPassword(passText.getText(), result.get(0).pass)==true)
+        if(result.get(0).username.equals(nameText.getText())== true && Password.checkPassword(passText.getText(), result.get(0).pass)==true)
         {
             if(result.get(0).type==1) //account type la admin
-                LoadApp();
-            else JOptionPane.showMessageDialog(null, "Bạn phải là quản trị viên mới có quyền đăng nhập!");
+                LoadApp(result.get(0).username);
+            else JOptionPane.showMessageDialog(null, "Your account must be admin to login this app!");
         }        
-        else JOptionPane.showMessageDialog(null, "Sai tên tài khoản hoặc mật khẩu đăng nhập");
+        else JOptionPane.showMessageDialog(null, "Username or password is not correct!");
     }
    
 }
