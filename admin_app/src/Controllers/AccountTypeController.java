@@ -5,12 +5,6 @@
  */
 package Controllers;
 
-import java.io.IOException;
-import java.util.List;
-import java.util.concurrent.CompletableFuture;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-
 /**
  *
  * @author Thang Le
@@ -44,6 +38,11 @@ public class AccountTypeController extends Controller {
     public void loadFull()
     {
 
+    }
+    @Override
+    public Object Filter(String keyWord, Object opt)
+    {
+        return null;
     }
     
 }

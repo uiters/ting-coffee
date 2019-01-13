@@ -8,12 +8,11 @@ import Models.FoodCategoryModel;
 import Models.FoodCategoryModel.FoodCategory;
 import Views.FoodCategoryView;
 import java.io.IOException;
-import java.util.Iterator;
 import java.util.List;
 import java.util.concurrent.CompletableFuture;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import org.junit.experimental.categories.Categories;
+import java.util.stream.Collectors;
 
 
 
@@ -116,7 +115,20 @@ public class FoodCategoryController extends Controller {
         future.thenAccept(listFoodCategories -> view.loadView(listFoodCategories));
         
     }
-    
+    @Override
+    public Object Filter(String keyWord, Object opt)
+    {
+        if(foodcategories == null) return null;
+        if(keyWord.isEmpty() || keyWord.trim().isEmpty())
+        {
+            return foodcategories;
+        }
+        else
+        {
+            return foodcategories.stream().filter(item -> 
+                    item.nameCategory.toLowerCase().contains(keyWord)).collect(Collectors.toList());
+        }
+    }
     
     private void _updateCategories(FoodCategory foodCategory){
         for(FoodCategory category : foodcategories){

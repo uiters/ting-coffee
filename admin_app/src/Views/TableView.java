@@ -18,7 +18,6 @@ import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
@@ -170,7 +169,7 @@ public class TableView extends View {
         
         JTextField searchText=new JTextField();
         PlaceHolder p1;
-        p1=new PlaceHolder (searchText,"ID,Name");
+        p1=new PlaceHolder (searchText,"Name");
         searchText.setAlignmentX(Component.CENTER_ALIGNMENT);
         JButton btnSearch=new JButton("Search");
         btnSearch.setForeground(new Color(0,107,68));
@@ -186,28 +185,12 @@ public class TableView extends View {
         btnSearch.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-             String text=searchText.getText();
-                if(!text.equals("")){
-                for(int i=0;i<table.getRowCount();i++)
-                    
-                {
-                    if(text.equalsIgnoreCase(table.getValueAt(i, 0).toString())==true)
-                    {
-                        table.setRowSelectionInterval(i, i);
-                         setInfo(i);
-                        break;
-                    }
-                   
-                    if(String.valueOf(table.getValueAt(i, 1)).toLowerCase().contains(text.toLowerCase()))
-                    {
-                            table.setRowSelectionInterval(i, i);
-                            setInfo(i);
-                            break;
-                    }
- 
-                    
-                }
-                }
+                String text = searchText.getText().toLowerCase();
+                if(text.equalsIgnoreCase("Name"))
+                    text = "";
+                Object data =  controller.Filter(text, null);
+                if(data != null)
+                    loadView(data);
             }
             
         });

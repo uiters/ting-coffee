@@ -25,9 +25,7 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
-import javax.swing.RowFilter;
 import javax.swing.table.DefaultTableModel;
-import javax.swing.table.TableRowSorter;
 
 /**
  *
@@ -39,8 +37,8 @@ public class FoodCategoryView extends View{
     private JTextField nameText; //Nametext
     private JTable table; //table FOOD
     private final AddFrameView addFrame;
-    private List<String> list=new ArrayList<String>(); // dung de luu list gan qua foodview
-    private List<String> listCate=new ArrayList<String>(); // dung de luu list gan qua foodview
+    private List<String> list=new ArrayList<>(); // dung de luu list gan qua foodview
+    private List<String> listCate=new ArrayList<>(); // dung de luu list gan qua foodview
     private final FoodCategoryController controller;
     public FoodCategoryView()
     {
@@ -159,7 +157,7 @@ public class FoodCategoryView extends View{
         
         JTextField searchText=new JTextField();
         PlaceHolder p1;
-        p1=new PlaceHolder (searchText,"ID,Name");
+        p1=new PlaceHolder (searchText,"Name");
         searchText.setAlignmentX(Component.CENTER_ALIGNMENT);
         JButton btnSearch=new JButton("Search");
         btnSearch.setForeground(new Color(0,107,68));
@@ -175,28 +173,12 @@ public class FoodCategoryView extends View{
          btnSearch.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-             String text=searchText.getText();
-                if(!text.equals("")){
-                for(int i=0;i<table.getRowCount();i++)
-                    
-                {
-                    if(text.equalsIgnoreCase(table.getValueAt(i, 0).toString())==true)
-                    {
-                        table.setRowSelectionInterval(i, i);
-                         setInfo(i);
-                        break;
-                    }
-                   
-                    if(String.valueOf(table.getValueAt(i, 1)).toLowerCase().contains(text.toLowerCase()))
-                    {
-                            table.setRowSelectionInterval(i, i);
-                            setInfo(i);
-                            break;
-                    }
- 
-                    
-                }
-                }
+                String text = searchText.getText().toLowerCase();
+                if(text.equalsIgnoreCase("Name"))
+                    text = "";
+                Object data =  controller.Filter(text, null);
+                if(data != null)
+                    loadView(data);
             }
             
         });

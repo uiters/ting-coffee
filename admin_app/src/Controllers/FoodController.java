@@ -15,7 +15,7 @@ import java.util.List;
 import java.util.concurrent.CompletableFuture;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.swing.JOptionPane;
+import java.util.stream.Collectors;
 
 /**
  *
@@ -147,7 +147,21 @@ public class FoodController extends Controller{
         });
         future.thenAccept(listFoods -> view.loadView(listFoods));
     }
-    
+    @Override
+    public Object Filter(String keyWord, Object opt)
+    {
+        if(foods == null) return null;
+        if(keyWord.isEmpty() || keyWord.trim().isEmpty())
+        {
+            return foods;
+        }
+        else
+        {
+            return foods.stream().filter(item -> 
+                    item.name.toLowerCase().contains(keyWord) || 
+                    item.nameCategory.toLowerCase().contains(keyWord)).collect(Collectors.toList());
+        }
+    }
    private void _deleteFoods(int index)
    {
        //foodcategories.remove(foodCategory); //??

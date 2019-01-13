@@ -9,8 +9,6 @@ import Controllers.AccountController;
 import Models.AccountModel;
 import Models.AccountModel.Account;
 import Models.AccountTypeModel.AccountType;
-import Models.FoodCategoryModel.FoodCategory;
-import Models.FoodModel.Food;
 import com.placeholder.PlaceHolder;
 import com.toedter.calendar.JDateChooser;
 import java.awt.*;
@@ -21,16 +19,15 @@ import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.LocalTime;
 import java.util.Date;
 import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
@@ -38,6 +35,8 @@ import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
 import java.util.List;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -157,7 +156,7 @@ public class AccountView extends View {
         main.setLayout(new BoxLayout(main, BoxLayout.X_AXIS));
         /*LOAD TABLE*/
          //Table
-        String []title=new String[]{"ID","Name","IDCard","Birthday","Sex","Address","Phone","Staff Type"};
+        String []title=new String[]{"User","Name","IDCard","Birthday","Sex","Address","Phone","Staff Type"};
         /*Object [][]object=new Object[][]{
             {"abc","Nguyen Van A","123","10-08-1990","Male","TPHCM","123456","Nhan vien"},
             {"xyz","Ha Thi C","123","15-02-1995","Female","Da Nang","123456789","Nhan vien"},
@@ -187,7 +186,11 @@ public class AccountView extends View {
             public void mouseClicked(MouseEvent arg0)
             {
                     int row=table.getSelectedRow();
+                try {
                     setInfo( row);
+                } catch (ParseException ex) {
+                    Logger.getLogger(AccountView.class.getName()).log(Level.SEVERE, null, ex);
+                }
                     
             }    
 });
@@ -222,7 +225,7 @@ public class AccountView extends View {
         
         JTextField searchText=new JTextField();
         PlaceHolder p1;
-        p1=new PlaceHolder (searchText,"ID,Name,Phone");
+        p1=new PlaceHolder (searchText,"User,Name");
         searchText.setAlignmentX(Component.CENTER_ALIGNMENT);
         JButton btnSearch=new JButton("Search");
         btnSearch.setForeground(new Color(0,107,68));
@@ -235,38 +238,18 @@ public class AccountView extends View {
         search.add(searchText);
         search.add(Box.createRigidArea(new Dimension(5,0)));
         
-        btnSearch.addActionListener(new ActionListener() {
+        btnSearch.addActionListener(new ActionListener() 
+        {
             @Override
-            public void actionPerformed(ActionEvent e) {
-             String text=searchText.getText();
-                if(!text.equals("")){
-                for(int i=0;i<table.getRowCount();i++)
-                    
-                {
-                    if(text.equalsIgnoreCase(table.getValueAt(i, 0).toString())==true)
-                    {
-                        table.setRowSelectionInterval(i, i);
-                         setInfo(i);
-                        break;
-                    }
-                   
-                    if(String.valueOf(table.getValueAt(i, 1)).toLowerCase().contains(text.toLowerCase()))
-                    {
-                            table.setRowSelectionInterval(i, i);
-                            setInfo(i);
-                            break;
-                    }
-                    if(String.valueOf(table.getValueAt(i, 6)).toLowerCase().contains(text.toLowerCase()))
-                    {
-                            table.setRowSelectionInterval(i, i);
-                            setInfo(i);
-                            break;
-                    }
-                    
-                }
-                }
+            public void actionPerformed(ActionEvent e) 
+            {
+                String text = searchText.getText().toLowerCase();
+                if(text.equalsIgnoreCase("User,Name"))
+                    text = "";
+                Object data =  controller.Filter(text, null);
+                if(data != null)
+                    loadView(data);
             }
-            
         });
         /*end search field*/
         
@@ -578,7 +561,7 @@ public class AccountView extends View {
     
     
     /*get value from table and set to textfield*/
-    private void setInfo(int row)
+    private void setInfo(int row) throws ParseException
     {
             String ID=table.getModel().getValueAt(row, 0).toString();
             String Name=table.getModel().getValueAt(row, 1).toString();
@@ -626,7 +609,8 @@ public class AccountView extends View {
             }
             catch(NullPointerException ex)
             {
-                birthday.setCalendar(null);
+                 Date date=new SimpleDateFormat("yy-MM-dd").parse(LocalTime.now().toString());
+                birthday.setDate(date);
             }
             
     }

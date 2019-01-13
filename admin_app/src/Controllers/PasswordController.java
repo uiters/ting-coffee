@@ -7,11 +7,8 @@ package Controllers;
 
 import Models.AccountModel;
 import Models.AccountModel.Account;
-import Models.FoodCategoryModel;
 import Models.PasswordModel;
-import Models.TablesModel;
 import Views.ProfileView;
-import Views.TableView;
 import java.io.IOException;
 import java.util.List;
 import java.util.concurrent.CompletableFuture;
@@ -48,6 +45,11 @@ public class PasswordController extends Controller {
 
     }
     
+    @Override
+    public Object Filter(String keyWord, Object opt)
+    {
+        return null;
+    }
     
     @Override
     public void delete(Object object){

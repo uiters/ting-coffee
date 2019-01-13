@@ -7,7 +7,6 @@ package Views;
 
 import Controllers.BillInfoController;
 import Models.BillInfoModel.BillInfo;
-import Models.FoodCategoryModel;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;

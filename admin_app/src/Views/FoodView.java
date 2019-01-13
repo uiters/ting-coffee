@@ -6,7 +6,6 @@
 package Views;
 
 import Controllers.FoodController;
-import Models.FoodCategoryModel;
 import Models.FoodCategoryModel.FoodCategory;
 import Models.FoodModel;
 import Models.FoodModel.Food;
@@ -25,7 +24,6 @@ import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFileChooser;
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
@@ -41,7 +39,6 @@ import java.awt.image.BufferedImage;
 import java.awt.image.DataBufferByte;
 import java.awt.image.WritableRaster;
 import java.io.IOException;
-import java.lang.reflect.Array;
 import java.nio.file.Files;
 import java.util.ArrayList;
 import java.util.List;
@@ -156,15 +153,7 @@ public class FoodView extends View{
         main.setLayout(new BoxLayout(main, BoxLayout.X_AXIS));
         /*LOAD TABLE*/
         //Table
-        String[] title = new String[]{"ID", "Name", "Cagetory", "Image", "Price"};
-        
-//        Object[][] object = null ;new Object[][]{
-//            {1, "Banh trang tron", "An vat", "", 10000},
-//            {2, "Banh trang tron", "An vat", "", 10000},
-//            {3, "Banh trang tron", "An vat", "", 10000},
-//            {4, "Banh trang tron", "An vat", "", 10000},
-//            {5, "Banh trang tron", "An vat", "", 10000},
-//            {6, "Banh trang tron", "An vat", "", 10000},};
+        String[] title = new String[]{"ID", "Name", "Category", "Image", "Price"};
         DefaultTableModel model = new DefaultTableModel(null, title) {
             @Override
             public boolean isCellEditable(int row, int column) {
@@ -231,7 +220,7 @@ public class FoodView extends View{
 
         JTextField searchText = new JTextField();
         PlaceHolder p1;
-        p1=new PlaceHolder (searchText,"ID,Name");
+        p1=new PlaceHolder (searchText,"Name,Category");
         searchText.setAlignmentX(Component.CENTER_ALIGNMENT);
         JButton btnSearch = new JButton("Search");
         btnSearch.setForeground(new Color(0,107,68));
@@ -247,26 +236,12 @@ public class FoodView extends View{
         btnSearch.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-             String text=searchText.getText();
-                if(!text.equals("")){
-                for(int i=0;i<table.getRowCount();i++)
-                    
-                {
-                    if(text.equalsIgnoreCase(table.getValueAt(i, 0).toString())==true)
-                    {
-                        table.setRowSelectionInterval(i, i);
-                        setInfo(i);
-                        break;
-                    }
-                   
-                    if(String.valueOf(table.getValueAt(i, 1)).toLowerCase().contains(text.toLowerCase()))
-                    {
-                            table.setRowSelectionInterval(i, i);
-                            setInfo(i);
-                            break;
-                    }
-                }
-                }
+                String text = searchText.getText().toLowerCase();
+                if(text.equalsIgnoreCase("Name,Category"))
+                    text = "";
+                Object data =  controller.Filter(text, null);
+                if(data != null)
+                    loadView(data);
             }
             
         });

@@ -6,11 +6,7 @@
 package Views;
 
 import Controllers.DashboardController;
-import Models.BillModel;
 import Models.DashboardModel.Report;
-import com.orsoncharts.label.StandardCategoryItemLabelGenerator;
-import com.orsoncharts.util.TextAnchor;
-import com.toedter.calendar.JDateChooser;
 import com.toedter.calendar.JMonthChooser;
 import com.toedter.calendar.JYearChooser;
 import java.awt.Color;
@@ -25,11 +21,8 @@ import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
-import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-import javax.swing.JTextField;
-import javax.swing.table.DefaultTableModel;
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartPanel;
 import org.jfree.chart.JFreeChart;
@@ -50,7 +43,7 @@ public class DashboardView extends View {
     private JButton btn;
     private JFreeChart lineChart;
     private DashboardController controller;
-    private List<Report> list=new ArrayList<Report>();
+    private List<Report> list=new ArrayList<>();
     String []items={"Last 7 day","Last month","Last year"};
     JComboBox cb;
     public DashboardView()
