@@ -27,8 +27,7 @@ public class FoodCategoryController extends Controller {
     
     public static FoodCategoryController getInstance(FoodCategoryView view)
     {
-        if(_instance == null)
-            _instance = new FoodCategoryController(view);
+        _instance = new FoodCategoryController(view);
         return _instance;
     }
     

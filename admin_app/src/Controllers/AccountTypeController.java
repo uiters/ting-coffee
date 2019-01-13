@@ -13,8 +13,7 @@ public class AccountTypeController extends Controller {
     private static AccountTypeController _instance = null;
     
     public static AccountTypeController getInstance() {
-        if(_instance == null)
-            _instance = new AccountTypeController();
+        _instance = new AccountTypeController();
         return _instance;
     }
     private AccountTypeController() {

@@ -24,8 +24,7 @@ public class AccountController extends Controller {
     private static AccountController _instance = null;
     
     public static AccountController getInstance(AccountView view) {
-        if(_instance == null)
-            _instance = new AccountController(view);
+        _instance = new AccountController(view);
         return _instance;
     }
     

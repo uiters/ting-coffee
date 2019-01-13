@@ -25,8 +25,7 @@ public class TablesController extends Controller {
     
     public static TablesController getInstance(TableView view)
     {
-        if(_instance == null)
-            _instance = new TablesController(view);
+        _instance = new TablesController(view);
         return _instance;
     }
     

@@ -56,7 +56,7 @@ public class AccountView extends View {
     private JTable table; //table Staff
     private AddFrameView addFrame;
     private List<String> list=null; //list save account type
-    private AccountController controller;
+    private final AccountController controller;
     
     public AccountView ()
     {
