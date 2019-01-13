@@ -128,7 +128,19 @@ Using [Store Pattern](https://github.com/jade28/store-pattern).
 
 ### `Admin App`
 
+<a href="https://github.com/jade28/starbucks-coffee/tree/master/admin_app">
+<img src="https://user-images.githubusercontent.com/33017913/51082088-b987d000-1732-11e9-9817-3acaa62d6cfd.jpg" width="900"/>
+</a>
+  
+<a href="https://github.com/jade28/starbucks-coffee/tree/master/admin_app">
+<img src="https://user-images.githubusercontent.com/33017913/51082089-bbea2a00-1732-11e9-8cc7-94910cfa685f.jpg" width="900"/>
+</a>
+  
 ### `Kitchen App`
+
+<a href="https://github.com/jade28/starbucks-coffee/tree/master/kitchen_app">
+<img src="https://user-images.githubusercontent.com/33017913/51082070-2ea6d580-1732-11e9-9e71-920a7410660a.jpg" width="900"/>
+</a>
 
 ## Bugs and Issues
 
