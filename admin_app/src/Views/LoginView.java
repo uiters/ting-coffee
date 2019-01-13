@@ -263,10 +263,10 @@ public class LoginView extends View {
     }
     
     
-    private void LoadApp()
+    private void LoadApp(String a)
     {
         JOptionPane.showMessageDialog(null, "Login successfully!");
-        app=new AdminappView();
+        app=new AdminappView(a);
         //app.setLoginView(this);
         
         //jf.setVisible(false);
@@ -300,7 +300,7 @@ public class LoginView extends View {
         if(result.get(0).username.equals(nameText.getText())==true&&Password.checkPassword(passText.getText(), result.get(0).pass)==true)
         {
             if(result.get(0).type==1) //account type la admin
-                LoadApp();
+                LoadApp(result.get(0).username);
             else JOptionPane.showMessageDialog(null, "Your account must be admin to login this app!");
         }        
         else JOptionPane.showMessageDialog(null, "Username or password is not correct!");

@@ -21,6 +21,8 @@ import java.awt.event.MouseEvent;
 import java.awt.event.WindowEvent;
 import java.net.URL;
 import java.util.Objects;
+import java.util.Timer;
+import java.util.TimerTask;
 import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
@@ -57,6 +59,7 @@ public class AdminappView extends JFrame{
     BillView billMain;
     AccountView staffMain;
     LoginView loginView;
+    ProfileView profileView;
     JLabel dashboardTitle;
     JLabel foodTitle;
     JLabel categoryTitle;
@@ -64,8 +67,11 @@ public class AdminappView extends JFrame{
     JLabel staffTitle;
     JLabel billTitle;
     JLabel logoutTitle;
-    public AdminappView()
+    JLabel profileTitle;
+    String username="";
+    public AdminappView(String a)
     {
+        username=a;
         jf=new JFrame("Cafe Management || Admin App");
         
        jf.setSize(1400, 800);
@@ -96,6 +102,7 @@ public class AdminappView extends JFrame{
         tableMain=new TableView();
         billMain=new BillView();
         staffMain=new AccountView();
+        profileView=new ProfileView(username);
         
         createHeader(header);
         jf.add(header, BorderLayout.PAGE_START);
@@ -360,6 +367,37 @@ public class AdminappView extends JFrame{
 });
         /*END LOG OUT OPTIONS*/
         
+        /*PROFILE*/
+        JPanel profile = new JPanel();
+        profile.setLayout(new BoxLayout(profile, BoxLayout.Y_AXIS));
+        profile.setBackground(new Color(228,249,245));
+        
+        profileTitle = new JLabel("Password");
+        profileTitle.setForeground(new Color(41,55,72));
+        profileTitle.setAlignmentX(Component.CENTER_ALIGNMENT);
+        
+        URL profileURL = getClass().getResource("../image/key.png");
+        JLabel profileIcon = new JLabel(new ImageIcon(profileURL));
+        profileIcon.setAlignmentX(Component.CENTER_ALIGNMENT);
+        
+        profile.add(profileTitle);
+        profile.add(Box.createRigidArea(new Dimension(0, 6)));
+        profile.add(profileIcon);
+        
+        profile.addMouseListener(new MouseAdapter() {
+             @Override
+             public void mouseClicked(MouseEvent e) {
+                 super.mouseClicked(e); //To change body of generated methods, choose Tools | Templates.
+                 setForeColor();
+                 profileTitle.setForeground(Color.red);
+                 profileView.Load();
+                 Wait(2);
+                
+             }
+            
+});
+        /*END PROFILE*/
+        
         options.add(Box.createRigidArea(new Dimension(30, 0)));
         options.add(bill);
         options.add(Box.createRigidArea(new Dimension(30, 0)));
@@ -372,6 +410,8 @@ public class AdminappView extends JFrame{
         options.add(table);
         options.add(Box.createRigidArea(new Dimension(30, 0)));
         options.add(staff);
+        options.add(Box.createRigidArea(new Dimension(30, 0)));
+        options.add(profile);
         options.add(Box.createRigidArea(new Dimension(30, 0)));
         options.add(logout);
         options.add(Box.createRigidArea(new Dimension(30, 0)));
@@ -388,6 +428,30 @@ public class AdminappView extends JFrame{
         loginView=a;
     }
     
+    private void Wait(int x)
+    {
+            //long timewait=Long.parseLong(timeText.getText()); // convert string to long
+            Timer wait=new Timer();
+            //flag=true; //set flag to recognize timer is started
+            TimerTask task=new TimerTask() {
+                long second=0;
+                @Override
+                public void run() {               
+                    //JOptionPane.showMessageDialog(null, "Refresh!");
+                    second=second+1;
+                    System.out.println(second);
+                    if(second==x)
+                    {
+                        //controller.loadFull();
+                        second=0;
+                        setForeColor();
+                        wait.cancel();
+                        wait.purge();
+                    }
+                }      
+            };
+           wait.scheduleAtFixedRate(task, 1000, x*1000);
+    }
     private void setForeColor()
     {
         Color defColor=new Color(41,55,72);
@@ -398,5 +462,6 @@ public class AdminappView extends JFrame{
         staffTitle.setForeground(defColor);
         billTitle.setForeground(defColor);
         logoutTitle.setForeground(defColor);
+        profileTitle.setForeground(defColor);
     }
 }
