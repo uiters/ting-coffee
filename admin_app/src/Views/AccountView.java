@@ -626,7 +626,7 @@ public class AccountView extends View {
             }
             catch(NullPointerException ex)
             {
-                
+                birthday.setCalendar(null);
             }
             
     }
