@@ -22,9 +22,12 @@ import java.awt.event.KeyEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.net.URL;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
+import java.util.concurrent.TimeUnit;
 import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
@@ -63,6 +66,7 @@ public class KitchenView extends View {
     private JTextField timeText;
     private JRadioButton check;
     private Timer timer;
+    private Timer wait;
     private JTextArea txtbill;
     JPanel header;
     JPanel main;
@@ -98,7 +102,7 @@ public class KitchenView extends View {
         DefaultTableModel model = (DefaultTableModel)table.getModel();
         model.setRowCount(0);
         bills.forEach((item) -> {
-            model.addRow(new Object[] { item.id,  item.idtable,item.checkin,item.checkout,item.discount,item.price,item.username});
+            model.addRow(new Object[] { item.id,  item.table,item.checkin,item.checkout,item.discount,item.price,item.username});
         });
         
         table.setModel(model);
@@ -141,16 +145,15 @@ public class KitchenView extends View {
         
         /* MAIN TABLE */
         main = new JPanel();
-        main.setBackground(Color.green);
-       
+        main.setBackground(new Color(228,249,245));
         
         /* INFO */
         info = new JPanel();
-        info.setBackground(Color.yellow);
+        info.setBackground(new Color(228,249,245));
         
          /* FOOTER */
         footer = new JPanel();
-        footer.setBackground(Color.cyan);
+        footer.setBackground(new Color(228,249,245));
         
         createHeader(header);
         createMain(main);
@@ -213,21 +216,10 @@ public class KitchenView extends View {
                  dashboardTitle.setForeground(Color.red);
                  table.clearSelection();
                  DefaultTableModel model=(DefaultTableModel)detailtable.getModel();
-                 model.setRowCount(0);
-                 if(check.isSelected()==false)
-                 {
-                     if(flag==true) timer.cancel(); // if timer is running then stop
-                     timeText.setEditable(true);
-                    controller.loadFull();
-                    flag=false; // reset flag
-                 }
-                 else
-                 {
-                     if(flag==true) timer.cancel();
-                     timeText.setEditable(false);
-                     Auto();
-                 }
-                     
+                 model.setRowCount(0);         
+                 controller.loadFull();
+                 Wait(2); // wait 2 seconds to set forecolor
+    
              }
             
 });
@@ -256,7 +248,7 @@ public class KitchenView extends View {
                  super.mouseClicked(e); //To change body of generated methods, choose Tools | Templates.
                  setForeColor();
                  helpTitle.setForeground(Color.red);
-                JOptionPane.showMessageDialog(null, "Bạn có thể chọn auto, sau đó click refresh để app có thể tự động reload sau thời gian quy định!");
+                JOptionPane.showMessageDialog(null, "Bạn có thể chọn auto, để app có thể tự động reload sau thời gian quy định!");
                  setForeColor();
              }
             
@@ -308,7 +300,7 @@ public class KitchenView extends View {
                 }
             }
         };
-        detailtable.getTableHeader().setFont(new java.awt.Font(table.getFont().toString(), Font.BOLD, 22));
+        detailtable.getTableHeader().setFont(new java.awt.Font(table.getFont().toString(), Font.TRUETYPE_FONT, 19));
         detailtable.getTableHeader().setReorderingAllowed(false); // khong cho di chuyen thu tu cac column
         detailtable.setFont(new java.awt.Font(table.getFont().toString(), Font.PLAIN, 18));
         detailtable.setModel(model);
@@ -343,7 +335,7 @@ public class KitchenView extends View {
         
         /*LOAD TABLE*/
          //Table
-        String []title=new String[]{"ID","IDTable","CheckIn","Checkout","Discount","Total Price","Username"};
+        String []title=new String[]{"ID","Table","CheckIn","Checkout","Discount","Total Price","Username"};
         DefaultTableModel model= new DefaultTableModel(null,title){
             @Override
             public boolean isCellEditable(int row, int column) {
@@ -351,7 +343,7 @@ public class KitchenView extends View {
             }
         };
         table=new JTable();
-        table.getTableHeader().setFont(new java.awt.Font(table.getFont().toString(), Font.BOLD, 22));
+        table.getTableHeader().setFont(new java.awt.Font(table.getFont().toString(), Font.TRUETYPE_FONT, 19));
         table.getTableHeader().setReorderingAllowed(false); // khong cho di chuyen thu tu cac column
         table.setFont(new java.awt.Font(table.getFont().toString(), Font.PLAIN, 18));
         table.setModel(model);
@@ -396,7 +388,7 @@ public class KitchenView extends View {
         footer.setPreferredSize(new Dimension(footer.getWidth(), 50));
         JPanel btn = new JPanel();
         btn.setLayout(new BoxLayout(btn, BoxLayout.X_AXIS));
-        btn.setBackground(Color.cyan);
+        btn.setBackground(new Color(228,249,245));
 
         JButton btnAdd = new JButton("Print");
         btn.add(Box.createRigidArea(new Dimension(5, 0)));
@@ -406,7 +398,7 @@ public class KitchenView extends View {
         JPanel auto= new JPanel();
         auto.setLayout(new BoxLayout(auto, BoxLayout.X_AXIS));
         auto.setMaximumSize(new Dimension(300, 50));
-        auto.setBackground(Color.cyan);
+        auto.setBackground(new Color(228,249,245));
         
         JLabel timeTitle = new JLabel("Refresh After");
         timeTitle.setForeground(new Color(41,55,72));
@@ -430,7 +422,7 @@ public class KitchenView extends View {
 });
         check=new JRadioButton("Auto");
         //check.setMaximumSize(new Dimension(40, 40
-        check.setBackground(Color.cyan);
+        check.setBackground(new Color(228,249,245));
         
         auto.add(timeTitle);
         auto.add(Box.createRigidArea(new Dimension(5, 0)));
@@ -448,6 +440,8 @@ public class KitchenView extends View {
         btnAdd.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                //String timeStamp = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(Calendar.getInstance().getTime());
+                //JOptionPane.showMessageDialog(null, timeStamp);
                 //JOptionPane.showMessageDialog(null, "Reload database ");
                int index=table.getSelectedRow();
                if(index>=0)
@@ -459,10 +453,32 @@ public class KitchenView extends View {
                        int id=Integer.parseInt(table.getValueAt(index, 0).toString());
                        controller.delete(id);
                        delete(index);
+                       DefaultTableModel model=(DefaultTableModel)detailtable.getModel();
+                       model.setRowCount(0);
                    }
                }
                else
                     JOptionPane.showMessageDialog(null, "Bạn chưa chọn hóa đơn nào để in");
+                
+            }
+        });
+        
+        check.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if(check.isSelected()==true)
+                {
+                    setForeColor();
+                    timeText.setEditable(false);
+                    dashboardTitle.setForeground(Color.red);
+                    Auto();
+                }
+                else
+                {
+                    timeText.setEditable(true);
+                    setForeColor();
+                    timer.cancel();
+                }
                 
             }
         });
@@ -490,6 +506,31 @@ public class KitchenView extends View {
                 }      
             };
            timer.scheduleAtFixedRate(task, 1000, timewait*1000);
+    }
+    
+    private void Wait(int x)
+    {
+            //long timewait=Long.parseLong(timeText.getText()); // convert string to long
+            wait=new Timer();
+            //flag=true; //set flag to recognize timer is started
+            TimerTask task=new TimerTask() {
+                long second=0;
+                @Override
+                public void run() {               
+                    //JOptionPane.showMessageDialog(null, "Refresh!");
+                    second=second+1;
+                    System.out.println(second);
+                    if(second==x)
+                    {
+                        //controller.loadFull();
+                        second=0;
+                        setForeColor();
+                        wait.cancel();
+                        wait.purge();
+                    }
+                }      
+            };
+           wait.scheduleAtFixedRate(task, 1000, x*1000);
     }
     
     private void setForeColor()
