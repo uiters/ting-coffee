@@ -108,7 +108,7 @@ public class AccountView extends View {
         DefaultTableModel model = (DefaultTableModel)table.getModel();
         model.setRowCount(0);
         categories.forEach((item) -> {
-            String temp=null;
+            String temp="";
             if(item.sex==1) temp="Male";
             else temp="Female";
             model.addRow(new Object[] { item.username,  item.name, item.idcard, item.birth, temp,item.address,item.number,item.typename});
@@ -613,9 +613,18 @@ public class AccountView extends View {
             //set date for jdatechooser from a value get from table
             try {
                 String Birth=table.getModel().getValueAt(row, 3).toString();
-                Date date=new SimpleDateFormat("yy-MM-dd").parse(Birth);
-                birthday.setDate(date);
+                if(Birth.equalsIgnoreCase("")==false)
+                {
+                    //String Birth=table.getModel().getValueAt(row, 3).toString();
+                    Date date=new SimpleDateFormat("yy-MM-dd").parse(Birth);
+                    birthday.setDate(date);
+                }
+                
             }catch (ParseException ex)
+            {
+                
+            }
+            catch(NullPointerException ex)
             {
                 
             }
