@@ -25,8 +25,7 @@ public class FoodController extends Controller{
     private static FoodController _instance = null;
     
     public static FoodController getInstance(FoodView view) {
-        if(_instance == null)
-            _instance = new FoodController(view);
+        _instance = new FoodController(view);
         return _instance;
     }
     

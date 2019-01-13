@@ -24,8 +24,7 @@ public class DashboardController extends Controller {
     
     public static DashboardController getInstance(DashboardView view)
     {
-        if(_instance == null)
-            _instance = new DashboardController(view);
+        _instance = new DashboardController(view);
         return _instance;
     }
     

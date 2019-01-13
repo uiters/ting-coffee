@@ -22,8 +22,7 @@ public class BillInfoController extends Controller {
     private static BillInfoController _instance = null;
     
     public static BillInfoController getInstance(BillInfoView view) {
-        if(_instance == null)
-            _instance = new BillInfoController(view);
+        _instance = new BillInfoController(view);
         return _instance;
     }
     

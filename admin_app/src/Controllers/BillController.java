@@ -23,8 +23,7 @@ public class BillController extends Controller {
      private static BillController _instance = null;
     
     public static BillController getInstance(BillView view) {
-        if(_instance == null)
-            _instance = new BillController(view);
+        _instance = new BillController(view);
         return _instance;
     }
     

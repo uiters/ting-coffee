@@ -25,8 +25,7 @@ public class PasswordController extends Controller {
     
     public static PasswordController getInstance(ProfileView view)
     {
-        if(_instance == null)
-            _instance = new PasswordController(view);
+        _instance = new PasswordController(view);
         return _instance;
     }
     
