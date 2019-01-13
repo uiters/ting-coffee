@@ -248,9 +248,12 @@ public class LoginView extends View {
         JOptionPane.showMessageDialog(null, "Login successfully!");
         app=new AdminappView(a);
         //app.setLoginView(this);
-        
+        app = null;
+        nameText.setText("");
+        passText.setText("");
         //jf.setVisible(false);
         jf.dispose();
+        
         
     }
     
@@ -277,7 +280,7 @@ public class LoginView extends View {
     @Override
     public void loadView(Object objects){
         List<Account> result=(List<Account>)(Object)objects;
-        if(result.get(0).username.equals(nameText.getText())==true&&Password.checkPassword(passText.getText(), result.get(0).pass)==true)
+        if(result.get(0).username.equals(nameText.getText())== true && Password.checkPassword(passText.getText(), result.get(0).pass)==true)
         {
             if(result.get(0).type==1) //account type la admin
                 LoadApp(result.get(0).username);

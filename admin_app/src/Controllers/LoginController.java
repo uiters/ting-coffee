@@ -24,8 +24,7 @@ public class LoginController extends Controller{
     
     public static LoginController getInstance(LoginView view)
     {
-        if(_instance == null)
-            _instance = new LoginController(view);
+        _instance = new LoginController(view);
         return _instance;
     }
     

@@ -318,7 +318,7 @@ public class AdminappView extends JFrame{
         logout.setLayout(new BoxLayout(logout, BoxLayout.Y_AXIS));
         logout.setBackground(new Color(228,249,245));
         
-        logoutTitle = new JLabel("Exit");
+        logoutTitle = new JLabel("Logout");
         logoutTitle.setForeground(new Color(41,55,72));
         logoutTitle.setAlignmentX(Component.CENTER_ALIGNMENT);
         
@@ -336,10 +336,12 @@ public class AdminappView extends JFrame{
                  super.mouseClicked(e); //To change body of generated methods, choose Tools | Templates.
                  setForeColor();
                  logoutTitle.setForeground(Color.red);
-                 int reply = JOptionPane.showConfirmDialog(null, "Do you want to exit?", "Notification", JOptionPane.YES_NO_OPTION);
+                 int reply = JOptionPane.showConfirmDialog(null, "Do you want to logout?", "Notification", JOptionPane.YES_NO_OPTION);
                  if (reply == JOptionPane.YES_OPTION) {
                     //xu ly log out
-                    System.exit(0);
+                    //System.exit(0);
+                    jf.dispose();
+                    new LoginView();
                 }
                 else {
                 }
