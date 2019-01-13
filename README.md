@@ -22,6 +22,7 @@
 <div align="center">
   <h4>
     <a href="#features">Features</a> |
+    <a href="#structure">Structure</a> |
     <a href="#install">Install</a> |
     <a href="#usage">Usage</a> |
     <a href="#documents">Documents</a> |
@@ -42,6 +43,12 @@
 * Manage table.
 * Manage account.
 * Sales report.
+
+## Structure
+
+<p align="center">
+<img src="https://user-images.githubusercontent.com/34389409/51085703-b6f79b80-176f-11e9-8684-378db7d5844d.png" width="500"/>
+</p>
 
 ## Install
 
