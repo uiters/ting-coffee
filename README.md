@@ -1,4 +1,4 @@
-<h1 align="center">
+<h1 align="center" id="home">
   <a href="https://github.com/jade28/starbucks-coffee">
     <img alt="starbucks-coffee" src="https://user-images.githubusercontent.com/34389409/50489187-d46efa80-0a38-11e9-824c-f438b1a38db4.png" width="300">
   </a>
@@ -151,6 +151,8 @@ Have a bug or an issue with this project? [Open a new issue](https://github.com/
 | [![Cuong Nguyen](https://github.com/jade28.png?size=100)](https://github.com/jade28) | [![Thien Chi Vi](https://github.com/tvc12.png?size=100)](https://github.com/tvc12) | [![Thang Huu Le](https://github.com/lhthang1998.png?size=100)](https://github.com/lhthang1998) |  [![Triet Minh Tran](https://github.com/triet1213.png?size=100)](https://github.com/triet1213) |
 | :---: | :---: | :---: | :---: |
 | [Cuong Nguyen](https://github.com/jade28) | [Thien Chi Vi](https://github.com/tvc12) | [Thang Huu Le](https://github.com/lhthang1998) |  [Triet Minh Tran](https://github.com/triet1213) |
+
+**[⬆ back to top](#home)**
 
 ## License
 
