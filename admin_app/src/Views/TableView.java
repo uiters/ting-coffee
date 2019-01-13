@@ -50,7 +50,7 @@ public class TableView extends View {
     @Override
     public void insert(Object objects){
         Tables category = (Tables)objects;
-        ((DefaultTableModel)table.getModel()).addRow(new Object[]{category.id, category.name,-1});
+        ((DefaultTableModel)table.getModel()).addRow(new Object[]{category.id, category.name});
     }
     
     @Override
@@ -71,7 +71,7 @@ public class TableView extends View {
         DefaultTableModel model = (DefaultTableModel)table.getModel();
         model.setRowCount(0);
         items.forEach((item) -> {
-            model.addRow(new Object[] { item.id,  item.name,-1});
+            model.addRow(new Object[] { item.id,  item.name});
         });
         
         table.setModel(model);
@@ -93,7 +93,7 @@ public class TableView extends View {
         main.setLayout(new BoxLayout(main, BoxLayout.X_AXIS));
         /*LOAD TABLE*/
          //Table
-        String []title=new String[]{"ID","Name","Status"};
+        String []title=new String[]{"ID","Name"};
         
         /*Object [][]object=new Object[][]{
             {1,"Ban 1"},
