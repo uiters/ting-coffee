@@ -57,7 +57,10 @@ public class Query {
     public static String checkLogin="call USP_Admin_CheckLogin( @username  )";
     
     //report
-    public static String getReport="call USP_Admin_GetReport( @date  )";
+    public static String getReportWeek="call USP_TVC12_GetReport_Week()";
+    public static String getReportToday="call USP_TVC12_GetReport_Today()";
+    public static String getReportMonth="call USP_TVC12_GetReport_Month()";
+    public static String getReportYear="call USP_TVC12_GetReport_Year()";
     
     
             

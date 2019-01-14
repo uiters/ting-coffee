@@ -91,7 +91,11 @@ public class AdminappView extends JFrame{
         jf.add(main, BorderLayout.CENTER);
         jf.add(info, BorderLayout.LINE_END);
         jf.add(footer, BorderLayout.PAGE_END);
+        setForeColor();
+        dashboardTitle.setForeground(Color.red);
+        dashboardMain.Load(main,info,footer);
         jf.setVisible(true);
+        
 
     }
     
@@ -153,6 +157,7 @@ public class AdminappView extends JFrame{
              }
             
 });
+
         /*END DASHBOARD OPTIONS*/
         
         /*FOOD*/
