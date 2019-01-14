@@ -35,9 +35,39 @@ public class DashboardModel {
         mySqlConnection = MySqlConnection.getInstance();
     }
     
-     public List<Report> getReport(String day) throws IOException
+     public List<Report> getReportWeek() throws IOException
     {
-        String rawJson=mySqlConnection.executeQuery(Query.getReport, new Object[] { day });
+        String rawJson=mySqlConnection.executeQuery(Query.getReportWeek, null);
+        if(rawJson==null)
+            return null;
+        Report[] reports=json.fromJson(rawJson, Report[].class); // convert json to foodcategory[]
+        List<Report> listReport = new LinkedList<>(Arrays.asList(reports));
+        return listReport;
+        
+    }
+     public List<Report> getReportToday() throws IOException
+    {
+        String rawJson=mySqlConnection.executeQuery(Query.getReportToday, null);
+        if(rawJson==null)
+            return null;
+        Report[] reports=json.fromJson(rawJson, Report[].class); // convert json to foodcategory[]
+        List<Report> listReport = new LinkedList<>(Arrays.asList(reports));
+        return listReport;
+        
+    }
+     public List<Report> getReportMonth() throws IOException
+    {
+        String rawJson=mySqlConnection.executeQuery(Query.getReportMonth, null);
+        if(rawJson==null)
+            return null;
+        Report[] reports=json.fromJson(rawJson, Report[].class); // convert json to foodcategory[]
+        List<Report> listReport = new LinkedList<>(Arrays.asList(reports));
+        return listReport;
+        
+    }
+     public List<Report> getReportYear() throws IOException
+    {
+        String rawJson=mySqlConnection.executeQuery(Query.getReportYear, null);
         if(rawJson==null)
             return null;
         Report[] reports=json.fromJson(rawJson, Report[].class); // convert json to foodcategory[]

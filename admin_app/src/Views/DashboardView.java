@@ -44,7 +44,7 @@ public class DashboardView extends View {
     private JFreeChart lineChart;
     private DashboardController controller;
     private List<Report> list=new ArrayList<>();
-    String []items={"Last 7 day","Last month","Last year"};
+    String []items={"Today","Last 7 day","Last month","Last year"};
     JComboBox cb;
     public DashboardView()
     {
@@ -70,7 +70,7 @@ public class DashboardView extends View {
 
     }
     
-    public void setList(Object objects)
+    public void setList(Object objects,int d)
     {
         list.clear();
         List<Report> categories = (List<Report>)(Object)objects;
@@ -80,7 +80,7 @@ public class DashboardView extends View {
         }
         //update chart
         CategoryPlot plot = (CategoryPlot) lineChart.getPlot();
-        plot.setDataset(createDataset());
+        plot.setDataset(createDataset(d));
 
     }
     //----------------------------------------------------------------------------------------------------------
@@ -212,23 +212,46 @@ public class DashboardView extends View {
                 int month=curday.getMonth()+1;
                 int year=curday.getYear();
                 if(cb.getSelectedIndex()==0) 
-                    JOptionPane.showMessageDialog(null, "Load ngay");
+                   controller.loadReportToday();
                 if(cb.getSelectedIndex()==1) 
-                    JOptionPane.showMessageDialog(null, "Load thang");
+                   controller.loadReportWeek();
                 if(cb.getSelectedIndex()==2) 
-                    JOptionPane.showMessageDialog(null, "Load nam");
+                    controller.loadReportMonth();
+                if(cb.getSelectedIndex()==3) 
+                    controller.loadReportYear();
                 
             }
         });
     }
     
-    DefaultCategoryDataset createDataset()
+    DefaultCategoryDataset createDataset(int d)
     {
         DefaultCategoryDataset dataset = new DefaultCategoryDataset( );
-        for(Report item : list)
+        if(d==0 || d==1)
         {
-            dataset.addValue( item.price , "VND" , item._date );
+            for(Report item : list)
+            {
+            
+                dataset.addValue( item.price , "VND" , item._date );
+            }
         }
+        if(d==2)
+        {
+            for(Report item : list)
+            {
+                String []month=item._date.split("-");
+                dataset.addValue( item.price , "VND" , month[0]+"-"+month[1] );
+            }
+        }
+        if(d==3)
+        {
+            for(Report item : list)
+            {
+                String []year=item._date.split("-");
+                dataset.addValue( item.price , "VND" , year[0] );
+            }
+        }
+        
         return dataset;
     }
 

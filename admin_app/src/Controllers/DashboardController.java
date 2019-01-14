@@ -63,20 +63,69 @@ public class DashboardController extends Controller {
     {
         return null;
     }
-    public void loadReport(Object obj)
+    public void loadReportWeek()
     {
-        String day=(String) obj;
+        //String day=(String) obj;
         CompletableFuture<List<Report>>  future;                
         future = CompletableFuture.supplyAsync(() -> {//open thread
             try {
 
-                reports = model.getReport(day);
+                reports = model.getReportWeek();
                 return reports;
             } catch (IOException ex) {
                 Logger.getLogger(DashboardController.class.getName()).log(Level.SEVERE, null, ex);
                 return null;
             }
         });
-        future.thenAccept(listReport -> view.setList(listReport));
+        future.thenAccept(listReport -> view.setList(listReport,1));
+    }
+    
+     public void loadReportMonth()
+    {
+        //String day=(String) obj;
+        CompletableFuture<List<Report>>  future;                
+        future = CompletableFuture.supplyAsync(() -> {//open thread
+            try {
+
+                reports = model.getReportMonth();
+                return reports;
+            } catch (IOException ex) {
+                Logger.getLogger(DashboardController.class.getName()).log(Level.SEVERE, null, ex);
+                return null;
+            }
+        });
+        future.thenAccept(listReport -> view.setList(listReport,2));
+    }
+     public void loadReportToday()
+    {
+        //String day=(String) obj;
+        CompletableFuture<List<Report>>  future;                
+        future = CompletableFuture.supplyAsync(() -> {//open thread
+            try {
+
+                reports = model.getReportToday();
+                return reports;
+            } catch (IOException ex) {
+                Logger.getLogger(DashboardController.class.getName()).log(Level.SEVERE, null, ex);
+                return null;
+            }
+        });
+        future.thenAccept(listReport -> view.setList(listReport,0));
+    }
+     public void loadReportYear()
+    {
+        //String day=(String) obj;
+        CompletableFuture<List<Report>>  future;                
+        future = CompletableFuture.supplyAsync(() -> {//open thread
+            try {
+
+                reports = model.getReportYear();
+                return reports;
+            } catch (IOException ex) {
+                Logger.getLogger(DashboardController.class.getName()).log(Level.SEVERE, null, ex);
+                return null;
+            }
+        });
+        future.thenAccept(listReport -> view.setList(listReport,3));
     }
 }
