@@ -136,16 +136,16 @@ Using [Store Pattern](https://github.com/jade28/store-pattern).
 ### `Admin App`
 
 <a href="https://github.com/jade28/starbucks-coffee/tree/master/admin_app">
-<img src="https://user-images.githubusercontent.com/33017913/51100451-c0811200-1808-11e9-8b2f-eef3f5fc8f03.jpg" width="900"/>
+<img src="https://user-images.githubusercontent.com/33017913/51131310-f1d9fc00-1861-11e9-938c-a84adfb2e451.jpg" width="900"/>
 </a>
 <a href="https://github.com/jade28/starbucks-coffee/tree/master/admin_app">
-<img src="https://user-images.githubusercontent.com/33017913/51100453-c4ad2f80-1808-11e9-99ac-5faf6966ff52.jpg" width="900"/>
+<img src="https://user-images.githubusercontent.com/33017913/51131315-f7374680-1861-11e9-85ac-46fb495536ec.jpg" width="900"/>
 </a>
   
 ### `Kitchen App`
 
 <a href="https://github.com/jade28/starbucks-coffee/tree/master/kitchen_app">
-<img src="https://user-images.githubusercontent.com/33017913/51082070-2ea6d580-1732-11e9-9e71-920a7410660a.jpg" width="900"/>
+<img src="https://user-images.githubusercontent.com/33017913/51131396-34033d80-1862-11e9-8f48-2340252a4e20.jpg" width="900"/>
 </a>
 
 ## Bugs and Issues
