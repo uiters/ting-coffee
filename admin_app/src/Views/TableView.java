@@ -25,6 +25,10 @@ import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
 
 import java.util.List;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
+import javax.swing.table.TableModel;
+import javax.swing.table.TableRowSorter;
 
 /**
  *
@@ -119,16 +123,17 @@ public class TableView extends View {
                 }
             }
         };
-        
+        final TableRowSorter<TableModel> sorter1 = new TableRowSorter<>(model); 
         table.getTableHeader().setFont(new java.awt.Font(table.getFont().toString(), Font.BOLD, 22));
         table.setFont(new java.awt.Font(table.getFont().toString(), Font.PLAIN, 18));
         table.setModel(model);
         table.setSelectionMode(0);
         table.setRowHeight(80); // chỉnh độ cao của hàng
-        
+        table.setRowSorter(sorter1);
+        JScrollPane jsp = new JScrollPane(table,JScrollPane.VERTICAL_SCROLLBAR_ALWAYS,JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
         controller.loadFull();
-        JScrollPane jsp=new JScrollPane(table);
-        
+      
+
         /*Sự kiện click ở table*/
         table.addMouseListener(new MouseAdapter() {
             @Override
@@ -171,20 +176,20 @@ public class TableView extends View {
         PlaceHolder p1;
         p1=new PlaceHolder (searchText,"Name");
         searchText.setAlignmentX(Component.CENTER_ALIGNMENT);
-        JButton btnSearch=new JButton("Search");
-        btnSearch.setForeground(new Color(0,107,68));
-        btnSearch.add(Box.createRigidArea(new Dimension(43, 20)));
-        btnSearch.setAlignmentX(Component.CENTER_ALIGNMENT);
+        JLabel lblSearch=new JLabel("Search");
+        lblSearch.setForeground(new Color(0,107,68));
+        lblSearch.add(Box.createRigidArea(new Dimension(43, 20)));
+        lblSearch.setAlignmentX(Component.CENTER_ALIGNMENT);
         
         search.add(Box.createRigidArea(new Dimension(5,0)));
-        search.add(btnSearch);
-        search.add(Box.createRigidArea(new Dimension(15,0)));
+        search.add(lblSearch);
+        search.add(Box.createRigidArea(new Dimension(50,0)));
         search.add(searchText);
         search.add(Box.createRigidArea(new Dimension(5,0)));
         
-        btnSearch.addActionListener(new ActionListener() {
+       searchText.getDocument().addDocumentListener(new DocumentListener(){
             @Override
-            public void actionPerformed(ActionEvent e) {
+            public void insertUpdate(DocumentEvent e) {
                 String text = searchText.getText().toLowerCase();
                 if(text.equalsIgnoreCase("Name"))
                     text = "";
@@ -192,8 +197,23 @@ public class TableView extends View {
                 if(data != null)
                     loadView(data);
             }
+
+            @Override
+            public void removeUpdate(DocumentEvent e) {
+                 String text = searchText.getText().toLowerCase();
+                if(text.equalsIgnoreCase("Name"))
+                    text = "";
+                Object data =  controller.Filter(text, null);
+                if(data != null)
+                    loadView(data);  
+            }
             
+            @Override
+            public void changedUpdate(DocumentEvent e) {
+            throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+            }
         });
+      
         /*end search field*/
         
         /*info detail*/

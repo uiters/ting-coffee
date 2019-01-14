@@ -37,6 +37,10 @@ import java.util.List;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
+import javax.swing.table.TableModel;
+import javax.swing.table.TableRowSorter;
 
 /**
  *
@@ -169,6 +173,7 @@ public class AccountView extends View {
             return false;
             }
         };
+        final TableRowSorter<TableModel> sorter1 = new TableRowSorter<>(model); 
         table = new JTable();
         table.getTableHeader().setFont(new java.awt.Font(table.getFont().toString(), Font.BOLD, 22));
         table.getTableHeader().setReorderingAllowed(false); // khong cho di chuyen thu tu cac column
@@ -176,9 +181,9 @@ public class AccountView extends View {
         table.setModel(model);
         table.setSelectionMode(0);
         table.setRowHeight(80); // chỉnh độ cao của hàng
-        
+        table.setRowSorter(sorter1);
         controller.loadFull();
-        JScrollPane jsp=new JScrollPane(table);
+        JScrollPane jsp = new JScrollPane(table,JScrollPane.VERTICAL_SCROLLBAR_ALWAYS,JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
         
         /*Sự kiện click ở table*/
         table.addMouseListener(new MouseAdapter() {
@@ -227,22 +232,21 @@ public class AccountView extends View {
         PlaceHolder p1;
         p1=new PlaceHolder (searchText,"User,Name");
         searchText.setAlignmentX(Component.CENTER_ALIGNMENT);
-        JButton btnSearch=new JButton("Search");
-        btnSearch.setForeground(new Color(0,107,68));
-        btnSearch.add(Box.createRigidArea(new Dimension(43, 20)));
-        btnSearch.setAlignmentX(Component.CENTER_ALIGNMENT);
+        JLabel lblSearch=new JLabel("Search");
+        lblSearch.setForeground(new Color(0,107,68));
+        lblSearch.add(Box.createRigidArea(new Dimension(43, 20)));
+        lblSearch.setAlignmentX(Component.CENTER_ALIGNMENT);
         
         search.add(Box.createRigidArea(new Dimension(5,0)));
-        search.add(btnSearch);
-        search.add(Box.createRigidArea(new Dimension(15,0)));
+        search.add(lblSearch);
+        search.add(Box.createRigidArea(new Dimension(50,0)));
         search.add(searchText);
         search.add(Box.createRigidArea(new Dimension(5,0)));
         
-        btnSearch.addActionListener(new ActionListener() 
+       searchText.getDocument().addDocumentListener(new DocumentListener(){
+           @Override
+            public void insertUpdate(DocumentEvent e) {
         {
-            @Override
-            public void actionPerformed(ActionEvent e) 
-            {
                 String text = searchText.getText().toLowerCase();
                 if(text.equalsIgnoreCase("User,Name"))
                     text = "";
@@ -250,9 +254,25 @@ public class AccountView extends View {
                 if(data != null)
                     loadView(data);
             }
+            }
+
+            @Override
+            public void removeUpdate(DocumentEvent e) {
+                 String text = searchText.getText().toLowerCase();
+                if(text.equalsIgnoreCase("User,Name"))
+                    text = "";
+                Object data =  controller.Filter(text, null);
+                if(data != null)
+                    loadView(data);
+            }
+
+            @Override
+            public void changedUpdate(DocumentEvent e) {
+                throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+            }
         });
         /*end search field*/
-        
+       
         /*info detail*/
         JPanel detail=new JPanel();
         detail.setLayout(new BoxLayout(detail,BoxLayout.Y_AXIS));
