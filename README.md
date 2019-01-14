@@ -136,11 +136,10 @@ Using [Store Pattern](https://github.com/jade28/store-pattern).
 ### `Admin App`
 
 <a href="https://github.com/jade28/starbucks-coffee/tree/master/admin_app">
-<img src="https://user-images.githubusercontent.com/33017913/51082088-b987d000-1732-11e9-9817-3acaa62d6cfd.jpg" width="900"/>
+<img src="https://user-images.githubusercontent.com/33017913/51100451-c0811200-1808-11e9-8b2f-eef3f5fc8f03.jpg" width="900"/>
 </a>
-  
 <a href="https://github.com/jade28/starbucks-coffee/tree/master/admin_app">
-<img src="https://user-images.githubusercontent.com/33017913/51082089-bbea2a00-1732-11e9-8cc7-94910cfa685f.jpg" width="900"/>
+<img src="https://user-images.githubusercontent.com/33017913/51100453-c4ad2f80-1808-11e9-99ac-5faf6966ff52.jpg" width="900"/>
 </a>
   
 ### `Kitchen App`
