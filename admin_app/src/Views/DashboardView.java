@@ -9,9 +9,11 @@ import Controllers.DashboardController;
 import Models.DashboardModel.Report;
 import com.toedter.calendar.JMonthChooser;
 import com.toedter.calendar.JYearChooser;
+import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Dimension;
+import java.awt.Paint;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.List;
@@ -23,14 +25,21 @@ import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import org.jfree.chart.ChartColor;
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartPanel;
 import org.jfree.chart.JFreeChart;
 import org.jfree.chart.labels.ItemLabelAnchor;
 import org.jfree.chart.labels.ItemLabelPosition;
 import org.jfree.chart.plot.CategoryPlot;
+import org.jfree.chart.plot.DefaultDrawingSupplier;
+import org.jfree.chart.plot.DrawingSupplier;
 import org.jfree.chart.plot.PlotOrientation;
+import org.jfree.chart.plot.XYPlot;
 import org.jfree.chart.renderer.category.CategoryItemRenderer;
+import org.jfree.chart.renderer.xy.StackedXYAreaRenderer;
+import org.jfree.chart.renderer.xy.XYAreaRenderer;
+import org.jfree.chart.renderer.xy.XYLineAndShapeRenderer;
 import org.jfree.data.category.DefaultCategoryDataset;
 
 /**
@@ -90,6 +99,8 @@ public class DashboardView extends View {
         LoadMain(main);
         LoadInfo(info);
         LoadFooter(footer);
+        controller.loadReportWeek();
+        cb.setSelectedIndex(1);
     }
     
     public void LoadMain(JPanel main)
@@ -97,16 +108,16 @@ public class DashboardView extends View {
         main.removeAll();
         main.setLayout(new BoxLayout(main, BoxLayout.X_AXIS));
         
-        lineChart = ChartFactory.createLineChart(
+        lineChart = ChartFactory.createAreaChart(
          "Dashboard",
          "Day","Total",
          null,
          PlotOrientation.VERTICAL,
          true,true,false);
-         
         ChartPanel chartPanel = new ChartPanel( lineChart );
         chartPanel.setPreferredSize( new Dimension( main.getWidth() , main.getHeight() ) );
-        
+        lineChart.getPlot().setBackgroundPaint( new Color(228,249,245) );
+
         //show detail value on top chart
         CategoryItemRenderer renderer = ((CategoryPlot)lineChart.getPlot()).getRenderer();
         renderer.setBaseItemLabelGenerator(new org.jfree.chart.labels.StandardCategoryItemLabelGenerator());
@@ -114,7 +125,7 @@ public class DashboardView extends View {
         ItemLabelPosition position = new ItemLabelPosition(ItemLabelAnchor.OUTSIDE12, 
                 org.jfree.ui.TextAnchor.TOP_CENTER);
         renderer.setBasePositiveItemLabelPosition(position);
-        //
+        
         main.add(Box.createRigidArea(new Dimension(5,0)));
         main.add(chartPanel);
         
@@ -232,7 +243,7 @@ public class DashboardView extends View {
             for(Report item : list)
             {
             
-                dataset.addValue( item.price , "VND" , item._date );
+                dataset.addValue( item.price , "USD" , item._date );
             }
         }
         if(d==2)
@@ -240,7 +251,7 @@ public class DashboardView extends View {
             for(Report item : list)
             {
                 String []month=item._date.split("-");
-                dataset.addValue( item.price , "VND" , month[0]+"-"+month[1] );
+                dataset.addValue( item.price , "USD" , month[0]+"-"+month[1] );
             }
         }
         if(d==3)
@@ -248,7 +259,7 @@ public class DashboardView extends View {
             for(Report item : list)
             {
                 String []year=item._date.split("-");
-                dataset.addValue( item.price , "VND" , year[0] );
+                dataset.addValue( item.price , "USD" , year[0] );
             }
         }
         
