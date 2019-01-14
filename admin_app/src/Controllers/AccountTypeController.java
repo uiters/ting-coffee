@@ -5,12 +5,6 @@
  */
 package Controllers;
 
-import java.io.IOException;
-import java.util.List;
-import java.util.concurrent.CompletableFuture;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-
 /**
  *
  * @author Thang Le
@@ -19,8 +13,7 @@ public class AccountTypeController extends Controller {
     private static AccountTypeController _instance = null;
     
     public static AccountTypeController getInstance() {
-        if(_instance == null)
-            _instance = new AccountTypeController();
+        _instance = new AccountTypeController();
         return _instance;
     }
     private AccountTypeController() {
@@ -44,6 +37,11 @@ public class AccountTypeController extends Controller {
     public void loadFull()
     {
 
+    }
+    @Override
+    public Object Filter(String keyWord, Object opt)
+    {
+        return null;
     }
     
 }

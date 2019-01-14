@@ -18,7 +18,6 @@ import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
@@ -50,7 +49,7 @@ public class TableView extends View {
     @Override
     public void insert(Object objects){
         Tables category = (Tables)objects;
-        ((DefaultTableModel)table.getModel()).addRow(new Object[]{category.id, category.name,-1});
+        ((DefaultTableModel)table.getModel()).addRow(new Object[]{category.id, category.name});
     }
     
     @Override
@@ -71,7 +70,7 @@ public class TableView extends View {
         DefaultTableModel model = (DefaultTableModel)table.getModel();
         model.setRowCount(0);
         items.forEach((item) -> {
-            model.addRow(new Object[] { item.id,  item.name,-1});
+            model.addRow(new Object[] { item.id,  item.name});
         });
         
         table.setModel(model);
@@ -93,7 +92,8 @@ public class TableView extends View {
         main.setLayout(new BoxLayout(main, BoxLayout.X_AXIS));
         /*LOAD TABLE*/
          //Table
-        String []title=new String[]{"ID","Name","Status"};
+        String []title=new String[]{"ID","Name"};
+        
         /*Object [][]object=new Object[][]{
             {1,"Ban 1"},
             {2,"Ban 2"},
@@ -161,7 +161,7 @@ public class TableView extends View {
         /*search field*/
         JPanel search=new JPanel();
         search.setLayout(new BoxLayout(search,BoxLayout.X_AXIS));
-        search.setBackground(Color.yellow);
+        search.setBackground(new Color(209, 228, 252));
         //search.setPreferredSize(new Dimension(info.getWidth(),20));
         search.setMaximumSize(new Dimension(300, 30));
         //search.setMaximumSize(new Dimension(info.getWidth(),20));
@@ -169,9 +169,11 @@ public class TableView extends View {
         
         JTextField searchText=new JTextField();
         PlaceHolder p1;
-        p1=new PlaceHolder (searchText,"Tìm với ID,Name");
+        p1=new PlaceHolder (searchText,"Name");
         searchText.setAlignmentX(Component.CENTER_ALIGNMENT);
         JButton btnSearch=new JButton("Search");
+        btnSearch.setForeground(new Color(0,107,68));
+        btnSearch.add(Box.createRigidArea(new Dimension(43, 20)));
         btnSearch.setAlignmentX(Component.CENTER_ALIGNMENT);
         
         search.add(Box.createRigidArea(new Dimension(5,0)));
@@ -183,28 +185,12 @@ public class TableView extends View {
         btnSearch.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-             String text=searchText.getText();
-                if(!text.equals("")){
-                for(int i=0;i<table.getRowCount();i++)
-                    
-                {
-                    if(text.equalsIgnoreCase(table.getValueAt(i, 0).toString())==true)
-                    {
-                        table.setRowSelectionInterval(i, i);
-                         setInfo(i);
-                        break;
-                    }
-                   
-                    if(String.valueOf(table.getValueAt(i, 1)).toLowerCase().contains(text.toLowerCase()))
-                    {
-                            table.setRowSelectionInterval(i, i);
-                            setInfo(i);
-                            break;
-                    }
- 
-                    
-                }
-                }
+                String text = searchText.getText().toLowerCase();
+                if(text.equalsIgnoreCase("Name"))
+                    text = "";
+                Object data =  controller.Filter(text, null);
+                if(data != null)
+                    loadView(data);
             }
             
         });
@@ -213,12 +199,12 @@ public class TableView extends View {
         /*info detail*/
         JPanel detail=new JPanel();
         detail.setLayout(new BoxLayout(detail,BoxLayout.Y_AXIS));
-        detail.setBackground(Color.yellow);
+        detail.setBackground(new Color(209, 228, 252));
         
         /*ID*/
         JPanel IDgroup=new JPanel();
         IDgroup.setLayout(new BoxLayout(IDgroup,BoxLayout.X_AXIS));
-        IDgroup.setBackground(Color.yellow);
+        IDgroup.setBackground(new Color(209, 228, 252));
         IDgroup.setMaximumSize(new Dimension(300, 30));
         
          idText=new JTextField();
@@ -237,7 +223,7 @@ public class TableView extends View {
         /*Name*/
         JPanel Namegroup=new JPanel();
         Namegroup.setLayout(new BoxLayout(Namegroup,BoxLayout.X_AXIS));
-        Namegroup.setBackground(Color.yellow);
+        Namegroup.setBackground(new Color(209, 228, 252));
         Namegroup.setMaximumSize(new Dimension(300, 30));
         
          nameText=new JTextField();
@@ -275,12 +261,20 @@ public class TableView extends View {
         footer.setPreferredSize(new Dimension(footer.getWidth(),50));
         JPanel btn=new JPanel();
         btn.setLayout(new BoxLayout(btn,BoxLayout.X_AXIS));
-        btn.setBackground(Color.cyan);
+        btn.setBackground(new Color(228,249,245));
         
          JButton btnAdd=new JButton("Add");
+        btnAdd.setForeground(new Color(0,107,68));
+        btnAdd.add(Box.createRigidArea(new Dimension(50, 20)));
          JButton btnUpdate=new JButton("Update");
+        btnUpdate.setForeground(new Color(0,107,68));
+        btnUpdate.add(Box.createRigidArea(new Dimension(50, 20)));
          JButton btnDelete=new JButton("Delete");
-         JButton btnCancel=new JButton("Cancel");
+        btnDelete.setForeground(new Color(0,107,68));
+        btnDelete.add(Box.createRigidArea(new Dimension(50, 20)));
+         //JButton btnCancel=new JButton("Cancel");
+        //btnCancel.setForeground(new Color(0,107,68));
+        //btnCancel.add(Box.createRigidArea(new Dimension(50, 20)));
          
          
          btn.add(Box.createRigidArea(new Dimension(5,0)));
@@ -290,8 +284,8 @@ public class TableView extends View {
          btn.add(Box.createRigidArea(new Dimension(50,0)));
          btn.add(btnDelete);
          btn.add(Box.createRigidArea(new Dimension(50,0)));
-         btn.add(btnCancel);
-         btn.add(Box.createRigidArea(new Dimension(50,0)));
+         //btn.add(btnCancel);
+         //btn.add(Box.createRigidArea(new Dimension(50,0)));
          
          footer.add(btn);
          //repaint panel
@@ -334,12 +328,12 @@ public class TableView extends View {
             }
         });
          
-         btnCancel.addActionListener(new ActionListener() {
+         /*btnCancel.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 //Xu ly
             }
-        });
+        });*/
          /*END sự kiện btn Add,....*/
     }
     

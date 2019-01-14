@@ -7,14 +7,13 @@ package Controllers;
 
 import Models.BillModel;
 import Models.BillModel.Bill;
-import Models.FoodModel;
 import Views.BillView;
-import Views.FoodView;
 import java.io.IOException;
 import java.util.List;
 import java.util.concurrent.CompletableFuture;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import java.util.stream.Collectors;
 
 /**
  *
@@ -24,8 +23,7 @@ public class BillController extends Controller {
      private static BillController _instance = null;
     
     public static BillController getInstance(BillView view) {
-        if(_instance == null)
-            _instance = new BillController(view);
+        _instance = new BillController(view);
         return _instance;
     }
     
@@ -75,6 +73,20 @@ public class BillController extends Controller {
             }
         });
         future.thenAccept(listBills -> view.loadView(listBills));
+    }
+    
+    @Override
+    public Object Filter(String keyWord, Object opt)
+    {
+        if(bills == null) return null;
+        if(keyWord.isEmpty() || keyWord.trim().isEmpty())
+            return bills;
+        else
+        {
+            return bills.stream().filter(item -> 
+                    item.table.toLowerCase().contains(keyWord) || 
+                    item.username.toLowerCase().contains(keyWord)).collect(Collectors.toList());
+        }
     }
     
     private void _deleteBills(int index)

@@ -25,7 +25,7 @@ public class Query {
      public static String updateFood="call USP_Admin_UpdateFood( @ID , @Name , @FoodCategory , @Price , @Img )";
      public static String updateInfoFood="call USP_Admin_UpdateInfoFood( @ID , @Name , @FoodCategory , @Price )";
      public static String getIDLastFood="call USP_Admin_GetIDLastFood()";
-     public static String addFood="call USP_Admin_AddFood( @Name , @Category , @Price )";
+     public static String addFood="call USP_Admin_AddFood( @Name , @Category , @Price , @Image )";
      
      
      
@@ -51,7 +51,8 @@ public class Query {
     public static String updateAccount="call USP_Admin_UpdateAccount( @username , @name , @sex , @idcard , @address , @number , @birth , @type )";
     public static String addAccount="call USP_Admin_AddAccount( @username , @name , @sex , @idcard , @address , @number , @birth , @type , @pass )";
     public static String resetAccount="call USP_Admin_ResetPass( @username , @pass )";
-    
+    public static String updatePassword="call USP_Admin_UpdatePassword( @username, @pass )";
+    public static String checkPassword="call USP_Admin_CheckLogin( @username )";
     //login
     public static String checkLogin="call USP_Admin_CheckLogin( @username  )";
     

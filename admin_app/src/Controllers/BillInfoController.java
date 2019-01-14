@@ -7,9 +7,7 @@ package Controllers;
 
 import Models.BillInfoModel;
 import Models.BillInfoModel.BillInfo;
-import Models.BillModel;
 import Views.BillInfoView;
-import Views.BillView;
 import java.io.IOException;
 import java.util.List;
 import java.util.concurrent.CompletableFuture;
@@ -24,8 +22,7 @@ public class BillInfoController extends Controller {
     private static BillInfoController _instance = null;
     
     public static BillInfoController getInstance(BillInfoView view) {
-        if(_instance == null)
-            _instance = new BillInfoController(view);
+        _instance = new BillInfoController(view);
         return _instance;
     }
     
@@ -58,6 +55,16 @@ public class BillInfoController extends Controller {
         
     }
     
+    @Override
+    public Object Filter(String keyWord, Object opt)
+    {
+        if(keyWord.isEmpty() || keyWord.trim().isEmpty())
+            return bills;
+        else
+        {
+            return null;
+        }
+    }
     
     public void LoadInfo(Object object)
     {

@@ -5,6 +5,7 @@
  */
 package Models;
 
+import Constants.Constant;
 import Constants.Query;
 import Models.AccountTypeModel.AccountType;
 import com.google.gson.Gson;
@@ -64,28 +65,28 @@ public class AccountModel {
     {
         //delete 
         String raw=mySqlConnection.executeNoneQuery(Query.delAccount, new Object[] { username });
-        if (raw.equals("1")==true) JOptionPane.showMessageDialog(null, "Đã xóa thành công");
+        if (raw.equals("1")==true) JOptionPane.showMessageDialog(null, "Deleted successfully!");
     }
     
     //update
     public void update(String username,String name,int sex,String idcard,String address,String number,String birth,String type) throws IOException
     {
         String raw=mySqlConnection.executeNoneQuery(Query.updateAccount, new Object[] { username,name,sex,idcard,address,number,birth,type });
-        if (raw.equals("1")==true) JOptionPane.showMessageDialog(null, "Đã cập nhật thành công");
+        if (raw.equals("1")==true) JOptionPane.showMessageDialog(null, "Updated successfully!");
     }
     
     
     public void addAccount(String username,String name,int sex,String idcard,String address,String number,String birth,String type,String pass) throws IOException
     {
         String raw=mySqlConnection.executeNoneQuery(Query.addAccount, new Object[] { username,name,sex,idcard,address,number,birth,type,pass });
-        if (raw.equals("1")==true) JOptionPane.showMessageDialog(null, "Đã thêm thành công! Mật khẩu mặc định là abc");
-        else JOptionPane.showMessageDialog(null, "Đã tồn tại tên tài khoản nhân viên này!");
+        if (raw.equals("1")==true) JOptionPane.showMessageDialog(null, "Add successfully! Default password is staff phone number!");
+        else JOptionPane.showMessageDialog(null, "Username is used!");
     }
     
     public void resetPassword(String username,String pass) throws IOException
     {
         String raw=mySqlConnection.executeNoneQuery(Query.resetAccount, new Object[] { username,pass});
-        if(raw.equals("1")==true) JOptionPane.showMessageDialog(null, "Đã reset password! Mật khẩu mặc định là abc");
+        if(raw.equals("1")==true) JOptionPane.showMessageDialog(null, "Reset password successfully! Default password is "+Constant.defaultpass);
     }
     
 

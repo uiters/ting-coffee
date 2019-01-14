@@ -15,7 +15,7 @@ import java.util.List;
 import java.util.concurrent.CompletableFuture;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.swing.JOptionPane;
+import java.util.stream.Collectors;
 
 /**
  *
@@ -25,8 +25,7 @@ public class FoodController extends Controller{
     private static FoodController _instance = null;
     
     public static FoodController getInstance(FoodView view) {
-        if(_instance == null)
-            _instance = new FoodController(view);
+        _instance = new FoodController(view);
         return _instance;
     }
     
@@ -70,9 +69,9 @@ public class FoodController extends Controller{
         future = CompletableFuture.supplyAsync(() -> {
             try
                 { 
-                    model.addFood(item.name,item.nameCategory,item.price); // insert to database
+                    model.addFood(item.name,item.nameCategory,item.price,item.stringImage); // insert to database
                     int id = model.getIDLast();// id get from model;
-                    Food category = model.new Food(id, item.name,item.nameCategory,item.price);
+                    Food category = model.new Food(id, item.name,item.nameCategory,item.price,item.stringImage);
                     _addFood(category); // insert to table in list local
                     return category;
                 }catch (IOException ex) {
@@ -147,7 +146,21 @@ public class FoodController extends Controller{
         });
         future.thenAccept(listFoods -> view.loadView(listFoods));
     }
-    
+    @Override
+    public Object Filter(String keyWord, Object opt)
+    {
+        if(foods == null) return null;
+        if(keyWord.isEmpty() || keyWord.trim().isEmpty())
+        {
+            return foods;
+        }
+        else
+        {
+            return foods.stream().filter(item -> 
+                    item.name.toLowerCase().contains(keyWord) || 
+                    item.nameCategory.toLowerCase().contains(keyWord)).collect(Collectors.toList());
+        }
+    }
    private void _deleteFoods(int index)
    {
        //foodcategories.remove(foodCategory); //??

@@ -6,42 +6,23 @@
 package Views;
 import Controllers.BillController;
 import Models.BillModel.Bill;
-import Models.FoodCategoryModel;
 import com.placeholder.PlaceHolder;
 import java.awt.*;
-import java.awt.BorderLayout;
-import java.awt.FlowLayout;
 import java.awt.Font;
-import java.awt.GridBagConstraints;
-import java.awt.GridBagLayout;
-import java.awt.GridLayout;
-import java.awt.Label;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.io.File;
-import java.net.URL;
-import java.util.Objects;
 import javax.swing.Box;
 import javax.swing.BoxLayout;
-import javax.swing.ImageIcon;
 import javax.swing.JButton;
-import javax.swing.JComboBox;
-import javax.swing.JFileChooser;
-import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
-import javax.swing.JTabbedPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
-import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.table.DefaultTableModel;
-import javax.swing.table.JTableHeader;
 /**
  *
  * @author Thang Le
@@ -90,7 +71,10 @@ public class BillView extends View {
         DefaultTableModel model = (DefaultTableModel)table.getModel();
         model.setRowCount(0);
         bills.forEach((item) -> {
-            model.addRow(new Object[] { item.id,  item.idtable,item.checkin,item.checkout,item.discount,item.price,item.username});
+            String status="";
+            if(item.status==1) status="Paid";
+            else status="Unpaid";
+            model.addRow(new Object[] { item.id,  item.table,item.checkin,item.checkout,item.discount,item.price,status,item.username});
         });
         
         table.setModel(model);
@@ -103,7 +87,7 @@ public class BillView extends View {
         main.setLayout(new BoxLayout(main, BoxLayout.X_AXIS));
         /*LOAD TABLE*/
          //Table
-        String []title=new String[]{"ID","IDTable","CheckIn","Checkout","Discount","Total Price","Username"};
+        String []title=new String[]{"ID","Table","CheckIn","Checkout","Discount","Total Price","Status","Username"};
         DefaultTableModel model= new DefaultTableModel(null,title){
             @Override
             public boolean isCellEditable(int row, int column) {
@@ -151,7 +135,7 @@ public class BillView extends View {
         /*search field*/
         JPanel search=new JPanel();
         search.setLayout(new BoxLayout(search,BoxLayout.X_AXIS));
-        search.setBackground(Color.yellow);
+        search.setBackground(new Color(209, 228, 252));
         //search.setPreferredSize(new Dimension(info.getWidth(),20));
         search.setMaximumSize(new Dimension(300, 30));
         //search.setMaximumSize(new Dimension(info.getWidth(),20));
@@ -159,9 +143,11 @@ public class BillView extends View {
         
         JTextField searchText=new JTextField();
         PlaceHolder p1;
-        p1=new PlaceHolder (searchText,"Tìm với ID");
+        p1=new PlaceHolder (searchText,"Table,Name");
         searchText.setAlignmentX(Component.CENTER_ALIGNMENT);
         JButton btnSearch=new JButton("Search");
+        btnSearch.setForeground(new Color(0,107,68));
+        btnSearch.add(Box.createRigidArea(new Dimension(55, 20)));
         btnSearch.setAlignmentX(Component.CENTER_ALIGNMENT);
         
         search.add(Box.createRigidArea(new Dimension(5,0)));
@@ -173,16 +159,12 @@ public class BillView extends View {
         btnSearch.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-             String text=searchText.getText();
-                for(int i=0;i<table.getRowCount();i++)
-                {
-                    if(text.equalsIgnoreCase(table.getValueAt(i, 0).toString())==true)
-                    {
-                        table.setRowSelectionInterval(i, i);
-                        setInfo(i);
-                        break;
-                    }
-                }
+                String text = searchText.getText().toLowerCase();
+                if(text.equalsIgnoreCase("Table,Name"))
+                    text = "";
+                Object data =  controller.Filter(text, null);
+                if(data != null)
+                    loadView(data);
             }
         });
         /*end search field*/
@@ -190,12 +172,12 @@ public class BillView extends View {
         /*info detail*/
         JPanel detail=new JPanel();
         detail.setLayout(new BoxLayout(detail,BoxLayout.Y_AXIS));
-        detail.setBackground(Color.yellow);
+        detail.setBackground(new Color(209, 228, 252));
         
         /*ID Bill*/
         JPanel IDgroup=new JPanel();
         IDgroup.setLayout(new BoxLayout(IDgroup,BoxLayout.X_AXIS));
-        IDgroup.setBackground(Color.yellow);
+        IDgroup.setBackground(new Color(209, 228, 252));
         IDgroup.setMaximumSize(new Dimension(300, 30));
         
          idText=new JTextField();
@@ -214,17 +196,17 @@ public class BillView extends View {
         /*ID table*/
         JPanel IDtablegroup=new JPanel();
         IDtablegroup.setLayout(new BoxLayout(IDtablegroup,BoxLayout.X_AXIS));
-        IDtablegroup.setBackground(Color.yellow);
+        IDtablegroup.setBackground(new Color(209, 228, 252));
         IDtablegroup.setMaximumSize(new Dimension(300, 30));
         
          idtableText=new JTextField();
          idtableText.setEditable(false);
          idtableText.setAlignmentX(Component.CENTER_ALIGNMENT);
-         JLabel idtableLabel=new JLabel("ID Table : ");
+         JLabel idtableLabel=new JLabel("Table : ");
          idtableLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
         IDtablegroup.add(Box.createRigidArea(new Dimension(5,0)));
         IDtablegroup.add(idtableLabel);
-        IDtablegroup.add(Box.createRigidArea(new Dimension(48,0)));
+        IDtablegroup.add(Box.createRigidArea(new Dimension(62,0)));
         IDtablegroup.add(idtableText);
         IDtablegroup.add(Box.createRigidArea(new Dimension(5,0))); 
         /*end ID table*/
@@ -233,7 +215,7 @@ public class BillView extends View {
         /*Date Check in*/
         JPanel Dateingroup=new JPanel();
         Dateingroup.setLayout(new BoxLayout(Dateingroup,BoxLayout.X_AXIS));
-        Dateingroup.setBackground(Color.yellow);
+        Dateingroup.setBackground(new Color(209, 228, 252));
         Dateingroup.setMaximumSize(new Dimension(300, 30));
         
          dateinText=new JTextField();
@@ -254,7 +236,7 @@ public class BillView extends View {
         JPanel Dateoutgroup=new JPanel();
         
         Dateoutgroup.setLayout(new BoxLayout(Dateoutgroup,BoxLayout.X_AXIS));
-        Dateoutgroup.setBackground(Color.yellow);
+        Dateoutgroup.setBackground(new Color(209, 228, 252));
         Dateoutgroup.setMaximumSize(new Dimension(300, 30));
         
          dateoutText=new JTextField();
@@ -273,7 +255,7 @@ public class BillView extends View {
         /*Discount*/
         JPanel Discountgroup=new JPanel();
         Discountgroup.setLayout(new BoxLayout(Discountgroup,BoxLayout.X_AXIS));
-        Discountgroup.setBackground(Color.yellow);
+        Discountgroup.setBackground(new Color(209, 228, 252));
         Discountgroup.setMaximumSize(new Dimension(300, 30));
         
          discountText=new JTextField();
@@ -292,7 +274,7 @@ public class BillView extends View {
         /*Total Price*/
         JPanel Totalgroup=new JPanel();
         Totalgroup.setLayout(new BoxLayout(Totalgroup,BoxLayout.X_AXIS));
-        Totalgroup.setBackground(Color.yellow);
+        Totalgroup.setBackground(new Color(209, 228, 252));
         Totalgroup.setMaximumSize(new Dimension(300, 30));
         
          totalText=new JTextField();
@@ -311,10 +293,12 @@ public class BillView extends View {
         /*Button Delete*/
         JPanel Btngroup=new JPanel();
         Btngroup.setLayout(new BoxLayout(Btngroup,BoxLayout.X_AXIS));
-        Btngroup.setBackground(Color.yellow);
+        Btngroup.setBackground(new Color(209, 228, 252));
         Btngroup.setMaximumSize(new Dimension(300, 30));
         
         JButton btnDel=new JButton("Delete");
+        btnDel.setForeground(new Color(0,107,68));
+        btnDel.add(Box.createRigidArea(new Dimension(50, 20)));
         btnDel.setAlignmentX(Component.CENTER_ALIGNMENT);
         
         Btngroup.add(Box.createRigidArea(new Dimension(5,0)));
@@ -339,10 +323,12 @@ public class BillView extends View {
         /*Button Delete*/
         JPanel BtnDetailgroup=new JPanel();
         BtnDetailgroup.setLayout(new BoxLayout(BtnDetailgroup,BoxLayout.X_AXIS));
-        BtnDetailgroup.setBackground(Color.yellow);
+        BtnDetailgroup.setBackground(new Color(209, 228, 252));
         BtnDetailgroup.setMaximumSize(new Dimension(300, 30));
         
         JButton btnDetail=new JButton("Detail");
+        btnDetail.setForeground(new Color(0,107,68));
+        btnDetail.add(Box.createRigidArea(new Dimension(50, 20)));
         btnDetail.setAlignmentX(Component.CENTER_ALIGNMENT);
         
         BtnDetailgroup.add(Box.createRigidArea(new Dimension(5,0)));

@@ -7,9 +7,7 @@ package Controllers;
 
 import Models.DashboardModel;
 import Models.DashboardModel.Report;
-import Models.FoodCategoryModel;
 import Views.DashboardView;
-import Views.FoodCategoryView;
 import java.io.IOException;
 import java.util.List;
 import java.util.concurrent.CompletableFuture;
@@ -26,8 +24,7 @@ public class DashboardController extends Controller {
     
     public static DashboardController getInstance(DashboardView view)
     {
-        if(_instance == null)
-            _instance = new DashboardController(view);
+        _instance = new DashboardController(view);
         return _instance;
     }
     
@@ -61,7 +58,11 @@ public class DashboardController extends Controller {
     {
         
     }
-    
+    @Override
+    public Object Filter(String keyWord, Object opt)
+    {
+        return null;
+    }
     public void loadReport(Object obj)
     {
         String day=(String) obj;

@@ -18,20 +18,22 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.io.File;
+import java.io.IOException;
+import java.net.URL;
+import java.nio.file.Files;
 import java.text.SimpleDateFormat;
 import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JDialog;
-import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
-import javax.swing.filechooser.FileNameExtensionFilter;
-import java.util.List;
+import org.apache.commons.codec.binary.Base64;
 
 /**
  *
@@ -61,7 +63,7 @@ public class AddFrameView {
     {
         jf=new JDialog(jf, title);
         jf.setModal(true); // hold main excution
-        jf.setSize(300, 400);
+        jf.setSize(300, 250);
         jf.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);  // đóng frame hiện hành
         jf.setResizable(false);
 
@@ -73,13 +75,13 @@ public class AddFrameView {
          /*info detail*/
         JPanel detail=new JPanel();
         detail.setLayout(new BoxLayout(detail,BoxLayout.Y_AXIS));
-        detail.setBackground(Color.yellow);
+        detail.setBackground(new Color(209, 228, 252));
         detail.setPreferredSize(new Dimension(250,300));
         
         
         JPanel Namegroup=new JPanel();
         Namegroup.setLayout(new BoxLayout(Namegroup,BoxLayout.X_AXIS));
-        Namegroup.setBackground(Color.yellow);
+        Namegroup.setBackground(new Color(209, 228, 252));
         Namegroup.setMaximumSize(new Dimension(300, 30));
         
          nameText=new JTextField();
@@ -96,7 +98,7 @@ public class AddFrameView {
         /*Category*/
         JPanel Categorygroup=new JPanel();
         Categorygroup.setLayout(new BoxLayout(Categorygroup,BoxLayout.X_AXIS));
-        Categorygroup.setBackground(Color.yellow);
+        Categorygroup.setBackground(new Color(209, 228, 252));
         Categorygroup.setMaximumSize(new Dimension(300, 30));
         
         
@@ -117,7 +119,7 @@ public class AddFrameView {
         /*Price*/
         JPanel Pricegroup=new JPanel();
         Pricegroup.setLayout(new BoxLayout(Pricegroup,BoxLayout.X_AXIS));
-        Pricegroup.setBackground(Color.yellow);
+        Pricegroup.setBackground(new Color(209, 228, 252));
         Pricegroup.setMaximumSize(new Dimension(300, 30));
         
          priceText=new JTextField();
@@ -146,19 +148,22 @@ public class AddFrameView {
          /*Button Add,Cancel*/
         JPanel Btngroup=new JPanel();
         Btngroup.setLayout(new BoxLayout(Btngroup,BoxLayout.X_AXIS));
-        Btngroup.setBackground(Color.yellow);
+        Btngroup.setBackground(new Color(209, 228, 252));
         Btngroup.setMaximumSize(new Dimension(300, 30));
         
         JButton btnCancel=new JButton("Cancel");
         btnCancel.setAlignmentX(Component.CENTER_ALIGNMENT);
+        btnCancel.setForeground(new Color(0,107,68));
         
         JButton btnAdd=new JButton("Add");
         btnAdd.setAlignmentX(Component.CENTER_ALIGNMENT);
+        btnAdd.setForeground(new Color(0,107,68));
         
-        Btngroup.add(Box.createRigidArea(new Dimension(25,0)));
-        Btngroup.add(btnCancel);
         Btngroup.add(Box.createRigidArea(new Dimension(115,0)));
         Btngroup.add(btnAdd);
+        Btngroup.add(Box.createRigidArea(new Dimension(25,0)));
+        Btngroup.add(btnCancel);
+        
         /*end Button Add,Cacnel*/
         
         
@@ -184,8 +189,18 @@ public class AddFrameView {
                 {
                     //Xu ly btn add
                     String namecategory=cb.getSelectedItem().toString();
-                    
-                    FoodModel.Food food=FoodModel.getInstance().new Food( nameText.getText() ,namecategory,Double.parseDouble(priceText.getText()) );
+                    URL default_url = getClass().getResource("../image/food_default.png");
+                    File file=new File(default_url.getPath());
+                    String encoded="";
+                    try
+                    {
+                        encoded = Base64.encodeBase64String(getByte(file));
+                    }
+                    catch (IOException ex)
+                    {
+                        
+                    }
+                    FoodModel.Food food=FoodModel.getInstance().new Food( nameText.getText() ,namecategory,Double.parseDouble(priceText.getText()),encoded );
                     controller.insert(food);
                     jf.dispose();
                 }
@@ -197,7 +212,7 @@ public class AddFrameView {
             @Override
             public void actionPerformed(ActionEvent e) {
                  //Xu ly btn cancel
-                 JOptionPane.showMessageDialog(null, "Close frame add food");
+                 //JOptionPane.showMessageDialog(null, "Close frame add food");
                   jf.dispose();
             }
         });
@@ -212,7 +227,7 @@ public class AddFrameView {
     {
         jf=new JDialog(jf, title);
         jf.setModal(true);
-        jf.setSize(300, 200);
+        jf.setSize(300, 150);
     
         jf.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);  // đóng frame hiện hành
         jf.setResizable(false);
@@ -225,13 +240,13 @@ public class AddFrameView {
          /*info detail*/
         JPanel detail=new JPanel();
         detail.setLayout(new BoxLayout(detail,BoxLayout.Y_AXIS));
-        detail.setBackground(Color.yellow);
+        detail.setBackground(new Color(209, 228, 252));
         detail.setPreferredSize(new Dimension(panel.getWidth(),panel.getHeight()));
         
         
         JPanel Namegroup=new JPanel();
         Namegroup.setLayout(new BoxLayout(Namegroup,BoxLayout.X_AXIS));
-        Namegroup.setBackground(Color.yellow);
+        Namegroup.setBackground(new Color(209, 228, 252));
         Namegroup.setMaximumSize(new Dimension(300, 30));
         
          nameText=new JTextField();
@@ -248,19 +263,22 @@ public class AddFrameView {
          /*Button Add,Cancel*/
         JPanel Btngroup=new JPanel();
         Btngroup.setLayout(new BoxLayout(Btngroup,BoxLayout.X_AXIS));
-        Btngroup.setBackground(Color.yellow);
+        Btngroup.setBackground(new Color(209, 228, 252));
         Btngroup.setMaximumSize(new Dimension(300, 30));
         
         JButton btnCancel=new JButton("Cancel");
         btnCancel.setAlignmentX(Component.CENTER_ALIGNMENT);
+        btnCancel.setForeground(new Color(0,107,68));
         
         JButton btnAdd=new JButton("Add");
         btnAdd.setAlignmentX(Component.CENTER_ALIGNMENT);
+        btnAdd.setForeground(new Color(0,107,68));
         
-        Btngroup.add(Box.createRigidArea(new Dimension(25,0)));
-        Btngroup.add(btnCancel);
         Btngroup.add(Box.createRigidArea(new Dimension(115,0)));
         Btngroup.add(btnAdd);
+        Btngroup.add(Box.createRigidArea(new Dimension(25,0)));
+        Btngroup.add(btnCancel);
+       
         /*end Button Add,Cancel*/
         
         detail.add(Box.createRigidArea(new Dimension(0,20)));
@@ -278,7 +296,7 @@ public class AddFrameView {
                 {
                     //Xu ly btn add
                     controller.insert(nameText.getText());
-                    JOptionPane.showMessageDialog(null, "Đã thêm 1 food category thành công!");
+                    //JOptionPane.showMessageDialog(null, "Đã thêm 1 food category thành công!");
                     jf.dispose();
                 }
                 else  JOptionPane.showMessageDialog(null, "Bạn chưa điền đủ thông tin!");
@@ -289,7 +307,7 @@ public class AddFrameView {
             @Override
             public void actionPerformed(ActionEvent e) {
                  //Xu ly btn cancel
-                 JOptionPane.showMessageDialog(null, "Close frame add food cagetory");
+                 //JOptionPane.showMessageDialog(null, "Close frame add food cagetory");
                   jf.dispose();
             }
         });
@@ -304,7 +322,7 @@ public class AddFrameView {
     {
         jf=new JDialog(jf,title);
         jf.setModal(true);
-        jf.setSize(300, 200);
+        jf.setSize(300, 150);
         jf.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);  // đóng frame hiện hành
         jf.setResizable(false);
 
@@ -316,13 +334,13 @@ public class AddFrameView {
          /*info detail*/
         JPanel detail=new JPanel();
         detail.setLayout(new BoxLayout(detail,BoxLayout.Y_AXIS));
-        detail.setBackground(Color.yellow);
+        detail.setBackground(new Color(209, 228, 252));
         detail.setPreferredSize(new Dimension(panel.getWidth(),panel.getHeight()));
         
         
         JPanel Namegroup=new JPanel();
         Namegroup.setLayout(new BoxLayout(Namegroup,BoxLayout.X_AXIS));
-        Namegroup.setBackground(Color.yellow);
+        Namegroup.setBackground(new Color(209, 228, 252));
         Namegroup.setMaximumSize(new Dimension(300, 30));
         
          nameText=new JTextField();
@@ -339,19 +357,22 @@ public class AddFrameView {
          /*Button Add,Cancel*/
         JPanel Btngroup=new JPanel();
         Btngroup.setLayout(new BoxLayout(Btngroup,BoxLayout.X_AXIS));
-        Btngroup.setBackground(Color.yellow);
+        Btngroup.setBackground(new Color(209, 228, 252));
         Btngroup.setMaximumSize(new Dimension(300, 30));
         
         JButton btnCancel=new JButton("Cancel");
         btnCancel.setAlignmentX(Component.CENTER_ALIGNMENT);
+        btnCancel.setForeground(new Color(0,107,68));
         
         JButton btnAdd=new JButton("Add");
         btnAdd.setAlignmentX(Component.CENTER_ALIGNMENT);
+        btnAdd.setForeground(new Color(0,107,68));
         
-        Btngroup.add(Box.createRigidArea(new Dimension(25,0)));
-        Btngroup.add(btnCancel);
         Btngroup.add(Box.createRigidArea(new Dimension(115,0)));
         Btngroup.add(btnAdd);
+        Btngroup.add(Box.createRigidArea(new Dimension(25,0)));
+        Btngroup.add(btnCancel);
+        
         /*end Button Add,Cancel*/
         
         detail.add(Box.createRigidArea(new Dimension(0,20)));
@@ -369,7 +390,7 @@ public class AddFrameView {
                 {
                     //Xu ly btn add
                     controller.insert(nameText.getText());
-                    JOptionPane.showMessageDialog(null, "Đã thêm 1 table thành công!");
+                    //JOptionPane.showMessageDialog(null, "Đã thêm 1 table thành công!");
                     jf.dispose();
                 }
                 else  JOptionPane.showMessageDialog(null, "Bạn chưa điền đủ thông tin!");
@@ -380,7 +401,7 @@ public class AddFrameView {
             @Override
             public void actionPerformed(ActionEvent e) {
                  //Xu ly btn cancel
-                 JOptionPane.showMessageDialog(null, "Close frame add food cagetory");
+                 //JOptionPane.showMessageDialog(null, "Close frame add food cagetory");
                   jf.dispose();
             }
         });
@@ -406,13 +427,13 @@ public class AddFrameView {
         /*info detail*/
         JPanel detail=new JPanel();
         detail.setLayout(new BoxLayout(detail,BoxLayout.Y_AXIS));
-        detail.setBackground(Color.yellow);
+        detail.setBackground(new Color(209, 228, 252));
         detail.setPreferredSize(new Dimension(panel.getWidth(),panel.getHeight()));
         
         /*ID*/
         JPanel IDgroup=new JPanel();
         IDgroup.setLayout(new BoxLayout(IDgroup,BoxLayout.X_AXIS));
-        IDgroup.setBackground(Color.yellow);
+        IDgroup.setBackground(new Color(209, 228, 252));
         IDgroup.setMaximumSize(new Dimension(300, 30));
         
          JTextField idText=new JTextField();
@@ -430,7 +451,7 @@ public class AddFrameView {
         /*Name*/
         JPanel Namegroup=new JPanel();
         Namegroup.setLayout(new BoxLayout(Namegroup,BoxLayout.X_AXIS));
-        Namegroup.setBackground(Color.yellow);
+        Namegroup.setBackground(new Color(209, 228, 252));
         Namegroup.setMaximumSize(new Dimension(300, 30));
         
          nameText=new JTextField();
@@ -446,7 +467,7 @@ public class AddFrameView {
         /*ID Card*/
         JPanel IDCardgroup=new JPanel();
         IDCardgroup.setLayout(new BoxLayout(IDCardgroup,BoxLayout.X_AXIS));
-        IDCardgroup.setBackground(Color.yellow);
+        IDCardgroup.setBackground(new Color(209, 228, 252));
         IDCardgroup.setMaximumSize(new Dimension(300, 30));
         
          JTextField idCardText=new JTextField();
@@ -463,7 +484,7 @@ public class AddFrameView {
         /*Birthday*/
         JPanel Birthgroup=new JPanel();
         Birthgroup.setLayout(new BoxLayout(Birthgroup,BoxLayout.X_AXIS));
-        Birthgroup.setBackground(Color.yellow);
+        Birthgroup.setBackground(new Color(209, 228, 252));
         Birthgroup.setMaximumSize(new Dimension(300, 30));
         
         JDateChooser birthday=new JDateChooser();
@@ -483,7 +504,7 @@ public class AddFrameView {
         /*Sex*/
         JPanel Sexgroup=new JPanel();
         Sexgroup.setLayout(new BoxLayout(Sexgroup,BoxLayout.X_AXIS));
-        Sexgroup.setBackground(Color.yellow);
+        Sexgroup.setBackground(new Color(209, 228, 252));
         Sexgroup.setMaximumSize(new Dimension(300, 30));
         
         String []list={"Female","Male"};
@@ -504,7 +525,7 @@ public class AddFrameView {
         /*Address*/
         JPanel Addressgroup=new JPanel();
         Addressgroup.setLayout(new BoxLayout(Addressgroup,BoxLayout.X_AXIS));
-        Addressgroup.setBackground(Color.yellow);
+        Addressgroup.setBackground(new Color(209, 228, 252));
         Addressgroup.setMaximumSize(new Dimension(300, 30));
         
          addressText=new JTextField();
@@ -521,7 +542,7 @@ public class AddFrameView {
         /*Phonenumber*/
         JPanel Phonegroup=new JPanel();
         Phonegroup.setLayout(new BoxLayout(Phonegroup,BoxLayout.X_AXIS));
-        Phonegroup.setBackground(Color.yellow);
+        Phonegroup.setBackground(new Color(209, 228, 252));
         Phonegroup.setMaximumSize(new Dimension(300, 30));
         
          phoneText=new JTextField();
@@ -549,7 +570,7 @@ public class AddFrameView {
         /*Account Type*/
         JPanel Typegroup=new JPanel();
         Typegroup.setLayout(new BoxLayout(Typegroup,BoxLayout.X_AXIS));
-        Typegroup.setBackground(Color.yellow);
+        Typegroup.setBackground(new Color(209, 228, 252));
         Typegroup.setMaximumSize(new Dimension(300, 30));
         
         cbType=new JComboBox();
@@ -576,19 +597,21 @@ public class AddFrameView {
         /*Button Add,Cancel*/
         JPanel Btngroup=new JPanel();
         Btngroup.setLayout(new BoxLayout(Btngroup,BoxLayout.X_AXIS));
-        Btngroup.setBackground(Color.yellow);
+        Btngroup.setBackground(new Color(209, 228, 252));
         Btngroup.setMaximumSize(new Dimension(300, 30));
         
         JButton btnCancel=new JButton("Cancel");
         btnCancel.setAlignmentX(Component.CENTER_ALIGNMENT);
+        btnCancel.setForeground(new Color(0,107,68));
         
         JButton btnAdd=new JButton("Add");
         btnAdd.setAlignmentX(Component.CENTER_ALIGNMENT);
+        btnAdd.setForeground(new Color(0,107,68));
         
         Btngroup.add(Box.createRigidArea(new Dimension(15,0)));
-        Btngroup.add(btnCancel);
-        Btngroup.add(Box.createRigidArea(new Dimension(135,0)));
         Btngroup.add(btnAdd);
+        Btngroup.add(Box.createRigidArea(new Dimension(135,0)));
+        Btngroup.add(btnCancel);
         Btngroup.add(Box.createRigidArea(new Dimension(15,0)));
         /*end Button Add,Cancel*/
         
@@ -628,7 +651,7 @@ public class AddFrameView {
                     String typename=cbType.getSelectedItem().toString();
                     SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
                     String strDate =dateFormat.format(birthday.getDate());
-                    String pass=Password.hashPassword(Constants.Constant.defaultpass);
+                    String pass=Password.hashPassword(phoneText.getText());
                     //Xu ly btn add
                     Account acc=AccountModel.getInstance().new Account(idText.getText(),nameText.getText(),idCardText.getText(),strDate,
                             index,addressText.getText(),phoneText.getText(),typename,pass);
@@ -651,5 +674,12 @@ public class AddFrameView {
         
         jf.add(detail, BorderLayout.CENTER);
         jf.setVisible(true);
+    }
+    
+    
+    public byte[] getByte(File file) throws IOException
+    {
+        byte[] fileContent = Files.readAllBytes(file.toPath());
+        return fileContent;
     }
 }

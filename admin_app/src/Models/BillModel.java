@@ -49,7 +49,7 @@ public class BillModel {
      public void delete(int id) throws IOException
      {
          String raw=mySqlConnection.executeNoneQuery(Query.delBill, new Object[] { id });
-         if (raw=="1") JOptionPane.showMessageDialog(null, "Đã xóa thành công");
+         if (raw=="1") JOptionPane.showMessageDialog(null, "Deleted successfully!");
      }
     
     public class Bill
@@ -58,6 +58,8 @@ public class BillModel {
         public int id;
         @SerializedName("IDTable") 
         public int idtable;
+        @SerializedName("Name") 
+        public String table;
         @SerializedName("DateCheckIn") 
         public String checkin;
         @SerializedName("DateCheckOut") 
@@ -66,6 +68,8 @@ public class BillModel {
         public Double discount;
         @SerializedName("TotalPrice") 
         public double price;
+        @SerializedName("Status") 
+        public int status;
         @SerializedName("Username") 
         public String username;
         
@@ -78,6 +82,18 @@ public class BillModel {
             this.checkout=checkout;
             this.discount=discount;
             this.price=price;
+            this.username=name;
+        }
+        
+        public Bill(int id,String table,String checkin,String checkout,Double discount,Double price,int status, String name)
+        {
+            this.id = id;
+            this.table = table;
+            this.checkin=checkin;
+            this.checkout=checkout;
+            this.discount=discount;
+            this.price=price;
+            this.status=status;
             this.username=name;
         }
         

@@ -6,8 +6,6 @@
 package Controllers;
 
 import Models.AccountModel.Account;
-import Models.AccountTypeModel;
-import Models.AccountTypeModel.AccountType;
 import Models.LoginModel;
 import Views.LoginView;
 import java.io.IOException;
@@ -15,7 +13,6 @@ import java.util.List;
 import java.util.concurrent.CompletableFuture;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.swing.JOptionPane;
 
 /**
  *
@@ -27,8 +24,7 @@ public class LoginController extends Controller{
     
     public static LoginController getInstance(LoginView view)
     {
-        if(_instance == null)
-            _instance = new LoginController(view);
+        _instance = new LoginController(view);
         return _instance;
     }
     
@@ -56,7 +52,11 @@ public class LoginController extends Controller{
         
        
     }
-    
+    @Override
+    public Object Filter(String keyWord, Object opt)
+    {
+        return null;
+    }
     @Override
     public void loadFull()
     {

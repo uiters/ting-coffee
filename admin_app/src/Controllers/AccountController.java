@@ -14,7 +14,7 @@ import java.util.List;
 import java.util.concurrent.CompletableFuture;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.swing.JOptionPane;
+import java.util.stream.Collectors;
 
 /**
  *
@@ -24,8 +24,7 @@ public class AccountController extends Controller {
     private static AccountController _instance = null;
     
     public static AccountController getInstance(AccountView view) {
-        if(_instance == null)
-            _instance = new AccountController(view);
+        _instance = new AccountController(view);
         return _instance;
     }
     
@@ -105,6 +104,22 @@ public class AccountController extends Controller {
         future.thenAccept(listAccs -> view.loadView(listAccs));
     }
     
+    @Override
+    public Object Filter(String keyWord, Object opt)
+    {
+        if(accounts == null) return null;
+        if(keyWord.isEmpty() || keyWord.trim().isEmpty())
+        {
+            return accounts;
+        }
+        else
+        {
+            return accounts.stream().filter(item -> 
+                    item.name.toLowerCase().contains(keyWord) || 
+                    item.username.toLowerCase().contains(keyWord)).collect(Collectors.toList());
+        }
+    }
+    
     public void setListAccType()
     {
         CompletableFuture<List<AccountType>>  future;                
@@ -134,12 +149,12 @@ public class AccountController extends Controller {
             }
         });
     }
-    private void _deleteAccount(String index)
+    private void _deleteAccount(String key)
     {
         //foodcategories.remove(foodCategory); //??
-        for(Account category :accounts){
-            if(category.username == index){
-                accounts.remove(category);
+        for(Account account :accounts){
+            if(account.username.equals(key)){
+                accounts.remove(account);
                 break;
             }
         }
@@ -147,16 +162,16 @@ public class AccountController extends Controller {
     
     private void _updateAccount(Account object)
     {
-        for(Account category : accounts){
-            if (category.username == object.username){
-                category.name = object.name;
-                category.sex = object.sex;
-                category.address= object.address;
-                category.birth = object.birth;
-                category.type = object.type;
-                category.typename = object.typename;
-                category.idcard = object.idcard;
-                category.number = object.number;
+        for(Account account : accounts){
+            if (account.username.equals(object.username)){
+                account.name = object.name;
+                account.sex = object.sex;
+                account.address= object.address;
+                account.birth = object.birth;
+                account.type = object.type;
+                account.typename = object.typename;
+                account.idcard = object.idcard;
+                account.number = object.number;
                 break;
             }
         }
