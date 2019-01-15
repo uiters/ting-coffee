@@ -387,10 +387,11 @@ public class AdminappView extends JFrame{
 });
         /*END PROFILE*/
         
-        options.add(Box.createRigidArea(new Dimension(30, 0)));
-        options.add(bill);
+       
         options.add(Box.createRigidArea(new Dimension(30, 0)));
         options.add(dashboard);
+        options.add(Box.createRigidArea(new Dimension(30, 0)));
+        options.add(bill);
         options.add(Box.createRigidArea(new Dimension(30, 0)));
         options.add(food);
         options.add(Box.createRigidArea(new Dimension(30, 0)));
