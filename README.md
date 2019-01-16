@@ -1,6 +1,6 @@
 <h1 align="center" id="home">
   <a href="https://github.com/jade28/ting-coffee">
-    <img alt="ting-coffee" src="https://user-images.githubusercontent.com/34389409/51265763-0e09a480-19ec-11e9-9352-ed5e1a51c0f0.png" width="300">
+    <img alt="ting-coffee" src="https://user-images.githubusercontent.com/34389409/51270422-6db97d00-19f7-11e9-993e-883a92b0c2d5.png" width="300">
   </a>
   <br>Ting Coffee<br>
 </h1>
