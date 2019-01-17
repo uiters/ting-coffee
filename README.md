@@ -17,7 +17,7 @@
   <a href="https://github.com/jade28/ting-coffee/blob/master/LICENSE">
     <img src="https://img.shields.io/github/license/jade28/ting-coffee.svg"/>
   </a>
-</p>  
+</p>
 
 <div align="center">
   <h4>
@@ -91,7 +91,7 @@ Using [Store Pattern](https://github.com/jade28/store-pattern).
 <div style="text-align: center"><table><tr>
   <td style="text-align: center">
   <a href="https://github.com/jade28/ting-coffee/tree/master/order_app">
-    <img src="https://user-images.githubusercontent.com/34389409/51075786-0207a500-16c3-11e9-8b32-4b3fdfb7bcf0.png" width="200"/></a>
+    <img src="images/order.png" width="200"/></a>
 </td>
 <td style="text-align: center">
   <a href="https://github.com/jade28/ting-coffee/tree/master/order_app">
@@ -134,18 +134,26 @@ Using [Store Pattern](https://github.com/jade28/store-pattern).
 </tr></table></div>
 
 ### `Admin App`
-
 <a href="https://github.com/jade28/ting-coffee/tree/master/admin_app">
-<img src="https://user-images.githubusercontent.com/33017913/51131310-f1d9fc00-1861-11e9-938c-a84adfb2e451.jpg" width="900"/>
+<img src="images/login.png" width="900"/>
 </a>
 <a href="https://github.com/jade28/ting-coffee/tree/master/admin_app">
-<img src="https://user-images.githubusercontent.com/33017913/51131315-f7374680-1861-11e9-85ac-46fb495536ec.jpg" width="900"/>
+<img src="images/chart.png" width="900"/>
+</a>
+<a href="https://github.com/jade28/ting-coffee/tree/master/admin_app">
+<img src="images/bill.png" width="900"/>
+</a>
+<a href="https://github.com/jade28/ting-coffee/tree/master/admin_app">
+<img src="images/food.png" width="900"/>
+</a>
+<a href="https://github.com/jade28/ting-coffee/tree/master/admin_app">
+<img src="images/table.png" width="900"/>
 </a>
   
 ### `Kitchen App`
 
 <a href="https://github.com/jade28/ting-coffee/tree/master/kitchen_app">
-<img src="https://user-images.githubusercontent.com/33017913/51131396-34033d80-1862-11e9-8f48-2340252a4e20.jpg" width="900"/>
+<img src="images/kitchen.png" width="900"/>
 </a>
 
 ## Bugs and Issues
