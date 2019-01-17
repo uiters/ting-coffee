@@ -135,9 +135,6 @@ Using [Store Pattern](https://github.com/jade28/store-pattern).
 
 ### `Admin App`
 <a href="https://github.com/jade28/ting-coffee/tree/master/admin_app">
-<img src="images/login.png" width="900"/>
-</a>
-<a href="https://github.com/jade28/ting-coffee/tree/master/admin_app">
 <img src="images/chart.png" width="900"/>
 </a>
 <a href="https://github.com/jade28/ting-coffee/tree/master/admin_app">
