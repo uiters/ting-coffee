@@ -44,7 +44,7 @@ public class LoginView extends View {
     
     LoginView()
     {
-        jf=new JFrame("Login | Admin App");
+        jf=new JFrame("Login \u2022 Admin App");
         jf.setSize(550, 450);
         jf.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);  // đóng frame 
         
@@ -65,7 +65,7 @@ public class LoginView extends View {
         URL imgURL = getClass().getResource("../image/logo1.png");
         brandImage.setIcon(new ImageIcon(imgURL));
         
-        JLabel brandText = new JLabel("Starbucks – "
+        JLabel brandText = new JLabel("Ting \u2022 Coffee – "
                 + "The Best Coffee and Espresso Drinks");
     
         brandText.setForeground(new Color(100,40,251));
