@@ -54,7 +54,7 @@ public class AdminappView extends JFrame{
     public AdminappView(String a)
     {
         username=a;
-        jf=new JFrame("Cafe Management || Admin App");
+        jf=new JFrame("Cafe Management \u2022 Admin App");
         
        jf.setSize(1400, 800);
        jf.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);  // đóng toàn bộ frame liên quan
@@ -112,7 +112,7 @@ public class AdminappView extends JFrame{
         URL imgURL = getClass().getResource("../image/logo.png");
         brandImage.setIcon(new ImageIcon(imgURL));
         
-        JLabel brandText = new JLabel("Starbucks – The Best Coffee and Espresso Drinks");
+        JLabel brandText = new JLabel("Ting\u2022Coffee – The Best Coffee and Espresso Drinks");
         brandText.setForeground(new Color(0,107,68));
         brandText.setBackground(new Color(228,249,245));
         brandText.setFont(new Font("SansSerif", Font.PLAIN, 20));
