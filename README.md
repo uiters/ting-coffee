@@ -1,21 +1,21 @@
 <h1 align="center" id="home">
-  <a href="https://github.com/jade28/ting-coffee">
+  <a href="https://github.com/cuongw/ting-coffee">
     <img alt="ting-coffee" src="https://user-images.githubusercontent.com/34389409/51270422-6db97d00-19f7-11e9-993e-883a92b0c2d5.png" width="300">
   </a>
   <br>Ting Coffee<br>
 </h1>
 
 <h4 align="center">
-  Managemet App for <a href="https://github.com/jade28/ting-coffee" target="_blank"><code>Ting Coffee</code></a>.
+  Managemet App for <a href="https://github.com/cuongw/ting-coffee" target="_blank"><code>Ting Coffee</code></a>.
 </h4>
 
 <p align="center">
-  <a href="https://travis-ci.org/jade28/starbucks-coffee">
-    <img src="https://travis-ci.org/jade28/ting-coffee.svg?branch=master"/>
+  <a href="https://travis-ci.org/cuongw/starbucks-coffee">
+    <img src="https://travis-ci.org/cuongw/ting-coffee.svg?branch=master"/>
   </a>
   
-  <a href="https://github.com/jade28/ting-coffee/blob/master/LICENSE">
-    <img src="https://img.shields.io/github/license/jade28/ting-coffee.svg"/>
+  <a href="https://github.com/cuongw/ting-coffee/blob/master/LICENSE">
+    <img src="https://img.shields.io/github/license/cuongw/ting-coffee.svg"/>
   </a>
 </p>
 
@@ -54,7 +54,7 @@
 
 Clone this project:
 ```
-$ git clone https://github.com/jade28/ting-coffee.git
+$ git clone https://github.com/cuongw/ting-coffee.git
 ```
 cd `ting-coffee`:
 ```
@@ -75,7 +75,7 @@ Enjoy 👍
 
 ## Documents
 
-Using [Store Pattern](https://github.com/jade28/store-pattern).
+Using [Store Pattern](https://github.com/cuongw/store-pattern).
 
 ## Technologies
 
@@ -90,21 +90,21 @@ Using [Store Pattern](https://github.com/jade28/store-pattern).
 
 <div style="text-align: center"><table><tr>
   <td style="text-align: center">
-  <a href="https://github.com/jade28/ting-coffee/tree/master/order_app">
+  <a href="https://github.com/cuongw/ting-coffee/tree/master/order_app">
     <img src="images/order.png" width="200"/></a>
 </td>
 <td style="text-align: center">
-  <a href="https://github.com/jade28/ting-coffee/tree/master/order_app">
+  <a href="https://github.com/cuongw/ting-coffee/tree/master/order_app">
 <img src="https://user-images.githubusercontent.com/34389409/51075787-02a03b80-16c3-11e9-89b0-7a50f305e0fb.png" width="200"/>
   </a>
 </td>
 <td style="text-align: center">
-  <a href="https://github.com/jade28/ting-coffee/tree/master/order_app">
+  <a href="https://github.com/cuongw/ting-coffee/tree/master/order_app">
 <img src="https://user-images.githubusercontent.com/34389409/51075788-02a03b80-16c3-11e9-81ab-46a192d38e58.png" width="200" />
   </a>
 </td>
 <td style="text-align: center">
-  <a href="https://github.com/jade28/ting-coffee/tree/master/order_app">
+  <a href="https://github.com/cuongw/ting-coffee/tree/master/order_app">
 <img src="https://user-images.githubusercontent.com/34389409/51075790-02a03b80-16c3-11e9-8a8e-3b539dde99f5.png" width="200"/>
   </a>
 </td>
@@ -112,21 +112,21 @@ Using [Store Pattern](https://github.com/jade28/store-pattern).
 
 <div style="text-align: center"><table><tr>
 <td style="text-align: center">
-  <a href="https://github.com/jade28/ting-coffee/tree/master/order_app">
+  <a href="https://github.com/cuongw/ting-coffee/tree/master/order_app">
 <img src="https://user-images.githubusercontent.com/34389409/51075791-0338d200-16c3-11e9-9395-f035e4a6a24f.png" width="200"/>
   </a>
 </td>
 <td style="text-align: center">
-<a href="https://github.com/jade28/ting-coffee/tree/master/order_app">
+<a href="https://github.com/cuongw/ting-coffee/tree/master/order_app">
   <img src="https://user-images.githubusercontent.com/34389409/51075792-0338d200-16c3-11e9-93a2-ca4837bf2f26.png" width="200"/></a>
 </td>
 <td style="text-align: center">
-  <a href="https://github.com/jade28/ting-coffee/tree/master/order_app">
+  <a href="https://github.com/cuongw/ting-coffee/tree/master/order_app">
 <img src="https://user-images.githubusercontent.com/34389409/51075793-03d16880-16c3-11e9-8a6f-f277cfd455bc.png" width="200" />
   </a>
 </td>
 <td style="text-align: center">
-  <a href="https://github.com/jade28/ting-coffee/tree/master/order_app">
+  <a href="https://github.com/cuongw/ting-coffee/tree/master/order_app">
 <img src="https://user-images.githubusercontent.com/34389409/51075874-0b454180-16c4-11e9-962c-f597b0f6e15a.png" width="200"/>
   </a>
 </td>
@@ -134,37 +134,37 @@ Using [Store Pattern](https://github.com/jade28/store-pattern).
 </tr></table></div>
 
 ### `Admin App`
-<a href="https://github.com/jade28/ting-coffee/tree/master/admin_app">
+<a href="https://github.com/cuongw/ting-coffee/tree/master/admin_app">
 <img src="images/chart.png" width="900"/>
 </a>
-<a href="https://github.com/jade28/ting-coffee/tree/master/admin_app">
+<a href="https://github.com/cuongw/ting-coffee/tree/master/admin_app">
 <img src="images/bill.png" width="900"/>
 </a>
-<a href="https://github.com/jade28/ting-coffee/tree/master/admin_app">
+<a href="https://github.com/cuongw/ting-coffee/tree/master/admin_app">
 <img src="images/food.png" width="900"/>
 </a>
-<a href="https://github.com/jade28/ting-coffee/tree/master/admin_app">
+<a href="https://github.com/cuongw/ting-coffee/tree/master/admin_app">
 <img src="images/table.png" width="900"/>
 </a>
   
 ### `Kitchen App`
 
-<a href="https://github.com/jade28/ting-coffee/tree/master/kitchen_app">
+<a href="https://github.com/cuongw/ting-coffee/tree/master/kitchen_app">
 <img src="images/kitchen.png" width="900"/>
 </a>
 
 ## Bugs and Issues
 
-Have a bug or an issue with this project? [Open a new issue](https://github.com/jade28/ting-coffee/issues) here on GitHub.
+Have a bug or an issue with this project? [Open a new issue](https://github.com/cuongw/ting-coffee/issues) here on GitHub.
 
 ## Team
 
-| [![Cuong Nguyen](https://github.com/jade28.png?size=100)](https://github.com/jade28) | [![Thien Chi Vi](https://github.com/tvc12.png?size=100)](https://github.com/tvc12) | [![Thang Huu Le](https://github.com/lhthang1998.png?size=100)](https://github.com/lhthang1998) |  [![Triet Minh Tran](https://github.com/triet1213.png?size=100)](https://github.com/triet1213) |
+| [![Cuong Duy Nguyen](https://github.com/cuongw.png?size=120)](https://github.com/cuongw) | [![Thien Chi Vi](https://github.com/tvc12.png?size=120)](https://github.com/tvc12) | [![Thang Huu Le](https://github.com/lhthang1998.png?size=120)](https://github.com/lhthang1998) |  [![Triet Minh Tran](https://github.com/triet1213.png?size=120)](https://github.com/triet1213) |
 | :---: | :---: | :---: | :---: |
-| [Cuong Nguyen](https://github.com/jade28) | [Thien Chi Vi](https://github.com/tvc12) | [Thang Huu Le](https://github.com/lhthang1998) |  [Triet Minh Tran](https://github.com/triet1213) |
+| [Cuong Duy Nguyen](https://github.com/cuongw) | [Thien Chi Vi](https://github.com/tvc12) | [Thang Huu Le](https://github.com/lhthang1998) |  [Triet Minh Tran](https://github.com/triet1213) |
 
 **[⬆ back to top](#home)**
 
 ## License
 
-[MIT](https://github.com/jade28/starbucks-coffee/blob/master/LICENSE)
+[MIT](https://github.com/cuongw/ting-coffee/blob/master/LICENSE)
