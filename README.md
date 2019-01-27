@@ -135,22 +135,22 @@ Using [Store Pattern](https://github.com/cuongw/store-pattern).
 
 ### `Admin App`
 <a href="https://github.com/cuongw/ting-coffee/tree/master/admin_app">
-<img src="images/chart.png" width="900"/>
+<img src="https://user-images.githubusercontent.com/34389409/51789297-04392b80-21ba-11e9-91fb-1c23721c2776.png" width="900"/>
 </a>
 <a href="https://github.com/cuongw/ting-coffee/tree/master/admin_app">
-<img src="images/bill.png" width="900"/>
+<img src="https://user-images.githubusercontent.com/34389409/51789304-12874780-21ba-11e9-85ac-d1f62304c367.png" width="900"/>
 </a>
 <a href="https://github.com/cuongw/ting-coffee/tree/master/admin_app">
-<img src="images/food.png" width="900"/>
+<img src="https://user-images.githubusercontent.com/34389409/51789308-1fa43680-21ba-11e9-9eee-68e58c6fb2fc.png" width="900"/>
 </a>
 <a href="https://github.com/cuongw/ting-coffee/tree/master/admin_app">
-<img src="images/table.png" width="900"/>
+<img src="https://user-images.githubusercontent.com/34389409/51789310-2f237f80-21ba-11e9-9a8c-5a227a0ccaf1.png" width="900"/>
 </a>
   
 ### `Kitchen App`
 
 <a href="https://github.com/cuongw/ting-coffee/tree/master/kitchen_app">
-<img src="images/kitchen.png" width="900"/>
+<img src="https://user-images.githubusercontent.com/34389409/51789316-406c8c00-21ba-11e9-8470-fd1763b81826.png" width="900"/>
 </a>
 
 ## Bugs and Issues
