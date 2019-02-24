@@ -53,16 +53,16 @@
 ## Install
 
 Clone this project:
-```
-$ git clone https://github.com/cuongw/ting-coffee.git
+```sh
+~$ git clone https://github.com/cuongw/ting-coffee.git
 ```
 cd `ting-coffee`:
-```
-$ cd ting-coffee
+```sh
+~$ cd ting-coffee
 ```
 Install packages for `flutter` apps:
-```
-$ flutter packages get
+```bash
+~$ flutter packages get
 ```
 Setup API:
 
@@ -76,12 +76,16 @@ Setup API:
   ```
 * Edit line 1 ```evn.dart``` at ```store-pattern/order_app/lib/Constants/```
 
-    ```const String URL_EXECUTE = "your domain/index.php";```
+    ```dart
+    const String URL_EXECUTE = "your domain/index.php";
+    ```
 
 * Edit line 17 ```kitchen_app/src/Constants/Constant.java``` and ```admin_app/src/Constants/Constant.java```
 
 
-    ```public static String urlConnect = "your domain/index.php";```
+    ```java
+    public static String urlConnect = "your domain/index.php";
+    ```
 
 * Run script sql in your PhpMyAdmin ```ting-coffee/database/mysql.sql```
 
@@ -89,26 +93,29 @@ Run:
 
 * Requrie install ```ant```
 
-	```$ sudo apt install ant```
-
-* Run andmin_app:
-
+	```bash
+	~$ sudo apt install ant
 	```
-	$ cd admin_app
-	$ ant run
+
+* Run admin_app:
+
+	```bash
+	~$ cd admin_app
+	~$ ant run
 	```
 
 * Run kitchen_app
 
-	```
-	$ cd kitchen_app
-	$ ant run
+	``` bash
+	~$ cd kitchen_app
+	~$ ant run
 	```
 
 * Run order_app
-	```
-	$ cd order_app
-	$ flutter run
+
+	```bash
+	~$ cd order_app
+	~$ flutter run
 	```
 ## Usage
 
