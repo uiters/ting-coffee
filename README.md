@@ -64,7 +64,52 @@ Install packages for `flutter` apps:
 ```
 $ flutter packages get
 ```
+Setup API:
 
+* Upload file: ```index.php``` at ```ting-coffee/server/Normal``` to your host.
+* Edit ```index.php```
+  ```
+  $servername = "Your servername";
+  $username = "your username";
+  $password = "your password";
+  $dbname = "database name";
+  ```
+* Edit line 1 ```evn.dart``` at ```store-pattern/order_app/lib/Constants/```
+
+    ```const String URL_EXECUTE = "your domain/index.php";```
+
+* Edit line 17 ```kitchen_app/src/Constants/Constant.java``` and ```admin_app/src/Constants/Constant.java```
+
+
+    ```public static String urlConnect = "your domain/index.php";```
+
+* Run script sql in your PhpMyAdmin ```ting-coffee/database/mysql.sql```
+
+Run:
+
+* Requrie install ```ant```
+
+	```$ sudo apt install ant```
+
+* Run andmin_app:
+
+	```
+	$ cd admin_app
+	$ ant run
+	```
+
+* Run kitchen_app
+
+	```
+	$ cd kitchen_app
+	$ ant run
+	```
+
+* Run order_app
+	```
+	$ cd order_app
+	$ flutter run
+	```
 ## Usage
 
 Using this account for testing:</br>
