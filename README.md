@@ -136,7 +136,7 @@ Using [Store Pattern](https://github.com/cuongw/store-pattern).
 <div style="text-align: center"><table><tr>
   <td style="text-align: center">
   <a href="https://github.com/cuongw/ting-coffee/tree/master/order_app">
-    <img src="images/order.png" width="200"/></a>
+    <img src="https://user-images.githubusercontent.com/34389409/53300996-2937c180-3880-11e9-8f4d-f30c16f3a609.png" width="200"/></a>
 </td>
 <td style="text-align: center">
   <a href="https://github.com/cuongw/ting-coffee/tree/master/order_app">
