@@ -53,18 +53,70 @@
 ## Install
 
 Clone this project:
-```
-$ git clone https://github.com/cuongw/ting-coffee.git
+```sh
+~$ git clone https://github.com/cuongw/ting-coffee.git
 ```
 cd `ting-coffee`:
-```
-$ cd ting-coffee
+```sh
+~$ cd ting-coffee
 ```
 Install packages for `flutter` apps:
+```bash
+~$ flutter packages get
 ```
-$ flutter packages get
-```
+Setup API:
 
+* Upload file: ```index.php``` at ```ting-coffee/server/Normal``` to your host.
+* Edit ```index.php```
+  ```
+  $servername = "Your servername";
+  $username = "your username";
+  $password = "your password";
+  $dbname = "database name";
+  ```
+* Edit line 1 ```evn.dart``` at ```store-pattern/order_app/lib/Constants/```
+
+    ```dart
+    const String URL_EXECUTE = "your domain/index.php";
+    ```
+
+* Edit line 17 ```kitchen_app/src/Constants/Constant.java``` and ```admin_app/src/Constants/Constant.java```
+
+
+    ```java
+    public static String urlConnect = "your domain/index.php";
+    ```
+
+* Run script sql in your PhpMyAdmin ```ting-coffee/database/mysql.sql```
+
+Run:
+
+* Requrie install ```ant```
+
+	```bash
+	~$ sudo apt install ant
+	```
+
+* Run admin_app:
+
+	```bash
+	~$ cd admin_app
+	~$ ant run
+	```
+
+* Run kitchen_app
+
+	``` bash
+	~$ cd kitchen_app
+	~$ ant run
+	```
+
+* Run order_app
+
+	```bash
+	~$ cd order_app
+	~$ flutter run
+	```
 ## Usage
 
 Using this account for testing:</br>
@@ -91,7 +143,7 @@ Using [Store Pattern](https://github.com/cuongw/store-pattern).
 <div style="text-align: center"><table><tr>
   <td style="text-align: center">
   <a href="https://github.com/cuongw/ting-coffee/tree/master/order_app">
-    <img src="images/order.png" width="200"/></a>
+    <img src="https://user-images.githubusercontent.com/34389409/53300996-2937c180-3880-11e9-8f4d-f30c16f3a609.png" width="200"/></a>
 </td>
 <td style="text-align: center">
   <a href="https://github.com/cuongw/ting-coffee/tree/master/order_app">
