@@ -211,9 +211,7 @@ Have a bug or an issue with this project? [Open a new issue](https://github.com/
 
 ## Team
 
-| [![Cuong Duy Nguyen](https://github.com/cuongw.png?size=120)](https://github.com/cuongw) | [![Thien Chi Vi](https://github.com/tvc12.png?size=120)](https://github.com/tvc12) | [![Thang Huu Le](https://github.com/lhthang1998.png?size=120)](https://github.com/lhthang1998) |  [![Triet Minh Tran](https://github.com/triet1213.png?size=120)](https://github.com/triet1213) |
-| :---: | :---: | :---: | :---: |
-| [Cuong Duy Nguyen](https://github.com/cuongw) | [Thien Chi Vi](https://github.com/tvc12) | [Thang Huu Le](https://github.com/lhthang1998) |  [Triet Minh Tran](https://github.com/triet1213) |
+[![](https://sourcerer.io/fame/cuongw/tvc12/ting-coffee/images/0)](https://sourcerer.io/fame/cuongw/tvc12/ting-coffee/links/0)[![](https://sourcerer.io/fame/cuongw/tvc12/ting-coffee/images/1)](https://sourcerer.io/fame/cuongw/tvc12/ting-coffee/links/1)[![](https://sourcerer.io/fame/cuongw/tvc12/ting-coffee/images/2)](https://sourcerer.io/fame/cuongw/tvc12/ting-coffee/links/2)[![](https://sourcerer.io/fame/cuongw/tvc12/ting-coffee/images/3)](https://sourcerer.io/fame/cuongw/tvc12/ting-coffee/links/3)[![](https://sourcerer.io/fame/cuongw/tvc12/ting-coffee/images/4)](https://sourcerer.io/fame/cuongw/tvc12/ting-coffee/links/4)[![](https://sourcerer.io/fame/cuongw/tvc12/ting-coffee/images/5)](https://sourcerer.io/fame/cuongw/tvc12/ting-coffee/links/5)[![](https://sourcerer.io/fame/cuongw/tvc12/ting-coffee/images/6)](https://sourcerer.io/fame/cuongw/tvc12/ting-coffee/links/6)[![](https://sourcerer.io/fame/cuongw/tvc12/ting-coffee/images/7)](https://sourcerer.io/fame/cuongw/tvc12/ting-coffee/links/7)
 
 **[⬆ back to top](#home)**
 
