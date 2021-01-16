@@ -6,15 +6,15 @@
 </h1>
 
 <h4 align="center">
-  Management App for <a href="https://github.com/cuongw/ting-coffee" target="_blank"><code>Ting Coffee</code></a>.
+  Managemet App for <a href="https://github.com/uiters/ting-coffee" target="_blank"><code>Ting Coffee</code></a>.
 </h4>
 
 <p align="center">
-  <a href="https://travis-ci.org/cuongw/starbucks-coffee">
-    <img src="https://travis-ci.org/cuongw/ting-coffee.svg?branch=master"/>
+  <a href="https://travis-ci.org/uiters/ting-coffee">
+    <img src="https://travis-ci.org/uiters/ting-coffee.svg?branch=master"/>
   </a>
   
-  <a href="https://github.com/cuongw/ting-coffee/blob/master/LICENSE">
+  <a href="https://github.com/uiters/ting-coffee/blob/master/LICENSE">
     <img src="https://img.shields.io/github/license/cuongw/ting-coffee.svg"/>
   </a>
 </p>
@@ -217,4 +217,4 @@ Have a bug or an issue with this project? [Open a new issue](https://github.com/
 
 ## License
 
-[MIT](https://github.com/cuongw/ting-coffee/blob/master/LICENSE)
+[MIT](https://github.com/uiters/ting-coffee/blob/master/LICENSE)
