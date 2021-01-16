@@ -6,7 +6,7 @@
 </h1>
 
 <h4 align="center">
-  Managemet App for <a href="https://github.com/cuongw/ting-coffee" target="_blank"><code>Ting Coffee</code></a>.
+  Management App for <a href="https://github.com/cuongw/ting-coffee" target="_blank"><code>Ting Coffee</code></a>.
 </h4>
 
 <p align="center">
