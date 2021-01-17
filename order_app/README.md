@@ -54,7 +54,7 @@
 
 Clone this project:
 ```sh
-~$ git clone https://github.com/cuongw/ting-coffee.git
+~$ git clone https://github.com/uiters/ting-coffee.git
 ```
 cd `ting-coffee`:
 ```sh
@@ -112,6 +112,8 @@ Run:
 	```
 
 * Run order_app
+
+⚠ Require: Flutter version `1.26.0-1.0.pre`
 
 	```bash
 	~$ cd order_app

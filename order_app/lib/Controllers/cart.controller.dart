@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import './../Models/cart.model.dart';
 
 class Controller {
@@ -10,12 +12,29 @@ class Controller {
     return _instance;
   }
 
-  Future<bool> insertBill(int idTable, DateTime dateCheckIn, DateTime dateCheckOut, double discount, double totalPrice, int status, String username) {
-    return Model.instance.insertBill(idTable, dateCheckIn, dateCheckOut, discount, totalPrice, status, username);
+  Future<bool> insertBill(
+      int idTable,
+      DateTime dateCheckIn,
+      DateTime dateCheckOut,
+      double discount,
+      double totalPrice,
+      int status,
+      String username) {
+    return Model.instance.insertBill(idTable, dateCheckIn, dateCheckOut,
+        discount, totalPrice, status, username);
   }
 
-  Future<bool> updateBill(int id, int idTable, DateTime dateCheckIn, DateTime dateCheckOut, double discount, double totalPrice, int status, String username) {
-    return Model.instance.updateBill(id, idTable, dateCheckIn, dateCheckOut, discount, totalPrice, status, username);
+  Future<bool> updateBill(
+      int id,
+      int idTable,
+      DateTime dateCheckIn,
+      DateTime dateCheckOut,
+      double discount,
+      double totalPrice,
+      int status,
+      String username) {
+    return Model.instance.updateBill(id, idTable, dateCheckIn, dateCheckOut,
+        discount, totalPrice, status, username);
   }
 
   Future<int> getIdBillMax() {
