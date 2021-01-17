@@ -45,7 +45,7 @@ class Model {
     if(directory.existsSync()) {
       directory.listSync().forEach((enity) {
         if(enity is File){
-          File file = enity; 
+          File file = enity;
           idImage = parseID(basename(file.path));
           image = file.readAsBytesSync();
           futureImages[idImage] = image;
@@ -55,10 +55,10 @@ class Model {
     return futureImages;
   }
 
-  Future<void> _saveImage(int id Uint8List image) async {
+  Future<void> _saveImage(int id, Uint8List image) async {
     String pathLocal = await this.localPath + '/image';
     new Directory(pathLocal).createSync(recursive: true);
-    
+
     final file = new File('$pathLocal/$id.png');
     file.writeAsBytesSync(image, mode: FileMode.write, flush: true);
   }
@@ -73,7 +73,7 @@ class Model {
   Future<Uint8List> _parseImage(Future<List> images) async {
     List image = await images;
     return base64.decode(image[0]['Image']);
-  }  
+  }
 
   //-------------------------------------------------------------------------
   Future<List<FoodCategory>> getFoodCategories() async {
@@ -161,7 +161,7 @@ Future<String> _getLocalPath() async {
 
 ///
 /// *Parse [name] -> [int]*
-/// 
+///
 /// Return [0] if name contains [characters]
 ///
 

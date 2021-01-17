@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import './../Models/menu.model.dart';
 
 import 'dart:typed_data';
@@ -21,7 +23,7 @@ class Controller {
   // Future<List<Food>> get foods {
   //   if (_foods == null) _foods = Model.instance.foods;
   //   return _foods;
-  // } 
+  // }
 
   Future<List<Food>> filterFoods(String category) async {
     List<Food> _foods = await foods;
@@ -47,7 +49,7 @@ class Controller {
   Future<List<Food>> _foods;
   Future<Map<int, Uint8List>> _images;
 
-  
+
   Future<List<Food>> get foods {
     if(_foods == null)
     {
@@ -56,7 +58,7 @@ class Controller {
     }
     return _foods;
   }
- 
+
   Future<Map<int, Uint8List>> get _imagesFile => Model.instance.imagesFile;
   Future<List> get _idImagesMySQL             => Model.instance.idImagesMySQL;
   Future<Uint8List> _getImageByID(int id)     => Model.instance.getImageById(id);
@@ -66,9 +68,9 @@ class Controller {
   Future<void> _deleteFile(int id)                async => Model.instance.delete(id);
 
   //Future<List<FoodCategory>> get foodCategories => Model.instance.foodCategories;
-   
+
   Future<List<Food>> _combineFoodsImages(Future<Map<int, Uint8List>> futureImages, Future<List<Food>> futureFoods) async {
-    
+
     Map<int, Uint8List> images = await futureImages;
     List<Food> foods=  await futureFoods;
     for (int i = 0; i < foods.length; ++i) {

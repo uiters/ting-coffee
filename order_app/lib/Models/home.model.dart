@@ -1,10 +1,8 @@
-import './connectServer.dart';
 import './../Constants/queries.dart' as queries;
-
+import './connectServer.dart';
 import './menu.model.dart' as menu;
 
 class Model {
-
   static Model _instance;
 
   static Model get instance {
@@ -16,14 +14,15 @@ class Model {
   Future<List<Table>> get tables => getTables();
 
   static Future<List<Table>> getTables() async {
-    Future<List> futureTables = MySqlConnection.instance.executeQuery(queries.GET_TABLES);
+    Future<List> futureTables =
+        MySqlConnection.instance.executeQuery(queries.GET_TABLES);
     return parse(futureTables);
   }
 
-  static Future<List<Table>> parse(Future<List> tables) async  {
+  static Future<List<Table>> parse(Future<List> tables) async {
     List<Table> futureTables = [];
-    await tables.then((values){
-      values.forEach((value){
+    await tables.then((values) {
+      values.forEach((value) {
         futureTables.add(new Table.fromJson(value));
       });
     });
@@ -42,7 +41,7 @@ class Table {
     this.id = -1;
     this.name = '';
     this.status = -1;
-    this._foods = new List<menu.Food>();    
+    this._foods = <menu.Food>[];
     this.dateCheckIn = DateTime.now();
   }
 
@@ -58,15 +57,16 @@ class Table {
     this.id = int.parse(json['ID']);
     this.name = json['Name'];
     this.status = int.parse(json['Status']);
-    this._foods = new List<menu.Food>();
-  }        
+    this._foods = <menu.Food>[];
+  }
 
   List<menu.Food> get foods {
-    if (_foods == null) _foods = new List<menu.Food>();
+    if (_foods == null) _foods = <menu.Food>[];
     return _foods;
   }
 
-  void addFoods(Future<List<menu.Food>> _foods) async { // Add BillDetail for table
+  void addFoods(Future<List<menu.Food>> _foods) async {
+    // Add BillDetail for table
     this.foods.addAll(await _foods);
   }
 
@@ -74,14 +74,14 @@ class Table {
     List<menu.Food> menuFoods = List<menu.Food>.from(_menuFoods);
 
     if (foods != null)
-    for (var i = 0; i < foods.length; i++) {
-      for (var j = 0; j < menuFoods.length; j++) {
-        if (foods[i].id == menuFoods[j].id) {
-          menuFoods[j] = foods[i];
-          break;
+      for (var i = 0; i < foods.length; i++) {
+        for (var j = 0; j < menuFoods.length; j++) {
+          if (foods[i].id == menuFoods[j].id) {
+            menuFoods[j] = foods[i];
+            break;
+          }
         }
       }
-    }
 
     return menuFoods;
   }
@@ -91,11 +91,13 @@ class Table {
     // exists: update food, not exists: add to foods
 
     int index = findIndexFood(food);
-    if (index == -1) { //add to foods
-    menu.Food _food = new menu.Food(food);
+    if (index == -1) {
+      //add to foods
+      menu.Food _food = new menu.Food(food);
       _food.quantity = 1;
       foods.add(_food);
-    } else { // update food
+    } else {
+      // update food
       foods[index].quantity++;
     }
 
@@ -103,7 +105,7 @@ class Table {
       this.status = 1;
     }
 
-    if(this.dateCheckIn == null) {
+    if (this.dateCheckIn == null) {
       this.dateCheckIn = DateTime.now();
     }
   }
@@ -136,11 +138,11 @@ class Table {
 
   int findIndexFood(menu.Food food) {
     if (foods != null)
-    for (var i = 0; i < foods.length; i++) {
-      if (food.id == foods[i].id) {
-        return i;
+      for (var i = 0; i < foods.length; i++) {
+        if (food.id == foods[i].id) {
+          return i;
+        }
       }
-    }
     return -1;
   }
 
@@ -153,5 +155,4 @@ class Table {
 
     return totalPrice;
   }
-
 }
