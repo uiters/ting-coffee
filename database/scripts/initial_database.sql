@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Jan 19, 2021 at 03:09 AM
+-- Generation Time: Jan 19, 2021 at 05:00 PM
 -- Server version: 10.3.16-MariaDB
 -- PHP Version: 7.3.23
 
@@ -658,7 +658,7 @@ CREATE TRIGGER `UTG_Report_Update` BEFORE UPDATE ON `BILL` FOR EACH ROW BEGIN
         WHERE 
         	DATE(REPORT._Date) = DATE(NEW.DateCheckIn);
         IF id1 = 0 THEN
-            INSERT INTO REPORT(, TotalPrice) VALUES(DATE(NEW.DateCheckIn), NEW.TotalPrice);
+            INSERT INTO REPORT(_Date, TotalPrice) VALUES(DATE(NEW.DateCheckIn), NEW.TotalPrice);
             ELSE
             UPDATE
                 REPORT
